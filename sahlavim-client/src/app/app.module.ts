@@ -24,16 +24,11 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MyFormComponent } from './Components/my-form/my-form.component';
-import { MyTableComponent } from './Components/my-table/my-table.component';
-import { MyGridComponent } from './Components/my-grid/my-grid.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MyFormComponent,
-    MyTableComponent,
-    MyGridComponent
+    AppComponent
+    
   ],
   imports: [
     BrowserModule,
