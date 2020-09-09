@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainServiceService } from 'src/app/servies/main-service.service';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 @Component({
   selector: 'app-header-menu',
