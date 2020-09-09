@@ -22,7 +22,6 @@ import {
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule
 } from '@angular/material';
 
-//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,9 +33,9 @@ import { AfternoonDetailsMenuComponent } from './components/Afternoons/afternoon
 import { AfternoonMainComponent } from './components/Afternoons/afternoon-main/afternoon-main.component';
 import { AfternoonScheduleComponent } from './components/Afternoons/afternoon-schedule/afternoon-schedule.component';
 import { WeeklySchedulingComponent } from './components/Afternoons/weekly-scheduling/weekly-scheduling.component';
-import { LoginComponent } from './components/login/login/login.component';
-import { HeaderMenuComponent } from './components/main/header-menu/header-menu.component';
-import { MessageComponent } from './components/main/message/message.component';
+import { LoginComponent } from './components/Login/login/login.component';
+import { HeaderMenuComponent } from './components/Main/header-menu/header-menu.component';
+import { MessageComponent } from './components/Main/message/message.component';
 import { ManagersTableComponent } from './components/Management/managers-table/managers-table.component';
 import { ManagementScheduleComponent } from './components/Management/management-schedule/management-schedule.component';
 import { ManagementSettingsClustersComponent } from './components/Management/management-settings-clusters/management-settings-clusters.component';
@@ -58,6 +57,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
 import { SettingsComponent } from './components/Settings/settings/settings.component';
 import { SettingsDetailsComponent } from './components/Settings/settings-details/settings-details.component';
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
+
 import { from } from 'rxjs';
 
 @NgModule({
@@ -97,7 +97,6 @@ import { from } from 'rxjs';
   ],
   imports: [
     BrowserModule,
-    //AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
