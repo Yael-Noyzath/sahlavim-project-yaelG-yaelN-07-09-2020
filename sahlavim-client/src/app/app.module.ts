@@ -22,24 +22,25 @@ import {
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule
 } from '@angular/material';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { RoutModule } from './routing/rout.module';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { AfternoonDetailsComponent } from './components/Afternoons/afternoon-details/afternoon-details.component';
 import { AfternoonDetailsMenuComponent } from './components/Afternoons/afternoon-details-menu/afternoon-details-menu.component';
 import { AfternoonMainComponent } from './components/Afternoons/afternoon-main/afternoon-main.component';
 import { AfternoonScheduleComponent } from './components/Afternoons/afternoon-schedule/afternoon-schedule.component';
 import { WeeklySchedulingComponent } from './components/Afternoons/weekly-scheduling/weekly-scheduling.component';
-import { LoginComponent } from './components/login/login/login.component';
-import { HeaderMenuComponent } from './components/main/header-menu/header-menu.component';
-import { MessageComponent } from './components/main/message/message.component';
+import { LoginComponent } from './components/Login/login/login.component';
+import { HeaderMenuComponent } from './components/Main/header-menu/header-menu.component';
+import { MessageComponent } from './components/Main/message/message.component';
 import { ManagersTableComponent } from './components/Management/managers-table/managers-table.component';
 import { ManagementScheduleComponent } from './components/Management/management-schedule/management-schedule.component';
 import { ManagementSettingsClustersComponent } from './components/Management/management-settings-clusters/management-settings-clusters.component';
 import { ManagementSettingsJointComponent } from './components/Management/management-settings-joint/management-settings-joint.component';
+import { ManagementMenuComponent }from'./components/Management/management-menu/management-menu.component';
 import { OperatorActivityComponent } from './components/Operators/operator-activity/operator-activity.component';
 import { OperatorActivityReportComponent } from './components/Operators/operator-activity-report/operator-activity-report.component';
 import { OperatorCreditComponent } from './components/Operators/operator-credit/operator-credit.component';
@@ -53,6 +54,11 @@ import { ProgramDetailsMenuComponent } from './components/Programs/program-detai
 import { ProgramReportComponent } from './components/Programs/program-report/program-report.component';
 import { ProgramsComponent } from './components/Programs/programs/programs.component';
 import { ProgramScheduleComponent } from './components/Programs/program-schedule/program-schedule.component';
+import { SettingsComponent } from './components/Settings/settings/settings.component';
+import { SettingsDetailsComponent } from './components/Settings/settings-details/settings-details.component';
+import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
+
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -71,6 +77,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
     ManagementScheduleComponent,
     ManagementSettingsClustersComponent,
     ManagementSettingsJointComponent,
+    ManagementMenuComponent,
     OperatorActivityComponent,
     OperatorActivityReportComponent,
     OperatorCreditComponent,
@@ -83,11 +90,13 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
     ProgramDetailsMenuComponent,
     ProgramReportComponent,
     ProgramsComponent,
-    ProgramScheduleComponent
+    ProgramScheduleComponent,
+    SettingsComponent,
+    SettingsDetailsComponent,
+    SettingsDetailsMenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -96,7 +105,6 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -111,6 +119,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
     MatGridListModule,
     HttpClientModule,
     RouterModule,
+    RoutModule,
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
