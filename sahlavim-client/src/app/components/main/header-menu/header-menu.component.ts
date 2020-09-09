@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MainServiceService } from 'src/app/servies/main-service.service';
 
 @Component({
   selector: 'app-header-menu',
@@ -8,23 +8,23 @@ import { Router } from '@angular/router';
 })
 export class HeaderMenuComponent implements OnInit {
 
-  constructor(private routr: Router) { }
+  constructor(private mainService: MainServiceService) { }
 
   ngOnInit() {
   }
 
   setting() {
-    this.routr.navigate(["/header-menu/setting-details-menu"]);
+    this.mainService.serviceNavigate("/header-menu/setting-details-menu");
   }
   management() {
-    this.routr.navigate(["/header-menu/management-menu"]);
+    this.mainService.serviceNavigate("/header-menu/management-menu");
 
   }
   operator() {
-    this.routr.navigate(["/header-menu/operator-menu"]);
+    this.mainService.serviceNavigate("/header-menu/operator-menu");
   }
   program() {
-    this.routr.navigate(["/header-menu/program-details-menu"]);
+    this.mainService.serviceNavigate("/header-menu/program-details-menu");
   }
 
 }

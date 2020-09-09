@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../components/login/login/login.component';
-import { HeaderMenuComponent } from '../components/main/header-menu/header-menu.component';
+import { LoginComponent } from '../components/Login/login/login.component';
+import { HeaderMenuComponent } from '../components/Main/header-menu/header-menu.component';
 import { ManagementMenuComponent } from '../components/Management/management-menu/management-menu.component';
 import { OperatorMenuComponent } from '../components/Operators/operator-menu/operator-menu.component';
 import { ProgramDetailsMenuComponent } from '../components/Programs/program-details-menu/program-details-menu.component';

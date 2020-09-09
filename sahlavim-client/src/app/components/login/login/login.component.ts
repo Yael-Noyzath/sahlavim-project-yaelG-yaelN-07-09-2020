@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MainServiceService } from 'src/app/servies/main-service.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private routr: Router) { }
+  constructor(private mainService: MainServiceService) { }
 
   ngOnInit() {
   }
   headerMenu(){
-    this.routr.navigate(["/header-menu"]);
+    this.mainService.serviceNavigate("/header-menu");
   }
 }
