@@ -19,7 +19,14 @@ export class Program {
         public StatusType:number,
         public CreateByUserId:number,
         public CreateDate:Date,
-        public 
+        public LastModifyUserId:number,//קוד מישתמש שינוי אחרון
+        public SysRowStatus:number,//לבדוק מה זה
+        public isProgramAfternoon:boolean,//האם תוכנית צהרים
+        public SemesterType:number,
+        public FirstActivity:Time,
+        public SecondActivity:Time,
+        public YearType:number,//לבדוק
+        public NumActivityInWeek:number
 
 
     ){}
