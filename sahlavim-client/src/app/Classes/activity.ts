@@ -13,7 +13,12 @@ export class Activity {
         public CreateDate:Date,
         public LastModifyUserId:number,//לבדוק מה זה
         public LastModifyDate:number,//לבדוק מה זה
-        public SysRowStatus:number){//לבדוק מה זה
+        public SysRowStatus:number,//לבדוק מה זה
+       public isActivityPreference:boolean,
+       public isMorningActivity:boolean,
+       public isNoonActivity:boolean,
+
+        ){
 
     }
 }
