@@ -27,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RoutModule } from './routing/rout.module';
-import { MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { AfternoonDetailsComponent } from './components/Afternoons/afternoon-details/afternoon-details.component';
 import { AfternoonDetailsMenuComponent } from './components/Afternoons/afternoon-details-menu/afternoon-details-menu.component';
 import { AfternoonMainComponent } from './components/Afternoons/afternoon-main/afternoon-main.component';
@@ -40,7 +40,7 @@ import { ManagersTableComponent } from './components/Management/managers-table/m
 import { ManagementScheduleComponent } from './components/Management/management-schedule/management-schedule.component';
 import { ManagementSettingsClustersComponent } from './components/Management/management-settings-clusters/management-settings-clusters.component';
 import { ManagementSettingsJointComponent } from './components/Management/management-settings-joint/management-settings-joint.component';
-import { ManagementMenuComponent }from'./components/Management/management-menu/management-menu.component';
+import { ManagementMenuComponent } from './components/Management/management-menu/management-menu.component';
 import { OperatorActivityComponent } from './components/Operators/operator-activity/operator-activity.component';
 import { OperatorActivityReportComponent } from './components/Operators/operator-activity-report/operator-activity-report.component';
 import { OperatorCreditComponent } from './components/Operators/operator-credit/operator-credit.component';
@@ -57,7 +57,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
 import { SettingsComponent } from './components/Settings/settings/settings.component';
 import { SettingsDetailsComponent } from './components/Settings/settings-details/settings-details.component';
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { from } from 'rxjs';
 
 @NgModule({
@@ -123,8 +123,7 @@ import { from } from 'rxjs';
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    FlexLayoutModule,
-
+    FlexLayoutModule
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]
