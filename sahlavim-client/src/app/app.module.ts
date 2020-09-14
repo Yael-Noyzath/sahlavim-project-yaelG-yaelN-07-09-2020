@@ -57,7 +57,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
 import { SettingsComponent } from './components/Settings/settings/settings.component';
 import { SettingsDetailsComponent } from './components/Settings/settings-details/settings-details.component';
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+//import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
 
 @NgModule({
@@ -123,7 +123,7 @@ import { from } from 'rxjs';
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    FlexLayoutModule,
+   // FlexLayoutModule,
 
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
