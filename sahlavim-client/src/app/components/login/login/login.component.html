@@ -1,4 +1,43 @@
+<div class="login" style="z-index: 2030">
+    <div class="div2-login">
+        <div class="form-container">
+            <img src="Images/logo.png" />
+            <form id="myForm" name="myForm" ng-if="enterByUserName==false">
+                <div class="form-group col-lg-2 col-md-3 col-sm-4">
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="*שם משתמש"
+                           ng-model="user.nvUserName"
+                           required />
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4">
+                    <input type="password" class="form-control  " id="password" name="password" placeholder="*סיסמא"
+                           ng-model="user.nvPassword"
+                           required />
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
+                    <button ng-click="Login()" class="btn  btn-info btn-lg btn-block btn-login ">כניסה</button>
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
+                    <button ng-click="resetUser()" class="password-button" ng-disabled="!user.nvUserName">שכחתי סיסמא</button>
+                </div>
+            </form>
+            <!--btn-info btn-lg btn-block btn-login-->
+            <form id="myForm1" name="forgetPasswordForm" ng-if="enterByUserName==true">
+                <div class="form-group col-lg-2 col-md-3 col-sm-4">
+                    <input type="email" class="form-control" id="mail" name="mail" placeholder="*הזן כתובת מייל לשחזור סיסמא"
+                           ng-model="user.nvMail"
+                           required />
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
+                    <button ng-click="resetPassword()" class="btn  btn-info btn-lg btn-block btn-login " ng-disabled="!user.nvMail">אישור</button>
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
+                    <a ng-click="resetUser()" style="color:red">כניסה באמצעות שם משתמש וסיסמא</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <p>login works!</p>
 <input type="button" value="headerMenu" (click)="headerMenu()">
 <router-outlet></router-outlet>
-
