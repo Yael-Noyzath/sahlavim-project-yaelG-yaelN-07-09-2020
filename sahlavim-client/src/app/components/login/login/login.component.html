@@ -1,43 +1,25 @@
-<div class="login" style="z-index: 2030">
-    <div class="div2-login">
-        <div class="form-container">
-            <img src="Images/logo.png" />
-            <form id="myForm" name="myForm" ng-if="enterByUserName==false">
-                <div class="form-group col-lg-2 col-md-3 col-sm-4">
-                    <input type="text" class="form-control" id="userName" name="userName" placeholder="*שם משתמש"
-                           ng-model="user.nvUserName"
-                           required />
-                </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4">
-                    <input type="password" class="form-control  " id="password" name="password" placeholder="*סיסמא"
-                           ng-model="user.nvPassword"
-                           required />
-                </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
-                    <button ng-click="Login()" class="btn  btn-info btn-lg btn-block btn-login ">כניסה</button>
-                </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
-                    <button ng-click="resetUser()" class="password-button" ng-disabled="!user.nvUserName">שכחתי סיסמא</button>
-                </div>
-            </form>
-            <!--btn-info btn-lg btn-block btn-login-->
-            <form id="myForm1" name="forgetPasswordForm" ng-if="enterByUserName==true">
-                <div class="form-group col-lg-2 col-md-3 col-sm-4">
-                    <input type="email" class="form-control" id="mail" name="mail" placeholder="*הזן כתובת מייל לשחזור סיסמא"
-                           ng-model="user.nvMail"
-                           required />
-                </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
-                    <button ng-click="resetPassword()" class="btn  btn-info btn-lg btn-block btn-login " ng-disabled="!user.nvMail">אישור</button>
-                </div>
-                <div class="form-group col-lg-2 col-md-3 col-sm-4 ">
-                    <a ng-click="resetUser()" style="color:red">כניסה באמצעות שם משתמש וסיסמא</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!-- <p>login works!</p>
+<img [src]="C:\הנדסאים\פרויקט גמר\sahlavim project\sahlavim-client\src\assets\Images\logo.png"> -->
+<!-- <form id="myForm" name="myForm" class="form-container">
+    <input type="text" name="userName" id="userName" placeholder="*שם משתמש" required class="form-group">
+    <input type="password" name="userPassword" id="userPassword" placeholder="*סיסמא" required class="form-group">
+    <input type="button" value="כניסה" (click)="headerMenu()">
+</form> -->
 
-<p>login works!</p>
-<input type="button" value="headerMenu" (click)="headerMenu()">
+<form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 <router-outlet></router-outlet>
