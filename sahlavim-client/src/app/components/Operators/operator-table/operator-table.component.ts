@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { Operator } from 'src/app/classes/operator';
 
 @Component({
   selector: 'app-operator-table',
@@ -8,12 +10,23 @@ import {MatTableModule} from '@angular/material/table';
 })
 export class OperatorTableComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private mainService: MainServiceService) { }
+  operatorsList: Array<Operator>;
   ngOnInit() {
+    this.getOperatorList();
+  }
+  getOperatorList() {
+    this.mainService.getOperators().subscribe(
+      myList => {
+        this.operatorsList = myList;
+        alert(this.operatorsList);
+      },
+      error => {
+        alert("errrrorrrr");
+      }
+    );
   }
 
 
 
-  
 }
