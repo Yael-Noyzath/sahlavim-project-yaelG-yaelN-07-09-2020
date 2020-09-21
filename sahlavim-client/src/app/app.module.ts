@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {AgGridModule} from 'ag-grid-angular';
 import {
   MatButtonModule,
   MatMenuModule,
@@ -19,7 +19,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatGridListModule,
-  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule
+  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -41,7 +41,6 @@ import { ManagementScheduleComponent } from './components/Management/management-
 import { ManagementSettingsClustersComponent } from './components/Management/management-settings-clusters/management-settings-clusters.component';
 import { ManagementSettingsJointComponent } from './components/Management/management-settings-joint/management-settings-joint.component';
 import { ManagementMenuComponent }from'./components/Management/management-menu/management-menu.component';
-import { OperatorActivityComponent } from './components/Operators/operator-activity/operator-activity.component';
 import { OperatorActivityReportComponent } from './components/Operators/operator-activity-report/operator-activity-report.component';
 import { OperatorCreditComponent } from './components/Operators/operator-credit/operator-credit.component';
 import { OperatorDetailsComponent } from './components/Operators/operator-details/operator-details.component';
@@ -59,6 +58,8 @@ import { SettingsDetailsComponent } from './components/Settings/settings-details
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
 //import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
+import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +79,6 @@ import { from } from 'rxjs';
     ManagementSettingsClustersComponent,
     ManagementSettingsJointComponent,
     ManagementMenuComponent,
-    OperatorActivityComponent,
     OperatorActivityReportComponent,
     OperatorCreditComponent,
     OperatorDetailsComponent,
@@ -93,7 +93,8 @@ import { from } from 'rxjs';
     ProgramScheduleComponent,
     SettingsComponent,
     SettingsDetailsComponent,
-    SettingsDetailsMenuComponent
+    SettingsDetailsMenuComponent,
+    OperatorTableComponent
   ],
   imports: [
     BrowserModule,
@@ -123,8 +124,10 @@ import { from } from 'rxjs';
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
-   // FlexLayoutModule,
+grinvald
+    FlexLayoutModule,
 
+ master
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]

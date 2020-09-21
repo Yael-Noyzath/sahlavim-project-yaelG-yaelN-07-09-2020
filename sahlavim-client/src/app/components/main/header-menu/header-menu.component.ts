@@ -9,22 +9,29 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 export class HeaderMenuComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) { }
-
+showWelcome:boolean=true;
   ngOnInit() {
   }
 
   setting() {
-    this.mainService.serviceNavigate("/header-menu/setting-details-menu");
+    this.mainService.serviceNavigate("/header-menu/settings");
+   this.showWelcome=false;
+
   }
   management() {
-    this.mainService.serviceNavigate("/header-menu/management-menu");
+    this.mainService.serviceNavigate("/header-menu/managers-table");
+    this.showWelcome=false;
 
   }
   operator() {
-    this.mainService.serviceNavigate("/header-menu/operator-menu");
+    this.mainService.serviceNavigate("/header-menu/operator-table");
+    this.showWelcome=false;
+
   }
   program() {
-    this.mainService.serviceNavigate("/header-menu/program-details-menu");
+    this.mainService.serviceNavigate("/header-menu/programs");
+    this.showWelcome=false;
+
   }
 
 }
