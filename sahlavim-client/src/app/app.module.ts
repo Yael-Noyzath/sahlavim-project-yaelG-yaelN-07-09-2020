@@ -57,7 +57,7 @@ import { ProgramScheduleComponent } from './components/Programs/program-schedule
 import { SettingsComponent } from './components/Settings/settings/settings.component';
 import { SettingsDetailsComponent } from './components/Settings/settings-details/settings-details.component';
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+//import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
 import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
 
@@ -125,7 +125,10 @@ import { OperatorTableComponent } from './components/Operators/operator-table/op
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
+grinvald
     FlexLayoutModule,
+
+ master
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]
