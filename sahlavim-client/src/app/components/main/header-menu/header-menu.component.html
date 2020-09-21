@@ -1,7 +1,18 @@
-<p>header-menu works!</p>
+<div style="text-align:center;" dir="rtl"> 
+    <div>
+        <img style="text-align:center;margin-bottom:2% ;" height="120px" width="190px" src="assets/Images/logo-JPG.jpg">
+    </div>
 
-<input type="button" value="setting" (click)="setting()">
-<input type="button" value="management" (click)="management()">
-<input type="button" value="operator" (click)="operator()">
-<input type="button" value="program" (click)="program()">
+<button class="button operatorBtn" mat-button value="operator" (click)="operator()" >מפעילים</button>
+<button class="button settingBtn" mat-button value="setting" (click)="setting()" >מסגרות </button>
+<button class="button programBtn" mat-button  value="program" (click)="program()">תוכניות</button> 
+<button class="button managementBtn" mat-button value="management" (click)="management()">ניהול</button>
+</div>
+<hr>
+
+<div *ngIf ="showWelcome" style=" text-align:center;padding-top: 100px;">
+    <h1>ברוכה הבאה <br>
+   למנהלי עמותת סחלבים</h1>
+</div>
+
 <router-outlet></router-outlet>
