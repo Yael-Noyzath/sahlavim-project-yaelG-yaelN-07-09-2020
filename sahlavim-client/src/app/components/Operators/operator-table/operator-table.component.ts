@@ -17,29 +17,31 @@ export class OperatorTableComponent implements OnInit {
 
   }
 
-
-  displayedColumns: string[] = ['id','name','kind','companyName','category','identity','phoneNumber','update','delete' ];
+//מערך שמות העמודות
+  displayedColumns: string[] = ['id','name','kind','companyName','category','identity','phoneNumber','Email','update','delete' ];
+  
+  //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
+  //מערך מפעילים לטבלה
   operators:Array<Operator>=[
     new Operator(1,"Yael","aa","0533145141"),
     new Operator(1,"Shira","aa","0533145141"),
     new Operator(1,"Michal","aa","0533145141"),
-
   ];
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatSort) sort: MatSort;
+
+@ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+@ViewChild(MatSort,{static:false}) sort: MatSort;
 
   constructor() {
-    // Create 100 users
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.operators);
   }
 
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  //   this.dataSource.sort = this.sort;
-  // }
+   ngAfterViewInit() {
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
+   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
