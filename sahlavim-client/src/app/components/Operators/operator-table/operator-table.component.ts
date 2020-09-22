@@ -71,7 +71,7 @@ export class OperatorTableComponent implements OnInit {
 //     progress: Math.round(Math.random() * 100).toString(),
 //     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
 //   };
-}
+//}
 
 
 
