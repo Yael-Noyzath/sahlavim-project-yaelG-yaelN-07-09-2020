@@ -5,15 +5,6 @@ import {MatSort} from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
 
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
   selector: 'app-operator-table',
@@ -27,7 +18,7 @@ export class OperatorTableComponent implements OnInit {
   }
 
 
-  displayedColumns: string[] = ['id','name','companyName','phoneNumber','update','delete' ];
+  displayedColumns: string[] = ['id','name','kind','companyName','category','identity','phoneNumber','update','delete' ];
   dataSource: MatTableDataSource<Operator>;
   operators:Array<Operator>=[
     new Operator(1,"Yael","aa","0533145141"),
