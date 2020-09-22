@@ -1,11 +1,7 @@
 export class Operator {
-    public OperatorType: number;
     public OperatorPaymentType: number;
-    public IdentityNumber: string;
-    public ContactPerson: string;
     public ContactPersonEmail: string;
     public ContactPersonPhone: string;
-    public inProgramsDatabase: boolean;
     public Talan: boolean;
     public NumActivityDays: number;
     public NumActivityWeek: number;
@@ -28,7 +24,12 @@ export class Operator {
     constructor(
         public OperatorId: number,
         public OperatorName: string,
+        public ContactPerson: string,
+        public OperatorType: number,
         public CompanyName: string,
+        public IdentityNumber: string,
+        public OperatorNamber: string,
+        public inProgramsDatabase: boolean,
         public OperatorNamber: string
     ) {
 
