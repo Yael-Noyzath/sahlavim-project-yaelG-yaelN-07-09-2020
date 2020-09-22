@@ -126,6 +126,11 @@ import { OperatorTableComponent } from './components/Operators/operator-table/op
     ReactiveFormsModule,
     MatExpansionModule,
 
+
+
+   // FlexLayoutModule
+   AgGridModule
+
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]
