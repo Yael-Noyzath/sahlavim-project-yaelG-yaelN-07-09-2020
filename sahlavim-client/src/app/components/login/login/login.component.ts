@@ -11,26 +11,40 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 export class LoginComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) { }
+
   enterByUserName: boolean = true;
-  user:User=new User();
-  formLogin:FormGroup;
+  user: User = new User();
+  formLogin: FormGroup;
+
   ngOnInit() {
     this.UserLoginControls();
   }
   //כניסה
   enterToTheMenu() {
-    this.user=this.formLogin.value;
-    alert(this.user.nvUserName)
+    this.user = this.formLogin.value;
+    alert(this.user.nvUserName);
+    ////////////ניסיון לגשת לשרת שלא הצליח
+    // this.mainService.post("UserLogin", {
+    //   nvUserName: "יעל",
+    //   nvPassword: "1234",
+    //   nvMail: this.user.nvMail
+    // }).then(
+    //   res => {
+    //     //בדיקה אם השם משתמש והסיסמא נכונים
+    //     this.mainService.serviceNavigate("/header-menu");
+    //   },
+    //   error => {
+    //     alert("UserLogin............");
+    //   });
     this.mainService.userLogin(this.user.nvUserName,this.user.nvPassword,this.user.nvMail).subscribe(
-      data=>{
-        alert("exelent");
-      },
-      erorr=>{
-        alert("errrorrr");
-      }
-    )
-    //בדיקה אם השם משתמש והסיסמא נכונים
-    this.mainService.serviceNavigate("/header-menu");
+       data=>{
+         alert("exelent");
+       },
+       erorr=>{
+         alert("errrorrr");
+       }
+     );
+
   }
   //אתחול סיסמא
   resetUser() {
@@ -45,18 +59,18 @@ export class LoginComponent implements OnInit {
   }
   UserLoginControls() {
     this.formLogin = new FormGroup({
-      userName:new FormControl(this.user.nvUserName),
-      userPassword:new FormControl(this.user.nvPassword),
-      userMail:new FormControl(this.user.nvMail)
+      nvUserName: new FormControl(this.user.nvUserName),
+      nvPassword: new FormControl(this.user.nvPassword),
+      nvMail: new FormControl(this.user.nvMail)
     });
   }
-  get userName() {
-    return this.formLogin.get("userName");
+  get nvUserName() {
+    return this.formLogin.get("nvUserName");
   }
-  get userPassword() {
-    return this.formLogin.get("userPassword");
+  get nvPassword() {
+    return this.formLogin.get("nvPassword");
   }
-  get userMail() {
-    return this.formLogin.get("userMail");
+  get nvMail() {
+    return this.formLogin.get("nvMail");
   }
 }

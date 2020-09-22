@@ -5,9 +5,9 @@ export class User {
     public nvFirstName: string="",
     public nvLastName: string="",
     public nvMobile: string="",
-    public nvMail: string="yael9742402@gmail.com",
-    public nvUserName: string="יעל",
-    public nvPassword: string="1234",
+    public nvMail: string="",
+    public nvUserName: string="",
+    public nvPassword: string="",
     public iUserType: number=-1,
     public iUserStatus: number=-1) {
      

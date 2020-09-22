@@ -8,11 +8,11 @@
 
             <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4" *ngIf="enterByUserName==true">
                 <div class="form-group">
-                    <input type="text" formControlName="userName" class="form-control" name="userName" placeholder="*שם משתמש"
+                    <input type="text" formControlName="nvUserName" class="form-control" name="nvUserName" placeholder="*שם משתמש"
                         required />
                 </div>
                 <div class="form-group">
-                    <input type="password" formControlName="userPassword" class="form-control" name="userPassword"
+                    <input type="password" formControlName="nvPassword" class="form-control" name="nvPassword"
                         placeholder="*סיסמא" required />
                 </div>
                 <div class="form-group">
@@ -28,7 +28,7 @@
                 *ngIf="enterByUserName==false">
 
                 <div class="form-group">
-                    <input type="email" class="form-control" formControlName="userMail" name="userMail"
+                    <input type="email" class="form-control" formControlName="nvMail" name="nvMail"
                         placeholder="*הזן כתובת מייל לשחזור סיסמא" required />
                 </div>
                 <div class="form-group">
