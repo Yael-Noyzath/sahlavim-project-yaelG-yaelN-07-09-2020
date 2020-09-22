@@ -1,3 +1,4 @@
+
 import {AfterViewInit,ViewChild, Component, OnInit } from '@angular/core';
 import {MatTableModule,MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
@@ -6,6 +7,8 @@ import { Operator } from 'src/app/Classes/operator';
 
 
 
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+
 @Component({
   selector: 'app-operator-table',
   templateUrl: './operator-table.component.html',
@@ -13,9 +16,31 @@ import { Operator } from 'src/app/Classes/operator';
 })
 export class OperatorTableComponent implements OnInit {
 
-  ngOnInit(){
 
+
+  constructor(private mainService: MainServiceService) { 
+      // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(this.operators);
+  
+ }
+  
+  operatorsList: Array<Operator>;
+  ngOnInit() {
+    this.getOperatorList();
   }
+  
+  getOperatorList() {
+    this.mainService.getOperators().subscribe(
+      myList => {
+        this.operatorsList = myList;
+        alert(this.operatorsList);
+      },
+      error => {
+        alert("errrrorrrr");
+      }
+    );
+  }
+
 
 
   displayedColumns: string[] = ['id','name','kind','companyName','category','identity','phoneNumber','update','delete' ];
@@ -24,17 +49,12 @@ export class OperatorTableComponent implements OnInit {
     new Operator(1,"Yael","aa","0533145141"),
     new Operator(1,"Shira","aa","0533145141"),
     new Operator(1,"Michal","aa","0533145141"),
-
   ];
+    
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
-    // Create 100 users
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.operators);
-  }
 
   // ngAfterViewInit() {
   //   this.dataSource.paginator = this.paginator;
@@ -49,7 +69,7 @@ export class OperatorTableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
+
 
 // const operators = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
