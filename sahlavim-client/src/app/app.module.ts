@@ -22,6 +22,7 @@ import {
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
 } from '@angular/material';
 
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -124,8 +125,12 @@ import { OperatorTableComponent } from './components/Operators/operator-table/op
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
+
+
+
    // FlexLayoutModule
    AgGridModule
+
   ],
   providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
   bootstrap: [AppComponent]

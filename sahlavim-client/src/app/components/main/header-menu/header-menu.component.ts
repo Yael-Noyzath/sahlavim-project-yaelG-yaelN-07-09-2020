@@ -13,9 +13,10 @@ showWelcome:boolean=true;
   ngOnInit() {
   }
 
-  setting() {
+  setting() {  
+     this.showWelcome=false;
+
     this.mainService.serviceNavigate("/header-menu/settings");
-   this.showWelcome=false;
 
   }
   management() {
