@@ -1,19 +1,20 @@
 
-  .mat-form-field {
+  /* .mat-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
+  } */
+ 
   table {
     width: 100%;
-    overflow-x: auto;
+    /* overflow-x: auto;
     overflow-y: hidden;
-    min-width: 500px;
-}
+    min-width: 500px; */
+} 
 th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+/* 
+.mat-column {
+    flex: 0 0 10%;
+} */

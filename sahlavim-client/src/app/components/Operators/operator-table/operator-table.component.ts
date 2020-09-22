@@ -18,21 +18,21 @@ export class OperatorTableComponent implements OnInit {
   }
 
 //מערך שמות העמודות
-  displayedColumns: string[] = ['id','name','kind','companyName','category','identity','phoneNumber','Email','update','delete' ];
+  displayedColumns: string[] = ['id','name','contactName','Type','companyName','category','identity','phoneNumber','Email','inProgramsDatabase','update','delete' ];
   
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
   operators:Array<Operator>=[
-    new Operator(1,"Yael","aa","0533145141"),
-    new Operator(2,"Shira","aa","0533145141"),
-    new Operator(3,"Michal","aa","0533145141"),
-    new Operator(1,"Yael","aa","0533145141"),
-    new Operator(2,"Shira","aa","0533145141"),
-    new Operator(3,"Michal","aa","0533145141"),
-    new Operator(1,"Yael","aa","0533145141"),
-    new Operator(2,"Shira","aa","0533145141"),
-    new Operator(3,"Michal","aa","0533145141"),
+    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",true),
+    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",false),
+    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",false),
+    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",false),
+    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",true),
+    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",true),
+    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",true),
+    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",false),
+    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",true),
   ];
 
 @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
