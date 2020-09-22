@@ -29,7 +29,7 @@ export class Operator {
         public OperatorId: number,
         public OperatorName: string,
         public CompanyName: string,
-        public OperatorNamber: string,
+        public OperatorNamber: string
     ) {
 
     }
