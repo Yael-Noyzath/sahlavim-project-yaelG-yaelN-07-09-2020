@@ -47,8 +47,14 @@ export class OperatorTableComponent implements OnInit {
   dataSource: MatTableDataSource<Operator>;
   operators:Array<Operator>=[
     new Operator(1,"Yael","aa","0533145141"),
-    new Operator(1,"Shira","aa","0533145141"),
-    new Operator(1,"Michal","aa","0533145141"),
+    new Operator(2,"Shira","aa","0533145141"),
+    new Operator(3,"Michal","aa","0533145141"),
+    new Operator(1,"Yael","aa","0533145141"),
+    new Operator(2,"Shira","aa","0533145141"),
+    new Operator(3,"Michal","aa","0533145141"),
+    new Operator(1,"Yael","aa","0533145141"),
+    new Operator(2,"Shira","aa","0533145141"),
+    new Operator(3,"Michal","aa","0533145141"),
   ];
     
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,7 +70,6 @@ export class OperatorTableComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -84,7 +89,7 @@ export class OperatorTableComponent implements OnInit {
 //     progress: Math.round(Math.random() * 100).toString(),
 //     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
 //   };
-// }
+}
 
 
 
