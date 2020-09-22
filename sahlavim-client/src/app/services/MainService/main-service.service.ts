@@ -21,4 +21,8 @@ export class MainServiceService {
     return this.http.post<Array<Operator>>(this.sahlavimUrl+"GetOperators",{});
   }
 
+  userLogin(UnvUserName:string,UnvPassword:string,UnvMail:string){
+    return this.http.post<Array<Operator>>(this.sahlavimUrl+"UserLogin",{ nvUserName:UnvUserName, nvPassword: UnvPassword, nvMail:UnvMail });
+  }
+
 }

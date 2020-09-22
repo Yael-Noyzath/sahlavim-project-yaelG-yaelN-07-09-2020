@@ -30,7 +30,7 @@ export class Operator {
         public IdentityNumber: string,
         public OperatorNamber: string,
         public inProgramsDatabase: boolean,
-
+        public OperatorNamber: string
     ) {
 
     }
