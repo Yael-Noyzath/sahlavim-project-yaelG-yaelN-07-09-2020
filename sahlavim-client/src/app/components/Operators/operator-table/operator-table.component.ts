@@ -62,6 +62,7 @@ export class OperatorTableComponent implements OnInit {
         break;
       case 'nvContactPerson': this.operators = this.operators.filter((m) => (m.nvContactPerson.indexOf(filterValue) > -1));
         break;
+        //iOperatorType צריך לעשות לו המרה מ 
       case 'nvOperatorTypeValue': this.operators = this.operators.filter((m) => (m.nvOperatorTypeValue.indexOf(filterValue) > -1));
         break;
       case 'nvCompanyName': this.operators = this.operators.filter((m) => (m.nvCompanyName.indexOf(filterValue) > -1));

@@ -1,5 +1,5 @@
 export class Operator {
-    public iiOperatorPaymentType: number;
+    public iOperatorPaymentType: number;
     public nvContactPersonMail: string;
     public nvContactPersonPhone: string;
     public bTalan: boolean;
