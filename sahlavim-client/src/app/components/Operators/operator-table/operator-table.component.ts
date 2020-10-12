@@ -1,9 +1,11 @@
-import {AfterViewInit,ViewChild, Component, OnInit } from '@angular/core';
-import {MatTableModule,MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import { AfterViewInit, ViewChild, Component, OnInit } from '@angular/core';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
-
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -13,48 +15,88 @@ import { Operator } from 'src/app/Classes/operator';
 })
 export class OperatorTableComponent implements OnInit {
 
-  ngOnInit(){
+  ngOnInit() {
+    this.getAllOperators();
 
   }
 
-//מערך שמות העמודות
-  displayedColumns: string[] = ['id','name','contactName','Type','companyName','category','identity','phoneNumber','Email','inProgramsDatabase','update','delete' ];
-  
+  //מערך שמות העמודות
+  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
+  index = 8;
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
-  operators:Array<Operator>=[
-    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",true),
-    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",false),
-    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",false),
-    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",false),
-    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",true),
-    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",true),
-    new Operator(1,"Yael","my contact",1,"aa","123456","0522222222",true),
-    new Operator(2,"Shira","my contact",1,"aa","123456","0522222222",false),
-    new Operator(3,"Michal","my contact",1,"aa","123456","0522222222",true),
-  ];
+  operators: Array<Operator>;
 
-@ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
-@ViewChild(MatSort,{static:false}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor() {
+  constructor(private mainService: MainServiceService) {
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.operators);
+    // if (this.operators[0].OperatorName)
+    //   this.dataSource = new MatTableDataSource(this.operators);
   }
 
-   ngAfterViewInit() {
-     this.dataSource.paginator = this.paginator;
-     this.dataSource.sort = this.sort;
-   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
-  applyFilter(event: Event) {
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
+
+  applyFilter(event: Event, prop: string) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    //העתקת הרשימה
+    var list = this.operators;
+    //מציאת הרשימה העונה על הדרישות
+    switch (prop) {
+      case 'nvOperatorName': this.operators = this.operators.filter((m) => (m.nvOperatorName.indexOf(filterValue) > -1));
+        break;
+      case 'nvContactPerson': this.operators = this.operators.filter((m) => (m.nvContactPerson.indexOf(filterValue) > -1));
+        break;
+      case 'nvOperatorTypeValue': this.operators = this.operators.filter((m) => (m.nvOperatorTypeValue.indexOf(filterValue) > -1));
+        break;
+      case 'nvCompanyName': this.operators = this.operators.filter((m) => (m.nvCompanyName.indexOf(filterValue) > -1));
+        break;
+      case 'nvActivityies': this.operators = this.operators.filter((m) => (m.nvActivityies.indexOf(filterValue) > -1));
+        break;
+      case 'nvIdentity': this.operators = this.operators.filter((m) => (m.nvIdentity.indexOf(filterValue) > -1));
+        break;
+      case 'nvContactPersonPhone': this.operators = this.operators.filter((m) => (m.nvContactPersonPhone.indexOf(filterValue) > -1));
+        break;
+      case 'nvContactPersonMail': this.operators = this.operators.filter((m) => (m.nvContactPersonMail.indexOf(filterValue) > -1));
+        break;
+      // case 'bInProgramPool': this.operators = this.operators.filter((m) => (m.bInProgramPool.indexOf(filterValue) > -1));
+      //   break;
     }
+    //שמירת הרשימה שנמצאה
+    this.dataSource.data = this.operators;
+    //החזרת הרשימה הראשונה
+    this.operators = list;
+  }
+
+  getAllOperators() {
+    this.mainService.post("GetOperators", {})
+      .then(
+        res => {
+          if (res) {
+            this.operators = res;
+            this.dataSource = new MatTableDataSource(this.operators);
+          }
+          else
+            alert("get all operators error")
+        }
+        , err => {
+          alert("err");
+        }
+      );
   }
 }
 
@@ -75,5 +117,5 @@ export class OperatorTableComponent implements OnInit {
 
 
 
-  
+
 

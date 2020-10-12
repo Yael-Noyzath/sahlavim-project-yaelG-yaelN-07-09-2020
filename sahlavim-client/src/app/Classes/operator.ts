@@ -1,36 +1,37 @@
 export class Operator {
-    public OperatorPaymentType: number;
-    public ContactPersonEmail: string;
-    public ContactPersonPhone: string;
-    public Talan: boolean;
-    public NumActivityDays: number;
-    public NumActivityWeek: number;
-    public FilePathTax: string;
-    public FilePathBooks: string;
-    public FilePathContract: string;
-    public ActivityPriority: boolean;
-    public CreateByUserId: number;
+    public iiOperatorPaymentType: number;
+    public nvContactPersonMail: string;
+    public nvContactPersonPhone: string;
+    public bTalan: boolean;
+    public iNumActivityDays: number;
+    public iNumActivityWeek: number;
+    public nvFilePathTax: string;
+    public nvFilePathBooks: string;
+    public nvFilePathContract: string;
+    public bActivityPriority: boolean;
+    public iCreateByUserId: number;
     public CreateDate: Date;
-    public LastModifyUserId: number;//לבדוק מה זה
-    public LastModifyDate: number;//לבדוק מה זה
-    public SysRowStatus: number;//לבדוק מה זה
-    public bookkeepingNum: number;
-    public NoonActivity: boolean;
-    public ActiveChanukaCamp: boolean;
-    public ActivePesachCamp: boolean;
-    public ActiveSummerCamp: boolean;
-    public LeadersNum: boolean;
+    public iLastModifyUserId: number;//לבדוק מה זה
+    public iLastModifyDate: number;//לבדוק מה זה
+    public iSysRowStatus: number;//לבדוק מה זה
+    public ibookkeepingNum: number;
+    public bActiveAfternoon: boolean;
+    public bActiveChanukahCamp: boolean;
+    public bActivePesachCamp: boolean;
+    public bActiveSummerCamp: boolean;
+    public bLeadersNum: boolean;
 
     constructor(
-        public OperatorId: number,
-        public OperatorName: string,
-        public ContactPerson: string,
-        public OperatorType: number,
-        public CompanyName: string,
-        public IdentityNumber: string,
-        public OperatorNamber: string,
-        public inProgramsDatabase: boolean,
-    ) {
-
-    }
+        public iOperatorId: number,
+        public nvOperatorName: string,
+        public nvContactPerson: string,
+        public iOperatorType: number,
+        public nvCompanyName: string,
+        public nvIdentity: string,
+        public nvOperatorNumber: string,
+        public binProgramsDatabase: boolean,
+        public nvOperatorTypeValue:string,
+        public nvActivityies:string,
+        public bInProgramPool:boolean,
+    ) {}
 }
