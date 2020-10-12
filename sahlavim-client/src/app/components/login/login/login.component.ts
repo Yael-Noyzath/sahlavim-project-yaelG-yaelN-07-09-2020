@@ -22,29 +22,23 @@ export class LoginComponent implements OnInit {
   //כניסה
   enterToTheMenu() {
     this.user = this.formLogin.value;
-    alert(this.user.nvUserName);
-    ////////////ניסיון לגשת לשרת שלא הצליח
-    // this.mainService.post("UserLogin", {
-    //   nvUserName: "יעל",
-    //   nvPassword: "1234",
-    //   nvMail: this.user.nvMail
-    // }).then(
-    //   res => {
-    //     //בדיקה אם השם משתמש והסיסמא נכונים
-    //     this.mainService.serviceNavigate("/header-menu");
-    //   },
-    //   error => {
-    //     alert("UserLogin............");
-    //   });
-    this.mainService.userLogin(this.user.nvUserName,this.user.nvPassword,this.user.nvMail).subscribe(
-       data=>{
-         alert("exelent");
-       },
-       erorr=>{
-         alert("errrorrr");
-       }
-     );
+    this.userLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
+  }
 
+  userLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
+    this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
+      .then(
+        res => {
+          if(res.iUserId)
+          this.mainService.serviceNavigate("/header-menu");
+          else{
+            alert("null")
+          }
+        },
+        err => {
+          alert("err")
+        }
+      );
   }
   //אתחול סיסמא
   resetUser() {
