@@ -52,6 +52,7 @@ export class OperatorTableComponent implements OnInit {
   // }
 
   applyFilter(event: Event, prop: string) {
+    //alert(prop);
     const filterValue = (event.target as HTMLInputElement).value;
     //העתקת הרשימה
     var list = this.operators;

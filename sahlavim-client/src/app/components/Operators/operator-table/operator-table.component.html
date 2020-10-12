@@ -1,10 +1,30 @@
 <p>operator-table works!</p>
 
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event,'nvCompanyName')" placeholder="חיפוש" #input>
+    <input matInput (keyup)="applyFilter($event,'nvOperatorName')" placeholder="שם" #input>
     <mat-icon color="warn" class="mat-18">search</mat-icon>
 </mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvOperatorTypeValue')" placeholder="סוג" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvCompanyName')" placeholder="חברה" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvActivityies')" placeholder="פעילות" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvIdentity')" placeholder="ת.ז" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvContactPersonMail')" placeholder="מייל" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+
 
 <div class="mat-elevation-z8" style="text-align:right;" dir="rtl">
     <table mat-table [dataSource]="dataSource" matSort>
