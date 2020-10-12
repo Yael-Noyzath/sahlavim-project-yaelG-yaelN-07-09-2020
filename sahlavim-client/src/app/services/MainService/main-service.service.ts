@@ -13,28 +13,25 @@ export class MainServiceService {
 
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
-/////////////////////ניסיון לגשת לשרת שלא הצליח
-  // post(url: string, data): Promise<any> {
-  //   console.log(url);
-  //   return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
-  // }
+  post(url: string, data): Promise<any> {
+    console.log(url);
+    return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
+  }
 
-  // get(url: string): Promise<any> {
-  //   console.log(url);
-  //   return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
+   get(url: string): Promise<any> {
+     console.log(url);
+     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
 
-  // }
+   }
 
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
 
-  // getOperators(): Observable<Array<Operator>> {
-  //   return this.http.post<Array<Operator>>(this.sahlavimUrl + "GetOperators", {});
-  // }
-
-  userLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
-     return this.http.post<Array<Operator>>(this.sahlavimUrl + "UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail },{});
+   getOperators(): Observable<Array<Operator>> {
+     return this.http.post<Array<Operator>>(this.sahlavimUrl + "GetOperators", {});
    }
+
+  
 
 }
