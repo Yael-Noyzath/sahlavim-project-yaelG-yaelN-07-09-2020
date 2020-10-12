@@ -1,74 +1,94 @@
 <p>operator-table works!</p>
 
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event,'nvOperatorName')" placeholder="שם" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
 </mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvOperatorTypeValue')" placeholder="סוג" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvCompanyName')" placeholder="חברה" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvActivityies')" placeholder="פעילות" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvIdentity')" placeholder="ת.ז" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event,'nvContactPersonMail')" placeholder="מייל" #input>
+    <mat-icon color="warn" class="mat-18">search</mat-icon>
+</mat-form-field>
+
 
 <div class="mat-elevation-z8" style="text-align:right;" dir="rtl">
     <table mat-table [dataSource]="dataSource" matSort>
-
+        
         <!-- Id Column -->
-        <ng-container matColumnDef="id">
+        <!-- <ng-container matColumnDef="nvIdentity">
             <th style="width:6%;" mat-header-cell *matHeaderCellDef mat-sort-header> קוד </th>
-            <td mat-cell *matCellDef="let row"> {{row.OperatorId}} </td>
-        </ng-container>
-
+            <td mat-cell *matCellDef="let row"> {{row.nvIdentity}} </td>
+        </ng-container> -->
 
         <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם </th>
-            <td mat-cell *matCellDef="let row"> {{row.OperatorName}} </td>
+        <ng-container matColumnDef="nvOperatorName">
+            <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם </th>
+            <td mat-cell *matCellDef="let row"> {{row.nvOperatorName}} </td>
         </ng-container>
 
         <!-- Contact Name Column -->
-        <ng-container matColumnDef="contactName">
+        <ng-container matColumnDef="nvContactPerson">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם איש קשר </th>
-            <td mat-cell *matCellDef="let row"> {{row.ContactPerson}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvContactPerson}} </td>
         </ng-container>
 
 
         <!-- kind Column -->
-        <ng-container matColumnDef="Type">
+        <ng-container matColumnDef="nvOperatorTypeValue">
             <th style="width: 7%;" mat-header-cell *matHeaderCellDef mat-sort-header>סוג</th>
-            <td mat-cell *matCellDef="let row"> {{row.OperatorType}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvOperatorTypeValue}} </td>
         </ng-container>
 
         <!-- companyName Column -->
-        <ng-container matColumnDef="companyName">
+        <ng-container matColumnDef="nvCompanyName">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header>חברה</th>
-            <td mat-cell *matCellDef="let row"> {{row.CompanyName}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvCompanyName}} </td>
         </ng-container>
 
         <!-- category activities Column -->
-        <ng-container matColumnDef="category">
+        <ng-container matColumnDef="nvActivityies">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header>קטגורית פעילות</th>
-            <td mat-cell *matCellDef="let row"> {{row.OperatorNamber}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvActivityies}} </td>
         </ng-container>
 
 
         <!-- Identity  Column -->
-        <ng-container matColumnDef="identity">
+        <ng-container matColumnDef="nvIdentity">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> ת.ז </th>
-            <td mat-cell *matCellDef="let row"> {{row.IdentityNumber}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvIdentity}} </td>
         </ng-container>
 
         <!-- phone number Column -->
-        <ng-container matColumnDef="phoneNumber">
+        <ng-container matColumnDef="nvContactPersonPhone">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> טלפון </th>
-            <td mat-cell *matCellDef="let row"> {{row.OperatorNamber}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvContactPersonPhone}} </td>
         </ng-container>
 
         <!-- Email Column -->
-        <ng-container matColumnDef="Email">
+        <ng-container matColumnDef="nvContactPersonMail">
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> מייל </th>
-            <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nvContactPersonMail}} </td>
         </ng-container>
 
         <!--is in Programs database Column -->
-        <ng-container matColumnDef="inProgramsDatabase">
+        <ng-container matColumnDef="bInProgramPool">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>קיים במאגר התוכניות</th>
-            <td mat-cell *matCellDef="let row"> {{row.inProgramsDatabase}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.bInProgramPool}} </td>
         </ng-container>
 
         <!-- Update -->
