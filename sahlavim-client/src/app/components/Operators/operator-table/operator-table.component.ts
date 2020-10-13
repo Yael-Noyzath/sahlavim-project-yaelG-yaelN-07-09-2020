@@ -6,6 +6,7 @@ import { Operator } from 'src/app/Classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
+import { User } from 'src/app/classes/user';
 
 
 @Component({
@@ -16,17 +17,17 @@ import { from } from 'rxjs';
 export class OperatorTableComponent implements OnInit {
 
   ngOnInit() {
+    this.currentUser = this.mainService.getUser();
     this.getAllOperators();
-
   }
 
   //מערך שמות העמודות
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
-  index = 8;
+  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete','choose'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
   operators: Array<Operator>;
+  currentUser: User=new User();
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -51,6 +52,7 @@ export class OperatorTableComponent implements OnInit {
   //   }
   // }
 
+  //פונקצית חיפוש לכל עמודה
   applyFilter(event: Event, prop: string) {
     //alert(prop);
     const filterValue = (event.target as HTMLInputElement).value;
@@ -62,7 +64,7 @@ export class OperatorTableComponent implements OnInit {
         break;
       case 'nvContactPerson': this.operators = this.operators.filter((m) => (m.nvContactPerson.indexOf(filterValue) > -1));
         break;
-        //iOperatorType צריך לעשות לו המרה מ 
+      //iOperatorType צריך לעשות לו המרה מ 
       case 'nvOperatorTypeValue': this.operators = this.operators.filter((m) => (m.nvOperatorTypeValue.indexOf(filterValue) > -1));
         break;
       case 'nvCompanyName': this.operators = this.operators.filter((m) => (m.nvCompanyName.indexOf(filterValue) > -1));
@@ -84,6 +86,7 @@ export class OperatorTableComponent implements OnInit {
     this.operators = list;
   }
 
+  //קבלת כל המפעילים
   getAllOperators() {
     this.mainService.post("GetOperators", {})
       .then(
@@ -99,6 +102,22 @@ export class OperatorTableComponent implements OnInit {
           alert("err");
         }
       );
+  }
+
+  //מחיקת מפעיל
+  DeleteOperator(oper: Operator) {
+    alert("DeleteOperator  "+oper.iOperatorId)
+    alert("האם אתה בטוח שברצונך למחוק מפעיל זה ?");
+    this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.currentUser.iUserId });
+  }
+  //עריכת מפעיל
+  EditOperator(oper: Operator) {
+    // settingsActiveTab = 0;
+    // bNeighborhood = false;
+    // bSchoolsExcude = false;
+    // iOperatorId = oper.iOperatorId;
+    this.mainService.post("GetOperator", { iOperatorId: oper.iOperatorId });
+    //מעבר לעמוד של עריכה
   }
 }
 

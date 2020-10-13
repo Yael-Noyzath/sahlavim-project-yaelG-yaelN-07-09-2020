@@ -14,29 +14,62 @@ export class LoginComponent implements OnInit {
 
   enterByUserName: boolean = true;
   user: User = new User();
+  currentUser: User = new User();
+  usersList: Array<User>;
   formLogin: FormGroup;
-
+  userExist:boolean=false;
   ngOnInit() {
     this.UserLoginControls();
   }
   //כניסה
   enterToTheMenu() {
+    //קבלה של הנתונים שהכניס בכניסה
     this.user = this.formLogin.value;
-    this.userLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
+    //בדיקה אם הוא רשאי להכנס
+    this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
+    //users קבלת רשימה של כל ה
+    this.GetUsers();
   }
 
-  userLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
+  GetUsers() {
+    this.mainService.post("GetUsers", {})
+      .then(
+        res => {
+          if (res) {
+            this.usersList = res;
+            //חיפוש המשתמש הזה בתוך הרשימה
+            this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
+              && u.nvPassword == this.user.nvPassword);
+            //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+            this.mainService.saveUser(this.currentUser);
+            if(this.userExist==true)
+            {
+              this.mainService.serviceNavigate("header-menu");
+            }
+          }
+          else
+            alert("GetUsers login error");
+        },
+        err => {
+          alert("error");
+        }
+      );
+  }
+
+  UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
         res => {
-          if(res.iUserId)
-          this.mainService.serviceNavigate("/header-menu");
-          else{
-            alert("null")
+          if (res.iUserId)
+            this.userExist= true;
+          else {
+            alert("userLogin error");
+            this.userExist= false;
           }
         },
         err => {
           alert("err")
+          this.userExist= false;
         }
       );
   }
