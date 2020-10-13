@@ -22,7 +22,7 @@ export class OperatorTableComponent implements OnInit {
   }
 
   //מערך שמות העמודות
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
+  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete','choose'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
