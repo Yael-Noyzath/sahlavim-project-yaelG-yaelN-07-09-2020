@@ -17,8 +17,8 @@ import { User } from 'src/app/classes/user';
 export class OperatorTableComponent implements OnInit {
 
   ngOnInit() {
-    this.getAllOperators();
     this.thisUser = this.mainService.getUser();
+    this.getAllOperators();
   }
 
   //מערך שמות העמודות
@@ -107,7 +107,7 @@ export class OperatorTableComponent implements OnInit {
 
   //מחיקת מפעיל
   DeleteOperator(oper: Operator) {
-    alert(oper.iOperatorId)
+    alert("DeleteOperator  "+oper.iOperatorId)
     alert("האם אתה בטוח שברצונך למחוק מפעיל זה ?");
     this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.thisUser.iUserId });
   }

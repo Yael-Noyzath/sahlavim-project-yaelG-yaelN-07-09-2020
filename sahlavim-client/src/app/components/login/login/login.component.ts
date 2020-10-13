@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   enterByUserName: boolean = true;
   user: User = new User();
+  thisUser: User = new User();
   usersList: Array<User>;
   formLogin: FormGroup;
 
@@ -28,18 +29,22 @@ export class LoginComponent implements OnInit {
     this.userLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
     //users קבלת רשימה של כל ה
     this.GetUsers();
-    //חיפוש המשתמש הזה בתוך הרשימה
-    this.user = this.usersList.find(u => u.nvUserName == this.user.nvUserName
-      && u.nvPassword == this.user.nvPassword);
-    //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-    this.mainService.saveUser(this.user);
   }
 
   GetUsers() {
     this.mainService.post("GetUsers", {})
       .then(
         res => {
-          this.usersList = res;
+          if (res) {
+            this.usersList = res;
+            //חיפוש המשתמש הזה בתוך הרשימה
+            this.thisUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
+              && u.nvPassword == this.user.nvPassword);
+            //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+            this.mainService.saveUser(this.thisUser);
+          }
+          else
+            alert("GetUsers error");
         },
         err => {
           alert("error");
@@ -54,7 +59,7 @@ export class LoginComponent implements OnInit {
           if (res.iUserId)
             this.mainService.serviceNavigate("/header-menu");
           else {
-            alert("null")
+            alert("userLogin error")
           }
         },
         err => {
