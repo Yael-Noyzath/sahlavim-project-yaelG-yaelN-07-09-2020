@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   enterByUserName: boolean = true;
   user: User = new User();
+  usersList: Array<User>;
   formLogin: FormGroup;
 
   ngOnInit() {
@@ -21,17 +22,38 @@ export class LoginComponent implements OnInit {
   }
   //כניסה
   enterToTheMenu() {
+    //קבלה של הנתונים שהכניס בכניסה
     this.user = this.formLogin.value;
+    //בדיקה אם הוא רשאי להכנס
     this.userLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
+    //users קבלת רשימה של כל ה
+    this.GetUsers();
+    //חיפוש המשתמש הזה בתוך הרשימה
+    this.user = this.usersList.find(u => u.nvUserName == this.user.nvUserName
+      && u.nvPassword == this.user.nvPassword);
+    //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+    this.mainService.saveUser(this.user);
+  }
+
+  GetUsers() {
+    this.mainService.post("GetUsers", {})
+      .then(
+        res => {
+          this.usersList = res;
+        },
+        err => {
+          alert("error");
+        }
+      );
   }
 
   userLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
         res => {
-          if(res.iUserId)
-          this.mainService.serviceNavigate("/header-menu");
-          else{
+          if (res.iUserId)
+            this.mainService.serviceNavigate("/header-menu");
+          else {
             alert("null")
           }
         },
