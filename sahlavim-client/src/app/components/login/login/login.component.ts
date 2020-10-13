@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             }
           }
           else
-            alert("GetUsers error");
+            alert("GetUsers login error");
         },
         err => {
           alert("error");

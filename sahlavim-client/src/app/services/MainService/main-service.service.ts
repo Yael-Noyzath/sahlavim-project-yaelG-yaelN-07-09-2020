@@ -32,11 +32,11 @@ export class MainServiceService {
   }
 
   saveUser(u: User) {
-    alert("saveUser  " + u.nvUserName);
+    //alert("saveUser  " + u.nvUserName);
     this.currentUser = u;
   }
   getUser() {
-    alert("getUser " + this.currentUser.nvUserName);
+    //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
 
