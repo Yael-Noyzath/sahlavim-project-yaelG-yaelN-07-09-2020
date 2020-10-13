@@ -14,10 +14,10 @@ export class LoginComponent implements OnInit {
 
   enterByUserName: boolean = true;
   user: User = new User();
-  thisUser: User = new User();
+  currentUser: User = new User();
   usersList: Array<User>;
   formLogin: FormGroup;
-
+  userExist:boolean=false;
   ngOnInit() {
     this.UserLoginControls();
   }
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     //קבלה של הנתונים שהכניס בכניסה
     this.user = this.formLogin.value;
     //בדיקה אם הוא רשאי להכנס
-    this.userLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
+    this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
     //users קבלת רשימה של כל ה
     this.GetUsers();
   }
@@ -38,10 +38,14 @@ export class LoginComponent implements OnInit {
           if (res) {
             this.usersList = res;
             //חיפוש המשתמש הזה בתוך הרשימה
-            this.thisUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
+            this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
               && u.nvPassword == this.user.nvPassword);
             //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-            this.mainService.saveUser(this.thisUser);
+            this.mainService.saveUser(this.currentUser);
+            if(this.userExist==true)
+            {
+              this.mainService.serviceNavigate("header-menu");
+            }
           }
           else
             alert("GetUsers error");
@@ -52,18 +56,20 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  userLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
+  UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
         res => {
           if (res.iUserId)
-            this.mainService.serviceNavigate("/header-menu");
+            this.userExist= true;
           else {
-            alert("userLogin error")
+            alert("userLogin error");
+            this.userExist= false;
           }
         },
         err => {
           alert("err")
+          this.userExist= false;
         }
       );
   }

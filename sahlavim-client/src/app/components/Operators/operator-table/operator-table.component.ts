@@ -17,7 +17,7 @@ import { User } from 'src/app/classes/user';
 export class OperatorTableComponent implements OnInit {
 
   ngOnInit() {
-    this.thisUser = this.mainService.getUser();
+    this.currentUser = this.mainService.getUser();
     this.getAllOperators();
   }
 
@@ -28,7 +28,7 @@ export class OperatorTableComponent implements OnInit {
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
   operators: Array<Operator>;
-  thisUser: User=new User();
+  currentUser: User=new User();
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -109,7 +109,7 @@ export class OperatorTableComponent implements OnInit {
   DeleteOperator(oper: Operator) {
     alert("DeleteOperator  "+oper.iOperatorId)
     alert("האם אתה בטוח שברצונך למחוק מפעיל זה ?");
-    this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.thisUser.iUserId });
+    this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.currentUser.iUserId });
   }
   //עריכת מפעיל
   EditOperator(oper: Operator) {

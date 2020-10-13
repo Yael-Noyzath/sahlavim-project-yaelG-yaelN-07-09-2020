@@ -13,7 +13,7 @@ export class MainServiceService {
   constructor(private router: Router, private http: HttpClient) { }
 
   //משתמש שנכנס למערכת
-  user: User = new User();
+  currentUser: User = new User();
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
   post(url: string, data): Promise<any> {
@@ -33,11 +33,11 @@ export class MainServiceService {
 
   saveUser(u: User) {
     alert("saveUser  " + u.nvUserName);
-    this.user = u;
+    this.currentUser = u;
   }
   getUser() {
-    alert("getUser " + this.user.nvUserName);
-    return this.user;
+    alert("getUser " + this.currentUser.nvUserName);
+    return this.currentUser;
   }
 
 }

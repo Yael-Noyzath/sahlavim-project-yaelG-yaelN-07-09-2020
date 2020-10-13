@@ -10,13 +10,13 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 export class HeaderMenuComponent implements OnInit {
 
   showWelcome: boolean = true;
-  thisUser: User = new User();
+  currentUser: User = new User();
 
   ngOnInit() {
   }
 
   constructor(private mainService: MainServiceService) {
-    this.thisUser = this.mainService.getUser();
+    this.currentUser = this.mainService.getUser();
   }
   setting() {
     this.showWelcome = false;
