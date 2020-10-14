@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperatorTableComponent } from './operator-table.component';
+import { OperatorActivityComponent } from './operator-activity.component';
 
-describe('OperatorTableComponent', () => {
-  let component: OperatorTableComponent;
-  let fixture: ComponentFixture<OperatorTableComponent>;
+describe('OperatorActivityComponent', () => {
+  let component: OperatorActivityComponent;
+  let fixture: ComponentFixture<OperatorActivityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OperatorTableComponent ]
+      declarations: [ OperatorActivityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OperatorTableComponent);
+    fixture = TestBed.createComponent(OperatorActivityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

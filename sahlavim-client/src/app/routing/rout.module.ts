@@ -7,20 +7,16 @@ import { ManagementMenuComponent } from '../components/Management/management-men
 import { OperatorMenuComponent } from '../components/Operators/operator-menu/operator-menu.component';
 import { ProgramDetailsMenuComponent } from '../components/Programs/program-details-menu/program-details-menu.component';
 import { SettingsDetailsMenuComponent } from '../components/Settings/settings-details-menu/settings-details-menu.component';
-import { ManagersTableComponent } from '../components/Management/managers-table/managers-table.component';
-import { OperatorTableComponent } from '../components/Operators/operator-table/operator-table.component';
-import { ProgramsComponent } from '../components/Programs/programs/programs.component';
-import { SettingsComponent } from '../components/Settings/settings/settings.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
   {
     path: "header-menu", component: HeaderMenuComponent,
     children: [
-      { path: "managers-table", component: ManagersTableComponent },
-      { path: "operator-table", component: OperatorTableComponent },
-      { path: "programs", component: ProgramsComponent },
-      { path: "settings", component: SettingsComponent }
+      { path: "management-menu", component: ManagementMenuComponent },
+      { path: "operator-menu", component: OperatorMenuComponent },
+      { path: "program-details-menu", component: ProgramDetailsMenuComponent },
+      { path: "setting-details-menu", component: SettingsDetailsMenuComponent }
     ]
   }
 ];

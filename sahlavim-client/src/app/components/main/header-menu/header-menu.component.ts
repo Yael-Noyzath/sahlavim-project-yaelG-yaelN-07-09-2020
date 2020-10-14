@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/classes/user';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 @Component({
@@ -9,34 +8,23 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class HeaderMenuComponent implements OnInit {
 
-  showWelcome: boolean = true;
-  currentUser: User = new User();
+  constructor(private mainService: MainServiceService) { }
 
   ngOnInit() {
   }
 
-  constructor(private mainService: MainServiceService) {
-    this.currentUser = this.mainService.getUser();
-  }
   setting() {
-    this.showWelcome = false;
-    this.mainService.serviceNavigate("/header-menu/settings");
-
+    this.mainService.serviceNavigate("/header-menu/setting-details-menu");
   }
   management() {
-    this.mainService.serviceNavigate("/header-menu/managers-table");
-    this.showWelcome = false;
+    this.mainService.serviceNavigate("/header-menu/management-menu");
 
   }
   operator() {
-    this.mainService.serviceNavigate("/header-menu/operator-table");
-    this.showWelcome = false;
-
+    this.mainService.serviceNavigate("/header-menu/operator-menu");
   }
   program() {
-    this.mainService.serviceNavigate("/header-menu/programs");
-    this.showWelcome = false;
-
+    this.mainService.serviceNavigate("/header-menu/program-details-menu");
   }
 
 }
