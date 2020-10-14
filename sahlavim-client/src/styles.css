@@ -5,6 +5,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';    
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';    
+
 .mat-card {    
     text-align: -webkit-center;    
 }    
