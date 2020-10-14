@@ -23,11 +23,19 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [             
+                "node_modules/bootstrap/dist/css/bootstrap.css",
+
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
+              }
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -124,8 +132,5 @@
       }
     }
   },
-  "defaultProject": "p",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "p"
 }

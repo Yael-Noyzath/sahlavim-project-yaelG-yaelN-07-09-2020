@@ -112,6 +112,7 @@ export class OperatorTableComponent implements OnInit {
   }
   //עריכת מפעיל
   EditOperator(oper: Operator) {
+    // serviceNavigate()
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
