@@ -39,6 +39,8 @@ export class OperatorTableComponent implements OnInit {
     //   this.dataSource = new MatTableDataSource(this.operators);
   }
 
+  visible:number=1;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -111,13 +113,13 @@ export class OperatorTableComponent implements OnInit {
     this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.currentUser.iUserId });
   }
   //עריכת מפעיל
-  EditOperator(oper: Operator) {
-    // serviceNavigate()
+  EditOperator(operator: Operator) {
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
     // iOperatorId = oper.iOperatorId;
-    this.mainService.post("GetOperator", { iOperatorId: oper.iOperatorId });
+    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu",operator.iOperatorId);
+
     //מעבר לעמוד של עריכה
   }
 }

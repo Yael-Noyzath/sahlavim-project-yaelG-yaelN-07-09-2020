@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./operators.component.css']
 })
 export class OperatorsComponent implements OnInit {
+   
+  menu:number=0;
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

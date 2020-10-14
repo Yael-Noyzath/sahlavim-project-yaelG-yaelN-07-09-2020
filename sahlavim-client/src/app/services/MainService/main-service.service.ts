@@ -26,9 +26,11 @@ export class MainServiceService {
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
 
   }
-
   serviceNavigate(path: string) {
     this.router.navigate([path]);
+  }
+  serviceNavigateForOperatorEdit(path: string,id:number) {
+    this.router.navigate([path,id]);
   }
 
   saveUser(u: User) {

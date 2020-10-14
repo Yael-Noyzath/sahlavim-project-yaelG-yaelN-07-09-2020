@@ -19,7 +19,13 @@ const appTable: Routes = [
     path: "header-menu", component: HeaderMenuComponent,
     children: [
       { path: "managers-table", component: ManagersTableComponent },
-      { path: "operators", component:OperatorsComponent  },
+      {
+        path: "operators", component: OperatorsComponent,
+        children: [
+          { path: "operator-table", component: OperatorTableComponent },
+          { path: 'operator-menu/:id', component: OperatorMenuComponent, }
+        ]
+      },
       { path: "programs", component: ProgramsComponent },
       { path: "settings", component: SettingsComponent }
 
