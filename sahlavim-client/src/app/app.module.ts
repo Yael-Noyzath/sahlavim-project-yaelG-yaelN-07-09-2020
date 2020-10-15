@@ -59,11 +59,8 @@ import { SettingsDetailsComponent } from './components/Settings/settings-details
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
 //import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
-import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
-<<<<<<< HEAD
-=======
-import { OperatorsComponent } from './components/Operators/operators/operators.component';
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
+//import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
+//import { OperatorsComponent } from './components/Operators/operators/operators.component';
 
 
 @NgModule({
@@ -99,12 +96,6 @@ import { OperatorsComponent } from './components/Operators/operators/operators.c
     SettingsComponent,
     SettingsDetailsComponent,
     SettingsDetailsMenuComponent,
-<<<<<<< HEAD
-    OperatorTableComponent
-=======
-    OperatorTableComponent,
-    OperatorsComponent,
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
   ],
   imports: [
     BrowserModule,

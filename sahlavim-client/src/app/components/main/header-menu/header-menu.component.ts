@@ -18,7 +18,6 @@ export class HeaderMenuComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
   }
-<<<<<<< HEAD
   setting() {
     this.showWelcome = false;
     this.mainService.serviceNavigate("/header-menu/settings");
@@ -39,7 +38,6 @@ export class HeaderMenuComponent implements OnInit {
     this.showWelcome = false;
 
   }
-=======
 
   
   // setting() {
@@ -62,6 +60,5 @@ export class HeaderMenuComponent implements OnInit {
   //   this.showWelcome = false;
 
   // }
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
 
 }
