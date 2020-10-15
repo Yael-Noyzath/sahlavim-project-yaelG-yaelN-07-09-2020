@@ -1,0 +1,21 @@
+
+.button{
+    width:110px;
+    margin-left: 50px;
+}
+.settingBtn{
+    background-color:rgb(47, 50, 150);
+}
+
+.managementBtn {
+    background-color:rgb(57, 120, 110);
+
+}
+.operatorBtn{
+    background-color:rgb(236, 116, 19);
+
+}
+
+.programBtn{
+background-color: rgb(98, 169, 29);
+}
