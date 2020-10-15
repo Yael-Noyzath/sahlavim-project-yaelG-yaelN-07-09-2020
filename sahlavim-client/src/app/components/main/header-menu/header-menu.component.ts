@@ -39,4 +39,26 @@ export class HeaderMenuComponent implements OnInit {
 
   }
 
+  
+  // setting() {
+  //   this.showWelcome = false;
+  //   this.mainService.serviceNavigate("/header-menu/settings");
+
+  // }
+  // management() {
+  //   this.mainService.serviceNavigate("/header-menu/managers-table");
+  //   this.showWelcome = false;
+
+  // }
+  // operator() {
+  //   this.mainService.serviceNavigate("/header-menu/operators");
+  //   this.showWelcome = false;
+
+  // }
+  // program() {
+  //   this.mainService.serviceNavigate("/header-menu/programs");
+  //   this.showWelcome = false;
+
+  // }
+
 }

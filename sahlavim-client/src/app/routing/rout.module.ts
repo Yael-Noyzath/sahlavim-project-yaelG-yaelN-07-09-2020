@@ -11,6 +11,7 @@ import { ManagersTableComponent } from '../components/Management/managers-table/
 import { OperatorTableComponent } from '../components/Operators/operator-table/operator-table.component';
 import { ProgramsComponent } from '../components/Programs/programs/programs.component';
 import { SettingsComponent } from '../components/Settings/settings/settings.component';
+import { OperatorsComponent } from '../components/Operators/operators/operators.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -20,8 +21,14 @@ const appTable: Routes = [
       { path: "managers-table", component: ManagersTableComponent },
       { path: "operator-table", component: OperatorTableComponent },
       { path: "programs", component: ProgramsComponent },
+      { path: "settings", component: SettingsComponent },
+    //]
+      { path: "operators", component:OperatorsComponent  },
+      { path: "programs", component: ProgramsComponent },
       { path: "settings", component: SettingsComponent }
+
     ]
+
   }
 ];
 
