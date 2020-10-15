@@ -22,11 +22,7 @@ export class OperatorTableComponent implements OnInit {
   }
 
   //מערך שמות העמודות
-<<<<<<< HEAD
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
-=======
   displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete','choose'];
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
   //מערך מפעילים לטבלה
@@ -116,10 +112,7 @@ export class OperatorTableComponent implements OnInit {
   }
   //עריכת מפעיל
   EditOperator(oper: Operator) {
-<<<<<<< HEAD
-=======
     // serviceNavigate()
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;

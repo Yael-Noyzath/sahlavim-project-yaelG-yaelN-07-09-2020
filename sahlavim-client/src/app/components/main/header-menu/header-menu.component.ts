@@ -18,7 +18,6 @@ export class HeaderMenuComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
   }
-<<<<<<< HEAD
   setting() {
     this.showWelcome = false;
     this.mainService.serviceNavigate("/header-menu/settings");
@@ -39,29 +38,5 @@ export class HeaderMenuComponent implements OnInit {
     this.showWelcome = false;
 
   }
-=======
-
-  
-  // setting() {
-  //   this.showWelcome = false;
-  //   this.mainService.serviceNavigate("/header-menu/settings");
-
-  // }
-  // management() {
-  //   this.mainService.serviceNavigate("/header-menu/managers-table");
-  //   this.showWelcome = false;
-
-  // }
-  // operator() {
-  //   this.mainService.serviceNavigate("/header-menu/operators");
-  //   this.showWelcome = false;
-
-  // }
-  // program() {
-  //   this.mainService.serviceNavigate("/header-menu/programs");
-  //   this.showWelcome = false;
-
-  // }
->>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
 
 }
