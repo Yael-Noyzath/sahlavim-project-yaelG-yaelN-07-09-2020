@@ -59,8 +59,12 @@ import { SettingsDetailsComponent } from './components/Settings/settings-details
 import { SettingsDetailsMenuComponent } from './components/Settings/settings-details-menu/settings-details-menu.component';
 //import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
+<<<<<<< HEAD
 //import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
 //import { OperatorsComponent } from './components/Operators/operators/operators.component';
+=======
+import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
+>>>>>>> parent of a190a81... edit header menu links
 
 
 @NgModule({
@@ -96,6 +100,10 @@ import { from } from 'rxjs';
     SettingsComponent,
     SettingsDetailsComponent,
     SettingsDetailsMenuComponent,
+<<<<<<< HEAD
+=======
+    OperatorTableComponent
+>>>>>>> parent of a190a81... edit header menu links
   ],
   imports: [
     BrowserModule,

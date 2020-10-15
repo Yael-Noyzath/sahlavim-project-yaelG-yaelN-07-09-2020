@@ -21,6 +21,7 @@ export class HeaderMenuComponent implements OnInit {
   setting() {
     this.showWelcome = false;
     this.mainService.serviceNavigate("/header-menu/settings");
+<<<<<<< HEAD
 
   }
   management() {
@@ -38,27 +39,24 @@ export class HeaderMenuComponent implements OnInit {
     this.showWelcome = false;
 
   }
+=======
+>>>>>>> parent of a190a81... edit header menu links
 
-  
-  // setting() {
-  //   this.showWelcome = false;
-  //   this.mainService.serviceNavigate("/header-menu/settings");
+  }
+  management() {
+    this.mainService.serviceNavigate("/header-menu/managers-table");
+    this.showWelcome = false;
 
-  // }
-  // management() {
-  //   this.mainService.serviceNavigate("/header-menu/managers-table");
-  //   this.showWelcome = false;
+  }
+  operator() {
+    this.mainService.serviceNavigate("/header-menu/operator-table");
+    this.showWelcome = false;
 
-  // }
-  // operator() {
-  //   this.mainService.serviceNavigate("/header-menu/operators");
-  //   this.showWelcome = false;
+  }
+  program() {
+    this.mainService.serviceNavigate("/header-menu/programs");
+    this.showWelcome = false;
 
-  // }
-  // program() {
-  //   this.mainService.serviceNavigate("/header-menu/programs");
-  //   this.showWelcome = false;
-
-  // }
+  }
 
 }
