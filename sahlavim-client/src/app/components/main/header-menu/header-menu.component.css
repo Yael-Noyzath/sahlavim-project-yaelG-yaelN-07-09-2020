@@ -19,3 +19,12 @@
 .programBtn{
 background-color: rgb(98, 169, 29);
 }
+
+a{
+    text-decoration: none;
+
+}
+.activeLink{
+    border: solid;
+    border-color: lightslategrey;
+}
