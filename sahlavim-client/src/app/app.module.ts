@@ -64,6 +64,9 @@ import { from } from 'rxjs';
 //import { OperatorsComponent } from './components/Operators/operators/operators.component';
 =======
 import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
+<<<<<<< HEAD
+>>>>>>> parent of a190a81... edit header menu links
+=======
 >>>>>>> parent of a190a81... edit header menu links
 
 
@@ -101,6 +104,10 @@ import { OperatorTableComponent } from './components/Operators/operator-table/op
     SettingsDetailsComponent,
     SettingsDetailsMenuComponent,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    OperatorTableComponent
+>>>>>>> parent of a190a81... edit header menu links
 =======
     OperatorTableComponent
 >>>>>>> parent of a190a81... edit header menu links

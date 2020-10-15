@@ -22,11 +22,15 @@ export class HeaderMenuComponent implements OnInit {
     this.showWelcome = false;
     this.mainService.serviceNavigate("/header-menu/settings");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of a190a81... edit header menu links
 
   }
   management() {
     this.mainService.serviceNavigate("/header-menu/managers-table");
     this.showWelcome = false;
+<<<<<<< HEAD
 
   }
   operator() {
@@ -58,5 +62,19 @@ export class HeaderMenuComponent implements OnInit {
     this.showWelcome = false;
 
   }
+=======
+
+  }
+  operator() {
+    this.mainService.serviceNavigate("/header-menu/operator-table");
+    this.showWelcome = false;
+
+  }
+  program() {
+    this.mainService.serviceNavigate("/header-menu/programs");
+    this.showWelcome = false;
+
+  }
+>>>>>>> parent of a190a81... edit header menu links
 
 }
