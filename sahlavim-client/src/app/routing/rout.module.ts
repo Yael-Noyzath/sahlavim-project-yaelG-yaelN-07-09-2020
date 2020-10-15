@@ -12,9 +12,12 @@ import { OperatorTableComponent } from '../components/Operators/operator-table/o
 import { ProgramsComponent } from '../components/Programs/programs/programs.component';
 import { SettingsComponent } from '../components/Settings/settings/settings.component';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { OperatorsComponent } from '../components/Operators/operators/operators.component';
 >>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
+=======
+>>>>>>> parent of a190a81... edit header menu links
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -23,18 +26,24 @@ const appTable: Routes = [
     children: [
       { path: "managers-table", component: ManagersTableComponent },
 <<<<<<< HEAD
+<<<<<<< HEAD
       { path: "operator-table", component: OperatorTableComponent },
       { path: "programs", component: ProgramsComponent },
       { path: "settings", component: SettingsComponent }
     ]
 =======
       { path: "operators", component:OperatorsComponent  },
+=======
+      { path: "operator-table", component: OperatorTableComponent },
+>>>>>>> parent of a190a81... edit header menu links
       { path: "programs", component: ProgramsComponent },
       { path: "settings", component: SettingsComponent }
-
     ]
+<<<<<<< HEAD
 
 >>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
+=======
+>>>>>>> parent of a190a81... edit header menu links
   }
 ];
 

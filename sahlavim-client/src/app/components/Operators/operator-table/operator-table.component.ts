@@ -117,9 +117,12 @@ export class OperatorTableComponent implements OnInit {
   //עריכת מפעיל
   EditOperator(oper: Operator) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     // serviceNavigate()
 >>>>>>> parent of e8819d2... Merge pull request #45 from Yael-Noyzath/noyzath
+=======
+>>>>>>> parent of a190a81... edit header menu links
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
