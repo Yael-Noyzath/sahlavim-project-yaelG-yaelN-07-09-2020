@@ -18,27 +18,25 @@ export class HeaderMenuComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
   }
+  setting() {
+    this.showWelcome = false;
+    this.mainService.serviceNavigate("/header-menu/settings");
 
-  
-  // setting() {
-  //   this.showWelcome = false;
-  //   this.mainService.serviceNavigate("/header-menu/settings");
+  }
+  management() {
+    this.mainService.serviceNavigate("/header-menu/managers-table");
+    this.showWelcome = false;
 
-  // }
-  // management() {
-  //   this.mainService.serviceNavigate("/header-menu/managers-table");
-  //   this.showWelcome = false;
+  }
+  operator() {
+    this.mainService.serviceNavigate("/header-menu/operator-table");
+    this.showWelcome = false;
 
-  // }
-  // operator() {
-  //   this.mainService.serviceNavigate("/header-menu/operators");
-  //   this.showWelcome = false;
+  }
+  program() {
+    this.mainService.serviceNavigate("/header-menu/programs");
+    this.showWelcome = false;
 
-  // }
-  // program() {
-  //   this.mainService.serviceNavigate("/header-menu/programs");
-  //   this.showWelcome = false;
-
-  // }
+  }
 
 }
