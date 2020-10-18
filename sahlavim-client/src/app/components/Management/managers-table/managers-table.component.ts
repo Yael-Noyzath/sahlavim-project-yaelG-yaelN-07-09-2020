@@ -34,7 +34,7 @@ export class ManagersTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ngAfterViewInit()
+   this.ngAfterViewInit();
   }
 
 

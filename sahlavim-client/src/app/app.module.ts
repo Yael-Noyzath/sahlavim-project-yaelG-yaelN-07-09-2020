@@ -60,6 +60,7 @@ import { SettingsDetailsMenuComponent } from './components/Settings/settings-det
 //import {FlexLayoutModule} from '@angular/flex-layout';
 import { from } from 'rxjs';
 import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
+import { OperatorsComponent } from './components/Operators/operators/operators.component';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { OperatorTableComponent } from './components/Operators/operator-table/op
     SettingsComponent,
     SettingsDetailsComponent,
     SettingsDetailsMenuComponent,
-    OperatorTableComponent
+    OperatorTableComponent,
+    OperatorsComponent,
   ],
   imports: [
     BrowserModule,
