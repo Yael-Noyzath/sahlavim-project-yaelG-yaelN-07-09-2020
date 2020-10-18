@@ -16,7 +16,6 @@ import { coordinator } from 'src/app/Classes/coordinator';
   styleUrls: ['./settings.component.css']
 })
 
-
 export class SettingsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
