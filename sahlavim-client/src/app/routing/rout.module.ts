@@ -11,7 +11,7 @@ import { ManagersTableComponent } from '../components/Management/managers-table/
 import { OperatorTableComponent } from '../components/Operators/operator-table/operator-table.component';
 import { ProgramsComponent } from '../components/Programs/programs/programs.component';
 import { SettingsComponent } from '../components/Settings/settings/settings.component';
-
+import { OperatorsComponent } from '../components/Operators/operators/operators.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -19,10 +19,16 @@ const appTable: Routes = [
     path: "header-menu", component: HeaderMenuComponent,
     children: [
       { path: "managers-table", component: ManagersTableComponent },
-     // { path: "operators", component:OperatorsComponent  },
-      { path: "operator-table", component: OperatorTableComponent },
+      {
+        path: "operators", component: OperatorsComponent,
+        children: [
+          { path: "operator-table", component: OperatorTableComponent },
+          { path: 'operator-menu/:id', component: OperatorMenuComponent, }
+        ]
+      },
       { path: "programs", component: ProgramsComponent },
       { path: "settings", component: SettingsComponent }
+
     ]
 
   }
