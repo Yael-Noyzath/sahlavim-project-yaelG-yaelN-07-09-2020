@@ -34,13 +34,14 @@ export class ManagersTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ngAfterViewInit()
   }
 
 
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  //   this.dataSource.sort = this.sort;
-  // }
+   ngAfterViewInit() {
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
+   }
 
   GetUsers() {
     this.mainService.post("GetUsers", {})
