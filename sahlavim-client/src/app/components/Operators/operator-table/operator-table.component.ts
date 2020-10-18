@@ -19,6 +19,8 @@ export class OperatorTableComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.mainService.getUser();
     this.getAllOperators();
+    this.ngAfterViewInit();
+
   }
 
   //מערך שמות העמודות
