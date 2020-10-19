@@ -9,7 +9,6 @@ import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
 import { Setting } from 'src/app/Classes/setting';
 import { coordinator } from 'src/app/Classes/coordinator';
-import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-settings',
@@ -22,7 +21,8 @@ export class SettingsComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
-    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue','edit','choose'];
+    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
+    'nvMail', 'nvPhoneCoordinator','edit','choose'];
 
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Setting>;
@@ -31,7 +31,6 @@ export class SettingsComponent implements OnInit {
   coordinatorList: Array<coordinator>;
   currentUser: User = new User();
   coordinator: coordinator = new coordinator();
-  selection = new SelectionModel<Setting>(true, []);
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = mainService.getUser();
@@ -82,23 +81,4 @@ export class SettingsComponent implements OnInit {
       }
     );
   }
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-  checkboxLabel(row?: Setting): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.iSettingId + 1}`;
-  }
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  
-
 }
