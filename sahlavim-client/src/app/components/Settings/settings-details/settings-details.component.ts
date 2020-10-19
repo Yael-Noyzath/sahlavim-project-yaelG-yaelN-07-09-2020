@@ -91,7 +91,6 @@ export class SettingsDetailsComponent implements OnInit {
     }
   }
   EditSetting(idSetting: number) {
-    alert("")
     this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu', idSetting)
   }
 }

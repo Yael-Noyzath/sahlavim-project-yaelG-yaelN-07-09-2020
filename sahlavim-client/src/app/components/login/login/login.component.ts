@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   userExist:boolean=false;
   ngOnInit() {
     this.UserLoginControls();
-    debugger
   }
   //כניסה
   enterToTheMenu() {
