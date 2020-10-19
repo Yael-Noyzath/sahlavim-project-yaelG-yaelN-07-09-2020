@@ -13,6 +13,13 @@ import { ProgramsComponent } from '../components/Programs/programs/programs.comp
 import { SettingsComponent } from '../components/Settings/settings/settings.component';
 import { OperatorsComponent } from '../components/Operators/operators/operators.component';
 import { SettingsDetailsComponent } from '../components/Settings/settings-details/settings-details.component';
+import { OperatorDetailsComponent } from '../components/Operators/operator-details/operator-details.component';
+import { OperatorActivitiesComponent } from '../components/Operators/operator-activities/operator-activities.component';
+import { OperatorActivityReportComponent } from '../components/Operators/operator-activity-report/operator-activity-report.component';
+import { OperatorCreditComponent } from '../components/Operators/operator-credit/operator-credit.component';
+import { OperatorMessagesComponent } from '../components/Operators/operator-messages/operator-messages.component';
+import { OperatorReviewComponent } from '../components/Operators/operator-review/operator-review.component';
+import { OperatorScheduleComponent } from '../components/Operators/operator-schedule/operator-schedule.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -24,7 +31,18 @@ const appTable: Routes = [
         path: "operators", component: OperatorsComponent,
         children: [
           { path: "operator-table", component: OperatorTableComponent },
-          { path: 'operator-menu/:id', component: OperatorMenuComponent, }
+          {
+            path: 'operator-menu/:id', component: OperatorMenuComponent,
+            children: [
+              { path: "operator-details", component: OperatorDetailsComponent },
+              { path: "operator-schedule", component: OperatorScheduleComponent },
+              { path: "operator-activities", component: OperatorActivitiesComponent },
+              { path: "operator-activity-report", component: OperatorActivityReportComponent },
+              { path: "operator-credit", component: OperatorCreditComponent },
+              { path: "operator-messages", component: OperatorMessagesComponent },
+              { path: "operator-review", component: OperatorReviewComponent },
+            ]
+          }
         ]
       },
       { path: "programs", component: ProgramsComponent },

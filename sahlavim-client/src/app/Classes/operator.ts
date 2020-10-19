@@ -3,8 +3,7 @@ export class Operator {
     public nvContactPersonMail: string;
     public nvContactPersonPhone: string;
     public bTalan: boolean;
-    public iNumActivityDays: number;
-    public iNumActivityWeek: number;
+ 
     public nvFilePathTax: string;
     public nvFilePathBooks: string;
     public nvFilePathContract: string;
@@ -14,24 +13,28 @@ export class Operator {
     public iLastModifyUserId: number;//לבדוק מה זה
     public iLastModifyDate: number;//לבדוק מה זה
     public iSysRowStatus: number;//לבדוק מה זה
-    public ibookkeepingNum: number;
     public bActiveAfternoon: boolean;
     public bActiveChanukahCamp: boolean;
     public bActivePesachCamp: boolean;
     public bActiveSummerCamp: boolean;
-    public bLeadersNum: boolean;
+    public iNumLeaders: number;
 
     constructor(
-        public iOperatorId: number,
-        public nvOperatorName: string,
-        public nvContactPerson: string,
-        public iOperatorType: number,
-        public nvCompanyName: string,
-        public nvIdentity: string,
-        public nvOperatorNumber: string,
-        public binProgramsDatabase: boolean,
-        public nvOperatorTypeValue:string,
-        public nvActivityies:string,
-        public bInProgramPool:boolean,
-    ) {}
+        public iOperatorId: number=1,
+        public nvOperatorName: string="",
+        public nvContactPerson: string="",
+        public iOperatorType: number=0,
+        public nvCompanyName: string="",
+        public nvIdentity: string="",
+        public nvOperatorNumber: string="",
+        public binProgramsDatabase: boolean=true,
+        public nvOperatorTypeValue:string="",
+        public nvActivityies:string="",
+        public bInProgramPool:boolean=true,
+        public ibookkeepingNum: number=0,
+        public iNumActivityDays: number=0,
+        public iNumActivityWeek: number=0
+        ) 
+        {}
+
 }

@@ -11,24 +11,13 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 export class OperatorMenuComponent implements OnInit {
   id: string;
   operator: Operator;
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
+
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { 
+        this.operator=this.mainService.operatorForDetails;
+
+  }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')
-
-    this.mainService.post("GetOperator", { iOperatorId: Number(this.id)  })
-      .then(
-        res => {
-          if (res) {
-            this.operator = res;
-            // }
-            // else
-            //   alert("There is an Error")
-          }
-        }
-        , err => {
-          alert("There is an Error")
-        }
-      );
+    
   }
 }

@@ -97,6 +97,7 @@ export class OperatorTableComponent implements OnInit {
           if (res) {
             this.operators = res;
             this.dataSource = new MatTableDataSource(this.operators);
+
           }
           else
             alert("get all operators error")
@@ -115,30 +116,17 @@ export class OperatorTableComponent implements OnInit {
   }
   //עריכת מפעיל
   EditOperator(operator: Operator) {
+    debugger
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
     // iOperatorId = oper.iOperatorId;
-    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu",operator.iOperatorId);
+    this.mainService.operatorForDetails=operator;
+    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu/",operator.iOperatorId);
 
     //מעבר לעמוד של עריכה
   }
 }
-
-// const operators = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-// /** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-//   };
-//}
 
 
 
