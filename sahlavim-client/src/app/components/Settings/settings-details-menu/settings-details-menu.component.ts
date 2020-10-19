@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 @Component({
   selector: 'app-settings-details-menu',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsDetailsMenuComponent implements OnInit {
 
-  constructor() { }
+  idSetting:string;
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
 
   ngOnInit() {
+    this.idSetting = this.route.snapshot.paramMap.get('id')
+    alert(this.idSetting)
   }
-
 }
