@@ -28,10 +28,6 @@ export class Setting {
         public bisJoint: boolean,
         public lSettingAgegroupsValue: number,
 
-        
-        public nvFullName : string,
-        public nvPhoneCoordinator : string,
-        public nvMail : string,
     ) {
 
     }
