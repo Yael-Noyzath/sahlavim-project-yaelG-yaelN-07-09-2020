@@ -1,1 +1,53 @@
-<p>operator-details works!</p>
+<div style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
+    <div style="float: right;width: 40%;">
+        <label>סוג*</label>
+        <mat-radio-group style="margin-right: 5%;" id="kind"  aria-label="Select an option">
+            <mat-radio-button value="private">פרטי</mat-radio-button>
+            <mat-radio-button value="Company">חברה</mat-radio-button>
+            <mat-radio-button value="Employee">שכיר</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <br>
+    <mat-form-field class="example-form-field">
+        <mat-label>שם מפעיל</mat-label>
+        <input matInput type="text" [(ngModel)]="operator.nvOperatorName">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+        <mat-label>שם חברה</mat-label>
+        <input matInput type="text" [(ngModel)]="operator.nvCompanyName">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+        <mat-label>ת.ז</mat-label>
+        <input matInput type="text" [(ngModel)]="operator.nvIdentity">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+        <mat-label>ת.ז</mat-label>
+        <input matInput type="text" [(ngModel)]="operator.nvIdentity">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>תנאי תשלום</mat-label>
+        <select [(value)]="operator.iOperatorPaymentType" matNativeControl required>
+          <option value="1">שוטף+30</option>
+          <option value="2">שוטף+60</option>
+          <option value="3">מזומן</option>
+        </select>
+      </mat-form-field>
+
+
+</div> 

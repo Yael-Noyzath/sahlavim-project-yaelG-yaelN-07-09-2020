@@ -97,6 +97,7 @@ export class OperatorTableComponent implements OnInit {
           if (res) {
             this.operators = res;
             this.dataSource = new MatTableDataSource(this.operators);
+
           }
           else
             alert("get all operators error")
@@ -115,11 +116,13 @@ export class OperatorTableComponent implements OnInit {
   }
   //עריכת מפעיל
   EditOperator(operator: Operator) {
+    debugger
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
     // iOperatorId = oper.iOperatorId;
-    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu",operator.iOperatorId);
+    this.mainService.operatorForDetails=operator;
+    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu/",operator.iOperatorId);
 
     //מעבר לעמוד של עריכה
   }

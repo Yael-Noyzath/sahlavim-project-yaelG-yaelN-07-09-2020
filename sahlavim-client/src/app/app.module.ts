@@ -61,6 +61,7 @@ import { SettingsDetailsMenuComponent } from './components/Settings/settings-det
 import { from } from 'rxjs';
 import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
 import { OperatorsComponent } from './components/Operators/operators/operators.component';
+import { OperatorActivitiesComponent } from './components/Operators/operator-activities/operator-activities.component';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { OperatorsComponent } from './components/Operators/operators/operators.c
     SettingsDetailsMenuComponent,
     OperatorTableComponent,
     OperatorsComponent,
+    OperatorActivitiesComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,16 +22,16 @@ export class Operator {
     public bLeadersNum: boolean;
 
     constructor(
-        public iOperatorId: number,
-        public nvOperatorName: string,
-        public nvContactPerson: string,
-        public iOperatorType: number,
-        public nvCompanyName: string,
-        public nvIdentity: string,
-        public nvOperatorNumber: string,
-        public binProgramsDatabase: boolean,
-        public nvOperatorTypeValue:string,
-        public nvActivityies:string,
-        public bInProgramPool:boolean,
-    ) {}
+        public iOperatorId: number=1,
+        public nvOperatorName: string="",
+        public nvContactPerson: string="",
+        public iOperatorType: number=0,
+        public nvCompanyName: string="",
+        public nvIdentity: string="",
+        public nvOperatorNumber: string="",
+        public binProgramsDatabase: boolean=true,
+        public nvOperatorTypeValue:string="",
+        public nvActivityies:string="",
+        public bInProgramPool:boolean=true) 
+        {}
 }

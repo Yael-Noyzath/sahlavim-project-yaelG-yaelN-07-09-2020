@@ -14,6 +14,9 @@ export class MainServiceService {
 
   //משתמש שנכנס למערכת
   currentUser: User = new User();
+  // לעריכת מפעיל
+  operatorForDetails:Operator=new Operator();
+
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
   post(url: string, data): Promise<any> {
@@ -24,8 +27,8 @@ export class MainServiceService {
   get(url: string): Promise<any> {
     console.log(url);
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
-
   }
+
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
