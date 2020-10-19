@@ -1,5 +1,4 @@
-<p>settings works!</p>
-<div class="mat-elevation-z8" style="text-align:right;" dir="rtl">
+<div class="mat-elevation-z8" style="text-align:right;" dir="rtl" *ngIf="openDetails==false">
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- SettingId Column -->
@@ -65,24 +64,36 @@
         </ng-container>
 
         <!-- FullName  Column -->
-        <ng-container matColumnDef="nvFullName">
+        <!-- <ng-container matColumnDef="nvFullName">
             <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>רכזת </th>
             <td mat-cell *matCellDef="let row"> {{row.nvFullName}} </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Mail  Column -->
-        <ng-container matColumnDef="nvMail">
+        <!-- <ng-container matColumnDef="nvMail">
             <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header> מייל רכזת </th>
             <td mat-cell *matCellDef="let row"> {{row.nvMail}} </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- PhoneCoordinator  Column -->
-        <ng-container matColumnDef="nvPhoneCoordinator">
+        <!-- <ng-container matColumnDef="nvPhoneCoordinator">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>טלפון רכזת </th>
             <td mat-cell *matCellDef="let row"> {{row.nvPhoneCoordinator}} </td>
+        </ng-container> -->
+
+        <!-- Coordinator Column -->
+        <ng-container matColumnDef="CoordinatorDetails">
+            <th style="width:5%;" mat-header-cell *matHeaderCellDef> פרטי רכזת </th>
+            <td mat-cell *matCellDef="let element">
+                <!-- (click)="redirectToDelete(element.id)" -->
+                <button mat-icon-button color="warn" (click)="CoordinatorDetails(element,element.iCoordinatorId)">
+                    <mat-icon class="mat-18">details</mat-icon>
+                </button>
+
+            </td>
         </ng-container>
 
-        <!-- Details Column -->
+        <!-- Edit Column -->
         <ng-container matColumnDef="edit">
             <th style="width:5%;" mat-header-cell *matHeaderCellDef>עריכה </th>
             <td mat-cell *matCellDef="let element">
@@ -111,3 +122,22 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+
+<mat-accordion *ngIf="openDetails==true">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false; openDetails=false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <p *ngIf="panelOpenState">לחץ לסגירה</p>
+                <p *ngIf="!panelOpenState">לחץ לפרטי רכזת</p>
+            </mat-panel-title>
+
+            <mat-panel-description>
+                {{currentSetting.iSettingId}} | {{currentSetting.nvSettingName}} | {{currentSetting.nvAddress}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p>שם: {{coordinator.nvFirstName}} {{coordinator.nvLastName}} </p>
+        <p>טלפון: {{coordinator.nvPhone}}</p>
+        <p>{{coordinator.nvMail}} :מייל </p>
+    </mat-expansion-panel>
+</mat-accordion>

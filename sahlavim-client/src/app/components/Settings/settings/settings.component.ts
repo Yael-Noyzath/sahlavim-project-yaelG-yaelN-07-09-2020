@@ -9,6 +9,7 @@ import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
 import { Setting } from 'src/app/Classes/setting';
 import { coordinator } from 'src/app/Classes/coordinator';
+import { flatten } from '@angular/compiler';
 
 @Component({
   selector: 'app-settings',
@@ -20,17 +21,22 @@ export class SettingsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
+  //   'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
+  //   'nvMail', 'nvPhoneCoordinator','edit','choose'];
   displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
-    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
-    'nvMail', 'nvPhoneCoordinator','edit','choose'];
+    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'CoordinatorDetails'
+    , 'edit', 'choose'];
 
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Setting>;
   //מערך מפעילים לטבלה
   settingList: Array<Setting>;
+  currentSetting:Setting=new Setting();
   coordinatorList: Array<coordinator>;
   currentUser: User = new User();
   coordinator: coordinator = new coordinator();
+  openDetails: boolean = false;
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = mainService.getUser();
@@ -53,15 +59,7 @@ export class SettingsComponent implements OnInit {
     this.mainService.post("SettingsGet", {}).then(
       res => {
         this.settingList = res;
-        //כדאי מאוד ליעל את זה
-        this.settingList.forEach(s => {
-          if (s.iCoordinatorId) {
-            this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == s.iCoordinatorId);
-            // s.nvFullName = this.coordinator.nvFirstName + " " + this.coordinator.nvLastName;
-            // s.nvPhoneCoordinator = this.coordinator.nvPhone;
-            // s.nvMail = this.coordinator.nvMail;
-          }
-        });
+        
         this.dataSource = new MatTableDataSource(this.settingList);
 
       },
@@ -80,5 +78,17 @@ export class SettingsComponent implements OnInit {
         alert("CoordinatorsGet err")
       }
     );
+  }
+
+  CoordinatorDetails(sett:Setting,CoordinatorId: number) {
+    this.currentSetting=sett;
+    if (this.openDetails == true)
+      this.openDetails = false;
+    else
+      this.openDetails = true;
+
+    if (CoordinatorId) {
+      this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
+    }
   }
 }
