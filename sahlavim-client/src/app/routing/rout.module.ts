@@ -12,6 +12,7 @@ import { OperatorTableComponent } from '../components/Operators/operator-table/o
 import { ProgramsComponent } from '../components/Programs/programs/programs.component';
 import { SettingsComponent } from '../components/Settings/settings/settings.component';
 import { OperatorsComponent } from '../components/Operators/operators/operators.component';
+import { SettingsDetailsComponent } from '../components/Settings/settings-details/settings-details.component';
 import { OperatorDetailsComponent } from '../components/Operators/operator-details/operator-details.component';
 import { OperatorActivitiesComponent } from '../components/Operators/operator-activities/operator-activities.component';
 import { OperatorActivityReportComponent } from '../components/Operators/operator-activity-report/operator-activity-report.component';
@@ -45,7 +46,13 @@ const appTable: Routes = [
         ]
       },
       { path: "programs", component: ProgramsComponent },
-      { path: "settings", component: SettingsComponent }
+      {
+        path: "settings", component: SettingsComponent,
+        children: [
+          { path: "settings-details", component: SettingsDetailsComponent },
+          { path: "settings-details-menu/:id", component: SettingsDetailsMenuComponent }
+        ]
+      },
 
     ]
 

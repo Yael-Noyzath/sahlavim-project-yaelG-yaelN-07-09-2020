@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   userExist:boolean=false;
   ngOnInit() {
     this.UserLoginControls();
-    
   }
   //כניסה
   enterToTheMenu() {
@@ -85,6 +84,7 @@ export class LoginComponent implements OnInit {
   sentMailToResetPassword() {
     alert(this.user.nvMail + " we are sorry but our mail dose not work!")
   }
+
   UserLoginControls() {
     this.formLogin = new FormGroup({
       nvUserName: new FormControl(this.user.nvUserName),
@@ -92,6 +92,7 @@ export class LoginComponent implements OnInit {
       nvMail: new FormControl(this.user.nvMail)
     });
   }
+  
   get nvUserName() {
     return this.formLogin.get("nvUserName");
   }
