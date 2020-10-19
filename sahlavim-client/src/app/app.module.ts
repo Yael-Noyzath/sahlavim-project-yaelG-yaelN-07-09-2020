@@ -19,6 +19,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatGridListModule,
+  MatCheckboxModule,
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
 } from '@angular/material';
 
@@ -117,6 +118,7 @@ import { OperatorActivitiesComponent } from './components/Operators/operator-act
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatOptionModule,
     MatSlideToggleModule,
     MatTableModule,

@@ -128,21 +128,6 @@ export class OperatorTableComponent implements OnInit {
   }
 }
 
-// const operators = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-// /** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-//   };
-//}
-
 
 
 
