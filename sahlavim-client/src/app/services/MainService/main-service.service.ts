@@ -4,6 +4,8 @@ import { Observable, observable } from 'rxjs';
 import { Operator } from 'src/app/classes/operator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
+import { Setting } from 'src/app/Classes/setting';
+import { settings } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class MainServiceService {
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
-  operatorForDetails:Operator=new Operator();
+  operatorForDetails: Operator = new Operator();
+  //לעריכת מסגרת
+  settingForDetails: Setting = new Setting();
 
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
@@ -32,8 +36,8 @@ export class MainServiceService {
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
-  serviceNavigateForOperatorEdit(path: string,id:number) {
-    this.router.navigate([path,id]);
+  serviceNavigateForOperatorEdit(path: string, id: number) {
+    this.router.navigate([path, id]);
   }
 
   saveUser(u: User) {

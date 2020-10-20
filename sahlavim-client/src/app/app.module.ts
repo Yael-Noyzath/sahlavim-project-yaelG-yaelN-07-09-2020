@@ -63,6 +63,9 @@ import { from } from 'rxjs';
 import { OperatorTableComponent } from './components/Operators/operator-table/operator-table.component';
 import { OperatorsComponent } from './components/Operators/operators/operators.component';
 import { OperatorActivitiesComponent } from './components/Operators/operator-activities/operator-activities.component';
+import { SettingTableComponent } from './components/Settings/setting-table/setting-table.component';
+import { SettingsScheduleComponent } from './components/Settings/settings-schedule/settings-schedule.component';
+import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
 
 
 @NgModule({
@@ -101,6 +104,9 @@ import { OperatorActivitiesComponent } from './components/Operators/operator-act
     OperatorTableComponent,
     OperatorsComponent,
     OperatorActivitiesComponent,
+    SettingTableComponent,
+    SettingsScheduleComponent,
+    SettingsMessagesComponent,
   ],
   imports: [
     BrowserModule,
