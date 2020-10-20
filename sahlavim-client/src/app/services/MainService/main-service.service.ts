@@ -5,7 +5,6 @@ import { Operator } from 'src/app/classes/operator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
-import { settings } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
