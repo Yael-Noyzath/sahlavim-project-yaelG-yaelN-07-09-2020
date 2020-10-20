@@ -20,6 +20,9 @@ import { OperatorCreditComponent } from '../components/Operators/operator-credit
 import { OperatorMessagesComponent } from '../components/Operators/operator-messages/operator-messages.component';
 import { OperatorReviewComponent } from '../components/Operators/operator-review/operator-review.component';
 import { OperatorScheduleComponent } from '../components/Operators/operator-schedule/operator-schedule.component';
+import { SettingTableComponent } from '../components/Settings/setting-table/setting-table.component';
+import { SettingsScheduleComponent } from '../components/Settings/settings-schedule/settings-schedule.component';
+import { SettingsMessagesComponent } from '../components/Settings/settings-messages/settings-messages.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -49,13 +52,18 @@ const appTable: Routes = [
       {
         path: "settings", component: SettingsComponent,
         children: [
-          { path: "settings-details", component: SettingsDetailsComponent },
-          { path: "settings-details-menu/:id", component: SettingsDetailsMenuComponent }
+          { path: "setting-table", component: SettingTableComponent },
+          {
+            path: "settings-details-menu/:id", component: SettingsDetailsMenuComponent,
+            children: [
+              { path: "settings-details", component: SettingsDetailsComponent },
+              { path: "settings-schedule", component: SettingsScheduleComponent },
+              { path: "settings-messages", component: SettingsMessagesComponent },
+            ]
+          },
         ]
       },
-
     ]
-
   }
 ];
 

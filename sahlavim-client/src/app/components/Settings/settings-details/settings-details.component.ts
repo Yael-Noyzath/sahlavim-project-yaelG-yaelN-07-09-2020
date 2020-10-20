@@ -1,15 +1,9 @@
-import { User } from 'src/app/classes/user';
-import { MainServiceService } from 'src/app/services/MainService/main-service.service';
-import { AfterViewInit, ViewChild, Component, OnInit } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Operator } from 'src/app/Classes/operator';
-import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
-import { from } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Setting } from 'src/app/Classes/setting';
-import { coordinator } from 'src/app/Classes/coordinator';
-import { flatten } from '@angular/compiler';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+
 
 @Component({
   selector: 'app-settings-details',
@@ -17,80 +11,65 @@ import { flatten } from '@angular/compiler';
   styleUrls: ['./settings-details.component.css']
 })
 export class SettingsDetailsComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
-  //   'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
-  //   'nvMail', 'nvPhoneCoordinator','edit','choose'];
-  displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
-    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'CoordinatorDetails'
-    , 'edit', 'choose'];
-
-  //סוג מקור הנתונים
-  dataSource: MatTableDataSource<Setting>;
-  //מערך מפעילים לטבלה
+  idSetting: number;
   settingList: Array<Setting>;
-  currentSetting:Setting=new Setting();
-  coordinatorList: Array<coordinator>;
-  currentUser: User = new User();
-  coordinator: coordinator = new coordinator();
-  openDetails: boolean = false;
+  currentSetting: Setting = new Setting();
+  formSetting: FormGroup;
 
-  constructor(private mainService: MainServiceService) {
-    this.currentUser = mainService.getUser();
-    this.CoordinatorsGet();
-    this.SettingsGet();
-
-  }
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
 
   ngOnInit() {
-    this.ngAfterViewInit();
+    // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.currentSetting = this.mainService.settingForDetails;
+    this.settingControls();
   }
 
+  // SettingsGet() {
+  //   this.mainService.post("SettingsGet", {}).then(
+  //     res => {
+  //       this.settingList = res;
+  //       this.currentSetting = this.settingList.find(s => s.iSettingId == this.idSetting);
+  //       this.settingControls();
+  //     },
+  //     err => {
+  //       alert("SettingsGet err")
+  //     }
+  //   );
+  // }
+  save() {
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  }
+  settingControls() {
+    this.formSetting = new FormGroup({
+      nvSettingName: new FormControl(this.currentSetting.nvSettingName),
+      nvSettingCode: new FormControl(this.currentSetting.nvSettingCode),
+      iSettingId: new FormControl(this.currentSetting.iSettingId),
+      nvSettingTypeValue: new FormControl(this.currentSetting.nvSettingTypeValue),
+      nvAddress: new FormControl(this.currentSetting.nvAddress),
+      nvPhone: new FormControl(this.currentSetting.nvPhone),
+      lSettingAgegroupsValue: new FormControl(this.currentSetting.lSettingAgegroupsValue),
+      nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
+      nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
+      nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
+      nvContactPersonMail: new FormControl(this.currentSetting.nvContactPersonMail)
+
+    });
   }
 
-  SettingsGet() {
-    this.mainService.post("SettingsGet", {}).then(
-      res => {
-        this.settingList = res;
-        
-        this.dataSource = new MatTableDataSource(this.settingList);
-
-      },
-      err => {
-        alert("SettingsGet err")
-      }
-    );
+  get nvUserName() {
+    return this.formSetting.get("nvSettingName");
   }
-  CoordinatorsGet() {
-    this.mainService.post("CoordinatorsGet", {}).then(
-      res => {
-        this.coordinatorList = res;
-
-      },
-      err => {
-        alert("CoordinatorsGet err")
-      }
-    );
+  get nvSettingCode() {
+    return this.formSetting.get("nvSettingCode");
   }
-
-  CoordinatorDetails(sett:Setting,CoordinatorId: number) {
-    this.currentSetting=sett;
-    if (this.openDetails == true)
-      this.openDetails = false;
-    else
-      this.openDetails = true;
-
-    if (CoordinatorId) {
-      this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
-    }
+  get nvPassword() {
+    return this.formSetting.get("nvAddress");
   }
-  EditSetting(idSetting: number) {
-    this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu', idSetting)
+  get nvMail() {
+    return this.formSetting.get("nvPhone");
+  }
+  saveChange() {
+    alert("saveChange")
   }
 }

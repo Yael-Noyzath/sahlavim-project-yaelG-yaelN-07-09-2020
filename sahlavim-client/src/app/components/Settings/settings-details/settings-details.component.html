@@ -1,143 +1,80 @@
-<div class="mat-elevation-z8" style="text-align:right;" dir="rtl" *ngIf="openDetails==false">
-    <table mat-table [dataSource]="dataSource" matSort>
+<mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
+    <form [formGroup]="formSetting" (ngSubmit)="saveChange()">
+        <mat-form-field class="example-form-field">
+            <mat-label>מזהה מסגרת</mat-label>
+            <input matInput type="text" formControlName="iSettingId" name="iSettingId" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>שם מסגרת</mat-label>
+            <input matInput type="text" formControlName="nvSettingName" name="nvSettingName" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>סמל</mat-label>
+            <input matInput type="text" formControlName="nvSettingCode" name="nvSettingCode" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
 
-        <!-- SettingId Column -->
-        <ng-container matColumnDef="iSettingId">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header> מזהה מסגרת </th>
-            <td mat-cell *matCellDef="let row"> {{row.iSettingId}} </td>
-        </ng-container>
-
-        <!-- SettingName Column -->
-        <ng-container matColumnDef="nvSettingName">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם מסגרת </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvSettingName}} </td>
-        </ng-container>
-
-
-        <!-- SettingCode Column -->
-        <ng-container matColumnDef="nvSettingCode">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>סמל מוסד</th>
-            <td mat-cell *matCellDef="let row"> {{row.nvSettingCode}}</td>
-        </ng-container>
-
-        <!-- SettingTypeValue Column -->
-        <ng-container matColumnDef="nvSettingTypeValue">
-            <th style="width: 1%;" mat-header-cell *matHeaderCellDef mat-sort-header>סוג</th>
-            <td mat-cell *matCellDef="let row"> {{row.nvSettingTypeValue}} </td>
-        </ng-container>
-
-        <!-- Address Column -->
-        <ng-container matColumnDef="nvAddress">
-            <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header>כתובת</th>
-            <td mat-cell *matCellDef="let row"> {{row.nvAddress}} </td>
-        </ng-container>
-
-
-        <!-- Phone  Column -->
-        <ng-container matColumnDef="nvPhone">
-            <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header> טלפון </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvPhone}} </td>
-        </ng-container>
-
-        <!-- ContactPerson  Column -->
-        <ng-container matColumnDef="nvContactPerson">
-            <th style="width: 1%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם איש קשר </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvContactPerson}} </td>
-        </ng-container>
-
-        <!-- ContactPersonMail  Column -->
-        <ng-container matColumnDef="nvContactPersonMail">
-            <th style="width: 1%;" mat-header-cell *matHeaderCellDef mat-sort-header> מייל איש קשר </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvContactPersonMail}} </td>
-        </ng-container>
-
-        <!-- ContactPersonPhone  Column -->
-        <ng-container matColumnDef="nvContactPersonPhone">
-            <th style="width: 1%;" mat-header-cell *matHeaderCellDef mat-sort-header>טלפון איש קשר </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvContactPersonPhone}} </td>
-        </ng-container>
-
-        <!-- SettingAgegroupsValue  Column -->
-        <ng-container matColumnDef="lSettingAgegroupsValue">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>קטגוריות גילאים </th>
-            <td mat-cell *matCellDef="let row"> {{row.lSettingAgegroupsValue}} </td>
-        </ng-container>
-
-        <!-- FullName  Column -->
-        <!-- <ng-container matColumnDef="nvFullName">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>רכזת </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvFullName}} </td>
-        </ng-container> -->
-
-        <!-- Mail  Column -->
-        <!-- <ng-container matColumnDef="nvMail">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header> מייל רכזת </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvMail}} </td>
-        </ng-container> -->
-
-        <!-- PhoneCoordinator  Column -->
-        <!-- <ng-container matColumnDef="nvPhoneCoordinator">
-            <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>טלפון רכזת </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvPhoneCoordinator}} </td>
-        </ng-container> -->
-
-        <!-- Coordinator Column -->
-        <ng-container matColumnDef="CoordinatorDetails">
-            <th style="width:5%;" mat-header-cell *matHeaderCellDef> פרטי רכזת </th>
-            <td mat-cell *matCellDef="let element">
-                <!-- (click)="redirectToDelete(element.id)" -->
-                <button mat-icon-button color="warn" (click)="CoordinatorDetails(element,element.iCoordinatorId)">
-                    <mat-icon class="mat-18">list</mat-icon>
-                </button>
-
-            </td>
-        </ng-container>
-
-        <!-- Edit Column -->
-        <ng-container matColumnDef="edit">
-            <th style="width:5%;" mat-header-cell *matHeaderCellDef>עריכה </th>
-            <td mat-cell *matCellDef="let element">
-                <!-- (click)="redirectToDelete(element.id)" -->
-                <button mat-icon-button color="warn" (click)="EditSetting(element.iSettingId)">
-                    <mat-icon class="mat-18">edit</mat-icon>
-                </button>
-            </td>
-        </ng-container>
-
-        <!-- Choose Column -->
-        <ng-container matColumnDef="choose">
-            <th style="width:4%;" mat-header-cell *matHeaderCellDef> בחירה </th>
-            <td mat-cell *matCellDef="let element">
-                <input type="checkbox">
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-        </tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</div>
-
-<mat-accordion *ngIf="openDetails==true">
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false; openDetails=false">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <p *ngIf="panelOpenState">לחץ לסגירה</p>
-                <p *ngIf="!panelOpenState">לחץ לפרטי רכזת</p>
-            </mat-panel-title>
-
-            <mat-panel-description>
-                {{currentSetting.iSettingId}} | {{currentSetting.nvSettingName}} | {{currentSetting.nvAddress}}
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <p>שם: {{coordinator.nvFirstName}} {{coordinator.nvLastName}} </p>
-        <p>טלפון: {{coordinator.nvPhone}}</p>
-        <p>{{coordinator.nvMail}} :מייל </p>
-    </mat-expansion-panel>
-</mat-accordion>
+        <mat-form-field class="example-form-field">
+            <mat-label>טלפון</mat-label>
+            <input matInput type="text" formControlName="nvPhone" name="nvPhone" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>כתובת</mat-label>
+            <input matInput type="text" formControlName="nvAddress" name="nvAddress" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>קטגורית גילאים</mat-label>
+            <input matInput type="text" formControlName="lSettingAgegroupsValue" name="lSettingAgegroupsValue"
+                required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>מיקום פעילות</mat-label>
+            <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>שם איש קשר</mat-label>
+            <input matInput type="text" formControlName="nvContactPerson" name="nvContactPerson" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>פלאפון איש קשר</mat-label>
+            <input matInput type="text" formControlName="nvContactPersonPhone" name="nvContactPersonPhone" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>מייל איש קשר</mat-label>
+            <input matInput type="text" formControlName="nvContactPersonMail" name="nvContactPersonMail" required />
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <button [disabled]="!formSetting.valid" mat-icon-button color="warn"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>save</mat-icon>
+        </button>
+    </form>
+</mat-card-content>
