@@ -11,7 +11,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
   styleUrls: ['./settings-details.component.css']
 })
 export class SettingsDetailsComponent implements OnInit {
- 
+
   idSetting: number;
   settingList: Array<Setting>;
   currentSetting: Setting = new Setting();
@@ -21,7 +21,7 @@ export class SettingsDetailsComponent implements OnInit {
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.currentSetting=this.mainService.settingForDetails;
+    this.currentSetting = this.mainService.settingForDetails;
     this.settingControls();
   }
 
@@ -43,13 +43,25 @@ export class SettingsDetailsComponent implements OnInit {
   settingControls() {
     this.formSetting = new FormGroup({
       nvSettingName: new FormControl(this.currentSetting.nvSettingName),
+      nvSettingCode: new FormControl(this.currentSetting.nvSettingCode),
+      iSettingId: new FormControl(this.currentSetting.iSettingId),
+      nvSettingTypeValue: new FormControl(this.currentSetting.nvSettingTypeValue),
       nvAddress: new FormControl(this.currentSetting.nvAddress),
-      nvPhone: new FormControl(this.currentSetting.nvPhone)
+      nvPhone: new FormControl(this.currentSetting.nvPhone),
+      lSettingAgegroupsValue: new FormControl(this.currentSetting.lSettingAgegroupsValue),
+      nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
+      nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
+      nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
+      nvContactPersonMail: new FormControl(this.currentSetting.nvContactPersonMail)
+
     });
   }
 
   get nvUserName() {
     return this.formSetting.get("nvSettingName");
+  }
+  get nvSettingCode() {
+    return this.formSetting.get("nvSettingCode");
   }
   get nvPassword() {
     return this.formSetting.get("nvAddress");
@@ -57,7 +69,7 @@ export class SettingsDetailsComponent implements OnInit {
   get nvMail() {
     return this.formSetting.get("nvPhone");
   }
-  saveChange(){
+  saveChange() {
     alert("saveChange")
   }
 }
