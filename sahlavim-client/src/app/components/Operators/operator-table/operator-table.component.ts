@@ -16,19 +16,41 @@ import { User } from 'src/app/classes/user';
 })
 export class OperatorTableComponent implements OnInit {
 
+  visible:number=1;
+
+  currentUser: User=new User();
+  //מערך מפעילים לטבלה
+  operators: Array<Operator>;
+   //מערך שמות העמודות
+   displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete','choose'];
+   //סוג מקור הנתונים
+   dataSource: MatTableDataSource<Operator>;
+
   ngOnInit() {
     this.currentUser = this.mainService.getUser();
     this.getAllOperators();
     this.ngAfterViewInit();
   }
 
-  //מערך שמות העמודות
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete','choose'];
-  //סוג מקור הנתונים
-  dataSource: MatTableDataSource<Operator>;
-  //מערך מפעילים לטבלה
-  operators: Array<Operator>;
-  currentUser: User=new User();
+    //קבלת כל המפעילים
+    getAllOperators() {
+      this.mainService.post("GetOperators", {})
+        .then(
+          res => {
+            if (res) {
+              this.operators = res;
+              this.dataSource = new MatTableDataSource(this.operators);
+             debugger
+  
+            }
+            else
+              alert("get all operators error")
+          }
+          , err => {
+            alert("err");
+          }
+        );
+    }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -40,7 +62,6 @@ export class OperatorTableComponent implements OnInit {
     //   this.dataSource = new MatTableDataSource(this.operators);
   }
 
-  visible:number=1;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -89,24 +110,7 @@ export class OperatorTableComponent implements OnInit {
     this.operators = list;
   }
 
-  //קבלת כל המפעילים
-  getAllOperators() {
-    this.mainService.post("GetOperators", {})
-      .then(
-        res => {
-          if (res) {
-            this.operators = res;
-            this.dataSource = new MatTableDataSource(this.operators);
 
-          }
-          else
-            alert("get all operators error")
-        }
-        , err => {
-          alert("err");
-        }
-      );
-  }
 
   //מחיקת מפעיל
   DeleteOperator(oper: Operator) {

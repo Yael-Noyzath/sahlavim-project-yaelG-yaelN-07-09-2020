@@ -12,18 +12,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class OperatorDetailsComponent implements OnInit {
   DetailsForm:FormGroup;
   operator: Operator;
+  bNeighborhoods:boolean;
+  schools = new FormControl();
+  neighborhoods=new FormControl();
 
   constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
 
   ngOnInit() {
-
     this.operator = this.mainService.operatorForDetails;
-    
-    this.DetailsForm = new FormGroup({
-      firstName: new FormControl()
-   });
+    this.bNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;
 
   }
 
-
+save(){
+  alert(this.operator.nvOperatorName);
+}
 }

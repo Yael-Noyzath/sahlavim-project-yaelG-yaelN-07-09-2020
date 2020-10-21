@@ -1,8 +1,9 @@
+import { Activity } from './activity';
+
 export class Operator {
     public iOperatorPaymentType: number;
     public nvContactPersonMail: string;
     public nvContactPersonPhone: string;
-    public bTalan: boolean;
  
     public nvFilePathTax: string;
     public nvFilePathBooks: string;
@@ -15,7 +16,7 @@ export class Operator {
     public iSysRowStatus: number;//לבדוק מה זה
     public bActiveAfternoon: boolean;
     public bActiveChanukahCamp: boolean;
-    public bActivePesachCamp: boolean;
+    public bActivePassoverCamp: boolean;
     public bActiveSummerCamp: boolean;
     public iNumLeaders: number;
 
@@ -31,10 +32,36 @@ export class Operator {
         public nvOperatorTypeValue:string="",
         public nvActivityies:string="",
         public bInProgramPool:boolean=true,
-        public ibookkeepingNum: number=0,
-        public iNumActivityDays: number=0,
-        public iNumActivityWeek: number=0
+        public iNumBookkeeping: number=0,
+        public iNumOperationsDay: number=0,
+        public iNumOperationsWeek: number=0,
+        public lActivity:Activity[]=[],
+        public lNeighborhoods:number[]=[],
+        public lSchoolsExcude:number[]=[],
+        public lSchools:number[]=[],
+        public bTalan: boolean=true
+
         ) 
         {}
 
+      
+      
+        // lActivity: (2) [{…}, {…}]
+        // lNeighborhoods: []
+        // lSchools: []
+        // lSchoolsExcude: []
+        // missing: null
+        // numactivities: null
+        // nvActivityies: "חיות, "
+        // nvCompanyName: "חיות וחיוכים"
+        // nvContactPerson: "אירנה"
+        // nvContactPersonMail: "irena-a@bezeqint.net"
+        // nvContactPersonPhone: "050-5633522"
+        // nvFilePathBooks: null
+        // nvFilePathContract: null
+        // nvFilePathTax: null
+        // nvIdentity: "023762280"
+        // nvOperatorName: "אירנה אפרייט"
+        // nvOperatorNumber: "615698"
+        // weekday: null
 }
