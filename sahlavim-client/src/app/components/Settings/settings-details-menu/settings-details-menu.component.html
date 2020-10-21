@@ -1,59 +1,28 @@
 <div class="menu">
     <nav style="direction: rtl;" class="navbar navbar-expand-lg navbar-light bg-light">
-        <h2 class="navbar-brand">
-            <mat-icon class="mat-18">create</mat-icon> {{currentSetting.nvSettingName}}
-        </h2>
+        <a   routerLink="settings-details" class="navbar-brand" >
+            <div>
+                <mat-icon   class="mat-18">create</mat-icon> {{setting.nvSettingName}}
+            </div>
+        </a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- <li class="nav-item">
-              <a class="nav-link" >פרטים</a>
-            </li> -->
+        <div  class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">         
+               <li class="nav-item">
+                    <a routerLink="settings-schedule" routerLinkActive="activeLink"  class="nav-link">יומן</a>
+                </li>              
                 <li class="nav-item">
-                    <a class="nav-link">פרטים</a>
+                    <a routerLink="settings-messages" routerLinkActive="activeLink" class="nav-link ">הודעות</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">יומן</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">הודעות</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link ">משובים</a>
+                    <a routerLink="operator-credit" routerLinkActive="activeLink" class="nav-link ">משובים</a>
                 </li>
             </ul>
-        </div>
+        </div> 
     </nav>
 </div>
-<mat-card-content>
 
-    <form [formGroup]="formSetting" (ngSubmit)="saveChange()">
-        <mat-form-field class="example-form-field">
-            <mat-label>שם מסגרת</mat-label>
-            <input matInput type="text" formControlName="nvSettingName" name="nvSettingName" required />
-            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
-            <mat-label>טלפון</mat-label>
-            <input matInput type="text" formControlName="nvPhone" name="nvPhone" required />
-            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
-            <mat-label>כתובת</mat-label>
-            <input matInput type="text" formControlName="nvAddress" name="nvAddress" required />
-            <!-- <button
-                mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
-        </mat-form-field><br>
-        <button [disabled]="!formSetting.valid" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
-            <mat-icon>save</mat-icon>
-          </button>
-    </form>
-</mat-card-content>
+
+<router-outlet></router-outlet>

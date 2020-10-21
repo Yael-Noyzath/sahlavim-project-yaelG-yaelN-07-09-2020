@@ -10,54 +10,13 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
   styleUrls: ['./settings-details-menu.component.css']
 })
 export class SettingsDetailsMenuComponent implements OnInit {
+  id: string;
+  setting: Setting;
 
-  idSetting: number;
-  settingList: Array<Setting>;
-  currentSetting: Setting = new Setting();
-  formSetting: FormGroup;
-
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
-
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
+    this.setting = this.mainService.settingForDetails;
+  }
   ngOnInit() {
-    this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
 
-    this.SettingsGet();
-  }
-
-  SettingsGet() {
-    this.mainService.post("SettingsGet", {}).then(
-      res => {
-        this.settingList = res;
-        this.currentSetting = this.settingList.find(s => s.iSettingId == this.idSetting);
-        this.settingControls();
-
-      },
-      err => {
-        alert("SettingsGet err")
-      }
-    );
-  }
-  save() {
-
-  }
-  settingControls() {
-    this.formSetting = new FormGroup({
-      nvSettingName: new FormControl(this.currentSetting.nvSettingName),
-      nvAddress: new FormControl(this.currentSetting.nvAddress),
-      nvPhone: new FormControl(this.currentSetting.nvPhone)
-    });
-  }
-
-  get nvUserName() {
-    return this.formSetting.get("nvSettingName");
-  }
-  get nvPassword() {
-    return this.formSetting.get("nvAddress");
-  }
-  get nvMail() {
-    return this.formSetting.get("nvPhone");
-  }
-  saveChange(){
-    alert("saveChange")
   }
 }
