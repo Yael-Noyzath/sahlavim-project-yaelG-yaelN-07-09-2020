@@ -1,34 +1,34 @@
 import { Time } from '@angular/common';
 
 export class Program {
-    constructor(public ProgramId:number,
-        public ProgramType:number,
-        public ProgramName:string,
-        public BudgetItem:string,//סעיף תקציב
-        public FromDate:Date,
-        public ToDate:Date,
-        public NumMorningActivities:number,//מיספר הפעלות בוקר
-        public NumAfternoonActivities:number,//מיספר הפעלות צהרים
-        public NumPreferenceActivities:number,//מספר הפעלות מועדפות
-        public NumPreferenceActivitiesInWeek:number,//מספר הפעלות מועדפות לשבוע
-        public StartTimeMorning:Time,
-        public ToTimeMorning:Time,
-        public StartTimeAfternoon:Time,
-        public ToTimeAfternoon:Time,
-        public areTwoActivitiesInDay:boolean,
-        public StatusType:number,
-        public CreateByUserId:number,
-        public CreateDate:Date,
-        public LastModifyUserId:number,//קוד מישתמש שינוי אחרון
-        public SysRowStatus:number,//לבדוק מה זה
-        public isProgramAfternoon:boolean,//האם תוכנית צהרים
-        public SemesterType:number,
-        public FirstActivity:Time,
-        public SecondActivity:Time,
-        public YearType:number,//לבדוק
-        public NumActivityInWeek:number
+    constructor(public iProgramId: number=-1,
+        public iProgramType: number=-1,
+        public nvProgramName: string="",
+        public nvBudgetItem: string="",//סעיף תקציב
+        public dFromDate: Date,
+        public dToDate: Date,
+        public iNumActivityMorning: number=-1,//מיספר הפעלות בוקר
+        public iNumActivityAfternoon: number=-1,//מיספר הפעלות צהרים
+        public iActivityPreferenceCount: number=-1,//מספר הפעלות מועדפות
+        public iActivityPreferenceInWeekCount: number=-1,//מספר הפעלות מועדפות לשבוע
+        public tFromTimeMorning: Time,
+        public tToTimeMorning: Time,
+        public tFromTimeAfternoon: Time,
+        public tToTimeAfternoon: Time,
+        public bTwoActivitiesThatDay: boolean=false,
+        public iStatusType: number=-1,
+        public CreateByUserId: number=-1,
+        public CreateDate: Date,
+        public LastModifyUserId: number=-1,//קוד מישתמש שינוי אחרון
+        public iSysRowStatus: number=-1,//לבדוק מה זה
+        public bProgramAfternoon: boolean=false,//האם תוכנית צהרים
+        public iSemesterType: number=-1,
+        public tFirstActivity: Time,
+        public tSecondActivity: Time,
+        public iYearType: number=-1,//לבדוק
+        public iNumActivityInWeek: number=-1,
+        public lProgramAgegroups: number=-1,
 
-
-    ){}
-  
+    ) { }
+   
 }

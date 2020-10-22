@@ -66,6 +66,7 @@ import { OperatorActivitiesComponent } from './components/Operators/operator-act
 import { SettingTableComponent } from './components/Settings/setting-table/setting-table.component';
 import { SettingsScheduleComponent } from './components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
+import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { SettingsMessagesComponent } from './components/Settings/settings-messag
     SettingTableComponent,
     SettingsScheduleComponent,
     SettingsMessagesComponent,
+    ProgramsTableComponent,
   ],
   imports: [
     BrowserModule,

@@ -70,6 +70,6 @@ export class SettingsDetailsComponent implements OnInit {
     return this.formSetting.get("nvPhone");
   }
   saveChange() {
-    alert("saveChange")
+    alert("saveChange");
   }
 }
