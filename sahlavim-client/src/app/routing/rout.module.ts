@@ -23,6 +23,7 @@ import { OperatorScheduleComponent } from '../components/Operators/operator-sche
 import { SettingTableComponent } from '../components/Settings/setting-table/setting-table.component';
 import { SettingsScheduleComponent } from '../components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from '../components/Settings/settings-messages/settings-messages.component';
+import { ProgramsTableComponent } from '../components/Programs/programs-table/programs-table.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -48,7 +49,20 @@ const appTable: Routes = [
           }
         ]
       },
-      { path: "programs", component: ProgramsComponent },
+      {
+        path: "programs", component: ProgramsComponent,
+        children: [
+          { path: "programs-table", component: ProgramsTableComponent },
+          {
+            path: "programs-details-menu/:id", component: ProgramDetailsMenuComponent,
+            children: [
+              // { path: "settings-details", component: SettingsDetailsComponent },
+              // { path: "settings-schedule", component: SettingsScheduleComponent },
+              // { path: "settings-messages", component: SettingsMessagesComponent },
+            ]
+          },
+        ]
+      },
       {
         path: "settings", component: SettingsComponent,
         children: [
