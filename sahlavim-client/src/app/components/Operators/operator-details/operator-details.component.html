@@ -1,8 +1,8 @@
-<div style=" text-align: center;margin-top: 3%;" class="Details">
-    <form>
+<div class="form-group" style=" text-align: center;margin-top: 3%;" class="Details">
+    <form operator="ngform" (ngSubmit)="save()" >
         <section class="example-section">
             <label class="example-margin">סוג:</label>
-            <mat-radio-group [(ngModel)]="operator.iOperatorType" name="OperatorType">
+            <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
                 <mat-radio-button class="example-margin" value="5" [checked]="operator.iOperatorType==5">פרטי
                 </mat-radio-button>
                 <mat-radio-button class="example-margin" value="6" [checked]="operator.iOperatorType==6">חברה
@@ -14,7 +14,7 @@
         <br>
         <mat-form-field class="example-form-field">
             <mat-label>שם מפעיל</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="OperatorName">
+            <input matInput type="text" [ngModel]="operator.nvOperatorName" name="nvOperatorName">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -22,7 +22,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>שם חברה</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="CompanyName">
+            <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -30,7 +30,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>ת.ז</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="Identity">
+            <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -38,7 +38,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>שם איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="ContactPerson">
+            <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="nvContactPerson">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -46,7 +46,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>טלפון איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="ContactPersonPhone">
+            <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -54,7 +54,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label> מייל איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="ContactPersonMail">
+            <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="nvContactPersonMail">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -62,7 +62,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר מדריכים</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.iNumLeaders" name="NumLeaders">
+            <input matInput type="text" [(ngModel)]="operator.iNumLeaders" name="iNumLeaders">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -70,7 +70,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>הגבלת מספר חוגים ביום</mat-label>
-            <input matInput type="number" [(ngModel)]="operator.iNumOperationsDay" name="NumOperationsDay">
+            <input matInput type="number" [(ngModel)]="operator.iNumOperationsDay" name="iNumOperationsDay">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -87,7 +87,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>תנאי תשלום</mat-label>
-            <select [(value)]="operator.iOperatorPaymentType" matNativeControl required>
+            <select [(value)]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
                 <option value="1">שוטף+30</option>
                 <option value="2">שוטף+60</option>
                 <option value="3">מזומן</option>
@@ -96,7 +96,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר ספק</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="Identity">
+            <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -104,7 +104,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר הנהלת חשבונות</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="NumBookkeeping">
+            <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -130,14 +130,13 @@
                 <mat-option *ngFor="let school of operator.lSchools" [value]="school">{{school}}</mat-option>
             </mat-select>
         </mat-form-field> 
-
         <section style="direction: rtl;" class="example-section">
-            <mat-checkbox [checked]="operator.lNeighborhoods.length>0?true:false" class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
+            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"  class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
 
         <mat-form-field appearance="fill">
             <mat-label>איזורים</mat-label>
-            <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!operator.lNeighborhoods.length>0?true:false">
+            <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
                 <mat-select-trigger>
                     {{neighborhoods.value ? neighborhoods.value[0] : ''}}
                     <span *ngIf="operator.lNeighborhoods.value?.length > 1" class="example-additional-selection">
@@ -147,7 +146,6 @@
                 <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}</mat-option>
             </mat-select>
         </mat-form-field> 
-        <input type="button" value="save" (click)="save()">
-
+        <button type="submit" class="btn btn-success" >save</button>
     </form>
 </div>

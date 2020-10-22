@@ -1,8 +1,7 @@
 import { Activity } from './activity';
 
 export class Operator {
-    public iOperatorPaymentType: number;
-    public nvContactPersonMail: string;
+  
     public nvContactPersonPhone: string;
  
     public nvFilePathTax: string;
@@ -39,7 +38,9 @@ export class Operator {
         public lNeighborhoods:number[]=[],
         public lSchoolsExcude:number[]=[],
         public lSchools:number[]=[],
-        public bTalan: boolean=true
+        public bTalan: boolean=true,
+        public iOperatorPaymentType: number=0,
+        public nvContactPersonMail: string=""
 
         ) 
         {}

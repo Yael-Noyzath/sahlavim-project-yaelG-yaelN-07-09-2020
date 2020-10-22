@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import {MatCheckboxModule} from '@angular/material'
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup,NgForm } from '@angular/forms';
 @Component({
   selector: 'app-operator-details',
   templateUrl: './operator-details.component.html',
@@ -13,6 +13,8 @@ export class OperatorDetailsComponent implements OnInit {
   DetailsForm:FormGroup;
   operator: Operator;
   bNeighborhoods:boolean;
+  blNeighborhoods:boolean;
+
   schools = new FormControl();
   neighborhoods=new FormControl();
 
@@ -24,7 +26,27 @@ export class OperatorDetailsComponent implements OnInit {
 
   }
 
-save(){
-  alert(this.operator.nvOperatorName);
-}
+ save(){
+
+   console.log(this.operator);
+
+  alert(this.operator.nvCompanyName);
+
+    this.mainService.post("UpdateOperator", {data:this.operator})
+      .then(
+        res => {
+          debugger
+          if (res) {
+           alert(res);
+          }
+          else
+            alert("UpdateOperator error")
+        }
+        , err => {
+          alert("err");
+        }
+      );
+      //עידכון רשימת המפעילים  ע"י קבלתה מחדש מהסרויס
+      this.mainService.getAllOperators();
+  }
 }
