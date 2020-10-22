@@ -1,16 +1,8 @@
 import { User } from 'src/app/classes/user';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
-import { AfterViewInit, ViewChild, Component, OnInit } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Operator } from 'src/app/Classes/operator';
-import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
-import { from } from 'rxjs';
-import { Setting } from 'src/app/Classes/setting';
-import { coordinator } from 'src/app/Classes/coordinator';
-import { flatten } from '@angular/compiler';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Program } from 'src/app/Classes/program';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-programs-table',
@@ -25,13 +17,13 @@ export class ProgramsTableComponent implements OnInit {
   currentUser: User = new User();
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
-
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  
   ngOnInit() {
     this.ngAfterViewInit();
   }
 
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
@@ -39,24 +31,25 @@ export class ProgramsTableComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ProgramsGet() {
-    this.mainService.post("ProgramsGet", {})
-      .then(
-        res => {
-          this.programList = res;
-          this.dataSource = new MatTableDataSource(this.programList);
-
-        },
-        err => {
-          alert("err ProgramsGet")
-        }
-      )
+    this.mainService.post("ProgramsGet", {}).then(
+      res => {
+        this.programList = res;
+        this.programList.forEach(p => {
+        });
+        this.dataSource = new MatTableDataSource(this.programList);
+      },
+      err => {
+        alert("ProgramsGet err")
+      }
+    );
   }
-  EditProgram() {
+
+  EditProgram(prog:Program) {
     alert("EditProgram");
   }
 }
