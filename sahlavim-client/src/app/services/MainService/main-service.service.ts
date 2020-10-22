@@ -5,15 +5,19 @@ import { Operator } from 'src/app/classes/operator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
-import { settings } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainServiceService {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
 
+    this.getAllOperators();
+    
+   }
+
+   operatorsList:Operator[]=[];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -23,14 +27,32 @@ export class MainServiceService {
 
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
-  post(url: string, data): Promise<any> {
+  post(url: string, data: object): Promise<any> {
     console.log(url);
+     debugger
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
   get(url: string): Promise<any> {
     console.log(url);
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
+  }
+
+  getAllOperators(){
+
+    this.post("GetOperators", {})
+    .then(
+      res => {
+        if (res) {
+          this.operatorsList = res;
+        }
+        else
+          alert("get all operators error")
+      }
+      , err => {
+        alert("err");
+      }
+    );
   }
 
   serviceNavigate(path: string) {

@@ -34,22 +34,9 @@ export class OperatorTableComponent implements OnInit {
 
     //קבלת כל המפעילים
     getAllOperators() {
-      this.mainService.post("GetOperators", {})
-        .then(
-          res => {
-            if (res) {
-              this.operators = res;
-              this.dataSource = new MatTableDataSource(this.operators);
-             debugger
-  
-            }
-            else
-              alert("get all operators error")
-          }
-          , err => {
-            alert("err");
-          }
-        );
+
+      this.dataSource = new MatTableDataSource(this.mainService.operatorsList); 
+
     }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -120,15 +107,15 @@ export class OperatorTableComponent implements OnInit {
   }
   //עריכת מפעיל
   EditOperator(operator: Operator) {
-    debugger
     // settingsActiveTab = 0;
     // bNeighborhood = false;
     // bSchoolsExcude = false;
     // iOperatorId = oper.iOperatorId;
     this.mainService.operatorForDetails=operator;
     this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu/",operator.iOperatorId);
-
+    
     //מעבר לעמוד של עריכה
+    
   }
 }
 
