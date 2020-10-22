@@ -27,7 +27,7 @@ export class MainServiceService {
 
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
 
-  post(url: string, data: object): Promise<any> {
+  post(url: string, data: any): Promise<any> {
     console.log(url);
      debugger
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();

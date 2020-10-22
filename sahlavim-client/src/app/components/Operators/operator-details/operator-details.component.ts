@@ -26,7 +26,7 @@ export class OperatorDetailsComponent implements OnInit {
 
   }
 
- save(form:NgForm):void{
+ save(){
 
    console.log(this.operator);
 
@@ -46,7 +46,7 @@ export class OperatorDetailsComponent implements OnInit {
           alert("err");
         }
       );
-      //עידכון רשימת המפעילים ע"י קבלתה מחדש מהסרויס
+      //עידכון רשימת המפעילים  ע"י קבלתה מחדש מהסרויס
       this.mainService.getAllOperators();
   }
 }
