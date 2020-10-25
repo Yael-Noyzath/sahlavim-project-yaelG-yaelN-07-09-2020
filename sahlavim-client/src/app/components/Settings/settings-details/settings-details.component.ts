@@ -52,8 +52,10 @@ export class SettingsDetailsComponent implements OnInit {
       nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
       nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
       nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
-      nvContactPersonMail: new FormControl(this.currentSetting.nvContactPersonMail)
-
+      nvContactPersonMail: new FormControl(this.currentSetting.nvContactPersonMail),
+      bSettingMorning: new FormControl(this.currentSetting.bSettingMorning),
+      bSettingNoon: new FormControl(this.currentSetting.bSettingNoon),
+      bActiveAfternoon: new FormControl(this.currentSetting.bActiveAfternoon),
     });
   }
 
