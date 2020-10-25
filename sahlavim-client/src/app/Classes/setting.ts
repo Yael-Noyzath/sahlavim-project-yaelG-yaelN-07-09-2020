@@ -22,14 +22,12 @@ export class Setting {
         public iLastModifyUserId: number=-1,//קוד מישתמש שינוי אחרון
         public iLastModifyDate: number=-1,//לבדוק מה זה
         public iSysRowStatus: number=-1,
-        public bisMorningSetting: boolean=false,
-        public bisNoonSetting: boolean=false,
-        public bisAternoon: boolean=false,
+        public bSettingMorning: boolean=false,
+        public bSettingNoon: boolean=false,
+        public bActiveAfternoon: boolean=false,
         public bisJoint: boolean=false,
-        public lSettingAgegroupsValue: number=-1,
-
-    ) {
-
+        public lSettingAgegroupsValue: Array<number>=new Array<number>(),
+    ) { 
     }
     
 }

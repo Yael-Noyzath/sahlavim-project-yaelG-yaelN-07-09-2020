@@ -95,4 +95,7 @@ export class SettingTableComponent implements OnInit {
     this.mainService.settingForDetails = setting;
     this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu/', setting.iSettingId);
   }
+  chooseAllSettings(){
+alert("select all doesnt work")
+  }
 }
