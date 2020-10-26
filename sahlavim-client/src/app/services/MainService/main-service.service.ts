@@ -14,10 +14,13 @@ export class MainServiceService {
   constructor(private router: Router, private http: HttpClient) {
 
     this.getAllOperators();
+    this.getSettings();
     
    }
 
    operatorsList:Operator[]=[];
+   settingsList:Setting[]=[];
+
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -29,7 +32,7 @@ export class MainServiceService {
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
-     debugger
+     
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
@@ -51,6 +54,17 @@ export class MainServiceService {
       }
       , err => {
         alert("err");
+      }
+    );
+  }
+
+  getSettings(){
+    this.post("SettingsGet", {}).then(
+      res => {
+        this.settingsList = res;
+      },
+      err => {
+        alert("SettingsGet err")
       }
     );
   }

@@ -2,11 +2,7 @@ import { Activity } from './activity';
 
 export class Operator {
   
-    public nvContactPersonPhone: string;
  
-    public nvFilePathTax: string;
-    public nvFilePathBooks: string;
-    public nvFilePathContract: string;
     public bActivityPriority: boolean;
     public iCreateByUserId: number;
     public CreateDate: Date;
@@ -34,13 +30,19 @@ export class Operator {
         public iNumBookkeeping: number=0,
         public iNumOperationsDay: number=0,
         public iNumOperationsWeek: number=0,
-        public lActivity:Activity[]=[],
+        //public lActivity:Activity[]=[],
         public lNeighborhoods:number[]=[],
         public lSchoolsExcude:number[]=[],
         public lSchools:number[]=[],
         public bTalan: boolean=true,
         public iOperatorPaymentType: number=0,
-        public nvContactPersonMail: string=""
+        public nvContactPersonMail: string="",
+        public nvContactPersonPhone: string="",
+        public nvFilePathTax: string="",
+        public nvFilePathBooks: string="",
+        public nvFilePathContract: string="",
+
+
 
         ) 
         {}

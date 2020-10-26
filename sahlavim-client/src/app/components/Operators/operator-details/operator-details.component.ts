@@ -12,9 +12,8 @@ import { FormControl, FormGroup,NgForm } from '@angular/forms';
 export class OperatorDetailsComponent implements OnInit {
   DetailsForm:FormGroup;
   operator: Operator;
-  bNeighborhoods:boolean;
-  blNeighborhoods:boolean;
-
+  blNeighborhoods:boolean;//פעיל באיזורים מסויימים
+  bSchoolsExclude:boolean;//לא פעיל במיסגרות מסויימות
   schools = new FormControl();
   neighborhoods=new FormControl();
 
@@ -22,7 +21,7 @@ export class OperatorDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.operator = this.mainService.operatorForDetails;
-    this.bNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;
+    this.blNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;//
 
   }
 

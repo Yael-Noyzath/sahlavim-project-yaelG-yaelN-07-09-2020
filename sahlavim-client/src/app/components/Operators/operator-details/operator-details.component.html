@@ -113,7 +113,8 @@
         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
-        <section style="direction: rtl;" class="example-section">
+
+       <section style="direction: rtl;" class="example-section">
             <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
                 class="example-margin">מפעיל בחוגי תל"ן</mat-checkbox>
         </section>
@@ -129,13 +130,36 @@
                 </mat-select-trigger>
                 <mat-option *ngFor="let school of operator.lSchools" [value]="school">{{school}}</mat-option>
             </mat-select>
-        </mat-form-field> 
+        </mat-form-field>
+
+
+         <!-- לשלוף מטבלת operator area -->   
         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"  class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
 
         <mat-form-field appearance="fill">
             <mat-label>איזורים</mat-label>
+            <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
+                <mat-select-trigger>
+                    {{neighborhoods.value ? neighborhoods.value[0] : ''}}
+                    <span *ngIf="operator.lNeighborhoods.value?.length > 1" class="example-additional-selection">
+                        (+{{neighborhoods.value.length - 1}} {{neighborhoods.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <button type="submit" class="btn btn-success" >save</button>
+
+        
+<!-- לשלוף מטבלת מסגרות -->
+        <section style="direction: rtl;" class="example-section">
+            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"  class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
+        </section>
+
+        <mat-form-field appearance="fill">
+            <mat-label>מסגרות</mat-label>
             <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
                 <mat-select-trigger>
                     {{neighborhoods.value ? neighborhoods.value[0] : ''}}
