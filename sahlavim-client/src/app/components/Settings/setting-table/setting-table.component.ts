@@ -23,7 +23,7 @@ export class SettingTableComponent implements OnInit {
   // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
   //   'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
   //   'nvMail', 'nvPhoneCoordinator','edit','choose'];
-  displayedColumns: string[] = [    'choose','edit','iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
+  displayedColumns: string[] = ['choose', 'edit', 'iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
     'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'CoordinatorDetails'
   ];
 
@@ -95,7 +95,7 @@ export class SettingTableComponent implements OnInit {
     this.mainService.settingForDetails = setting;
     this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu/', setting.iSettingId);
   }
-  chooseAllSettings(){
-alert("select all doesnt work")
+  chooseAllSettings() {
+    alert("select all doesnt work")
   }
 }

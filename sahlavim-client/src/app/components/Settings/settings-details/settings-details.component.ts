@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { coordinator } from 'src/app/Classes/coordinator';
 import { Setting } from 'src/app/Classes/setting';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
@@ -15,14 +16,29 @@ export class SettingsDetailsComponent implements OnInit {
   idSetting: number;
   settingList: Array<Setting>;
   currentSetting: Setting = new Setting();
+  currentCoordinator: coordinator = new coordinator();
+  coordinatorList: Array<coordinator>;
   formSetting: FormGroup;
 
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
+  }
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.currentSetting = this.mainService.settingForDetails;
-    this.settingControls();
+    this.CoordinatorsGet();
+  }
+  CoordinatorsGet() {
+    this.mainService.post("CoordinatorsGet", {}).then(
+      res => {
+        this.coordinatorList = res;
+        this.currentSetting = this.mainService.settingForDetails;
+        this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId)
+        this.settingControls();
+      },
+      err => {
+        alert("CoordinatorsGet err")
+      }
+    );
   }
 
   // SettingsGet() {

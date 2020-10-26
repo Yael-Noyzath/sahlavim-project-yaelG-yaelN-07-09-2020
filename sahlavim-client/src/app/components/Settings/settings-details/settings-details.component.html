@@ -82,7 +82,9 @@
         <br><br>
 
         <h6>רכזת</h6>
-<p>שיוך רכזת (לא עובד)</p>
+        <p>{{currentCoordinator.nvFirstName}} {{currentCoordinator.nvLastName}} {{currentCoordinator.nvPhone}}
+            {{currentCoordinator.nvMail}}</p>
+        <p>שיוך רכזת (לא עובד)</p>
         <button [disabled]="!formSetting.valid" mat-icon-button color="warn"
             aria-label="Example icon button with a home icon">
             <mat-icon>save</mat-icon>
