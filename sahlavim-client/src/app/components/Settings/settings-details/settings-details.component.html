@@ -1,13 +1,6 @@
 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
     <form [formGroup]="formSetting" (ngSubmit)="saveChange()">
         <mat-form-field class="example-form-field">
-            <mat-label>מזהה מסגרת</mat-label>
-            <input matInput type="text" formControlName="iSettingId" name="iSettingId" required />
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
             <mat-label>שם מסגרת</mat-label>
             <input matInput type="text" formControlName="nvSettingName" name="nvSettingName" required />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -16,7 +9,7 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>סמל</mat-label>
-            <input matInput type="text" formControlName="nvSettingCode" name="nvSettingCode" required />
+            <input matInput type="text" formControlName="nvSettingCode" name="nvSettingCode" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -24,7 +17,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>טלפון</mat-label>
-            <input matInput type="text" formControlName="nvPhone" name="nvPhone" required />
+            <input matInput type="text" formControlName="nvPhone" name="nvPhone" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -46,32 +39,50 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מיקום פעילות</mat-label>
-            <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" required />
+            <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>שם איש קשר</mat-label>
-            <input matInput type="text" formControlName="nvContactPerson" name="nvContactPerson" required />
+            <input matInput type="text" formControlName="nvContactPerson" name="nvContactPerson" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>פלאפון איש קשר</mat-label>
-            <input matInput type="text" formControlName="nvContactPersonPhone" name="nvContactPersonPhone" required />
+            <input matInput type="text" formControlName="nvContactPersonPhone" name="nvContactPersonPhone" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מייל איש קשר</mat-label>
-            <input matInput type="text" formControlName="nvContactPersonMail" name="nvContactPersonMail" required />
+            <input matInput type="text" formControlName="nvContactPersonMail" name="nvContactPersonMail" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
+
+        <h6>קיטנה</h6>
+
+        <input type="checkbox" formControlName="bSettingMorning" name="bSettingMorning" />
+        <mat-label> מסגרת בוקר </mat-label>
+        <br>
+
+        <input type="checkbox" formControlName="bSettingNoon" name="bSettingNoon" />
+        <mat-label>מסגרת צהריים </mat-label>
+        <br> <br>
+
+        <h6>צהרון</h6>
+        <input type="checkbox" formControlName="bActiveAfternoon" name="bActiveAfternoon" />
+        <mat-label> האם קיים? </mat-label>
+        <br><br>
+
+        <h6>רכזת</h6>
+<p>שיוך רכזת (לא עובד)</p>
         <button [disabled]="!formSetting.valid" mat-icon-button color="warn"
             aria-label="Example icon button with a home icon">
             <mat-icon>save</mat-icon>

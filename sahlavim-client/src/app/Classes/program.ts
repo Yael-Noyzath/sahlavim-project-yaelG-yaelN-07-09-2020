@@ -27,7 +27,7 @@ export class Program {
         public tSecondActivity: Time,
         public iYearType: number=-1,//לבדוק
         public iNumActivityInWeek: number=-1,
-        public lProgramAgegroups: number=-1,
+        public lProgramAgegroups: Array<number>,
 
     ) { }
    

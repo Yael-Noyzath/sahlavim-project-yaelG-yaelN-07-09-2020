@@ -17,7 +17,7 @@ export class ProgramsTableComponent implements OnInit {
   currentUser: User = new User();
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
-  
+
   ngOnInit() {
     this.ngAfterViewInit();
   }
@@ -34,12 +34,17 @@ export class ProgramsTableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+  i: number = 0;
   ProgramsGet() {
     this.mainService.post("ProgramsGet", {}).then(
       res => {
         this.programList = res;
+//חיתוך הרשימה במקום שלא צריך
         this.programList.forEach(p => {
+          if (p.iProgramType == -1)
+            this.programList.splice(this.i, 1);
+          this.i++;
+
         });
         this.dataSource = new MatTableDataSource(this.programList);
       },
@@ -49,7 +54,7 @@ export class ProgramsTableComponent implements OnInit {
     );
   }
 
-  EditProgram(prog:Program) {
+  EditProgram(prog: Program) {
     alert("EditProgram");
   }
 }

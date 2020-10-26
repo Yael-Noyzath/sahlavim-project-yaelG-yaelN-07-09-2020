@@ -106,7 +106,7 @@
 
         <!-- Choose Column -->
         <ng-container matColumnDef="choose">
-            <th style="width:4%;" mat-header-cell *matHeaderCellDef> בחירה </th>
+            <th style="width:6%;" mat-header-cell *matHeaderCellDef> בחירה  <input type="checkbox" (click)="chooseAllSettings()"></th>
             <td mat-cell *matCellDef="let element">
                 <input type="checkbox">
             </td>
