@@ -5,12 +5,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';    
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';    
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';   
+@import "~angular2-multiselect-dropdown/themes/default.theme.css"; 
 
 .mat-card {    
     text-align: -webkit-center;    
 }    
     
+.custom-font-size .multiselect-dropdown .dropdown-btn {
+    font-size:12px !important;
+ }
+ 
 .demo-toolbar {    
     display: flex;    
     align-items: center;    

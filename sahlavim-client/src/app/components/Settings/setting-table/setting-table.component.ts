@@ -49,7 +49,9 @@ export class SettingTableComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
     this.CoordinatorsGet();
-    this.SettingsGet();
+    this.settingList=mainService.settingsList;
+    this.dataSource = new MatTableDataSource(this.settingList);
+
   }
 
   ngAfterViewInit() {
@@ -57,17 +59,6 @@ export class SettingTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  SettingsGet() {
-    this.mainService.post("SettingsGet", {}).then(
-      res => {
-        this.settingList = res;
-        this.dataSource = new MatTableDataSource(this.settingList);
-      },
-      err => {
-        alert("SettingsGet err")
-      }
-    );
-  }
 
   CoordinatorsGet() {
     this.mainService.post("CoordinatorsGet", {}).then(

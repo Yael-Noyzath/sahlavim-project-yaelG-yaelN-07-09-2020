@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
 import {
   MatButtonModule,
   MatMenuModule,
@@ -111,6 +113,7 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     ProgramsTableComponent,
   ],
   imports: [
+    AngularMultiSelectModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

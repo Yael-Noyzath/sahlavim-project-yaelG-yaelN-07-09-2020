@@ -2,3 +2,7 @@
     opacity: 0.75;
     font-size: 0.75em;
   }
+
+  ng-multiselect-dropdown /deep/ .multiselect-dropdown > .dropdown-btn{
+    font-size:12px !important;
+ }

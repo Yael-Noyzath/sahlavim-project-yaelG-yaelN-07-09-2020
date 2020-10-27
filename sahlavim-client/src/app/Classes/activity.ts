@@ -1,22 +1,26 @@
 export class Activity {
-    constructor(public ActivityId:number,
-        public OperatorId:number,
-        public ActivityName:string,
-        public CategoryType:number,
-        public StatusType:number,
-        public ActivityProduct:string,
-        public Price:number,
-        public ShortBreak:number,
-        public LongBreak:number,
-        public Points:number,
-        public CreateByUserId:number,
-        public CreateDate:Date,
-        public LastModifyUserId:number,//לבדוק מה זה
-        public LastModifyDate:number,//לבדוק מה זה
-        public SysRowStatus:number,//לבדוק מה זה
-       public isActivityPreference:boolean,
-       public isMorningActivity:boolean,
-       public isNoonActivity:boolean,
+    constructor(
+        public iActivityId:number,
+        public iOperatorId:number,
+        public nvActivityName:string,
+        public iCategoryType:number,
+        public iStatusType:number,
+        public nvActivityProduct:string,
+        public nPrice:string,
+        public nShortBreak:string,
+        public nLongBreak:string,
+        // public Points:number,
+        // public CreateByUserId:number,
+        // public CreateDate:Date,
+        // public LastModifyUserId:number,//לבדוק מה זה
+        // public LastModifyDate:number,//לבדוק מה זה
+        // public SysRowStatus:number,//לבדוק מה זה
+       public bActivityPreference:boolean,
+    //    public lActivityAgegroups:ActivityAgeGroup[]=[],
+       public bActivityMorning:boolean,
+      public bActivityNoon:boolean,
+
+      
 
         ){
 
