@@ -20,7 +20,7 @@ export class SettingsDetailsComponent implements OnInit {
   coordinatorList: Array<coordinator>;
   formSetting: FormGroup;
 
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
+  constructor(private mainService: MainServiceService) {
   }
 
   ngOnInit() {

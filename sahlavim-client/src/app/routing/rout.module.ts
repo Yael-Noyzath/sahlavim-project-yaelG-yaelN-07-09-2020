@@ -24,6 +24,8 @@ import { SettingTableComponent } from '../components/Settings/setting-table/sett
 import { SettingsScheduleComponent } from '../components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from '../components/Settings/settings-messages/settings-messages.component';
 import { ProgramsTableComponent } from '../components/Programs/programs-table/programs-table.component';
+import { ProgramDetailsComponent } from '../components/Programs/program-details/program-details.component';
+import { ProgramScheduleComponent } from '../components/Programs/program-schedule/program-schedule.component';
 
 const appTable: Routes = [
   { path: "", component: LoginComponent },
@@ -56,9 +58,9 @@ const appTable: Routes = [
           {
             path: "programs-details-menu/:id", component: ProgramDetailsMenuComponent,
             children: [
-              // { path: "settings-details", component: SettingsDetailsComponent },
-              // { path: "settings-schedule", component: SettingsScheduleComponent },
-              // { path: "settings-messages", component: SettingsMessagesComponent },
+               { path: "programs-details", component: ProgramDetailsComponent },
+               { path: "programs-schedule", component: ProgramScheduleComponent },
+               //{ path: "settings-messages", component: SettingsMessagesComponent },
             ]
           },
         ]

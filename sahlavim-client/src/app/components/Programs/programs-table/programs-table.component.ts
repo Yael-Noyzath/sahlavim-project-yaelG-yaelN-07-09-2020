@@ -27,34 +27,28 @@ export class ProgramsTableComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = this.mainService.getUser();
-    this.ProgramsGet();
+    this.programList = this.mainService.programsList;
+    this.spliceProgramsList();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  i: number = 0;
-  ProgramsGet() {
-    this.mainService.post("ProgramsGet", {}).then(
-      res => {
-        this.programList = res;
-//חיתוך הרשימה במקום שלא צריך
-        this.programList.forEach(p => {
-          if (p.iProgramType == -1)
-            this.programList.splice(this.i, 1);
-          this.i++;
 
-        });
-        this.dataSource = new MatTableDataSource(this.programList);
-      },
-      err => {
-        alert("ProgramsGet err")
-      }
-    );
+  spliceProgramsList() {
+    var i = 0;
+    this.programList.forEach(p => {
+      if (p.iProgramType == -1)
+        this.programList.splice(i, 1);
+      i++;
+    });
+    this.dataSource = new MatTableDataSource(this.programList);
   }
 
+
   EditProgram(prog: Program) {
-    alert("EditProgram");
+    this.mainService.programForDetails = prog;
+    this.mainService.serviceNavigateForOperatorEdit("/header-menu/programs/programs-details-menu/", prog.iProgramId)
   }
 }
