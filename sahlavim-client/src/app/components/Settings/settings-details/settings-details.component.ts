@@ -73,5 +73,9 @@ export class SettingsDetailsComponent implements OnInit {
   }
   saveChange() {
     alert("saveChange");
+
+    
+    //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
+   this.mainService.getSettings();
   }
 }

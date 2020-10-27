@@ -30,7 +30,7 @@ export class Operator {
         public iNumBookkeeping: number=0,
         public iNumOperationsDay: number=0,
         public iNumOperationsWeek: number=0,
-        //public lActivity:Activity[]=[],
+        public lActivity:Activity[]=[],
         public lNeighborhoods:number[]=[],
         public lSchoolsExcude:number[]=[],
         public lSchools:number[]=[],

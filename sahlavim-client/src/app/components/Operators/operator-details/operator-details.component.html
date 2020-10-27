@@ -1,5 +1,5 @@
 <div class="form-group" style=" text-align: center;margin-top: 3%;" class="Details">
-    <form operator="ngform" (ngSubmit)="save()" >
+    <form operator="ngform" (ngSubmit)="save()">
         <section class="example-section">
             <label class="example-margin">סוג:</label>
             <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
@@ -114,28 +114,29 @@
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
 
-       <section style="direction: rtl;" class="example-section">
+        <section style="direction: rtl;" class="example-section">
             <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
                 class="example-margin">מפעיל בחוגי תל"ן</mat-checkbox>
         </section>
 
         <mat-form-field appearance="fill">
             <mat-label>חוגי תל"ן</mat-label>
-            <mat-select [formControl]="schools"  multiple [disabled]="!operator.bTalan">
+            <mat-select [formControl]="schools" multiple [disabled]="!operator.bTalan">
                 <mat-select-trigger>
                     {{schools.value ? schools.value[0] : ''}}
                     <span *ngIf="schools.value?.length > 1" class="example-additional-selection">
                         (+{{schools.value.length - 1}} {{schools.value?.length === 2 ? 'other' : 'others'}})
-                      </span>
+                    </span>
                 </mat-select-trigger>
                 <mat-option *ngFor="let school of operator.lSchools" [value]="school">{{school}}</mat-option>
             </mat-select>
         </mat-form-field>
 
 
-         <!-- לשלוף מטבלת operator area -->   
+        <!-- לשלוף מטבלת operator area -->
         <section style="direction: rtl;" class="example-section">
-            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"  class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
+            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
+                class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
 
         <mat-form-field appearance="fill">
@@ -147,18 +148,27 @@
                         (+{{neighborhoods.value.length - 1}} {{neighborhoods.value?.length === 2 ? 'other' : 'others'}})
                     </span>
                 </mat-select-trigger>
-                <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}</mat-option>
+                <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}
+                </mat-option>
             </mat-select>
-        </mat-form-field> 
-        <button type="submit" class="btn btn-success" >save</button>
+        </mat-form-field>
 
-        
-<!-- לשלוף מטבלת מסגרות -->
+
+        <!-- לשלוף מטבלת מסגרות -->
         <section style="direction: rtl;" class="example-section">
-            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"  class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
+            <mat-checkbox [checked]="bSchoolsExclude" (change)="bSchoolsExclude=!bSchoolsExclude"
+                class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
         </section>
+ 
+        <div style="width: 30%;">
+    <angular2-multiselect class="custom-font-size" name="SchoolsExcude" [disabled]="!bSchoolsExclude" [data]="List" [(ngModel)]="selectedItems"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+          </div>
+        
 
-        <mat-form-field appearance="fill">
+        <!-- <mat-form-field appearance="fill">
             <mat-label>מסגרות</mat-label>
             <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
                 <mat-select-trigger>
@@ -167,9 +177,10 @@
                         (+{{neighborhoods.value.length - 1}} {{neighborhoods.value?.length === 2 ? 'other' : 'others'}})
                     </span>
                 </mat-select-trigger>
-                <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}</mat-option>
+                <mat-option *ngFor="let Neighborhood of settingsList" [value]="Neighborhood">{{Neighborhood.nvSettingName}}</mat-option>
             </mat-select>
-        </mat-form-field> 
-        <button type="submit" class="btn btn-success" >save</button>
+        </mat-form-field>  -->
+
+        <button type="submit" class="btn btn-success">save</button>
     </form>
 </div>
