@@ -5,6 +5,7 @@ import { Operator } from 'src/app/classes/operator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
+import { Program } from 'src/app/Classes/program';
 
 @Injectable({
   providedIn: 'root'
@@ -15,25 +16,28 @@ export class MainServiceService {
 
     this.getAllOperators();
     this.getSettings();
-    
-   }
+    this.ProgramsGet();
+  }
 
-   operatorsList:Operator[]=[];
-   settingsList:Setting[]=[];
-
+  operatorsList: Operator[] = [];
+  settingsList: Setting[] = [];
+  programsList: Program[] = [];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
   operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
-  //"http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
+  
 
-  sahlavimUrl = "  http://localhost:53070/Service1.svc";
+  //לעריכת תוכנית
+  programForDetails: Program;
+// שרת בדיקות מרוחק
+  sahlavimUrl ="http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
-     
+
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
@@ -41,27 +45,36 @@ export class MainServiceService {
     console.log(url);
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
-
-  getAllOperators(){
-
-    this.post("GetOperators", {})
-    .then(
+  ProgramsGet() {
+    this.post("ProgramsGet", {}).then(
       res => {
-        if (res) {
-          this.operatorsList = res;
-        }
-        else
-          alert("get all operators error")
-      }
-      , err => {
-        alert("err");
+        this.programsList = res;
+      },
+      err => {
+        alert("ProgramsGet err")
       }
     );
   }
+  getAllOperators() {
 
-  getSettings(){
+    this.post("GetOperators", {})
+      .then(
+        res => {
+          if (res) {
+            this.operatorsList = res;
+          }
+          else
+            alert("get all operators error")
+        }
+        , err => {
+          alert("err");
+        }
+      );
+  }
 
-    this.post("SettingsGet", {}).then(
+
+  getSettings() {
+     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
       },

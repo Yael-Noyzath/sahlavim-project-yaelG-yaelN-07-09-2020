@@ -4,9 +4,9 @@
         <!-- ProgramTypeValue Column -->
         <ng-container matColumnDef="nvProgramTypeValue">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>סוג תוכנית </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvProgramTypeValue}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.iProgramType}} </td>
         </ng-container>
-        
+
         <!-- ProgramName Column -->
         <ng-container matColumnDef="nvProgramName">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>שם תוכנית</th>
@@ -17,13 +17,13 @@
         <!-- FromDateFormat Column -->
         <ng-container matColumnDef="dFromDateFormat">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>מתאריך </th>
-            <td mat-cell *matCellDef="let row"> {{row.dFromDateFormat}}</td>
+            <td mat-cell *matCellDef="let row"> {{row.dFromDate}}</td>
         </ng-container>
 
         <!-- ToDateFormat Column -->
         <ng-container matColumnDef="dToDateFormat">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>עד תאריך</th>
-            <td mat-cell *matCellDef="let row"> {{row.dToDateFormat}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.dToDate}} </td>
         </ng-container>
 
         <!-- engthProgramSettings Column -->
@@ -45,7 +45,7 @@
             <td mat-cell *matCellDef="let row"> {{row.nvBudgetItem}} </td>
         </ng-container>
 
-       
+
         <!-- Edit Column -->
         <ng-container matColumnDef="edit">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef>עריכה </th>
