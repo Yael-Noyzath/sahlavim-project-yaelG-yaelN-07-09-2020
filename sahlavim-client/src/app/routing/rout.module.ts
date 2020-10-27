@@ -26,6 +26,7 @@ import { SettingsMessagesComponent } from '../components/Settings/settings-messa
 import { ProgramsTableComponent } from '../components/Programs/programs-table/programs-table.component';
 
 const appTable: Routes = [
+ 
   { path: "", component: LoginComponent },
   {
     path: "header-menu", component: HeaderMenuComponent,
