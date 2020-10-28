@@ -34,6 +34,7 @@ export class MainServiceService {
 
 // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
   sahlavimUrl ="http://localhost:53070/Service1.svc/";//שרת מקומי
+  
   post(url: string, data: any): Promise<any> {
     console.log(url);
 
@@ -88,7 +89,7 @@ export class MainServiceService {
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
-  serviceNavigateForOperatorEdit(path: string, id: number) {
+  serviceNavigateForId(path: string, id: number) {
     this.router.navigate([path, id]);
   }
 

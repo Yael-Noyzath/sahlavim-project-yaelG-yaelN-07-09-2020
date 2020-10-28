@@ -112,7 +112,7 @@ export class OperatorTableComponent implements OnInit {
     // bSchoolsExcude = false;
     // iOperatorId = oper.iOperatorId;
     this.mainService.operatorForDetails=operator;
-    this.mainService.serviceNavigateForOperatorEdit("/header-menu/operators/operator-menu/",operator.iOperatorId);
+    this.mainService.serviceNavigateForId("/header-menu/operators/operator-menu/",operator.iOperatorId);
     
     //מעבר לעמוד של עריכה
     
