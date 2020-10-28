@@ -6,7 +6,7 @@ export class Setting {
         public iSettingId: number=-1,
         public nvSettingName: string="",
         public nvSettingCode: string="",
-        public nvSettingTypeValue: number=-1,
+        public nvSettingTypeValue: string="",
         public nvLat: string="",
         public nvLng: string="",
         public nvAddress: string="",

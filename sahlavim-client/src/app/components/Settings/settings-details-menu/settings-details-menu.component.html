@@ -1,8 +1,11 @@
 <div class="menu">
     <nav style="direction: rtl;" class="navbar navbar-expand-lg navbar-light bg-light">
         <a   routerLink="settings-details" class="navbar-brand" >
-            <div>
+            <div *ngIf="idSetting!=-1">
                 <mat-icon   class="mat-18">create</mat-icon> {{setting.nvSettingName}}
+            </div>
+            <div *ngIf="idSetting==-1">
+                <mat-icon   class="mat-18">create</mat-icon> מסגרת חדשה
             </div>
         </a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

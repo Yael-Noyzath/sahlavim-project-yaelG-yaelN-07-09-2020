@@ -1,6 +1,4 @@
 import { Time } from '@angular/common';
-import { DateFilter, Timer } from 'ag-grid-community';
-import { time } from 'console';
 
 export class Program {
     constructor(public iProgramId: number=-1,
@@ -14,9 +12,9 @@ export class Program {
         public iActivityPreferenceCount: number=-1,//מספר הפעלות מועדפות
         public iActivityPreferenceInWeekCount: number=-1,//מספר הפעלות מועדפות לשבוע
         public tFromTimeMorning: Date=new Date(),
-        public tToTimeMorning: Time,
-        public tFromTimeAfternoon: Time,
-        public tToTimeAfternoon: Time,
+        public tToTimeMorning: Date=new Date(),
+        public tFromTimeAfternoon: Date=new Date(),
+        public tToTimeAfternoon: Date=new Date(),
         public bTwoActivitiesThatDay: boolean=false,
         public iStatusType: number=-1,
         public CreateByUserId: number=-1,
@@ -25,8 +23,8 @@ export class Program {
         public iSysRowStatus: number=-1,//לבדוק מה זה
         public bProgramAfternoon: boolean=false,//האם תוכנית צהרים
         public iSemesterType: number=-1,
-       // public tFirstActivity: Time,
-       // public tSecondActivity: Time,
+       // public tFirstActivity: Date=new Date(),
+       // public tSecondActivity: Date=new Date(),
         public iYearType: number=-1,//לבדוק
         public iNumActivityInWeek: number=-1,
         public lProgramAgegroups: Array<number>=new Array<number>(),

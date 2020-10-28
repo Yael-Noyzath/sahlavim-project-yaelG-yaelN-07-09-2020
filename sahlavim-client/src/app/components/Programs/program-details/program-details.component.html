@@ -2,7 +2,7 @@
     <form [formGroup]="formProgram" (ngSubmit)="saveChange()">
         <mat-form-field class="example-form-field">
             <mat-label>סוג תוכנית</mat-label>
-            <input matInput type="text" formControlName="iProgramType" name="iProgramType" currentProgram />
+            <input matInput type="text" formControlName="iProgramType" name="iProgramType" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>

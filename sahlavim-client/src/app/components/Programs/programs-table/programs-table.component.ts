@@ -51,4 +51,8 @@ export class ProgramsTableComponent implements OnInit {
     this.mainService.programForDetails = prog;
     this.mainService.serviceNavigateForOperatorEdit("/header-menu/programs/programs-details-menu/", prog.iProgramId)
   }
+  addProgram(){
+    this.mainService.programForDetails = new Program();
+    this.mainService.serviceNavigateForOperatorEdit("/header-menu/programs/programs-details-menu/",-1)
+  }
 }
