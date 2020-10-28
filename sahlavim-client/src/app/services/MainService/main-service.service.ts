@@ -77,17 +77,7 @@ export class MainServiceService {
       );
   }
 
-  globalObj() {
-    this.post("SysTableListGet", {}).then(
-      res => {
-        this.gItems = res;
-        //alert(this.gItems[0].dParams[0].Value)
-      },
-      err => {
-        alert("globalObj err");
-      }
-    )
-  }
+ 
 
   getSettings() {
     this.post("SettingsGet", {}).then(
@@ -117,5 +107,19 @@ export class MainServiceService {
     //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
+ globalObj() {
+    this.post("SysTableListGet", {}).then(
+      res => {
+        this.gItems = res;
+        //alert(this.gItems[0].dParams[0].Value)
+      },
+      err => {
+        alert("globalObj err");
+      }
+    )
+  }
 
+  getGItems(){
+    return this.gItems;
+  }
 }

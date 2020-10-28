@@ -23,8 +23,8 @@ export class SettingTableComponent implements OnInit {
   // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
   //   'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
   //   'nvMail', 'nvPhoneCoordinator','edit','choose'];
-  displayedColumns: string[] = ['choose', 'edit', 'iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
-    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'CoordinatorDetails'
+  displayedColumns: string[] = ['choose', 'edit', 'iSettingId', 'nvSettingName', 'nvSettingCode', 'iSettingType', 'nvAddress', 'nvPhone',
+    'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroups', 'CoordinatorDetails'
   ];
 
 
@@ -37,6 +37,9 @@ export class SettingTableComponent implements OnInit {
   currentUser: User = new User();
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
+  lSysTable: any = [];
+  lSettingAgegroups: any = [];
+  lSettingType: Map<number, string>=new Map<number,string>();
 
 
   ngOnInit() {
@@ -47,13 +50,15 @@ export class SettingTableComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
+    this.lSysTable = mainService.getGItems();
+    this.lSettingAgegroups = this.lSysTable[7].dParams;
+    this.lSettingType = this.lSysTable[6].dParams;
     this.currentUser = this.mainService.getUser();
     this.CoordinatorsGet();
-    this.settingList=mainService.settingsList;
+    this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
-
+    //alert(this.lSettingType.get(19));
   }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -86,10 +91,10 @@ export class SettingTableComponent implements OnInit {
     this.mainService.settingForDetails = setting;
     this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
   }
-  addSetting(){
+  addSetting() {
     this.mainService.settingForDetails = new Setting();
     this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
- 
+
   }
   chooseAllSettings() {
     alert("select all doesnt work")

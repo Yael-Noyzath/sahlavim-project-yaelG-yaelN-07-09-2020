@@ -27,21 +27,26 @@ export class ManagersTableComponent implements OnInit {
   usersList: Array<User>;
 
   currentUser: User = new User();
+  lUserType: any = [];
+  lSysTable: any = [];
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = mainService.getUser();
     this.GetUsers();
+    this.lSysTable = mainService.getGItems();
+    this.lUserType = this.lSysTable[0].dParams;
+    //alert(this.lUserType[0].Value)
   }
 
   ngOnInit() {
-   this.ngAfterViewInit();
+    this.ngAfterViewInit();
   }
 
 
-   ngAfterViewInit() {
-     this.dataSource.paginator = this.paginator;
-     this.dataSource.sort = this.sort;
-   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   GetUsers() {
     this.mainService.post("GetUsers", {})
