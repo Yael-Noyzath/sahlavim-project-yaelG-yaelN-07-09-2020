@@ -12,12 +12,15 @@ import { Program } from 'src/app/Classes/program';
 })
 export class MainServiceService {
 
-  constructor(private router: Router, private http: HttpClient) {
+  gItems:any = [];
 
+  constructor(private router: Router, private http: HttpClient) {
+    this.globalObj();
     this.getAllOperators();
     this.getSettings();
     this.ProgramsGet();
   }
+
 
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
@@ -25,16 +28,16 @@ export class MainServiceService {
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
- operatorForDetails: Operator = new Operator();
+  operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
-  
+
   //לעריכת תוכנית
   programForDetails: Program;
 
-// http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
-  sahlavimUrl ="http://localhost:53070/Service1.svc/";//שרת מקומי
-  
+  // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
+  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+
   post(url: string, data: any): Promise<any> {
     console.log(url);
 
@@ -74,9 +77,20 @@ export class MainServiceService {
       );
   }
 
+  globalObj() {
+    this.post("SysTableListGet", {}).then(
+      res => {
+        this.gItems = res;
+        //alert(this.gItems[0].dParams[0].Value)
+      },
+      err => {
+        alert("globalObj err");
+      }
+    )
+  }
 
   getSettings() {
-     this.post("SettingsGet", {}).then(
+    this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
       },
@@ -85,6 +99,8 @@ export class MainServiceService {
       }
     );
   }
+
+
 
   serviceNavigate(path: string) {
     this.router.navigate([path]);
