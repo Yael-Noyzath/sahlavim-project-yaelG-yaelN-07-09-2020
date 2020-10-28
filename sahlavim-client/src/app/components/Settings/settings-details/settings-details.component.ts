@@ -32,8 +32,9 @@ export class SettingsDetailsComponent implements OnInit {
       res => {
         this.coordinatorList = res;
         this.currentSetting = this.mainService.settingForDetails;
-        this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId)
-        this.settingControls();
+        if (this.currentSetting.iCoordinatorId)
+          this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId)
+          this.settingControls();
       },
       err => {
         alert("CoordinatorsGet err")
@@ -87,11 +88,39 @@ export class SettingsDetailsComponent implements OnInit {
   get nvMail() {
     return this.formSetting.get("nvPhone");
   }
+  get lSettingAgegroupsValue() {
+    return this.formSetting.get("lSettingAgegroupsValue");
+  }
+  get iSettingId() {
+    return this.formSetting.get("iSettingId");
+  }
+  get nvSettingTypeValue() {
+    return this.formSetting.get("nvSettingTypeValue");
+  }
+  get nvOperatingLocation() {
+    return this.formSetting.get("nvOperatingLocation");
+  }
+  get nvContactPerson() {
+    return this.formSetting.get("nvContactPerson");
+  }
+  get nvContactPersonPhone() {
+    return this.formSetting.get("nvContactPersonPhone");
+  }
+  get nvContactPersonMail() {
+    return this.formSetting.get("nvContactPersonMail");
+  }
+  get bSettingMorning() {
+    return this.formSetting.get("bSettingMorning");
+  }
+  get bSettingNoon() {
+    return this.formSetting.get("bSettingNoon");
+  }
+  get bActiveAfternoon() {
+    return this.formSetting.get("bActiveAfternoon");
+  }
   saveChange() {
     alert("saveChange");
-
-    
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
-   this.mainService.getSettings();
+    this.mainService.getSettings();
   }
 }

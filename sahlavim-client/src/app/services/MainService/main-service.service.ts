@@ -32,6 +32,8 @@ export class MainServiceService {
 
   //לעריכת תוכנית
   programForDetails: Program;
+
+  sahlavimUrl = "http://localhost:53070/Service1.svc/"
 // שרת בדיקות מרוחק
   sahlavimUrl ="http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
 
@@ -87,7 +89,7 @@ export class MainServiceService {
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
-  serviceNavigateForOperatorEdit(path: string, id: number) {
+  serviceNavigateForId(path: string, id: number) {
     this.router.navigate([path, id]);
   }
 

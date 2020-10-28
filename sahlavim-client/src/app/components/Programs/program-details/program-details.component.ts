@@ -10,17 +10,18 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class ProgramDetailsComponent implements OnInit {
 
-  currentProgram: Program;
+  currentProgram: Program=new Program();
   formProgram: FormGroup;
 
-  constructor(mainService: MainServiceService) {
-    this.currentProgram = mainService.programForDetails;
-    this.programControls();
-  }
-
-  ngOnInit() {
+  constructor(private mainService: MainServiceService) {
+     this.currentProgram = this.mainService.programForDetails;
+     this.programControls();
   }
   
+
+  ngOnInit() { 
+  }
+
   programControls() {
     this.formProgram = new FormGroup({
       iProgramType: new FormControl(this.currentProgram.iProgramType),
@@ -45,6 +46,30 @@ export class ProgramDetailsComponent implements OnInit {
       tToTimeAfternoon: new FormControl(this.currentProgram.tToTimeAfternoon),
       bTwoActivitiesThatDay: new FormControl(this.currentProgram.bTwoActivitiesThatDay),
     });
+  }
+  get iProgramType() {
+    return this.formProgram.get("iProgramType");
+  }
+  get nvProgramName() {
+    return this.formProgram.get("nvProgramName");
+  }
+  get dFromDate() {
+    return this.formProgram.get("dFromDate");
+  }
+  get dToDate() {
+    return this.formProgram.get("dToDate");
+  }
+  get nvBudgetItem() {
+    return this.formProgram.get("nvBudgetItem");
+  }
+  get lProgramAgegroups() {
+    return this.formProgram.get("lProgramAgegroups");
+  }
+  get iNumActivityMorning() {
+    return this.formProgram.get("iNumActivityMorning");
+  }
+  get iNumActivityAfternoon() {
+    return this.formProgram.get("iNumActivityAfternoon");
   }
   saveChange() {
 
