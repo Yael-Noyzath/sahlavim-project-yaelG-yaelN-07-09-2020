@@ -49,10 +49,10 @@ export class ProgramsTableComponent implements OnInit {
 
   EditProgram(prog: Program) {
     this.mainService.programForDetails = prog;
-    this.mainService.serviceNavigateForOperatorEdit("/header-menu/programs/programs-details-menu/", prog.iProgramId)
+    this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/", prog.iProgramId)
   }
   addProgram(){
     this.mainService.programForDetails = new Program();
-    this.mainService.serviceNavigateForOperatorEdit("/header-menu/programs/programs-details-menu/",-1)
+    this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/",-1)
   }
 }

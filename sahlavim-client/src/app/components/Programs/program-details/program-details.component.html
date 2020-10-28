@@ -2,7 +2,7 @@
     <form [formGroup]="formProgram" (ngSubmit)="saveChange()">
         <mat-form-field class="example-form-field">
             <mat-label>סוג תוכנית</mat-label>
-            <input matInput type="text" formControlName="iProgramType" name="iProgramType" />
+            <input matInput type="text" formControlName="iProgramType" name="iProgramType" required/>
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -15,20 +15,6 @@
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
-            <mat-label>מתאריך</mat-label>
-            <input matInput type="date" formControlName="dFromDate" name="dFromDate" />
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
-            <mat-label>עד תאריך</mat-label>
-            <input matInput type="date" formControlName="dToDate" name="dToDate" />
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
             <mat-label>סעיף תקציבי</mat-label>
             <input matInput type="text" formControlName="nvBudgetItem" name="nvBudgetItem" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -36,36 +22,52 @@
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
+            <mat-label>מתאריך</mat-label>
+            <input matInput type="date" formControlName="dFromDate" name="dFromDate" required/>
+            <p style="color: red;">יש להזין תאריך עתידי</p>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
+            <mat-label>עד תאריך</mat-label>
+            <input matInput type="date" formControlName="dToDate" name="dToDate" required/>
+            <p style="color: red;">יש להזין תאריך הגדול מתאריך ההתחלה</p>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field><br>
+        <mat-form-field class="example-form-field">
             <mat-label>קטגורית גילאים</mat-label>
-            <input matInput type="text" formControlName="lProgramAgegroups" name="lProgramAgegroups" required />
+            <input matInput type="text" required formControlName="lProgramAgegroups" name="lProgramAgegroups" required />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות בוקר</mat-label>
-            <input matInput type="number" formControlName="iNumActivityMorning" name="iNumActivityMorning" />
+            <input matInput type="number" required formControlName="iNumActivityMorning" name="iNumActivityMorning" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות צהריים</mat-label>
-            <input matInput type="number" formControlName="iNumActivityAfternoon" name="iNumActivityAfternoon" />
+            <input matInput type="number" required formControlName="iNumActivityAfternoon" name="iNumActivityAfternoon" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות מועדפות</mat-label>
-            <input matInput type="number" formControlName="iActivityPreferenceCount" name="iActivityPreferenceCount" />
+            <input matInput type="number" required formControlName="iActivityPreferenceCount" name="iActivityPreferenceCount" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות מועדפות לשבוע</mat-label>
-            <input matInput type="number" formControlName="iActivityPreferenceInWeekCount"
+            <input matInput type="number" required formControlName="iActivityPreferenceInWeekCount"
                 name="iActivityPreferenceInWeekCount" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>

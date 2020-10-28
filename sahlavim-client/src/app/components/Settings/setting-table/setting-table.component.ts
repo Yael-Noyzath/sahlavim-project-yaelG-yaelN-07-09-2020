@@ -84,11 +84,11 @@ export class SettingTableComponent implements OnInit {
   }
   EditSetting(setting: Setting) {
     this.mainService.settingForDetails = setting;
-    this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu/', setting.iSettingId);
+    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
   }
   addSetting(){
     this.mainService.settingForDetails = new Setting();
-    this.mainService.serviceNavigateForOperatorEdit('/header-menu/settings/settings-details-menu/', -1);
+    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
  
   }
   chooseAllSettings() {

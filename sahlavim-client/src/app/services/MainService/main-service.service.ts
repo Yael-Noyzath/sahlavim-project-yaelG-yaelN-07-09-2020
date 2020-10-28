@@ -31,7 +31,7 @@ export class MainServiceService {
   //לעריכת תוכנית
   programForDetails: Program;
 
-  sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/"
+  sahlavimUrl = "http://localhost:53070/Service1.svc/"
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
@@ -84,7 +84,7 @@ export class MainServiceService {
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
-  serviceNavigateForOperatorEdit(path: string, id: number) {
+  serviceNavigateForId(path: string, id: number) {
     this.router.navigate([path, id]);
   }
 
