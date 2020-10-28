@@ -33,6 +33,7 @@ export class OperatorDetailsComponent implements OnInit {
   ngOnInit() {
  
     this.operator = this.mainService.operatorForDetails;
+    debugger
     this.blNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;//האם באיזורים מסויימם
     this.bSchoolsExclude= this.operator.lSchoolsExcude.length>0?true:false;//האם לא פועל במיסגרות מסויימות
     this.settingsList=this.mainService.settingsList;
@@ -46,18 +47,6 @@ export class OperatorDetailsComponent implements OnInit {
         }
     }
    
-
-    // this.List = [
-    //   { item_id: 1, item_text: 'Mumbai' },
-    //   { item_id: 2, item_text: 'Bangaluru' },
-    //   { item_id: 3, item_text: 'Pune' },
-    //   { item_id: 4, item_text: 'Navsari' },
-    //   { item_id: 5, item_text: 'New Delhi' }
-    // ];
-    // this.selectedItems = [
-    //   { item_id: 3, item_text: 'Pune' },
-    //   { item_id: 4, item_text: 'Navsari' }
-    // ];
 
     this.dropdownSettings = {
       singleSelection: false,
