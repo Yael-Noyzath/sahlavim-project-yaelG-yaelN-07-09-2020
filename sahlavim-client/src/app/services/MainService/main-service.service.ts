@@ -25,7 +25,7 @@ export class MainServiceService {
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
-  operatorForDetails: Operator = new Operator();
+ operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
   
@@ -44,7 +44,7 @@ export class MainServiceService {
     console.log(url);
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
-  
+
   ProgramsGet() {
     this.post("ProgramsGet", {}).then(
       res => {
