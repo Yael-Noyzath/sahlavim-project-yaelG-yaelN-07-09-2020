@@ -25,18 +25,16 @@ export class MainServiceService {
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
-  operatorForDetails: Operator = new Operator();
+ operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
   
-
   //לעריכת תוכנית
   programForDetails: Program;
 
-  sahlavimUrl = "http://localhost:53070/Service1.svc/"
-// שרת בדיקות מרוחק
-  sahlavimUrl ="http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
-
+// http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
+  sahlavimUrl ="http://localhost:53070/Service1.svc/";//שרת מקומי
+  
   post(url: string, data: any): Promise<any> {
     console.log(url);
 
@@ -47,6 +45,7 @@ export class MainServiceService {
     console.log(url);
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
+
   ProgramsGet() {
     this.post("ProgramsGet", {}).then(
       res => {
@@ -57,6 +56,7 @@ export class MainServiceService {
       }
     );
   }
+
   getAllOperators() {
 
     this.post("GetOperators", {})

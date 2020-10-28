@@ -169,24 +169,11 @@
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
             (onDeSelect)="OnItemDeSelect($event)"
-            [disabled]="!bSchoolsExclude" 
+            [disabled]="!bSchoolsExclude"            
           >
           </ng-multiselect-dropdown>
           </div>
 
-
-        <!-- <mat-form-field appearance="fill">
-            <mat-label>מסגרות</mat-label>
-            <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
-                <mat-select-trigger>
-                    {{neighborhoods.value ? neighborhoods.value[0] : ''}}
-                    <span *ngIf="operator.lNeighborhoods.value?.length > 1" class="example-additional-selection">
-                        (+{{neighborhoods.value.length - 1}} {{neighborhoods.value?.length === 2 ? 'other' : 'others'}})
-                    </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let Neighborhood of settingsList" [value]="Neighborhood">{{Neighborhood.nvSettingName}}</mat-option>
-            </mat-select>
-        </mat-form-field>  -->
 
         <button type="submit" class="btn btn-success">save</button>
     </form>
