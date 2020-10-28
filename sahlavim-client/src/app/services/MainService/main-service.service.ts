@@ -28,10 +28,14 @@ export class MainServiceService {
   operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
+  
+
   //לעריכת תוכנית
   programForDetails: Program;
 
   sahlavimUrl = "http://localhost:53070/Service1.svc/"
+// שרת בדיקות מרוחק
+  sahlavimUrl ="http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
@@ -70,8 +74,9 @@ export class MainServiceService {
       );
   }
 
+
   getSettings() {
-    this.post("SettingsGet", {}).then(
+     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
       },

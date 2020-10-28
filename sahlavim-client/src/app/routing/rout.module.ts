@@ -28,6 +28,7 @@ import { ProgramDetailsComponent } from '../components/Programs/program-details/
 import { ProgramScheduleComponent } from '../components/Programs/program-schedule/program-schedule.component';
 
 const appTable: Routes = [
+ 
   { path: "", component: LoginComponent },
   {
     path: "header-menu", component: HeaderMenuComponent,

@@ -5,6 +5,8 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 import {MatCheckboxModule} from '@angular/material'
 import { FormControl, FormGroup,NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
+import {  IDropdownSettings } from 'ng-multiselect-dropdown';
+
 @Component({
   selector: 'app-operator-details',
   templateUrl: './operator-details.component.html',
@@ -13,8 +15,7 @@ import { Setting } from 'src/app/Classes/setting';
 export class OperatorDetailsComponent implements OnInit {
 
   List = [];
-  selectedItems = [];
-  dropdownSettings = {};
+  dropdownSettings:IDropdownSettings;
 
   DetailsForm:FormGroup;
   operator: Operator;
@@ -22,45 +23,51 @@ export class OperatorDetailsComponent implements OnInit {
   bSchoolsExclude:boolean;//לא פעיל במיסגרות מסויימות
   schools = new FormControl();
   neighborhoods=new FormControl();
-
-  settingsList:Setting[]=[];
+ 
+  schoolsExcludeList:Setting[] = [];//רשימת המיסגרות בהן המפעיל לא פעיל
+  settingsList:Setting[]=[];//רשימת המיסגרות
 
   constructor(private route: ActivatedRoute, private mainService: MainServiceService) { 
-    this.settingsList=mainService.settingsList;
   }
 
   ngOnInit() {
-    this.List = [
-      {"id":1,"itemName":"India"},
-      {"id":2,"itemName":"Singapore"},
-      {"id":3,"itemName":"Australia"},
-      {"id":4,"itemName":"Canada"},
-      {"id":5,"itemName":"South Korea"},
-      {"id":6,"itemName":"Germany"},
-      {"id":7,"itemName":"France"},
-      {"id":8,"itemName":"Russia"},
-      {"id":9,"itemName":"Italy"},
-      {"id":10,"itemName":"Sweden"}
-    ];
-    this.selectedItems = [
-      {"id":2,"itemName":"Singapore"},
-      {"id":3,"itemName":"Australia"},
-      {"id":4,"itemName":"Canada"},
-      {"id":5,"itemName":"South Korea"}
-  ];
+ 
     this.operator = this.mainService.operatorForDetails;
-    debugger
-    this.blNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;//
-    this.bSchoolsExclude= this.operator.lSchoolsExcude.length>0?true:false;//
+    this.blNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;//האם באיזורים מסויימם
+    this.bSchoolsExclude= this.operator.lSchoolsExcude.length>0?true:false;//האם לא פועל במיסגרות מסויימות
+    this.settingsList=this.mainService.settingsList;
+    
+    // איתחול רשימת schoolsExcludeList 
+    if(this.operator.lSchoolsExcude.length>0)
+    {
+       for ( let schoolId of this.operator.lSchoolsExcude)
+        { 
+          this.schoolsExcludeList.push(this.settingsList.find(x=>x.iSettingId == schoolId));
+        }
+    }
+   
 
-    this.dropdownSettings = { 
-      singleSelection: false, 
-      text:"Select Countries",
-      selectAllText:'Select All',
-      unSelectAllText:'UnSelect All',
-      enableSearchFilter: true,
-      classes:"myclass custom-class"
-    };            
+    // this.List = [
+    //   { item_id: 1, item_text: 'Mumbai' },
+    //   { item_id: 2, item_text: 'Bangaluru' },
+    //   { item_id: 3, item_text: 'Pune' },
+    //   { item_id: 4, item_text: 'Navsari' },
+    //   { item_id: 5, item_text: 'New Delhi' }
+    // ];
+    // this.selectedItems = [
+    //   { item_id: 3, item_text: 'Pune' },
+    //   { item_id: 4, item_text: 'Navsari' }
+    // ];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+     idField: 'iSettingId',
+    textField: 'nvSettingName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };         
 
   }
 
@@ -68,7 +75,19 @@ export class OperatorDetailsComponent implements OnInit {
 
    console.log(this.operator);
 
-  alert(this.operator.nvCompanyName);
+   //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
+   if(this.schoolsExcludeList.length>0)
+   {
+     for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
+       { 
+       if(this.operator.lSchoolsExcude.indexOf(school.iSettingId)==-1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
+       {
+          this.operator.lSchoolsExcude.push(school.iSettingId);
+       }
+      }
+  }
+
+  debugger
 
     this.mainService.post("UpdateOperator", {data:this.operator})
       .then(
@@ -87,4 +106,24 @@ export class OperatorDetailsComponent implements OnInit {
       //עידכון רשימת המפעילים  ע"י קבלתה מחדש מהסרויס
       this.mainService.getAllOperators();
   }
+
+//בינתיים
+  onItemSelect(item:Setting){
+//this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
+    console.log(item);
+    console.log(this.schoolsExcludeList);
+}
+OnItemDeSelect(item:Setting){
+  //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
+ 
+    console.log(item);
+    console.log(this.schoolsExcludeList);
+}
+onSelectAll(items: any){
+
+    console.log(items);
+}
+onDeSelectAll(items: any){
+    console.log(items);
+}
 }

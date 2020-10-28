@@ -139,19 +139,19 @@
                 class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
 
-        <mat-form-field appearance="fill">
-            <mat-label>איזורים</mat-label>
-            <mat-select [formControl]="neighborhoods" name="neighborhoods" multiple [disabled]="!blNeighborhoods">
-                <mat-select-trigger>
-                    {{neighborhoods.value ? neighborhoods.value[0] : ''}}
-                    <span *ngIf="operator.lNeighborhoods.value?.length > 1" class="example-additional-selection">
-                        (+{{neighborhoods.value.length - 1}} {{neighborhoods.value?.length === 2 ? 'other' : 'others'}})
-                    </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let Neighborhood of operator.lNeighborhoods" [value]="Neighborhood">{{Neighborhood}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div  style="width: 30%;text-align: center; ">
+            <ng-multiselect-dropdown name="schoolExclude"
+            [(ngModel)]="schoolsExcludeList"
+            [placeholder]="'איזורים'"
+            [data]="settingsList"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="OnItemDeSelect($event)"
+            [disabled]="true" 
+          >
+          </ng-multiselect-dropdown>
+          </div>
 
 
         <!-- לשלוף מטבלת מסגרות -->
@@ -160,13 +160,20 @@
                 class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
         </section>
  
-        <div style="width: 30%;">
-    <angular2-multiselect class="custom-font-size" name="SchoolsExcude" [disabled]="!bSchoolsExclude" [data]="List" [(ngModel)]="selectedItems"
-            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
-            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
-        </angular2-multiselect>
+        <div  style="width: 30%;text-align: center; ">
+            <ng-multiselect-dropdown name="schoolExclude"
+            [(ngModel)]="schoolsExcludeList"
+            [placeholder]="'מסגרות'"
+            [data]="settingsList"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="OnItemDeSelect($event)"
+            [disabled]="!bSchoolsExclude" 
+          >
+          </ng-multiselect-dropdown>
           </div>
-        
+
 
         <!-- <mat-form-field appearance="fill">
             <mat-label>מסגרות</mat-label>
