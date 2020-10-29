@@ -31,13 +31,14 @@ export class MainServiceService {
   
   //לעריכת תוכנית
   programForDetails: Program;
-
+ 
+  
 // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
   sahlavimUrl ="http://localhost:53070/Service1.svc/";//שרת מקומי
-  
+
   post(url: string, data: any): Promise<any> {
     console.log(url);
-
+debugger
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
