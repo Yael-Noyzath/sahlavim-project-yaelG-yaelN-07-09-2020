@@ -21,7 +21,7 @@
                 <!-- <p *ngIf="row.iUserType==1" >מנהלת</p>
                 <p *ngIf="row.iUserType==2" >מזכירה</p> -->
                 <!-- {{row.iUserType}} -->
-                {{this.lUserType[row.iUserType-1].Value}}
+                {{this.lUserType.get(row.iUserType)}}
 
             </td>
         </ng-container>

@@ -19,12 +19,19 @@ export class SettingsDetailsComponent implements OnInit {
   currentCoordinator: coordinator = new coordinator();
   coordinatorList: Array<coordinator>;
   formSetting: FormGroup;
+  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
+  lSettingTypeValue:Map<number, string> = new Map<number, string>();
+  lNeighborhoodTypeValue:Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
+    this.lSettingTypeValue = mainService.SysTableList[5];
+    this.lSettingAgegroupsValue=mainService.SysTableList[6];
+    this.lNeighborhoodTypeValue=mainService.SysTableList[4];
   }
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
+    
     this.CoordinatorsGet();
   }
   CoordinatorsGet() {
@@ -62,10 +69,11 @@ export class SettingsDetailsComponent implements OnInit {
       nvSettingName: new FormControl(this.currentSetting.nvSettingName),
       nvSettingCode: new FormControl(this.currentSetting.nvSettingCode),
       iSettingId: new FormControl(this.currentSetting.iSettingId),
-      nvSettingTypeValue: new FormControl(this.currentSetting.iSettingType),
+      iSettingType: new FormControl(this.currentSetting.iSettingType),
       nvAddress: new FormControl(this.currentSetting.nvAddress),
+      iNeighborhoodType: new FormControl(this.currentSetting.iNeighborhoodType),
       nvPhone: new FormControl(this.currentSetting.nvPhone),
-      lSettingAgegroupsValue: new FormControl(this.currentSetting.lSettingAgegroups),
+      lSettingAgegroups: new FormControl(this.currentSetting.lSettingAgegroups),
       nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
       nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
       nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
@@ -88,8 +96,8 @@ export class SettingsDetailsComponent implements OnInit {
   get nvMail() {
     return this.formSetting.get("nvPhone");
   }
-  get lSettingAgegroupsValue() {
-    return this.formSetting.get("lSettingAgegroupsValue");
+  get lSettingAgegroups() {
+    return this.formSetting.get("lSettingAgegroups");
   }
   get iSettingId() {
     return this.formSetting.get("iSettingId");
@@ -117,6 +125,9 @@ export class SettingsDetailsComponent implements OnInit {
   }
   get bActiveAfternoon() {
     return this.formSetting.get("bActiveAfternoon");
+  } 
+  get iNeighborhoodType() {
+    return this.formSetting.get("iNeighborhoodType");
   }
   saveChange() {
     alert("saveChange");

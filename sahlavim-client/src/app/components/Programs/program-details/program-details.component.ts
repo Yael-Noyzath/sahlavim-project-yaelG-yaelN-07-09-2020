@@ -12,9 +12,13 @@ export class ProgramDetailsComponent implements OnInit {
 
   currentProgram: Program=new Program();
   formProgram: FormGroup;
+  lProgramAgegroupsValue:Map<number, string> = new Map<number, string>();
+  lProgramTypeValue:Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
      this.currentProgram = this.mainService.programForDetails;
+     this.lProgramTypeValue = mainService.SysTableList[9];
+     this.lProgramAgegroupsValue=mainService.SysTableList[6];
      this.programControls();
   }
   
@@ -25,7 +29,6 @@ export class ProgramDetailsComponent implements OnInit {
   programControls() {
     this.formProgram = new FormGroup({
       iProgramType: new FormControl(this.currentProgram.iProgramType),
-      //nvProgramTypeValue: new FormControl(this.currentProgram.nvProgramTypeValue),
       nvProgramName: new FormControl(this.currentProgram.nvProgramName),
       //dFromDateFormat: new FormControl(this.currentProgram.dFromDate),
       //dToDateFormat: new FormControl(this.currentProgram.dToDateFormat),

@@ -27,15 +27,13 @@ export class ManagersTableComponent implements OnInit {
   usersList: Array<User>;
 
   currentUser: User = new User();
-  lUserType: any = [];
-  lSysTable: any = [];
+  lUserType: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     this.currentUser = mainService.getUser();
     this.GetUsers();
-    this.lSysTable = mainService.getGItems();
-    this.lUserType = this.lSysTable[0].dParams;
-    //alert(this.lUserType[0].Value)
+    //מילוי הרשימה בצורה של MAP
+    this.lUserType = mainService.SysTableList[0];
   }
 
   ngOnInit() {

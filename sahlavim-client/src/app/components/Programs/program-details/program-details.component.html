@@ -1,11 +1,13 @@
 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
     <form [formGroup]="formProgram" (ngSubmit)="saveChange()">
-        <mat-form-field class="example-form-field">
-            <mat-label>סוג תוכנית</mat-label>
-            <input matInput type="text" formControlName="iProgramType" name="iProgramType" required/>
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        
+        <mat-form-field>
+            <mat-select formControlName="iProgramType" required placeholder="סוג תוכנית" name="iProgramType">
+                <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">{{this.lProgramTypeValue.get(s)}}</mat-option>
+            </mat-select>
+            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
-            </button>
+            </button> -->
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>שם תוכנית</mat-label>
@@ -13,6 +15,14 @@
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-select formControlName="lProgramAgegroups" required placeholder="קטגורית גילאים" name="lProgramAgegroups">
+                <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue.get(s)}}</mat-option>
+            </mat-select>
+            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button> -->
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>סעיף תקציבי</mat-label>
@@ -33,13 +43,6 @@
             <mat-label>עד תאריך</mat-label>
             <input matInput type="date" formControlName="dToDate" name="dToDate" required/>
             <p style="color: red;">יש להזין תאריך הגדול מתאריך ההתחלה</p>
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field><br>
-        <mat-form-field class="example-form-field">
-            <mat-label>קטגורית גילאים</mat-label>
-            <input matInput type="text" required formControlName="lProgramAgegroups" name="lProgramAgegroups" required />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
