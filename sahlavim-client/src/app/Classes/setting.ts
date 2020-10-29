@@ -11,7 +11,7 @@ export class Setting {
         public nvLng: string="",
         public nvAddress: string="",
         public nvOperatingLocation: string="",
-        public nvNeighborhood: string="",
+        public iNeighborhoodType: number=-1,
         public nvPhone: string="",
         public nvContactPerson: string="",
         public nvContactPersonMail: string="",
