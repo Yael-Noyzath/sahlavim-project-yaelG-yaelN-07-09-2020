@@ -62,10 +62,10 @@ export class SettingsDetailsComponent implements OnInit {
       nvSettingName: new FormControl(this.currentSetting.nvSettingName),
       nvSettingCode: new FormControl(this.currentSetting.nvSettingCode),
       iSettingId: new FormControl(this.currentSetting.iSettingId),
-      nvSettingTypeValue: new FormControl(this.currentSetting.nvSettingTypeValue),
+      nvSettingTypeValue: new FormControl(this.currentSetting.iSettingType),
       nvAddress: new FormControl(this.currentSetting.nvAddress),
       nvPhone: new FormControl(this.currentSetting.nvPhone),
-      lSettingAgegroupsValue: new FormControl(this.currentSetting.lSettingAgegroupsValue),
+      lSettingAgegroupsValue: new FormControl(this.currentSetting.lSettingAgegroups),
       nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
       nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
       nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
@@ -94,8 +94,8 @@ export class SettingsDetailsComponent implements OnInit {
   get iSettingId() {
     return this.formSetting.get("iSettingId");
   }
-  get nvSettingTypeValue() {
-    return this.formSetting.get("nvSettingTypeValue");
+  get iSettingType() {
+    return this.formSetting.get("iSettingType");
   }
   get nvOperatingLocation() {
     return this.formSetting.get("nvOperatingLocation");

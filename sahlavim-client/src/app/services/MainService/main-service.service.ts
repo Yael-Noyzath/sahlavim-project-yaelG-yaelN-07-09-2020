@@ -12,12 +12,15 @@ import { Program } from 'src/app/Classes/program';
 })
 export class MainServiceService {
 
-  constructor(private router: Router, private http: HttpClient) {
+  gItems:any = [];
 
+  constructor(private router: Router, private http: HttpClient) {
+    this.globalObj();
     this.getAllOperators();
     this.getSettings();
     this.ProgramsGet();
   }
+
 
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
@@ -25,10 +28,10 @@ export class MainServiceService {
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
- operatorForDetails: Operator = new Operator();
+  operatorForDetails: Operator = new Operator();
   //לעריכת מסגרת
   settingForDetails: Setting = new Setting();
-  
+
   //לעריכת תוכנית
   programForDetails: Program;
  
@@ -75,9 +78,10 @@ debugger
       );
   }
 
+ 
 
   getSettings() {
-     this.post("SettingsGet", {}).then(
+    this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
       },
@@ -86,6 +90,8 @@ debugger
       }
     );
   }
+
+
 
   serviceNavigate(path: string) {
     this.router.navigate([path]);
@@ -102,5 +108,19 @@ debugger
     //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
+ globalObj() {
+    this.post("SysTableListGet", {}).then(
+      res => {
+        this.gItems = res;
+        //alert(this.gItems[0].dParams[0].Value)
+      },
+      err => {
+        alert("globalObj err");
+      }
+    )
+  }
 
+  getGItems(){
+    return this.gItems;
+  }
 }

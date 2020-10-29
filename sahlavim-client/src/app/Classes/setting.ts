@@ -6,7 +6,7 @@ export class Setting {
         public iSettingId: number=-1,
         public nvSettingName: string="",
         public nvSettingCode: string="",
-        public nvSettingTypeValue: string="",
+        public iSettingType: number=-1,
         public nvLat: string="",
         public nvLng: string="",
         public nvAddress: string="",
@@ -26,7 +26,7 @@ export class Setting {
         public bSettingNoon: boolean=false,
         public bActiveAfternoon: boolean=false,
         public bisJoint: boolean=false,
-        public lSettingAgegroupsValue: Array<number>=new Array<number>(),
+        public lSettingAgegroups: Array<number>=new Array<number>(),
     ) { 
     }
     

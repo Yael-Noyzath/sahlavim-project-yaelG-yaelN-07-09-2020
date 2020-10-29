@@ -5,7 +5,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 import {MatCheckboxModule} from '@angular/material'
 import { FormControl, FormGroup,NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
-import {  IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-operator-details',
