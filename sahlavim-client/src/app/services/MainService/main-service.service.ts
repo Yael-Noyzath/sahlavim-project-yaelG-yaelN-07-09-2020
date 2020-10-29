@@ -36,10 +36,12 @@ export class MainServiceService {
 
   //לעריכת תוכנית
   programForDetails: Program;
- 
-  
-// http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
-  sahlavimUrl ="http://localhost:53070/Service1.svc/";//שרת מקומי
+
+  //מערך של כל הטבלאות
+  SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
+
+  // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
+  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
@@ -114,12 +116,28 @@ export class MainServiceService {
     return this.currentUser;
   }
 
- globalObj() {
+
+  globalObj() {
+
     this.post("SysTableListGet", {}).then(
       res => {
+        //קבלת כל הטבלאות בפורמט של הסרבר
         this.gItems = res;
         debugger
         //alert(this.gItems[0].dParams[0].Value)
+        //מעברת על כל הטבלאות
+        this.gItems.forEach(g => {
+          //במערך של הטבלאות MAP עבור כל טבלה יצירת 
+          //בפורמט מתאים לאנגולר 8 PARAMS בשביל שמירת הנתונים של 
+          this.SysTableList[g.iListId - 1] = new Map<number, string>();
+          //שלה PARAMS לכל טבלה עובר על 
+          //KEY,VALUE את הנתונים בצורה של MAP ומכניס לתוך ה
+          //MAP ומכניס את ה
+          //של הטבלה ID למערך במקום של ה
+          g.dParams.forEach(p => {
+            this.SysTableList[g.iListId - 1].set(p.Key, p.Value);
+          });
+        });
       },
       err => {
         alert("globalObj err");
@@ -127,7 +145,7 @@ export class MainServiceService {
     )
   }
 
-  getGItems(){
+  getGItems() {
     return this.gItems;
   }
 }

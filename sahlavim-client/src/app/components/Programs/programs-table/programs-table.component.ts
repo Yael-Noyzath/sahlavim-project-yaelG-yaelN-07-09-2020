@@ -11,12 +11,14 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class ProgramsTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['choose', 'edit', 'nvProgramTypeValue', 'nvProgramName', 'dFromDateFormat', 'dToDateFormat',
-    'lengthProgramSettings', 'lProgramAgegroupsValue', 'nvBudgetItem'];
+  displayedColumns: string[] = ['choose', 'edit', 'iProgramType', 'nvProgramName', 'dFromDateFormat', 'dToDateFormat',
+    'lProgramSettings', 'lProgramAgegroups', 'nvBudgetItem'];
 
   currentUser: User = new User();
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
+  lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lProgramTypeValue: Map<number, string> = new Map<number, string>();
 
   ngOnInit() {
     this.ngAfterViewInit();
@@ -29,6 +31,9 @@ export class ProgramsTableComponent implements OnInit {
     this.currentUser = this.mainService.getUser();
     this.programList = this.mainService.programsList;
     this.spliceProgramsList();
+    //קבלת הרשימות מהסרויס
+    this.lProgramAgegroupsValue = mainService.SysTableList[6];
+    this.lProgramTypeValue = mainService.SysTableList[9];
   }
 
   ngAfterViewInit() {
@@ -51,8 +56,8 @@ export class ProgramsTableComponent implements OnInit {
     this.mainService.programForDetails = prog;
     this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/", prog.iProgramId)
   }
-  addProgram(){
+  addProgram() {
     this.mainService.programForDetails = new Program();
-    this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/",-1)
+    this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/", -1)
   }
 }

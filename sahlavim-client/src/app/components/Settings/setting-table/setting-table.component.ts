@@ -10,6 +10,7 @@ import { from } from 'rxjs';
 import { Setting } from 'src/app/Classes/setting';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { flatten } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-setting-table',
@@ -37,12 +38,13 @@ export class SettingTableComponent implements OnInit {
   currentUser: User = new User();
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
-  lSysTable: any = [];
-  lSettingAgegroups: any = [];
-  lSettingType: Map<number, string>=new Map<number,string>();
+  lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lSettingTypeValue: Map<number, string> = new Map<number, string>();
+
 
 
   ngOnInit() {
+
 
     this.ngAfterViewInit();
   }
@@ -50,14 +52,15 @@ export class SettingTableComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
-    this.lSysTable = mainService.getGItems();
-    this.lSettingAgegroups = this.lSysTable[7].dParams;
-    this.lSettingType = this.lSysTable[6].dParams;
+    //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
+    //this.lSettingType = this.lSysTable[6-1].dParams;
     this.currentUser = this.mainService.getUser();
     this.CoordinatorsGet();
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
-    //alert(this.lSettingType.get(19));
+    //קבלת הרשימות מהסרויס
+    this.lSettingTypeValue = mainService.SysTableList[5];
+    this.lSettingAgegroupsValue = mainService.SysTableList[6];
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
