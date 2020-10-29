@@ -12,15 +12,17 @@ import { Program } from 'src/app/Classes/program';
 })
 export class MainServiceService {
 
-  gItems:any = [];
 
   constructor(private router: Router, private http: HttpClient) {
     this.globalObj();
     this.getAllOperators();
     this.getSettings();
     this.ProgramsGet();
+    // let dict = new Dictionary<Number>();
+
   }
 
+  gItems:any = [];
 
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
@@ -41,7 +43,6 @@ export class MainServiceService {
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
-debugger
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
@@ -50,10 +51,13 @@ debugger
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
 
+
+//פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
   ProgramsGet() {
     this.post("ProgramsGet", {}).then(
       res => {
         this.programsList = res;
+        debugger
       },
       err => {
         alert("ProgramsGet err")
@@ -61,6 +65,7 @@ debugger
     );
   }
 
+//רשימת המפעילים
   getAllOperators() {
 
     this.post("GetOperators", {})
@@ -79,7 +84,7 @@ debugger
   }
 
  
-
+//רשימת המיסגרות
   getSettings() {
     this.post("SettingsGet", {}).then(
       res => {
@@ -91,11 +96,10 @@ debugger
     );
   }
 
-
-
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
+
   serviceNavigateForId(path: string, id: number) {
     this.router.navigate([path, id]);
   }
@@ -104,14 +108,17 @@ debugger
     //alert("saveUser  " + u.nvUserName);
     this.currentUser = u;
   }
+
   getUser() {
     //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
+
  globalObj() {
     this.post("SysTableListGet", {}).then(
       res => {
         this.gItems = res;
+        debugger
         //alert(this.gItems[0].dParams[0].Value)
       },
       err => {
