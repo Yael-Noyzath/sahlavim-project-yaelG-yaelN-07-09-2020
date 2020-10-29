@@ -43,7 +43,7 @@ export class MainServiceService {
 
   post(url: string, data: any): Promise<any> {
     console.log(url);
-
+debugger
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 

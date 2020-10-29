@@ -81,7 +81,6 @@ export class OperatorDetailsComponent implements OnInit {
     this.mainService.post("UpdateOperator", {data:this.operator})
       .then(
         res => {
-          debugger
           if (res) {
            alert(res);
           }
