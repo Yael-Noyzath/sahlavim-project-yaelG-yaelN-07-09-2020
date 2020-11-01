@@ -1,5 +1,5 @@
 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
-    <form [formGroup]="formSetting" (ngSubmit)="saveChange()">
+    <form [formGroup]="formSetting" (ngSubmit)="saveSetting()">
         <mat-form-field class="example-form-field">
             <mat-label>שם מסגרת</mat-label>
             <input matInput type="text" formControlName="nvSettingName" name="nvSettingName" required />

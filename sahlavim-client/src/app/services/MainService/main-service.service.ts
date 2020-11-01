@@ -110,7 +110,9 @@ debugger
     //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
-
+  getUserId(){
+    return this.currentUser.iUserId;
+  }
 
   globalObj() {
     this.post("SysTableListGet", {}).then(
