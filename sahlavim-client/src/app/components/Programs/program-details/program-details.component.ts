@@ -10,24 +10,27 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class ProgramDetailsComponent implements OnInit {
 
-  currentProgram: Program=new Program();
+  currentUserId: number;
+  currentProgram: Program = new Program();
   formProgram: FormGroup;
-  lProgramAgegroupsValue:Map<number, string> = new Map<number, string>();
-  lProgramTypeValue:Map<number, string> = new Map<number, string>();
+  lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lProgramTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
-     this.currentProgram = this.mainService.programForDetails;
-     this.lProgramTypeValue = mainService.SysTableList[9];
-     this.lProgramAgegroupsValue=mainService.SysTableList[6];
-     this.programControls();
+    this.currentUserId = mainService.getUserId();
+    this.currentProgram = this.mainService.programForDetails;
+    this.lProgramTypeValue = mainService.SysTableList[9];
+    this.lProgramAgegroupsValue = mainService.SysTableList[6];
+    this.programControls();
   }
-  
 
-  ngOnInit() { 
+
+  ngOnInit() {
   }
 
   programControls() {
     this.formProgram = new FormGroup({
+      iProgramId: new FormControl(this.currentProgram.iProgramId),
       iProgramType: new FormControl(this.currentProgram.iProgramType),
       nvProgramName: new FormControl(this.currentProgram.nvProgramName),
       //dFromDateFormat: new FormControl(this.currentProgram.dFromDate),
@@ -49,6 +52,9 @@ export class ProgramDetailsComponent implements OnInit {
       tToTimeAfternoon: new FormControl(this.currentProgram.tToTimeAfternoon),
       bTwoActivitiesThatDay: new FormControl(this.currentProgram.bTwoActivitiesThatDay),
     });
+  }
+  get iProgramId() {
+    return this.formProgram.get("iProgramType");
   }
   get iProgramType() {
     return this.formProgram.get("iProgramType");
@@ -74,7 +80,28 @@ export class ProgramDetailsComponent implements OnInit {
   get iNumActivityAfternoon() {
     return this.formProgram.get("iNumActivityAfternoon");
   }
-  saveChange() {
-
+  saveProgram() {
+    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.currentUserId }).then(
+      res => {
+        alert(res)
+      },
+      err => {
+        alert("saveProgram err");
+      }
+    )
+    //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
+    this.mainService.getPrograms();
   }
+
+
+  testDate() {
+    this.currentProgram = this.formProgram.value;
+    alert(this.currentProgram.iProgramId)
+    // if (this.currentProgram.iProgramId > -1 && (this.currentProgram.dFromDate > $scope.dFromDate || this.currentProgram.dToDate < $scope.dToDate))
+    //   alert("שים לב  <br />בשמירה ימחקו הפעילויות שהוגדרו מחוץ לטווח התאריכים שצומצם <br /> האם בכל אופן הינך מעונין לשמור ?" + "אזהרה")
+    // function () { $scope.saveProgram(); }, function () { return; });
+    // else
+    this.saveProgram();
+  }
+
 }

@@ -35,7 +35,7 @@ export class SettingTableComponent implements OnInit {
   settingList: Array<Setting>;
   currentSetting: Setting = new Setting();
   coordinatorList: Array<coordinator>;
-  currentUser: User = new User();
+  currentUserId: number;
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
   lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
@@ -54,7 +54,7 @@ export class SettingTableComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
     //this.lSettingType = this.lSysTable[6-1].dParams;
-    this.currentUser = this.mainService.getUser();
+    this.currentUserId = this.mainService.getUserId();
     this.CoordinatorsGet();
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
