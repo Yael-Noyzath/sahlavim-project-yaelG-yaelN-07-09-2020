@@ -18,7 +18,7 @@ export class MainServiceService {
     this.globalObj();
     this.getAllOperators();
     this.getSettings();
-    this.ProgramsGet();
+    this.getPrograms();
   }
 
 
@@ -52,7 +52,7 @@ debugger
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
 
-  ProgramsGet() {
+  getPrograms() {
     this.post("ProgramsGet", {}).then(
       res => {
         this.programsList = res;
