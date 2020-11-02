@@ -54,7 +54,7 @@ export class SettingTableComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
     //this.lSettingType = this.lSysTable[6-1].dParams;
-    this.currentUserId = this.mainService.getUserId();
+    this.currentUserId = this.mainService.currentUser.iUserId;
     this.CoordinatorsGet();
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);

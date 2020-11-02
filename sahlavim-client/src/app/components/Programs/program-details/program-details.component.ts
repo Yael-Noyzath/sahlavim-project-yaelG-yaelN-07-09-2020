@@ -19,7 +19,7 @@ export class ProgramDetailsComponent implements OnInit {
   cancelAllProgramAgegroups: boolean = false;
 
   constructor(private mainService: MainServiceService) {
-    this.currentUserId = mainService.getUserId();
+    this.currentUserId = mainService.currentUser.iUserId;
     this.currentProgram = this.mainService.programForDetails;
     this.lProgramTypeValue = mainService.SysTableList[9];
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
