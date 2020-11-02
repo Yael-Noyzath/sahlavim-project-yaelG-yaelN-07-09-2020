@@ -70,7 +70,6 @@
                 <mat-selection-list #shoes formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
                     name="lSettingAgegroups">
                     <div *ngFor="let s of lSettingAgegroupsValue.keys()">
-
                         <div *ngIf="isSelected(s)">
                             <div *ngIf="selected">
                                 <mat-list-option selected [value]="s">
@@ -82,11 +81,8 @@
                                     {{this.lSettingAgegroupsValue.get(s)}}
                                 </mat-list-option>
                             </div>
-
-
                         </div>
-                    </div>
-
+                    </div>                    
                 </mat-selection-list>
             </mat-expansion-panel>
         </mat-accordion>
