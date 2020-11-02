@@ -2,8 +2,8 @@ import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
-import {MatCheckboxModule} from '@angular/material'
-import { FormControl, FormGroup,NgForm } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material'
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
@@ -14,104 +14,135 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class OperatorDetailsComponent implements OnInit {
 
-  List = [];
-  dropdownSettings:IDropdownSettings;
+  dropdownSettings: IDropdownSettings;
+  dropdownNeighborhoods: IDropdownSettings;
 
-  DetailsForm:FormGroup;
+  //רשימת שכונות
+  NeighborhoodsList:Map<number,string>;
+
+  DetailsForm: FormGroup;
   operator: Operator;
-  blNeighborhoods:boolean;//פעיל באיזורים מסויימים
-  bSchoolsExclude:boolean;//לא פעיל במיסגרות מסויימות
-  schools = new FormControl();
-  neighborhoods=new FormControl();
- 
-  schoolsExcludeList:Setting[] = [];//רשימת המיסגרות בהן המפעיל לא פעיל
-  settingsList:Setting[]=[];//רשימת המיסגרות
+  blNeighborhoods: boolean;//פעיל באיזורים מסויימים
+  bSettingslsExclude: boolean;//לא פעיל במיסגרות מסויימות
+  schoolListforTalan: Setting[] = [];//רשימת בתי הספר לחוגי תל"ן
+  lschool: Setting[] = [];//בתי הספר בהם מפעיל מפעיל חוגי תל"ן
+  schoolsExcludeList: Setting[] = [];//רשימת המיסגרות בהן המפעיל לא פעיל
+  settingsList: Setting[] = [];//רשימת המיסגרות
 
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { 
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
   }
 
   ngOnInit() {
- 
-    this.operator = this.mainService.operatorForDetails;
-    debugger
-    this.blNeighborhoods= this.operator.lNeighborhoods.length>0?true:false;//האם באיזורים מסויימם
-    this.bSchoolsExclude= this.operator.lSchoolsExcude.length>0?true:false;//האם לא פועל במיסגרות מסויימות
-    this.settingsList=this.mainService.settingsList;
-    
-    // איתחול רשימת schoolsExcludeList 
-    if(this.operator.lSchoolsExcude.length>0)
-    {
-       for ( let schoolId of this.operator.lSchoolsExcude)
-        { 
-          this.schoolsExcludeList.push(this.settingsList.find(x=>x.iSettingId == schoolId));
-        }
-    }
-   
 
+    this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס ערכיה
+    this.blNeighborhoods = this.operator.lNeighborhoods.length > 0 ? true : false;//האם פעיל באיזורים מסויימם
+    this.bSettingslsExclude = this.operator.lSchoolsExcude.length > 0 ? true : false;//האם לא פועל במיסגרות מסויימות
+    this.settingsList = this.mainService.settingsList;//רשימת המיסגרות לבחירת לא פעיל במיסגרות מסויימות
+debugger
+    //שליפת רשימת מיסגרות מסוג ביה"ס- לחוגי תל"ן
+    this.schoolListforTalan = this.settingsList.filter(x => x.iSettingType === 18);
+    if (this.operator.lSchools.length > 0)//talan schools where operates for the form input
+    {
+      for (let schoolId of this.operator.lSchools)
+        this.lschool.push(this.settingsList.find(x => x.iSettingId == schoolId));
+    }
+
+    // איתחול רשימת schoolsExcludeList 
+    if (this.operator.lSchoolsExcude.length > 0) {
+      for (let schoolId of this.operator.lSchoolsExcude) {
+        this.schoolsExcludeList.push(this.settingsList.find(x => x.iSettingId == schoolId));
+      }
+    }
+
+    this.NeighborhoodsList=this.mainService.gItems[4].dParams;
+    
+    
+
+    //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,
-     idField: 'iSettingId',
-    textField: 'nvSettingName',
+      idField: 'iSettingId',
+      textField: 'nvSettingName',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
       allowSearchFilter: true
-    };         
+    };
+
+    //הגדרות ה multi select
+    this.dropdownNeighborhoods = {
+      singleSelection: false,
+      idField: 'key',
+      textField: 'value',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
 
   }
 
- save(){
 
-   console.log(this.operator);
 
-   //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
-   if(this.schoolsExcludeList.length>0)
-   {
-     for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
-       { 
-       if(this.operator.lSchoolsExcude.indexOf(school.iSettingId)==-1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
-       {
+  save() {
+
+    console.log(this.operator);
+debugger
+    //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
+    if (this.schoolsExcludeList.length > 0) {
+      for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
+      {
+        if (this.operator.lSchoolsExcude.indexOf(school.iSettingId) == -1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
+        {
           this.operator.lSchoolsExcude.push(school.iSettingId);
-       }
+        }
       }
-  }
+    }
 
-  debugger
+    //  עידכון בתי הספר בהם מפעיל חוגי תל"ן
+    if (this.lschool.length > 0) {
+      for (let schoolid of this.lschool) {
+        if (this.operator.lSchools.indexOf(schoolid.iSettingId) == -1)//אם הבי"הס לא כלול ברשימה 
+        {
+          this.operator.lSchools.push(schoolid.iSettingId);
+        }
+      }
+    }
 
-    this.mainService.post("UpdateOperator", {data:this.operator})
+debugger
+    this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
-          if (res) {
-           alert(res);
-          }
-          else
-            alert("UpdateOperator error")
+            alert("update "+this.operator.nvOperatorName+" done!"); 
+               //קבלה מהשרת את רשימת מפעילים המעודכנת
+                this.mainService.getAllOperators();
+                this.mainService.serviceNavigate("/header-menu/operators/operator-table");
+
         }
         , err => {
           alert("err");
         }
       );
-      //עידכון רשימת המפעילים  ע"י קבלתה מחדש מהסרויס
-      this.mainService.getAllOperators();
+
   }
 
-//בינתיים
-  onItemSelect(item:Setting){
-//this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
+  //בינתיים
+  onItemSelect(item: Setting) {
+    //this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
     console.log(item);
     console.log(this.schoolsExcludeList);
-}
-OnItemDeSelect(item:Setting){
-  //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
- 
+  }
+  OnItemDeSelect(item: Setting) {
+    //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
+
     console.log(item);
     console.log(this.schoolsExcludeList);
-}
-onSelectAll(items: any){
+  }
+  onSelectAll(items: any) {
 
     console.log(items);
-}
-onDeSelectAll(items: any){
+  }
+  onDeSelectAll(items: any) {
     console.log(items);
-}
+  }
 }

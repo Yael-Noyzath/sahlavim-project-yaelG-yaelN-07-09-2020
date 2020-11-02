@@ -4,20 +4,19 @@
     </div>
     <mat-card-content>
 
-        <form [formGroup]="formLogin" (ngSubmit)="enterToTheMenu()">
+        <form [formGroup]="formLogin" (ngSubmit)="Login()">
 
             <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4" *ngIf="enterByUserName==true">
                 <div class="form-group">
-                    <input type="text" formControlName="nvUserName" class="form-control" name="nvUserName" placeholder="*שם משתמש"
-                        required />
+                    <input type="text" formControlName="nvUserName" class="form-control" name="nvUserName"
+                        placeholder="*שם משתמש" required />
                 </div>
                 <div class="form-group">
                     <input type="password" formControlName="nvPassword" class="form-control" name="nvPassword"
                         placeholder="*סיסמא" required />
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="כניסה" class="btn btn-info btn-lg btn-block btn-login "
-                        [disabled]="!formLogin.valid">
+                    <button [disabled]="!formLogin.valid" class="btn btn-info btn-lg btn-block btn-login " type="submit">כניסה</button>
                 </div>
                 <div class="form-group">
                     <button (click)="resetUser()" class="password-button">שכחתי סיסמא</button>
@@ -47,4 +46,3 @@
     </mat-card-content>
 
 </div>
-
