@@ -21,7 +21,6 @@ import {
   MatOptionModule,
   MatPaginatorModule,
   MatSortModule,
-  MatGridListModule,
   MatCheckboxModule,
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
 } from '@angular/material';
@@ -70,6 +69,8 @@ import { SettingTableComponent } from './components/Settings/setting-table/setti
 import { SettingsScheduleComponent } from './components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
 import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
+import {MatListModule} from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -138,6 +139,7 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
+    MatListModule,
     HttpClientModule,
     RouterModule,
     RoutModule,
