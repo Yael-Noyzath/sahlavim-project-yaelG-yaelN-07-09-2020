@@ -13,25 +13,27 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class SettingsDetailsComponent implements OnInit {
 
+  panelOpenState = false;
   idSetting: number;
   settingList: Array<Setting>;
+  currentUserId: number;
   currentSetting: Setting = new Setting();
   currentCoordinator: coordinator = new coordinator();
   coordinatorList: Array<coordinator>;
   formSetting: FormGroup;
-  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
-  lSettingTypeValue:Map<number, string> = new Map<number, string>();
-  lNeighborhoodTypeValue:Map<number, string> = new Map<number, string>();
+  lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lSettingTypeValue: Map<number, string> = new Map<number, string>();
+  lNeighborhoodTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
+    this.lNeighborhoodTypeValue = mainService.SysTableList[4];
     this.lSettingTypeValue = mainService.SysTableList[5];
-    this.lSettingAgegroupsValue=mainService.SysTableList[6];
-    this.lNeighborhoodTypeValue=mainService.SysTableList[4];
+    this.lSettingAgegroupsValue = mainService.SysTableList[6];
   }
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
-    
+    this.currentUserId = this.mainService.getUserId();
     this.CoordinatorsGet();
   }
   CoordinatorsGet() {
@@ -41,7 +43,7 @@ export class SettingsDetailsComponent implements OnInit {
         this.currentSetting = this.mainService.settingForDetails;
         if (this.currentSetting.iCoordinatorId)
           this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId)
-          this.settingControls();
+        this.settingControls();
       },
       err => {
         alert("CoordinatorsGet err")
@@ -125,13 +127,29 @@ export class SettingsDetailsComponent implements OnInit {
   }
   get bActiveAfternoon() {
     return this.formSetting.get("bActiveAfternoon");
-  } 
+  }
   get iNeighborhoodType() {
     return this.formSetting.get("iNeighborhoodType");
   }
-  saveChange() {
-    alert("saveChange");
+  saveSetting() {
+
+    // alert(this.currentSetting.lSettingAgegroups.includes())
+    this.currentSetting = this.formSetting.value; //קבלת החבר מהטופס
+    this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.currentUserId }).then(
+      res => {
+        alert("save!!")
+      },
+      err => {
+        alert("saveSetting err");
+      }
+    )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
     this.mainService.getSettings();
+  }
+  selected:boolean=false;
+  isSelected(s: any) {
+    // alert(this.currentSetting.lSettingAgegroups.includes(s))
+    this.selected= this.currentSetting.lSettingAgegroups.includes(s);
+    return true;
   }
 }

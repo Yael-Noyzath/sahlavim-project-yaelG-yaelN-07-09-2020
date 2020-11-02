@@ -19,7 +19,7 @@ export class MainServiceService {
 
     this.getAllOperators();
     this.getSettings();
-    this.ProgramsGet();
+    this.getPrograms();
     // let dict = new Dictionary<Number>();
 
   }
@@ -55,10 +55,9 @@ export class MainServiceService {
     return this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
 
-
+  getPrograms() {
 //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
-  ProgramsGet() {
-    this.post("ProgramsGet", {}).then(
+  this.post("ProgramsGet", {}).then(
       res => {
         this.programsList = res;
       },

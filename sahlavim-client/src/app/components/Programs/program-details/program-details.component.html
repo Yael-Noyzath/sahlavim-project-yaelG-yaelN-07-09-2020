@@ -1,9 +1,10 @@
 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
-    <form [formGroup]="formProgram" (ngSubmit)="saveChange()">
-        
+    <form [formGroup]="formProgram" (ngSubmit)="testDate()">
+
         <mat-form-field>
             <mat-select formControlName="iProgramType" required placeholder="סוג תוכנית" name="iProgramType">
-                <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">{{this.lProgramTypeValue.get(s)}}</mat-option>
+                <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">{{this.lProgramTypeValue.get(s)}}
+                </mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -16,14 +17,65 @@
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
-        <mat-form-field>
+        <!-- <mat-form-field>
             <mat-select formControlName="lProgramAgegroups" required placeholder="קטגורית גילאים" name="lProgramAgegroups">
                 <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue.get(s)}}</mat-option>
-            </mat-select>
-            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            </mat-select> -->
+
+
+        <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button> -->
-        </mat-form-field><br>
+        <!-- </mat-form-field><br> -->
+
+        <mat-accordion style="text-align:center;">
+            <mat-expansion-panel class="text-center col-lg-3 col-lg-offset-4" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-description>
+                        נבחרו: {{shoes.selectedOptions.selected.length}}
+                    </mat-panel-description>
+                    <mat-panel-title>
+                        קטגורית גילאים
+                        <!-- <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+                            (click)="cancelAll()">
+                            <mat-icon>cancel</mat-icon>
+                        </button> -->
+                        <!-- <button mat-icon-button color="warn" (click)="selectAll()">
+                            <mat-icon>check</mat-icon>
+                        </button> -->
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-selection-list #shoes formControlName="lProgramAgegroups" required placeholder="קטגורית גילאים"
+                    name="lProgramAgegroups">
+                    <div *ngFor="let s of lProgramAgegroupsValue.keys()">
+
+                        <div *ngIf="isSelected(s)">
+                            <div *ngIf="selected">
+                                <mat-list-option selected [value]="s">
+                                    {{this.lProgramAgegroupsValue.get(s)}}
+                                </mat-list-option>
+                            </div>
+                            <div *ngIf="!selected">
+                                <mat-list-option [value]="s">
+                                    {{this.lProgramAgegroupsValue.get(s)}}
+                                </mat-list-option>
+                            </div>
+
+
+                        </div>
+                        <!-- <div *ngIf="isSelected(s)==false">
+                            <mat-list-option [value]="s">
+                                {{this.lProgramAgegroupsValue.get(s)}}
+                            </mat-list-option>
+                        </div> -->
+
+
+                    </div>
+
+                </mat-selection-list>
+            </mat-expansion-panel>
+        </mat-accordion>
         <mat-form-field class="example-form-field">
             <mat-label>סעיף תקציבי</mat-label>
             <input matInput type="text" formControlName="nvBudgetItem" name="nvBudgetItem" />
@@ -33,7 +85,7 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מתאריך</mat-label>
-            <input matInput type="date" formControlName="dFromDate" name="dFromDate" required/>
+            <input matInput type="date" formControlName="dFromDate" name="dFromDate"/>
             <p style="color: red;">יש להזין תאריך עתידי</p>
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -41,7 +93,7 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>עד תאריך</mat-label>
-            <input matInput type="date" formControlName="dToDate" name="dToDate" required/>
+            <input matInput type="date" formControlName="dToDate" name="dToDate"/>
             <p style="color: red;">יש להזין תאריך הגדול מתאריך ההתחלה</p>
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -56,14 +108,16 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות צהריים</mat-label>
-            <input matInput type="number" required formControlName="iNumActivityAfternoon" name="iNumActivityAfternoon" />
+            <input matInput type="number" required formControlName="iNumActivityAfternoon"
+                name="iNumActivityAfternoon" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>מספר הפעלות מועדפות</mat-label>
-            <input matInput type="number" required formControlName="iActivityPreferenceCount" name="iActivityPreferenceCount" />
+            <input matInput type="number" required formControlName="iActivityPreferenceCount"
+                name="iActivityPreferenceCount" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
