@@ -55,15 +55,42 @@
         <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button> -->
-        <mat-selection-list #shoes formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
-            name="lSettingAgegroups">
-            <mat-list-option *ngFor="let s of lSettingAgegroupsValue.keys()" [value]="s">
-                {{this.lSettingAgegroupsValue.get(s)}}
-            </mat-list-option>
-        </mat-selection-list>
-        <p>
-            Options selected: {{shoes.selectedOptions.selected.length}}
-        </p>
+
+        <mat-accordion style="text-align:center;">
+            <mat-expansion-panel class="text-center col-lg-2 col-lg-offset-4" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-description>
+                        נבחרו: {{shoes.selectedOptions.selected.length}}
+                    </mat-panel-description>
+                    <mat-panel-title>
+                        קטגורית גילאים
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-selection-list #shoes formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
+                    name="lSettingAgegroups">
+                    <div *ngFor="let s of lSettingAgegroupsValue.keys()">
+
+                        <div *ngIf="isSelected(s)">
+                            <div *ngIf="selected">
+                                <mat-list-option selected [value]="s">
+                                    {{this.lSettingAgegroupsValue.get(s)}}
+                                </mat-list-option>
+                            </div>
+                            <div *ngIf="!selected">
+                                <mat-list-option [value]="s">
+                                    {{this.lSettingAgegroupsValue.get(s)}}
+                                </mat-list-option>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </mat-selection-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+
         <mat-form-field class="example-form-field">
             <mat-label>מיקום פעילות</mat-label>
             <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" />
