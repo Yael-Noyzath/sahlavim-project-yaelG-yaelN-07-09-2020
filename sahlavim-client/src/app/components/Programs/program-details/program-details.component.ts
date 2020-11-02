@@ -15,6 +15,8 @@ export class ProgramDetailsComponent implements OnInit {
   formProgram: FormGroup;
   lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
   lProgramTypeValue: Map<number, string> = new Map<number, string>();
+  selectAllProgramAgegroups: boolean = false;
+  cancelAllProgramAgegroups: boolean = false;
 
   constructor(private mainService: MainServiceService) {
     this.currentUserId = mainService.getUserId();
@@ -96,12 +98,36 @@ export class ProgramDetailsComponent implements OnInit {
 
   testDate() {
     this.currentProgram = this.formProgram.value;
-    alert(this.currentProgram.iProgramId)
     // if (this.currentProgram.iProgramId > -1 && (this.currentProgram.dFromDate > $scope.dFromDate || this.currentProgram.dToDate < $scope.dToDate))
     //   alert("שים לב  <br />בשמירה ימחקו הפעילויות שהוגדרו מחוץ לטווח התאריכים שצומצם <br /> האם בכל אופן הינך מעונין לשמור ?" + "אזהרה")
     // function () { $scope.saveProgram(); }, function () { return; });
     // else
     this.saveProgram();
   }
+  selected: boolean = false;
+  isSelected(s: any) {
+    // alert(this.currentSetting.lSettingAgegroups.includes(s))
+    // if (this.selectAllProgramAgegroups)
+    //   return true;
+    // else
+    //   if (this.cancelAllProgramAgegroups)
+    //     return false;
+    //   else
+    //    {
+        this.selected= this.selected = this.currentProgram.lProgramAgegroups.includes(s)
+        return true;
+      // } 
+  }
+  // selectAll() {
+  //   //alert(this.selectAllProgramAgegroups)
+  //   this.selectAllProgramAgegroups = true;
+  //   this.cancelAllProgramAgegroups = false;
 
+  // }
+  // cancelAll() {
+  //   //alert(this.selectAllProgramAgegroups)
+  //   this.cancelAllProgramAgegroups = true;
+  //   this.selectAllProgramAgegroups = false;
+
+  // }
 }

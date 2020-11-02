@@ -13,6 +13,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class SettingsDetailsComponent implements OnInit {
 
+  panelOpenState = false;
   idSetting: number;
   settingList: Array<Setting>;
   currentUserId: number;
@@ -25,9 +26,9 @@ export class SettingsDetailsComponent implements OnInit {
   lNeighborhoodTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
+    this.lNeighborhoodTypeValue = mainService.SysTableList[4];
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
-    this.lNeighborhoodTypeValue = mainService.SysTableList[4];
   }
 
   ngOnInit() {
@@ -131,6 +132,8 @@ export class SettingsDetailsComponent implements OnInit {
     return this.formSetting.get("iNeighborhoodType");
   }
   saveSetting() {
+
+    // alert(this.currentSetting.lSettingAgegroups.includes())
     this.currentSetting = this.formSetting.value; //קבלת החבר מהטופס
     this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.currentUserId }).then(
       res => {
@@ -142,5 +145,11 @@ export class SettingsDetailsComponent implements OnInit {
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
     this.mainService.getSettings();
+  }
+  selected:boolean=false;
+  isSelected(s: any) {
+    // alert(this.currentSetting.lSettingAgegroups.includes(s))
+    this.selected= this.currentSetting.lSettingAgegroups.includes(s);
+    return true;
   }
 }
