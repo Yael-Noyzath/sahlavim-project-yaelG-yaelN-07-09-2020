@@ -55,8 +55,7 @@ export class OperatorDetailsComponent implements OnInit {
     }
 
     this.NeighborhoodsList=this.mainService.gItems[4].dParams;
-    
-    
+    debugger
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -72,8 +71,8 @@ export class OperatorDetailsComponent implements OnInit {
     //הגדרות ה multi select
     this.dropdownNeighborhoods = {
       singleSelection: false,
-      idField: 'key',
-      textField: 'value',
+      idField: 'NeighborhoodsList.keys',
+      textField: 'NeighborhoodsList.values',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,

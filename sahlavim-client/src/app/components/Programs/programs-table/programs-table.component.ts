@@ -1,4 +1,4 @@
-import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Program } from 'src/app/Classes/program';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -15,8 +15,8 @@ export class ProgramsTableComponent implements OnInit {
 
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
-  lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
-  lProgramTypeValue: Map<number, string> = new Map<number, string>();
+  lProgramAgegroupsValue:Array<row>= new Array<row>();
+  lProgramTypeValue:Array<row>= new Array<row>();
 
   ngOnInit() {
     this.ngAfterViewInit();

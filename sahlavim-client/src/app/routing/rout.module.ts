@@ -34,8 +34,9 @@ const appTable: Routes = [
     path: "header-menu", component: HeaderMenuComponent,
     children: [
       { path: "managers-table", component: ManagersTableComponent },
-      {
-        path: "operators", component: OperatorsComponent,
+     
+      
+      { path: "operators", component: OperatorsComponent,
         children: [
           { path: "operator-table", component: OperatorTableComponent },
           {
@@ -52,8 +53,9 @@ const appTable: Routes = [
           }
         ]
       },
-      {
-        path: "programs", component: ProgramsComponent,
+
+      
+       { path: "programs", component: ProgramsComponent,
         children: [
           { path: "programs-table", component: ProgramsTableComponent },
           {
