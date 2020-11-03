@@ -7,27 +7,22 @@
         <form [formGroup]="formLogin" (ngSubmit)="Login()">
 
             <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4" *ngIf="enterByUserName==true">
-                <div class="form-group">
-                    <input type="text" formControlName="nvUserName" class="form-control" name="nvUserName"
-                        placeholder="שם משתמש" required />
-                </div>
-                <!-- <div class="form-group">
-                    <input type="password" formControlName="nvPassword" class="form-control" name="nvPassword"
-                        placeholder="*סיסמא" required />
-                </div> -->
-                <!-- <mat-form-field appearance="outline">
+
+                <mat-form-field appearance="standard">
+                    <mat-label>שם משתמש</mat-label>
+                    <input matInput type="text" formControlName="nvUserName" class="form-control" name="nvUserName"
+                        placeholder="שם משתמש" required>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
                     <mat-label>סיסמא</mat-label>
-                    <input matInput placeholder="Placeholder">
-                    <mat-icon matSuffix>remove_red_eye
-                    </mat-icon>
-                    <mat-hint>Hint</mat-hint>
-                  </mat-form-field> -->
-                    <input formControlName="nvPassword" class="form-control" name="nvPassword" placeholder="סיסמא" required
-                        [type]="hide ? 'password' : 'text'" style="display: block;">
-                    <button style="display: block;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
+                    <input matInput type="password" class="form-control" formControlName="nvPassword" name="nvPassword"
+                        placeholder="סיסמא" required [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix mat-icon-button (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}} </mat-icon>
+                </mat-form-field>
+
                 <div class="form-group">
                     <input type="submit" value="כניסה" class="btn btn-info btn-lg btn-block btn-login "
                         [disabled]="!formLogin.valid">
@@ -43,7 +38,9 @@
                 <div class="form-group">
                     <input type="email" class="form-control" formControlName="nvMail" name="nvMail"
                         placeholder="*הזן כתובת מייל לשחזור סיסמא" required />
+                    <mat-icon matSuffix mat-icon-button>mail</mat-icon>
                 </div>
+                
                 <div class="form-group">
                     <button (click)="sentMailToResetPassword()" [disabled]="!userMail.valid"
                         class="btn  btn-info btn-lg btn-block btn-login">אישור</button>
