@@ -19,15 +19,16 @@ export class SettingsDetailsComponent implements OnInit {
   currentSetting: Setting = new Setting();
   currentCoordinator: coordinator = new coordinator();
   coordinatorList: Array<coordinator>;
-  formSetting: FormGroup;
   lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
   lSettingTypeValue: Map<number, string> = new Map<number, string>();
+  lSettingTypeValueKeys:any;
   lNeighborhoodTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     this.lNeighborhoodTypeValue = mainService.SysTableList[4];
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
+    this.lSettingTypeValueKeys=this.lSettingTypeValue.keys();
   }
 
   ngOnInit() {
@@ -40,8 +41,7 @@ export class SettingsDetailsComponent implements OnInit {
         this.coordinatorList = res;
         this.currentSetting = this.mainService.settingForDetails;
         if (this.currentSetting.iCoordinatorId)
-          this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId)
-        this.settingControls();
+          this.currentCoordinator = this.coordinatorList.find(c => c.iCoordinatorId == this.currentSetting.iCoordinatorId);
       },
       err => {
         alert("CoordinatorsGet err")
@@ -49,105 +49,30 @@ export class SettingsDetailsComponent implements OnInit {
     );
   }
 
-  // SettingsGet() {
-  //   this.mainService.post("SettingsGet", {}).then(
-  //     res => {
-  //       this.settingList = res;
-  //       this.currentSetting = this.settingList.find(s => s.iSettingId == this.idSetting);
-  //       this.settingControls();
-  //     },
-  //     err => {
-  //       alert("SettingsGet err")
-  //     }
-  //   );
-  // }
   save() {
 
   }
-  settingControls() {
-    this.formSetting = new FormGroup({
-      nvSettingName: new FormControl(this.currentSetting.nvSettingName),
-      nvSettingCode: new FormControl(this.currentSetting.nvSettingCode),
-      iSettingId: new FormControl(this.currentSetting.iSettingId),
-      iSettingType: new FormControl(this.currentSetting.iSettingType),
-      nvAddress: new FormControl(this.currentSetting.nvAddress),
-      iNeighborhoodType: new FormControl(this.currentSetting.iNeighborhoodType),
-      nvPhone: new FormControl(this.currentSetting.nvPhone),
-      lSettingAgegroups: new FormControl(this.currentSetting.lSettingAgegroups),
-      nvOperatingLocation: new FormControl(this.currentSetting.nvOperatingLocation),
-      nvContactPerson: new FormControl(this.currentSetting.nvContactPerson),
-      nvContactPersonPhone: new FormControl(this.currentSetting.nvContactPersonPhone),
-      nvContactPersonMail: new FormControl(this.currentSetting.nvContactPersonMail),
-      bSettingMorning: new FormControl(this.currentSetting.bSettingMorning),
-      bSettingNoon: new FormControl(this.currentSetting.bSettingNoon),
-      bActiveAfternoon: new FormControl(this.currentSetting.bActiveAfternoon),
-    });
-  }
 
-  get nvUserName() {
-    return this.formSetting.get("nvSettingName");
-  }
-  get nvSettingCode() {
-    return this.formSetting.get("nvSettingCode");
-  }
-  get nvPassword() {
-    return this.formSetting.get("nvAddress");
-  }
-  get nvMail() {
-    return this.formSetting.get("nvPhone");
-  }
-  get lSettingAgegroups() {
-    return this.formSetting.get("lSettingAgegroups");
-  }
-  get iSettingId() {
-    return this.formSetting.get("iSettingId");
-  }
-  get iSettingType() {
-    return this.formSetting.get("iSettingType");
-  }
-  get nvOperatingLocation() {
-    return this.formSetting.get("nvOperatingLocation");
-  }
-  get nvContactPerson() {
-    return this.formSetting.get("nvContactPerson");
-  }
-  get nvContactPersonPhone() {
-    return this.formSetting.get("nvContactPersonPhone");
-  }
-  get nvContactPersonMail() {
-    return this.formSetting.get("nvContactPersonMail");
-  }
-  get bSettingMorning() {
-    return this.formSetting.get("bSettingMorning");
-  }
-  get bSettingNoon() {
-    return this.formSetting.get("bSettingNoon");
-  }
-  get bActiveAfternoon() {
-    return this.formSetting.get("bActiveAfternoon");
-  }
-  get iNeighborhoodType() {
-    return this.formSetting.get("iNeighborhoodType");
-  }
   saveSetting() {
 
     // alert(this.currentSetting.lSettingAgegroups.includes())
-    this.currentSetting = this.formSetting.value; //קבלת החבר מהטופס
     this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
-        alert("save!!")
+        //קבלה מהשרת את רשימת מפעילים המעודכנת
+        this.mainService.getSettings();
+        alert("update " + this.currentSetting.nvSettingName + " done!");
+
+        this.mainService.serviceNavigate("/header-menu/settings/setting-table");
       },
       err => {
         alert("saveSetting err");
       }
     )
-    //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
-    this.mainService.getSettings();
   }
-  selected:boolean=false;
+  selected: boolean = false;
   isSelected(s: any) {
     // alert(this.currentSetting.lSettingAgegroups.includes(s))
-    this.selected= this.currentSetting.lSettingAgegroups.includes(s);
+    this.selected = this.currentSetting.lSettingAgegroups.includes(s);
     return true;
   }
 }

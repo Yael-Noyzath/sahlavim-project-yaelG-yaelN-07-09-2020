@@ -1,15 +1,15 @@
 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
-    <form [formGroup]="formSetting" (ngSubmit)="saveSetting()">
+    <form (ngSubmit)="saveSetting()">
         <mat-form-field class="example-form-field">
             <mat-label>שם מסגרת</mat-label>
-            <input matInput type="text" formControlName="nvSettingName" name="nvSettingName" required />
+            <input matInput type="text"  [(ngModel)]="currentSetting.nvSettingName" name="nvSettingName" required />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field>
-            <mat-select formControlName="iSettingType" required placeholder="סוג מסגרת" name="iSettingType">
-                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue.get(s)}}
+            <mat-select  [(ngModel)]="currentSetting.iSettingType"  required placeholder="סוג מסגרת" name="iSettingType">
+                <mat-option *ngFor="let s of lSettingTypeValueKeys" [value]="s">{{this.lSettingTypeValue.get(s)}}
                 </mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -18,7 +18,7 @@
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>סמל</mat-label>
-            <input matInput type="text" formControlName="nvSettingCode" name="nvSettingCode" />
+            <input matInput type="text"  [(ngModel)]="currentSetting.nvSettingCode"  name="nvSettingCode" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -26,20 +26,20 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>טלפון</mat-label>
-            <input matInput type="text" formControlName="nvPhone" name="nvPhone" />
+            <input matInput type="text" [(ngModel)]="currentSetting.nvPhone" name="nvPhone" />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field class="example-form-field">
             <mat-label>כתובת</mat-label>
-            <input matInput type="text" formControlName="nvAddress" name="nvAddress" required />
+            <input matInput type="text" [(ngModel)]="currentSetting.nvAddress" name="nvAddress" required />
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
         <mat-form-field>
-            <mat-select formControlName="iNeighborhoodType" required placeholder="שכונה" name="iNeighborhoodType">
+            <mat-select [(ngModel)]="currentSetting.iNeighborhoodType" required placeholder="שכונה" name="iNeighborhoodType">
                 <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">
                     {{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
             </mat-select>
@@ -47,7 +47,7 @@
                 <mat-icon>close</mat-icon>
             </button> -->
         </mat-form-field><br>
-            <!-- <mat-select formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
+            <!-- <mat-select [(ngModel)]="currentSetting.lSettingAgegroups" required placeholder="קטגורית גילאים"
                 name="lSettingAgegroups">
                 <mat-option *ngFor="let s of lSettingAgegroupsValue.keys()" [value]="s">
                     {{this.lSettingAgegroupsValue.get(s)}}</mat-option>
@@ -67,7 +67,7 @@
                             קטגורית גילאים
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-selection-list #shoes formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
+                    <mat-selection-list #shoes [(ngModel)]="currentSetting.lSettingAgegroups" required placeholder="קטגורית גילאים"
                         name="lSettingAgegroups">
                         <div *ngFor="let s of lSettingAgegroupsValue.keys()">
                             <div *ngIf="isSelected(s)">
@@ -88,28 +88,28 @@
             </mat-accordion>
             <mat-form-field class="example-form-field">
                 <mat-label>מיקום פעילות</mat-label>
-                <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" />
+                <input matInput type="text" [(ngModel)]="currentSetting.nvOperatingLocation" name="nvOperatingLocation" />
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field><br>
             <mat-form-field class="example-form-field">
                 <mat-label>שם איש קשר</mat-label>
-                <input matInput type="text" formControlName="nvContactPerson" name="nvContactPerson" />
+                <input matInput type="text" [(ngModel)]="currentSetting.nvContactPerson" name="nvContactPerson" />
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field><br>
             <mat-form-field class="example-form-field">
                 <mat-label>פלאפון איש קשר</mat-label>
-                <input matInput type="text" formControlName="nvContactPersonPhone" name="nvContactPersonPhone" />
+                <input matInput type="text" [(ngModel)]="currentSetting.nvContactPersonPhone" name="nvContactPersonPhone" />
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field><br>
             <mat-form-field class="example-form-field">
                 <mat-label>מייל איש קשר</mat-label>
-                <input matInput type="text" formControlName="nvContactPersonMail" name="nvContactPersonMail" />
+                <input matInput type="text" [(ngModel)]="currentSetting.nvContactPersonMail" name="nvContactPersonMail" />
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -117,16 +117,16 @@
 
             <h6>קיטנה</h6>
 
-            <input type="checkbox" formControlName="bSettingMorning" name="bSettingMorning" />
+            <input type="checkbox" [(ngModel)]="currentSetting.bSettingMorning" name="bSettingMorning" />
             <mat-label> מסגרת בוקר </mat-label>
             <br>
 
-            <input type="checkbox" formControlName="bSettingNoon" name="bSettingNoon" />
+            <input type="checkbox" [(ngModel)]="currentSetting.bSettingNoon" name="bSettingNoon" />
             <mat-label>מסגרת צהריים </mat-label>
             <br> <br>
 
             <h6>צהרון</h6>
-            <input type="checkbox" formControlName="bActiveAfternoon" name="bActiveAfternoon" />
+            <input type="checkbox" [(ngModel)]="currentSetting.bActiveAfternoon" name="bActiveAfternoon" />
             <mat-label> האם קיים? </mat-label>
             <br><br>
 
@@ -136,7 +136,7 @@
                     {{currentCoordinator.nvMail}}</p>
             </div>
             <p>שיוך רכזת (לא עובד)</p>
-            <button [disabled]="!formSetting.valid" mat-icon-button color="warn"
+            <button mat-icon-button color="warn"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>save</mat-icon>
             </button>
