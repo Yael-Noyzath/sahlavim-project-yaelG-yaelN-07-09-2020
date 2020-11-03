@@ -9,8 +9,7 @@
         </mat-form-field><br>
         <mat-form-field>
             <mat-select formControlName="iSettingType" required placeholder="סוג מסגרת" name="iSettingType">
-                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue.get(s)}}
-                </mat-option>
+                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue.get(s)}}</mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -40,21 +39,20 @@
         </mat-form-field><br>
         <mat-form-field>
             <mat-select formControlName="iNeighborhoodType" required placeholder="שכונה" name="iNeighborhoodType">
-                <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">
-                    {{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
+                <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">{{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button> -->
         </mat-form-field><br>
-        <!-- <mat-select formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
-                name="lSettingAgegroups">
-                <mat-option *ngFor="let s of lSettingAgegroupsValue.keys()" [value]="s">
-                    {{this.lSettingAgegroupsValue.get(s)}}</mat-option>
-            </mat-select> -->
-        <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-form-field>
+            <mat-select formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים" name="lSettingAgegroups">
+                <mat-option *ngFor="let s of lSettingAgegroupsValue.keys()" [value]="s">{{this.lSettingAgegroupsValue.get(s)}}</mat-option>
+            </mat-select>
+            <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button> -->
+<<<<<<< HEAD
 
         <mat-accordion style="text-align:center;">
             <mat-expansion-panel class="text-center col-lg-2 col-lg-offset-4" (opened)="panelOpenState = true"
@@ -87,6 +85,9 @@
             </mat-expansion-panel>
         </mat-accordion>
 
+=======
+        </mat-form-field><br>
+>>>>>>> parent of 562e9b48... login
         <mat-form-field class="example-form-field">
             <mat-label>מיקום פעילות</mat-label>
             <input matInput type="text" formControlName="nvOperatingLocation" name="nvOperatingLocation" />

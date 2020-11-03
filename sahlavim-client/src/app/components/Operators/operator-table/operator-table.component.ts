@@ -25,8 +25,8 @@ export class OperatorTableComponent implements OnInit {
   dataSource: MatTableDataSource<Operator>;
 
   ngOnInit() {
-    this.operators=this.mainService.operatorsList
-    
+    this.operators = this.mainService.operatorsList
+
     this.dataSource = new MatTableDataSource(this.operators);
     this.ngAfterViewInit();
   }
@@ -100,21 +100,20 @@ export class OperatorTableComponent implements OnInit {
 
   //מחיקת מפעיל
   DeleteOperator(oper: Operator) {
-  
-    if(confirm("Are you sure to delete "+oper.nvOperatorName +"?")) 
-   {
-         this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.mainService.currentUser.iUserId }).then(
-      res => {
-        this.mainService.operatorsList = res;
-      },
-      err => {
-        alert(err);
-      }
-    );
-   }
+
+    if (confirm("Are you sure to delete " + oper.nvOperatorName + "?")) {
+      this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.mainService.currentUser.iUserId }).then(
+        res => {
+          this.mainService.operatorsList = res;
+        },
+        err => {
+          alert(err);
+        }
+      );
+    }
 
   }
-  
+
   //עריכת מפעיל
   EditOperator(operator: Operator) {
     // settingsActiveTab = 0;

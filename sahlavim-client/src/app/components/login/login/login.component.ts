@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) { }
 
-  hide = true;
   enterByUserName: boolean = true;
   user: User = new User();
   currentUser: User = new User();
