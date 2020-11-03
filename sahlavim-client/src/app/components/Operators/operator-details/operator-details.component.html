@@ -85,7 +85,7 @@
         </mat-form-field><br>
 
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="direction: rtl;">
             <mat-label>תנאי תשלום</mat-label>
             <mat-select [(value)]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
                 <mat-option value="8">30 + שוטף</mat-option>
@@ -109,6 +109,11 @@
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
+
+        <section style="direction: rtl;" class="example-section">
+            <mat-checkbox [(ngModel)]="operator.bActivityPriority" [checked]="operator.bActivityPriority" name="ActivityPriority"
+                class="example-margin">עדיפות בשיבוץ</mat-checkbox>
+        </section>
 
         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>

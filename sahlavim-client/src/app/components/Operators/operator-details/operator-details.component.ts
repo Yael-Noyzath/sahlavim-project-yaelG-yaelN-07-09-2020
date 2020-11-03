@@ -38,7 +38,7 @@ export class OperatorDetailsComponent implements OnInit {
     this.blNeighborhoods = this.operator.lNeighborhoods.length > 0 ? true : false;//האם פעיל באיזורים מסויימם
     this.bSettingslsExclude = this.operator.lSchoolsExcude.length > 0 ? true : false;//האם לא פועל במיסגרות מסויימות
     this.settingsList = this.mainService.settingsList;//רשימת המיסגרות לבחירת לא פעיל במיסגרות מסויימות
-debugger
+
     //שליפת רשימת מיסגרות מסוג ביה"ס- לחוגי תל"ן
     this.schoolListforTalan = this.settingsList.filter(x => x.iSettingType === 18);
     if (this.operator.lSchools.length > 0)//talan schools where operates for the form input
