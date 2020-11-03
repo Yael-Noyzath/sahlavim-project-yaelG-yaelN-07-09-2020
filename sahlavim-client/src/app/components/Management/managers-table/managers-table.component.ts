@@ -26,11 +26,9 @@ export class ManagersTableComponent implements OnInit {
   //מערך מפעילים לטבלה
   usersList: Array<User>;
 
-  currentUser: User = new User();
   lUserType: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
-    this.currentUser = mainService.getUser();
     this.GetUsers();
     //מילוי הרשימה בצורה של MAP
     this.lUserType = mainService.SysTableList[0];

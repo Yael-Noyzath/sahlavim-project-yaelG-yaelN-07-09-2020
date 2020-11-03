@@ -114,9 +114,7 @@ export class MainServiceService {
     //alert("getUser " + this.currentUser.nvUserName);
     return this.currentUser;
   }
-  getUserId(){
-    return this.currentUser.iUserId;
-  }
+  
 
   globalObj() {
 

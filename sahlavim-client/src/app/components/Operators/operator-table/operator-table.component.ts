@@ -6,7 +6,6 @@ import { Operator } from 'src/app/Classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
-import { User } from 'src/app/classes/user';
 
 
 @Component({
@@ -18,7 +17,6 @@ export class OperatorTableComponent implements OnInit {
 
   visible:number=1;
 
-  currentUser: User=new User();
   //מערך מפעילים לטבלה
   operators: Array<Operator>;
    //מערך שמות העמודות
@@ -27,7 +25,6 @@ export class OperatorTableComponent implements OnInit {
    dataSource: MatTableDataSource<Operator>;
 
   ngOnInit() {
-    this.currentUser = this.mainService.getUser();
     this.getAllOperators();
     this.ngAfterViewInit();
   }
@@ -103,7 +100,7 @@ export class OperatorTableComponent implements OnInit {
   DeleteOperator(oper: Operator) {
     alert("DeleteOperator  "+oper.iOperatorId)
     alert("האם אתה בטוח שברצונך למחוק מפעיל זה ?");
-    this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.currentUser.iUserId });
+    this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.mainService.currentUser.iUserId });
   }
   //עריכת מפעיל
   EditOperator(operator: Operator) {

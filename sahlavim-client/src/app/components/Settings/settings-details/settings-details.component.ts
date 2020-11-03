@@ -16,7 +16,6 @@ export class SettingsDetailsComponent implements OnInit {
   panelOpenState = false;
   idSetting: number;
   settingList: Array<Setting>;
-  currentUserId: number;
   currentSetting: Setting = new Setting();
   currentCoordinator: coordinator = new coordinator();
   coordinatorList: Array<coordinator>;
@@ -33,7 +32,6 @@ export class SettingsDetailsComponent implements OnInit {
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.currentUserId = this.mainService.getUserId();
     this.CoordinatorsGet();
   }
   CoordinatorsGet() {
@@ -135,7 +133,7 @@ export class SettingsDetailsComponent implements OnInit {
 
     // alert(this.currentSetting.lSettingAgegroups.includes())
     this.currentSetting = this.formSetting.value; //קבלת החבר מהטופס
-    this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.currentUserId }).then(
+    this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         alert("save!!")
       },

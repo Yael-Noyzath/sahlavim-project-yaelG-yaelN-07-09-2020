@@ -10,7 +10,6 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class ProgramDetailsComponent implements OnInit {
 
-  currentUserId: number;
   currentProgram: Program = new Program();
   formProgram: FormGroup;
   lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
@@ -19,7 +18,6 @@ export class ProgramDetailsComponent implements OnInit {
   cancelAllProgramAgegroups: boolean = false;
 
   constructor(private mainService: MainServiceService) {
-    this.currentUserId = mainService.getUserId();
     this.currentProgram = this.mainService.programForDetails;
     this.lProgramTypeValue = mainService.SysTableList[9];
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
@@ -83,7 +81,7 @@ export class ProgramDetailsComponent implements OnInit {
     return this.formProgram.get("iNumActivityAfternoon");
   }
   saveProgram() {
-    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.currentUserId }).then(
+    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         alert(res)
       },
