@@ -3,7 +3,7 @@
 
         <mat-form-field>
             <mat-select [(ngModel)]="currentProgram.iProgramType" required placeholder="סוג תוכנית" name="iProgramType">
-                <mat-option *ngFor="let s of programTypes" [value]="s">{{this.lProgramTypeValue.get(s)}}
+                <mat-option *ngFor="let s of programTypes" [value]="s">{{this.lProgramTypeValue[s].value}}
                 </mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -19,7 +19,7 @@
         </mat-form-field><br>
         <!-- <mat-form-field>
             <mat-select [(ngModel)]="currentProgram.lProgramAgegroups" required placeholder="קטגורית גילאים" name="lProgramAgegroups">
-                <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue.get(s)}}</mat-option>
+                <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue[s]}}</mat-option>
             </mat-select> -->
 
 
@@ -53,12 +53,12 @@
                         <div *ngIf="isSelected(s)">
                             <div *ngIf="selected">
                                 <mat-list-option selected [value]="s">
-                                    {{this.lProgramAgegroupsValue.get(s)}}
+                                    {{this.lProgramAgegroupsValue[s].value}}
                                 </mat-list-option>
                             </div>
                             <div *ngIf="!selected">
                                 <mat-list-option [value]="s">
-                                    {{this.lProgramAgegroupsValue.get(s)}}
+                                    {{this.lProgramAgegroupsValue[s].value}}
                                 </mat-list-option>
                             </div>
 
@@ -66,7 +66,7 @@
                         </div>
                         <!-- <div *ngIf="isSelected(s)==false">
                             <mat-list-option [value]="s">
-                                {{this.lProgramAgegroupsValue.get(s)}}
+                                {{this.lProgramAgegroupsValue[s]}}
                             </mat-list-option>
                         </div> -->
 

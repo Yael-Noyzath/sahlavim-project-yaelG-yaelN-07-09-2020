@@ -115,6 +115,7 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     ProgramsTableComponent,
   ],
   imports: [
+    HttpClientModule ,
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
     BrowserModule,

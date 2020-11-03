@@ -28,6 +28,7 @@ export class SettingsDetailsComponent implements OnInit {
     this.lNeighborhoodTypeValue = mainService.SysTableList[4];
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
+    debugger
   }
 
   ngOnInit() {

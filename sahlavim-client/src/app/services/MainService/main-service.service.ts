@@ -7,9 +7,6 @@ import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class row{
   key:number;
   value:string; 
@@ -18,6 +15,13 @@ export class row{
     this.value=value;
   }
 }
+
+
+@Injectable({
+  providedIn: 'root'
+})
+
+
 export class MainServiceService {
 
 
