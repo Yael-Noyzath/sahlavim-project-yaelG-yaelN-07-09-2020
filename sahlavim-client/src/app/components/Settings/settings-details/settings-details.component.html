@@ -9,7 +9,7 @@
         </mat-form-field><br>
         <mat-form-field>
             <mat-select formControlName="iSettingType" required placeholder="סוג מסגרת" name="iSettingType">
-                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue.get(s)}}
+                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue[s].value}}
                 </mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -41,7 +41,7 @@
         <mat-form-field>
             <mat-select formControlName="iNeighborhoodType" required placeholder="שכונה" name="iNeighborhoodType">
                 <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">
-                    {{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
+                    {{this.lNeighborhoodTypeValue[s].value}}</mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -50,7 +50,7 @@
             <!-- <mat-select formControlName="lSettingAgegroups" required placeholder="קטגורית גילאים"
                 name="lSettingAgegroups">
                 <mat-option *ngFor="let s of lSettingAgegroupsValue.keys()" [value]="s">
-                    {{this.lSettingAgegroupsValue.get(s)}}</mat-option>
+                    {{this.lSettingAgegroupsValue[s]}}</mat-option>
             </mat-select> -->
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -73,12 +73,12 @@
                             <div *ngIf="isSelected(s)">
                                 <div *ngIf="selected">
                                     <mat-list-option selected [value]="s">
-                                        {{this.lSettingAgegroupsValue.get(s)}}
+                                        {{this.lSettingAgegroupsValue[s].value}}
                                     </mat-list-option>
                                 </div>
                                 <div *ngIf="!selected">
                                     <mat-list-option [value]="s">
-                                        {{this.lSettingAgegroupsValue.get(s)}}
+                                        {{this.lSettingAgegroupsValue[s].value}}
                                     </mat-list-option>
                                 </div>
                             </div>
