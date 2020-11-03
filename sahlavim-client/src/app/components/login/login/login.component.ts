@@ -16,53 +16,55 @@ export class LoginComponent implements OnInit {
   enterByUserName: boolean = true;
   user: User = new User();
   currentUser: User = new User();
-  usersList: Array<User>;
+  usersList: User[];
   formLogin: FormGroup;
   userExist:boolean=false;
+
   ngOnInit() {
     this.UserLoginControls();
-  }
-  //כניסה
-  enterToTheMenu() {
-    //קבלה של הנתונים שהכניס בכניסה
-    this.user = this.formLogin.value;
-    //בדיקה אם הוא רשאי להכנס
-    this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
-    //users קבלת רשימה של כל ה
     this.GetUsers();
+
   }
+
+  // Login to site
+  Login() {
+    this.user = this.formLogin.value;
+     //חיפוש המשתמש הזה בתוך הרשימה
+     this.currentUser = this.usersList.find(u => u.nvUserName ==this.user.nvUserName && u.nvPassword ==this.user.nvPassword);
+     if(this.currentUser)//אם שם והסיסמה נכונים
+     {
+        //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+        this.mainService.currentUser=this.currentUser 
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
+        this.mainService.serviceNavigate("header-menu");
+     }
+     else
+     {
+       alert("שם וסיסמה אינם תקינים");
+     }
+  }
+
 
   GetUsers() {
     this.mainService.post("GetUsers", {})
       .then(
         res => {
-          if (res) {
             this.usersList = res;
-            //חיפוש המשתמש הזה בתוך הרשימה
-            this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
-              && u.nvPassword == this.user.nvPassword);
-            //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-            this.mainService.saveUser(this.currentUser);
-            if(this.userExist==true)
-            {
-              this.mainService.serviceNavigate("header-menu");
-            }
-          }
-          else
-            alert("GetUsers login error");
         },
         err => {
-          alert("error");
+          alert(err +"get users err");
         }
       );
   }
 
+
   UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
-        res => {
+        res => { 
           if (res.iUserId)
             this.userExist= true;
+             
           else {
             alert("userLogin error");
             this.userExist= false;
@@ -74,6 +76,7 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+  
   //אתחול סיסמא
   resetUser() {
     if (this.enterByUserName)

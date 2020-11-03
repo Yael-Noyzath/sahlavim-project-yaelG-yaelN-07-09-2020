@@ -33,7 +33,7 @@ export class SettingsDetailsComponent implements OnInit {
 
   ngOnInit() {
     // this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.currentUserId = this.mainService.getUserId();
+    this.currentUserId = this.mainService.currentUser.iUserId;
     this.CoordinatorsGet();
   }
   CoordinatorsGet() {

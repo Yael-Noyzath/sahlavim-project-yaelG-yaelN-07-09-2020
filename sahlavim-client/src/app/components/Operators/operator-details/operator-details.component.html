@@ -1,4 +1,4 @@
-<div class="form-group" style=" text-align: center;margin-top: 3%;" class="Details">
+<div class="form-group" style=" text-align: center;margin-top: 3%;direction: rtl;" class="Details">
     <form operator="ngform" (ngSubmit)="save()">
         <section class="example-section">
             <label class="example-margin">סוג:</label>
@@ -14,7 +14,7 @@
         <br>
         <mat-form-field class="example-form-field">
             <mat-label>שם מפעיל</mat-label>
-            <input matInput type="text" [ngModel]="operator.nvOperatorName" name="nvOperatorName">
+            <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -114,53 +114,58 @@
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
 
+        <div id="TalanSchool" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
+
         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
                 class="example-margin">מפעיל בחוגי תל"ן</mat-checkbox>
         </section>
 
-        <mat-form-field appearance="fill">
-            <mat-label>חוגי תל"ן</mat-label>
-            <mat-select [formControl]="schools" multiple [disabled]="!operator.bTalan">
-                <mat-select-trigger>
-                    {{schools.value ? schools.value[0] : ''}}
-                    <span *ngIf="schools.value?.length > 1" class="example-additional-selection">
-                        (+{{schools.value.length - 1}} {{schools.value?.length === 2 ? 'other' : 'others'}})
-                    </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let school of operator.lSchools" [value]="school">{{school}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-
-        <!-- לשלוף מטבלת operator area -->
-        <section style="direction: rtl;" class="example-section">
-            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
-                class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
-        </section>
-
-        <div  style="width: 30%;text-align: center; ">
-            <ng-multiselect-dropdown name="schoolExclude"
-            [(ngModel)]="schoolsExcludeList"
-            [placeholder]="'איזורים'"
-            [data]="settingsList"
+        <div>
+            <ng-multiselect-dropdown name="talanSchools"
+            [(ngModel)]="lschool"
+            [placeholder]="'בתי ספר'"
+            [data]="schoolListforTalan"
             [settings]="dropdownSettings"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
             (onDeSelect)="OnItemDeSelect($event)"
-            [disabled]="true" 
+            [disabled]="!operator.bTalan" 
           >
           </ng-multiselect-dropdown>
           </div>
+        </div>
 
 
+        <!--  לטפל! רשימת שכונות -->
+        <!-- <section style="direction: rtl;" class="example-section">
+            <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
+                class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
+        </section>
+           
+
+         <div  style="width: 30%;text-align: center; margin-left: 30%;">
+            <ng-multiselect-dropdown name="neighborhoods"
+            [settings]="dropdownNeighborhoods"
+            [data]="NeighborhoodsList"
+            [(ngModel)]="NeighborhoodsList" 
+            [placeholder]="'איזורים'"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="OnItemDeSelect($event)"
+            [disabled]="!blNeighborhoods" 
+          >
+          </ng-multiselect-dropdown>
+          </div> -->
+
+<div id="SettingslsExclude" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
         <!-- לשלוף מטבלת מסגרות -->
         <section style="direction: rtl;" class="example-section">
-            <mat-checkbox [checked]="bSchoolsExclude" (change)="bSchoolsExclude=!bSchoolsExclude"
+            <mat-checkbox [checked]="bSettingslsExclude" (change)="bSettingslsExclude=!bSettingslsExclude"
                 class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
         </section>
  
-        <div  style="width: 30%;text-align: center; ">
+        <div >
             <ng-multiselect-dropdown name="schoolExclude"
             [(ngModel)]="schoolsExcludeList"
             [placeholder]="'מסגרות'"
@@ -169,11 +174,11 @@
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
             (onDeSelect)="OnItemDeSelect($event)"
-            [disabled]="!bSchoolsExclude"            
+            [disabled]="!bSettingslsExclude"            
           >
           </ng-multiselect-dropdown>
           </div>
-
+</div>
 
         <button type="submit" class="btn btn-success">save</button>
     </form>
