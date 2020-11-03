@@ -104,7 +104,7 @@
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר הנהלת חשבונות</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
+            <input matInput  type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -143,7 +143,7 @@
 
 
         <!--  לטפל! רשימת שכונות -->
-        <!-- <section style="direction: rtl;" class="example-section">
+         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
                 class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
@@ -161,7 +161,7 @@
             [disabled]="!blNeighborhoods" 
           >
           </ng-multiselect-dropdown>
-          </div> -->
+          </div> 
 
 <div id="SettingslsExclude" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
         <!-- לשלוף מטבלת מסגרות -->

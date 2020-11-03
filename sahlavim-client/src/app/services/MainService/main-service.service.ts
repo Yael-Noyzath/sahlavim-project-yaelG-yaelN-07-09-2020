@@ -10,6 +10,14 @@ import { Program } from 'src/app/Classes/program';
 @Injectable({
   providedIn: 'root'
 })
+export class row{
+  key:number;
+  value:string; 
+  constructor(key:number,value:string){
+    this.key=key;
+    this.value=value;
+  }
+}
 export class MainServiceService {
 
 
@@ -40,7 +48,7 @@ export class MainServiceService {
   programForDetails: Program;
 
   //מערך של כל הטבלאות
-  SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
+  SysTableList: Array<Array<row>> = new Array<Array<row>>();
 
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
   sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
@@ -115,10 +123,10 @@ export class MainServiceService {
     this.currentUser = u;
   }
 
-  getUser() {
-    //alert("getUser " + this.currentUser.nvUserName);
-    return this.currentUser;
-  }
+getUser()
+{
+return this.currentUser;
+}
 
 
   //שכונות sysTableUd=5
@@ -134,18 +142,18 @@ export class MainServiceService {
         this.gItems.forEach(g => {
           //במערך של הטבלאות MAP עבור כל טבלה יצירת 
           //בפורמט מתאים לאנגולר 8 PARAMS בשביל שמירת הנתונים של 
-          this.SysTableList[g.iListId - 1] = new Map<number, string>();
+          this.SysTableList[g.iListId - 1] = new Array<row>();
           //שלה PARAMS לכל טבלה עובר על 
           //KEY,VALUE את הנתונים בצורה של MAP ומכניס לתוך ה
           //MAP ומכניס את ה
           //של הטבלה ID למערך במקום של ה
           g.dParams.forEach(p => {
-            this.SysTableList[g.iListId - 1].set(p.Key, p.Value);
+            this.SysTableList[g.iListId - 1].push(new row(p.Key,p.Value));
 
           });
 
         });
-
+debugger
       },
       err => {
         alert("globalObj err");
@@ -153,7 +161,5 @@ export class MainServiceService {
     )
   }
 
-  getGItems() {
-    return this.gItems;
-  }
+
 }
