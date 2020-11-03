@@ -14,7 +14,9 @@ export class MainServiceService {
 
 
   constructor(private router: Router, private http: HttpClient) {
+
     this.globalObj();
+
     this.getAllOperators();
     this.getSettings();
     this.getPrograms();
@@ -58,7 +60,6 @@ export class MainServiceService {
   this.post("ProgramsGet", {}).then(
       res => {
         this.programsList = res;
-        debugger
       },
       err => {
         alert("ProgramsGet err")
@@ -90,6 +91,7 @@ export class MainServiceService {
     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
+        
       },
       err => {
         alert("SettingsGet err")
@@ -116,13 +118,14 @@ export class MainServiceService {
   }
   
 
+//שכונות sysTableUd=5
   globalObj() {
 
     this.post("SysTableListGet", {}).then(
       res => {
         //קבלת כל הטבלאות בפורמט של הסרבר
         this.gItems = res;
-        debugger
+
         //alert(this.gItems[0].dParams[0].Value)
         //מעברת על כל הטבלאות
         this.gItems.forEach(g => {
@@ -135,8 +138,11 @@ export class MainServiceService {
           //של הטבלה ID למערך במקום של ה
           g.dParams.forEach(p => {
             this.SysTableList[g.iListId - 1].set(p.Key, p.Value);
+
           });
+          
         });
+
       },
       err => {
         alert("globalObj err");
