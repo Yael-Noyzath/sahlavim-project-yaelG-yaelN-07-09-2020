@@ -15,8 +15,8 @@ export class ProgramsTableComponent implements OnInit {
 
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
-  lProgramAgegroupsValue:Array<row>= new Array<row>();
-  lProgramTypeValue:Array<row>= new Array<row>();
+  lProgramAgegroupsValue: Array<row> = new Array<row>();
+  lProgramTypeValue: Array<row> = new Array<row>();
 
   ngOnInit() {
     this.ngAfterViewInit();
@@ -31,6 +31,7 @@ export class ProgramsTableComponent implements OnInit {
     //קבלת הרשימות מהסרויס
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
     this.lProgramTypeValue = mainService.SysTableList[9];
+    alert(this.lProgramAgegroupsValue)
   }
 
   ngAfterViewInit() {
