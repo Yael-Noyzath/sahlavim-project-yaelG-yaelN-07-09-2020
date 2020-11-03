@@ -26,7 +26,6 @@ export class OperatorTableComponent implements OnInit {
 
   ngOnInit() {
     this.operators = this.mainService.operatorsList
-
     this.dataSource = new MatTableDataSource(this.operators);
     this.ngAfterViewInit();
   }

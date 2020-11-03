@@ -85,13 +85,13 @@
         </mat-form-field><br>
 
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" style="direction: rtl;">
             <mat-label>תנאי תשלום</mat-label>
-            <select [(value)]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
-                <option value="1">שוטף+30</option>
-                <option value="2">שוטף+60</option>
-                <option value="3">מזומן</option>
-            </select>
+            <mat-select [(value)]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
+                <mat-option value="8">30 + שוטף</mat-option>
+                <mat-option value="9"> שוטף + 60</mat-option>
+                <mat-option value="10">מזומן</mat-option>
+            </mat-select>
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
@@ -109,6 +109,11 @@
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field><br>
+
+        <section style="direction: rtl;" class="example-section">
+            <mat-checkbox [(ngModel)]="operator.bActivityPriority" [checked]="operator.bActivityPriority" name="ActivityPriority"
+                class="example-margin">עדיפות בשיבוץ</mat-checkbox>
+        </section>
 
         <section style="direction: rtl;" class="example-section">
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
@@ -179,6 +184,26 @@
           </ng-multiselect-dropdown>
           </div>
 </div>
+
+<section style="direction: rtl;" class="example-section">
+    <mat-checkbox [(ngModel)]="operator.bActiveAfternoon" [checked]="operator.bActiveAfternoon" name="ActiveAfternoon"
+        class="example-margin">עובד בצהרונים</mat-checkbox>
+</section>
+
+<section style="direction: rtl;" class="example-section">
+    <mat-checkbox [(ngModel)]="operator.bActiveChanukahCamp" [checked]="operator.bActiveChanukahCamp" name="ActiveChanukahCamp"
+        class="example-margin">עובד בקייטנת חנוכה</mat-checkbox>
+</section>
+
+<section style="direction: rtl;" class="example-section">
+    <mat-checkbox [(ngModel)]="operator.bActivePassoverCamp" [checked]="operator.bActivePassoverCamp" name="ActivePassoverCamp"
+        class="example-margin">עובד בקייטנת פסח</mat-checkbox>
+</section>
+
+<section style="direction: rtl;" class="example-section">
+    <mat-checkbox [(ngModel)]="operator.bActiveSummerCamp" [checked]="operator.bActiveSummerCamp" name="ActiveSummerCamp"
+        class="example-margin">עובד בקייטנת קיץ</mat-checkbox>
+</section>
 
         <button type="submit" class="btn btn-success">save</button>
     </form>
