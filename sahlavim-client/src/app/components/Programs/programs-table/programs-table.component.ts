@@ -1,4 +1,3 @@
-import { User } from 'src/app/classes/user';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Program } from 'src/app/Classes/program';
@@ -14,7 +13,6 @@ export class ProgramsTableComponent implements OnInit {
   displayedColumns: string[] = ['choose', 'edit', 'iProgramType', 'nvProgramName', 'dFromDateFormat', 'dToDateFormat',
     'lProgramSettings', 'lProgramAgegroups', 'nvBudgetItem'];
 
-  currentUser: User = new User();
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
   lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
@@ -28,7 +26,6 @@ export class ProgramsTableComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
-    this.currentUser = this.mainService.getUser();
     this.programList = this.mainService.programsList;
     this.spliceProgramsList();
     //קבלת הרשימות מהסרויס

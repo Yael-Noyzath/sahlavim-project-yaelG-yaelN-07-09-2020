@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatListModule} from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import {
   MatButtonModule,
@@ -69,8 +71,6 @@ import { SettingTableComponent } from './components/Settings/setting-table/setti
 import { SettingsScheduleComponent } from './components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
 import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
-import {MatListModule} from '@angular/material/list';
-import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({

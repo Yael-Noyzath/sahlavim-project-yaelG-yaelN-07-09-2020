@@ -13,12 +13,14 @@ export class HeaderMenuComponent implements OnInit {
   currentUser: User = new User();
 
   ngOnInit() {
+    this.currentUser = this.mainService.currentUser;
+
   }
 
   constructor(private mainService: MainServiceService) {
-    this.currentUser = this.mainService.getUser();
+    
   }
 
-  
+
 
 }

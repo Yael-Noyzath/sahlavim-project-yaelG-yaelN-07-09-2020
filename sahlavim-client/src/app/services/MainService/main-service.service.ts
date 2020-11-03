@@ -24,7 +24,7 @@ export class MainServiceService {
 
   }
 
-  gItems:any = [];
+  gItems: any = [];
 
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
@@ -56,10 +56,13 @@ export class MainServiceService {
   }
 
   getPrograms() {
-//פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
-  this.post("ProgramsGet", {}).then(
+    //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
+    this.post("ProgramsGet", {}).then(
       res => {
-        this.programsList = res;
+        if (res)
+          this.programsList = res;
+        else
+          alert(" get programs err");
       },
       err => {
         alert("ProgramsGet err")
@@ -67,7 +70,7 @@ export class MainServiceService {
     );
   }
 
-//רשימת המפעילים
+  //רשימת המפעילים
   getAllOperators() {
 
     this.post("GetOperators", {})
@@ -85,13 +88,13 @@ export class MainServiceService {
       );
   }
 
- 
-//רשימת המיסגרות
+
+  //רשימת המיסגרות
   getSettings() {
     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
-        
+
       },
       err => {
         alert("SettingsGet err")
@@ -117,7 +120,8 @@ export class MainServiceService {
     return this.currentUser;
   }
 
-//שכונות sysTableUd=5
+
+  //שכונות sysTableUd=5
   globalObj() {
 
     this.post("SysTableListGet", {}).then(
@@ -139,7 +143,7 @@ export class MainServiceService {
             this.SysTableList[g.iListId - 1].set(p.Key, p.Value);
 
           });
-          
+
         });
 
       },

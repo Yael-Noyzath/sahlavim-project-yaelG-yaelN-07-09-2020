@@ -10,7 +10,6 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class ProgramDetailsComponent implements OnInit {
 
-  currentUserId: number;
   currentProgram: Program = new Program();
   formProgram: FormGroup;
   lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
@@ -19,7 +18,6 @@ export class ProgramDetailsComponent implements OnInit {
   cancelAllProgramAgegroups: boolean = false;
 
   constructor(private mainService: MainServiceService) {
-    this.currentUserId = mainService.currentUser.iUserId;
     this.currentProgram = this.mainService.programForDetails;
     this.lProgramTypeValue = mainService.SysTableList[9];
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
@@ -83,9 +81,11 @@ export class ProgramDetailsComponent implements OnInit {
     return this.formProgram.get("iNumActivityAfternoon");
   }
   saveProgram() {
-    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.currentUserId }).then(
+    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
-        alert(res)
+        alert("update "+this.currentProgram.nvProgramName+" done!"); 
+        this.mainService.getPrograms();
+        this.mainService.serviceNavigate("/header-menu/programs/programs-table");
       },
       err => {
         alert("saveProgram err");
@@ -114,9 +114,9 @@ export class ProgramDetailsComponent implements OnInit {
     //     return false;
     //   else
     //    {
-        this.selected= this.selected = this.currentProgram.lProgramAgegroups.includes(s)
-        return true;
-      // } 
+    this.selected = this.selected = this.currentProgram.lProgramAgegroups.includes(s)
+    return true;
+    // } 
   }
   // selectAll() {
   //   //alert(this.selectAllProgramAgegroups)
