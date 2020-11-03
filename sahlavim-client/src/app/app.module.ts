@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgGridModule} from 'ag-grid-angular';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatListModule} from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import {
   MatButtonModule,
@@ -21,7 +23,6 @@ import {
   MatOptionModule,
   MatPaginatorModule,
   MatSortModule,
-  MatGridListModule,
   MatCheckboxModule,
   MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
 } from '@angular/material';
@@ -138,6 +139,7 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
+    MatListModule,
     HttpClientModule,
     RouterModule,
     RoutModule,

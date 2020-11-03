@@ -83,7 +83,9 @@ export class ProgramDetailsComponent implements OnInit {
   saveProgram() {
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
-        alert(res)
+        alert("update "+this.currentProgram.nvProgramName+" done!"); 
+        this.mainService.getPrograms();
+        this.mainService.serviceNavigate("/header-menu/programs/programs-table");
       },
       err => {
         alert("saveProgram err");
@@ -112,9 +114,9 @@ export class ProgramDetailsComponent implements OnInit {
     //     return false;
     //   else
     //    {
-        this.selected= this.selected = this.currentProgram.lProgramAgegroups.includes(s)
-        return true;
-      // } 
+    this.selected = this.selected = this.currentProgram.lProgramAgegroups.includes(s)
+    return true;
+    // } 
   }
   // selectAll() {
   //   //alert(this.selectAllProgramAgegroups)
