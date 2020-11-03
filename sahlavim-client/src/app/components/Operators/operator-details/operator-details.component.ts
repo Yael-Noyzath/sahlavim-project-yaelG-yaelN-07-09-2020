@@ -54,7 +54,7 @@ export class OperatorDetailsComponent implements OnInit {
       }
     }
 
-    this.NeighborhoodsList=this.mainService.SysTableList[4];
+    this.NeighborhoodsList=this.mainService.gItems[4].dParams;
 
         // איתחול רשימת שכונות של המפעיל 
         if (this.operator.lNeighborhoods.length > 0) {
