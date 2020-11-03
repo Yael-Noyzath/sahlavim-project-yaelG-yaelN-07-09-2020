@@ -9,7 +9,7 @@
         </mat-form-field><br>
         <mat-form-field>
             <mat-select  [(ngModel)]="currentSetting.iSettingType"  required placeholder="סוג מסגרת" name="iSettingType">
-                <mat-option *ngFor="let s of lSettingTypeValueKeys" [value]="s">{{this.lSettingTypeValue.get(s)}}
+                <mat-option *ngFor="let s of lSettingTypeValueKeys" [value]="s">{{this.lSettingTypeValue[s].value}}
                 </mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">

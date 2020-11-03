@@ -48,7 +48,7 @@
                 </mat-expansion-panel-header>
                 <mat-selection-list #shoes [(ngModel)]="currentProgram.lProgramAgegroups" required placeholder="קטגורית גילאים"
                     name="lProgramAgegroups">
-                    <div *ngFor="let s of lProgramAgegroupsValue.keys()">
+                    <div *ngFor="let s of lProgramAgegroupsValue">
 
                         <div *ngIf="isSelected(s)">
                             <div *ngIf="selected">
