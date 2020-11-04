@@ -1,6 +1,6 @@
 import { User } from 'src/app/classes/user';
-import { MainServiceService } from 'src/app/services/MainService/main-service.service';
-import { AfterViewInit, ViewChild, Component, OnInit } from '@angular/core';
+import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -40,16 +40,6 @@ export class SettingTableComponent implements OnInit {
   lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
   lSettingTypeValue:Map<number, string> = new Map<number, string>();
 
-
-
-  ngOnInit() {
-
-
-    this.ngAfterViewInit();
-  }
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
     //this.lSettingType = this.lSysTable[6-1].dParams;
@@ -59,45 +49,57 @@ export class SettingTableComponent implements OnInit {
     //קבלת הרשימות מהסרויס
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
+
+   
+}
+
+  ngOnInit() {
+
+ 
+    this.ngAfterViewInit();
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
 
-  CoordinatorsGet() {
-    this.mainService.post("CoordinatorsGet", {}).then(
-      res => {
-        this.coordinatorList = res;
-      },
-      err => {
-        alert("CoordinatorsGet err")
-      }
-    );
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+}
 
-  CoordinatorDetails(sett: Setting, CoordinatorId: number) {
-    this.currentSetting = sett;
-    if (this.openDetails == true)
-      this.openDetails = false;
-    else
-      this.openDetails = true;
 
-    if (CoordinatorId) {
-      this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
+CoordinatorsGet() {
+  this.mainService.post("CoordinatorsGet", {}).then(
+    res => {
+      this.coordinatorList = res;
+    },
+    err => {
+      alert("CoordinatorsGet err")
     }
-  }
-  EditSetting(setting: Setting) {
-    this.mainService.settingForDetails = setting;
-    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
-  }
-  addSetting() {
-    this.mainService.settingForDetails = new Setting();
-    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
+  );
+}
 
+CoordinatorDetails(sett: Setting, CoordinatorId: number) {
+  this.currentSetting = sett;
+  if (this.openDetails == true)
+    this.openDetails = false;
+  else
+    this.openDetails = true;
+
+  if (CoordinatorId) {
+    this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
   }
-  chooseAllSettings() {
-    alert("select all doesnt work")
-  }
+}
+EditSetting(setting: Setting) {
+  this.mainService.settingForDetails = setting;
+  this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
+}
+addSetting() {
+  this.mainService.settingForDetails = new Setting();
+  this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
+
+}
+chooseAllSettings() {
+  alert("select all doesnt work")
+}
 }

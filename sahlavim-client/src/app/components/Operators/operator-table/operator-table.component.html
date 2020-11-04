@@ -88,11 +88,11 @@
             <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> מייל </th>
             <td mat-cell *matCellDef="let row"> {{row.nvContactPersonMail}} </td>
         </ng-container>
-
         <!--is in Programs database Column -->
         <ng-container matColumnDef="bInProgramPool">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef mat-sort-header>קיים במאגר התוכניות</th>
-            <td mat-cell *matCellDef="let row"> {{row.bInProgramPool}} </td>
+            <td mat-cell *matCellDef="let row">   {{row.bInProgramPool==true?'לא':'כן'}}
+            </td>
         </ng-container>
         <!-- Update -->
         <ng-container matColumnDef="update">

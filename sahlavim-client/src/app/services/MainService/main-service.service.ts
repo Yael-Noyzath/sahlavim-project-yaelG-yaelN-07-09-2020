@@ -8,11 +8,11 @@ import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 
 export class row{
-  key:number;
-  value:string; 
+  Key:number;
+  Value:string; 
   constructor(key:number,value:string){
-    this.key=key;
-    this.value=value;
+    this.Key=key;
+    this.Value=value;
   }
 }
 
@@ -139,7 +139,7 @@ return this.currentUser;
       res => {
         //קבלת כל הטבלאות בפורמט של הסרבר
         this.gItems = res;
-
+debugger
         //alert(this.gItems[0].dParams[0].Value)
         //מעברת על כל הטבלאות
         this.gItems.forEach(g => {
