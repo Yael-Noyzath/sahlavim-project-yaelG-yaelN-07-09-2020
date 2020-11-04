@@ -1,7 +1,8 @@
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Program } from 'src/app/Classes/program';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { parse } from 'url';
 
 @Component({
   selector: 'app-programs-table',
@@ -15,8 +16,8 @@ export class ProgramsTableComponent implements OnInit {
 
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
-  lProgramAgegroupsValue: Array<row> = new Array<row>();
-  lProgramTypeValue: Array<row> = new Array<row>();
+  lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lProgramTypeValue: Map<number, string> = new Map<number, string>();
 
   ngOnInit() {
     this.ngAfterViewInit();
@@ -31,7 +32,8 @@ export class ProgramsTableComponent implements OnInit {
     //קבלת הרשימות מהסרויס
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
     this.lProgramTypeValue = mainService.SysTableList[9];
-    alert(this.lProgramAgegroupsValue)
+    // alert(this.lProgramAgegroupsValue[0].value)
+
   }
 
   ngAfterViewInit() {
@@ -58,4 +60,6 @@ export class ProgramsTableComponent implements OnInit {
     this.mainService.programForDetails = new Program();
     this.mainService.serviceNavigateForId("/header-menu/programs/programs-details-menu/", -1)
   }
+
+  
 }

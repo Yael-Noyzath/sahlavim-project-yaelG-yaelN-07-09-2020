@@ -8,9 +8,8 @@
             </button>
         </mat-form-field><br>
         <mat-form-field>
-            <mat-select  [(ngModel)]="currentSetting.iSettingType"  required placeholder="סוג מסגרת" name="iSettingType">
-                <mat-option *ngFor="let s of lSettingTypeValueKeys" [value]="s">{{this.lSettingTypeValue[s].value}}
-                </mat-option>
+            <mat-select [(ngModel)]="currentSetting.iSettingType" required placeholder="סוג מסגרת" name="iSettingType">
+                <mat-option *ngFor="let s of lSettingTypeValue.keys()" [value]="s">{{this.lSettingTypeValue.get(s)}}</mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -40,8 +39,7 @@
         </mat-form-field><br>
         <mat-form-field>
             <mat-select [(ngModel)]="currentSetting.iNeighborhoodType" required placeholder="שכונה" name="iNeighborhoodType">
-                <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">
-                    {{this.lNeighborhoodTypeValue[s].value}}</mat-option>
+                <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">{{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
             </mat-select>
             <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
@@ -56,7 +54,7 @@
                 <mat-icon>close</mat-icon>
             </button> -->
 
-            <mat-accordion style="text-align:center;">
+            <!-- <mat-accordion style="text-align:center;">
                 <mat-expansion-panel class="text-center col-lg-2 col-lg-offset-4" (opened)="panelOpenState = true"
                     (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
@@ -73,19 +71,34 @@
                             <div *ngIf="isSelected(s)">
                                 <div *ngIf="selected">
                                     <mat-list-option selected [value]="s">
-                                        {{this.lSettingAgegroupsValue[s].value}}
+                                        {{this.lSettingAgegroupsValue.get(s)}}
                                     </mat-list-option>
                                 </div>
                                 <div *ngIf="!selected">
                                     <mat-list-option [value]="s">
-                                        {{this.lSettingAgegroupsValue[s].value}}
+                                        {{this.lSettingAgegroupsValue.get(s)}}
                                     </mat-list-option>
                                 </div>
                             </div>
                         </div>
                     </mat-selection-list>
                 </mat-expansion-panel>
-            </mat-accordion>
+            </mat-accordion> -->
+
+            <div style="border: solid;width: 40%; margin: auto; padding: 30px;">
+                <p>קטגורית גילאים</p>
+                <ng-multiselect-dropdown name="SettingAgegroups" 
+                    [settings]="dropdownSettingAgegroups"
+                    [data]="lSettingAgegroupsValue"
+                    [(ngModel)]="SettingAgegroupsListNg"
+                    [placeholder]="'קטגורית גילאים'"
+                    (onSelect)="onItemSelect($event)" 
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="OnItemDeSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+    
+
             <mat-form-field class="example-form-field">
                 <mat-label>מיקום פעילות</mat-label>
                 <input matInput type="text" [(ngModel)]="currentSetting.nvOperatingLocation" name="nvOperatingLocation" />

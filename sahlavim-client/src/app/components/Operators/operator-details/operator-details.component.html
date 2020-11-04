@@ -141,7 +141,6 @@
           </div>
         </div>
 
-        <div id="TalanSchool" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
 
         <!--  לטפל! רשימת שכונות -->
          <section style="direction: rtl;" class="example-section">
@@ -149,13 +148,12 @@
                 class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
         </section>
            
-           
 
-         <div >
+         <div  style="width: 30%;text-align: center; margin-left: 30%;">
             <ng-multiselect-dropdown name="neighborhoods"
             [settings]="dropdownNeighborhoods"
-            [(ngModel)]="operatorNeighborhoods" 
             [data]="NeighborhoodsList"
+            [(ngModel)]="NeighborhoodsList" 
             [placeholder]="'איזורים'"
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
@@ -164,8 +162,6 @@
           >
           </ng-multiselect-dropdown>
           </div> 
-        </div> 
-
 
 <div id="SettingslsExclude" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
         <!-- לשלוף מטבלת מסגרות -->

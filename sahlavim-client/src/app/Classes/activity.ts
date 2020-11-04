@@ -10,7 +10,7 @@ export class Activity {
         public nShortBreak:string="",
         public nLongBreak:string="",
        public bActivityPreference:boolean=false,
-       public lActivityAgegroups:number[]=[],
+       //public lActivityAgegroups:number[]=[],
        public bActivityMorning:boolean=false,
        public bActivityNoon:boolean=false,
 
