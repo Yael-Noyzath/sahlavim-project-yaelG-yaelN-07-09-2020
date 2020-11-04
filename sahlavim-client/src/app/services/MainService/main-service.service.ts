@@ -8,11 +8,11 @@ import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 
 export class row{
-  key:number;
-  value:string; 
+  Key:number;
+  Value:string; 
   constructor(key:number,value:string){
-    this.key=key;
-    this.value=value;
+    this.Key=key;
+    this.Value=value;
   }
 }
 

@@ -34,7 +34,7 @@ export class Operator {
        public bActiveChanukahCamp: boolean=false,
         public bActivePassoverCamp: boolean=false,
         public bActiveSummerCamp: boolean=false,
-                public bActivityPriority: boolean=false,
+        public bActivityPriority: boolean=false,
 
         public lNeighborhoods:number[]=[],
 

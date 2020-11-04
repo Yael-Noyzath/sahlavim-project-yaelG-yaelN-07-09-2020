@@ -15,7 +15,6 @@ import { from } from 'rxjs';
 })
 export class OperatorTableComponent implements OnInit {
 
-  visible: number = 1;
 
   //מערך מפעילים לטבלה
   operators: Operator[];

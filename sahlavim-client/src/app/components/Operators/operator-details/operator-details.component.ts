@@ -59,7 +59,7 @@ export class OperatorDetailsComponent implements OnInit {
         // איתחול רשימת שכונות של המפעיל 
         if (this.operator.lNeighborhoods.length > 0) {
           for (let nlId of this.operator.lNeighborhoods) {
-            this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.key == nlId));
+            this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
           }
         }
 
@@ -77,8 +77,8 @@ export class OperatorDetailsComponent implements OnInit {
     //הגדרות ה multi select
     this.dropdownNeighborhoods = {
       singleSelection: false,
-      idField: 'key',
-      textField: 'value',
+      idField: 'Key',
+      textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -117,9 +117,9 @@ export class OperatorDetailsComponent implements OnInit {
         //  עידכון רשימת פעיל בשכונות מסויימות 
         if (this.operatorNeighborhoods.length > 0) {
           for (let id of this.operatorNeighborhoods) {
-            if (this.operator.lNeighborhoods.indexOf(id.key) == -1)//אם השכונה לא כלולה כבר ברשימה 
+            if (this.operator.lNeighborhoods.indexOf(id.Key) == -1)//אם השכונה לא כלולה כבר ברשימה 
             {
-              this.operator.lNeighborhoods.push(id.key);
+              this.operator.lNeighborhoods.push(id.Key);
             }
           }
         }
