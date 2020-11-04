@@ -12,16 +12,17 @@ import { MainServiceService, row } from 'src/app/services/MainService/main-servi
 
 export class ProgramDetailsComponent implements OnInit {
 
-  ProgramAgegroupsList:row[]=[];
+  lProgramAgegroupsValue: row[]=[];
+  ProgramAgegroupsListNg:row[]=[];
   dropdownProgramAgegroups: IDropdownSettings;
 
 
   currentProgram: Program = new Program();
   formProgram: FormGroup;
-  lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
   lProgramTypeValue: Map<number, string> = new Map<number, string>();
   selectAllProgramAgegroups: boolean = false;
   cancelAllProgramAgegroups: boolean = false;
+
   constructor(private mainService: MainServiceService) {
     this.currentProgram = this.mainService.programForDetails;
     this.lProgramTypeValue = mainService.SysTableList[9];
@@ -31,11 +32,18 @@ export class ProgramDetailsComponent implements OnInit {
   ngOnInit() { 
     this.lProgramAgegroupsValue = this.mainService.gItems[6].dParams;
 
+    // איתחול רשימת הגילאים של התוכנית 
+    if (this.currentProgram.lProgramAgegroups.length > 0) {
+      for (let nlId of this.currentProgram.lProgramAgegroups) {
+        this.ProgramAgegroupsListNg.push(this.lProgramAgegroupsValue.find(x => x.Key == nlId));
+      }
+    }
+
     //הגדרות ה multi select
     this.dropdownProgramAgegroups = {
       singleSelection: false,
-      idField: 'iProgramId',
-      textField: 'nvProgramName',
+      idField: 'Key',
+      textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -46,6 +54,15 @@ export class ProgramDetailsComponent implements OnInit {
 
 
   saveProgram() {
+    this.currentProgram.lProgramAgegroups.splice(0,this.currentProgram.lProgramAgegroups.length)
+     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
+      if (this.ProgramAgegroupsListNg.length > 0) {
+       for (let age of this.ProgramAgegroupsListNg)//מעבר על הרשימה שנבחרה
+       {
+           this.currentProgram.lProgramAgegroups.push(age.Key);
+       }
+    }
+    debugger
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
@@ -99,13 +116,13 @@ export class ProgramDetailsComponent implements OnInit {
   onItemSelect(item: Program) {
     //this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
     console.log(item);
-    console.log(this.ProgramAgegroupsList);
+    //console.log(this.ProgramAgegroupsListNg);
   }
   OnItemDeSelect(item: Program) {
     //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
 
     console.log(item);
-    console.log(this.ProgramAgegroupsList);
+    //console.log(this.ProgramAgegroupsListNg);
   }
   onSelectAll(items: any) {
 

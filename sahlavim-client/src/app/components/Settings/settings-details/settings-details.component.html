@@ -54,7 +54,7 @@
                 <mat-icon>close</mat-icon>
             </button> -->
 
-            <mat-accordion style="text-align:center;">
+            <!-- <mat-accordion style="text-align:center;">
                 <mat-expansion-panel class="text-center col-lg-2 col-lg-offset-4" (opened)="panelOpenState = true"
                     (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
@@ -83,7 +83,22 @@
                         </div>
                     </mat-selection-list>
                 </mat-expansion-panel>
-            </mat-accordion>
+            </mat-accordion> -->
+
+            <div style="border: solid;width: 40%; margin: auto; padding: 30px;">
+                <p>קטגורית גילאים</p>
+                <ng-multiselect-dropdown name="SettingAgegroups" 
+                    [settings]="dropdownSettingAgegroups"
+                    [data]="lSettingAgegroupsValue"
+                    [(ngModel)]="SettingAgegroupsListNg"
+                    [placeholder]="'קטגורית גילאים'"
+                    (onSelect)="onItemSelect($event)" 
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="OnItemDeSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+    
+
             <mat-form-field class="example-form-field">
                 <mat-label>מיקום פעילות</mat-label>
                 <input matInput type="text" [(ngModel)]="currentSetting.nvOperatingLocation" name="nvOperatingLocation" />

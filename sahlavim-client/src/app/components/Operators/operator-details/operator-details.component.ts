@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
-import { MainServiceService,row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { MatCheckboxModule } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
@@ -18,8 +18,8 @@ export class OperatorDetailsComponent implements OnInit {
   dropdownNeighborhoods: IDropdownSettings;
 
   //רשימת שכונות
-  NeighborhoodsList:row[]=[];
-  operatorNeighborhoods:row[]=[];;
+  NeighborhoodsList:Map<number,string>;
+
   DetailsForm: FormGroup;
   operator: Operator;
   blNeighborhoods: boolean;//פעיל באיזורים מסויימים
@@ -55,13 +55,7 @@ export class OperatorDetailsComponent implements OnInit {
     }
 
     this.NeighborhoodsList=this.mainService.gItems[4].dParams;
-
-        // איתחול רשימת שכונות של המפעיל 
-        if (this.operator.lNeighborhoods.length > 0) {
-          for (let nlId of this.operator.lNeighborhoods) {
-            this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
-          }
-        }
+    debugger
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -77,8 +71,8 @@ export class OperatorDetailsComponent implements OnInit {
     //הגדרות ה multi select
     this.dropdownNeighborhoods = {
       singleSelection: false,
-      idField: 'Key',
-      textField: 'Value',
+      idField: 'NeighborhoodsList.keys',
+      textField: 'NeighborhoodsList.values',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -92,7 +86,7 @@ export class OperatorDetailsComponent implements OnInit {
   save() {
 
     console.log(this.operator);
-
+debugger
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.schoolsExcludeList.length > 0) {
       for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
@@ -113,17 +107,6 @@ export class OperatorDetailsComponent implements OnInit {
         }
       }
     }
-
-        //  עידכון רשימת פעיל בשכונות מסויימות 
-        if (this.operatorNeighborhoods.length > 0) {
-          for (let id of this.operatorNeighborhoods) {
-            if (this.operator.lNeighborhoods.indexOf(id.Key) == -1)//אם השכונה לא כלולה כבר ברשימה 
-            {
-              this.operator.lNeighborhoods.push(id.Key);
-            }
-          }
-        }
-    
 
 debugger
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
