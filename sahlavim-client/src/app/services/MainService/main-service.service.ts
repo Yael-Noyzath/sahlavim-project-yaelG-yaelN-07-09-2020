@@ -52,8 +52,7 @@ export class MainServiceService {
   programForDetails: Program;
 
   //מערך של כל הטבלאות
-  SysTableList: Array<Array<row>> = new Array<Array<row>>();
-
+  SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
   sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
 
@@ -146,18 +145,15 @@ debugger
         this.gItems.forEach(g => {
           //במערך של הטבלאות MAP עבור כל טבלה יצירת 
           //בפורמט מתאים לאנגולר 8 PARAMS בשביל שמירת הנתונים של 
-          this.SysTableList[g.iListId - 1] = new Array<row>();
+          this.SysTableList[g.iListId - 1] = new Map<number, string>();
           //שלה PARAMS לכל טבלה עובר על 
           //KEY,VALUE את הנתונים בצורה של MAP ומכניס לתוך ה
           //MAP ומכניס את ה
           //של הטבלה ID למערך במקום של ה
           g.dParams.forEach(p => {
-            this.SysTableList[g.iListId - 1].push(new row(p.Key,p.Value));
-
+            this.SysTableList[g.iListId - 1].set(p.Key, p.Value);
           });
-
         });
-debugger
       },
       err => {
         alert("globalObj err");

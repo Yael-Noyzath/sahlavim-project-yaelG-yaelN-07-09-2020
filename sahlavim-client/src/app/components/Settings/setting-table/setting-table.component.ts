@@ -37,8 +37,8 @@ export class SettingTableComponent implements OnInit {
   coordinatorList: Array<coordinator>;
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
-  lSettingAgegroupsValue: Array<row> = new Array<row>();
-  lSettingTypeValue: Array<row> = new Array<row>();
+  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
+  lSettingTypeValue:Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
