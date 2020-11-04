@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 
 @Component({
@@ -20,9 +20,9 @@ export class SettingsDetailsComponent implements OnInit {
   currentCoordinator: coordinator = new coordinator();
   coordinatorList: Array<coordinator>;
   formSetting: FormGroup;
-  lSettingAgegroupsValue:Array<row>= new Array<row>();
-  lSettingTypeValue: Array<row>= new Array<row>();
-  lNeighborhoodTypeValue: Array<row>= new Array<row>();
+  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
+  lSettingTypeValue: Map<number, string> = new Map<number, string>();
+  lNeighborhoodTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     this.lNeighborhoodTypeValue = mainService.SysTableList[4];
@@ -49,13 +49,8 @@ export class SettingsDetailsComponent implements OnInit {
     );
   }
 
-  save() {
-
-  }
-
   saveSetting() {
-
-    // alert(this.currentSetting.lSettingAgegroups.includes())
+     //alert(this.currentSetting.lSettingAgegroups[0])
     this.mainService.post("SettingInsertUpdate", { oSetting: this.currentSetting, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         //קבלה מהשרת את רשימת מפעילים המעודכנת

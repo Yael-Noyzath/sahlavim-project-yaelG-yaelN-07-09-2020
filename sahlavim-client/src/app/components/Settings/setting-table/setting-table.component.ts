@@ -1,5 +1,5 @@
 import { User } from 'src/app/classes/user';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { AfterViewInit, ViewChild, Component, OnInit } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -37,8 +37,8 @@ export class SettingTableComponent implements OnInit {
   coordinatorList: Array<coordinator>;
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
-  lSettingAgegroupsValue:Array<row>= new Array<row>();
-  lSettingTypeValue:Array<row>= new Array<row>();
+  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
+  lSettingTypeValue:Map<number, string> = new Map<number, string>();
 
 
 
