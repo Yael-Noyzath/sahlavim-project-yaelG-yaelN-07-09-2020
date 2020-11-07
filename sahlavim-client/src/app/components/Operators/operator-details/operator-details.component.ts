@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
-import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService,row } from 'src/app/services/MainService/main-service.service';
 import { MatCheckboxModule } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
@@ -18,8 +18,8 @@ export class OperatorDetailsComponent implements OnInit {
   dropdownNeighborhoods: IDropdownSettings;
 
   //רשימת שכונות
-  NeighborhoodsList:Map<number,string>;
-
+  NeighborhoodsList:row[]=[];
+  operatorNeighborhoods:row[]=[];;
   DetailsForm: FormGroup;
   operator: Operator;
   blNeighborhoods: boolean;//פעיל באיזורים מסויימים
@@ -55,8 +55,14 @@ export class OperatorDetailsComponent implements OnInit {
     }
 
     this.NeighborhoodsList=this.mainService.gItems[4].dParams;
-    debugger
 
+        // איתחול רשימת שכונות של המפעיל 
+        if (this.operator.lNeighborhoods.length > 0) {
+          for (let nlId of this.operator.lNeighborhoods) {
+            this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
+          }
+        }
+debugger
     //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,
@@ -71,8 +77,8 @@ export class OperatorDetailsComponent implements OnInit {
     //הגדרות ה multi select
     this.dropdownNeighborhoods = {
       singleSelection: false,
-      idField: 'NeighborhoodsList.keys',
-      textField: 'NeighborhoodsList.values',
+      idField: 'Key',
+      textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -86,7 +92,7 @@ export class OperatorDetailsComponent implements OnInit {
   save() {
 
     console.log(this.operator);
-debugger
+
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.schoolsExcludeList.length > 0) {
       for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
@@ -108,7 +114,10 @@ debugger
       }
     }
 
-debugger
+
+    debugger
+
+
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
@@ -141,7 +150,28 @@ debugger
 
     console.log(items);
   }
-  onDeSelectAll(items: any) {
+
+  onSelectAllNeighborhood(items: any) {
+
+    this.operator.lNeighborhoods=Array.from( this.mainService.SysTableList[4].keys());
     console.log(items);
   }
+
+  onDeSelectAllNeighborhood(items: any){
+    this.operator.lNeighborhoods=[];
+    debugger
+  }
+
+
+  onDeSelectNeighborhood(item: row) {//מחיקה
+   this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x=>x.Key==item.Key) , 1);
+  }
+
+  onSelectNeighborhood(item: row) {//הוספה
+
+    this.operator.lNeighborhoods.push(item.Key);
+
+    console.log(item);
+  }
+
 }
