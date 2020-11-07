@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
+import { Setting } from 'src/app/Classes/setting';
 import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
 
 @Component({
@@ -12,24 +14,39 @@ import { MainServiceService, row } from 'src/app/services/MainService/main-servi
 
 export class ProgramDetailsComponent implements OnInit {
 
-  lProgramAgegroupsValue: row[]=[];
-  ProgramAgegroupsListNg:row[]=[];
+  lProgramAgegroupsValue: row[] = [];
+  ProgramAgegroupsListNg: row[] = [];
   dropdownProgramAgegroups: IDropdownSettings;
 
 
   currentProgram: Program = new Program();
   formProgram: FormGroup;
   lProgramTypeValue: Map<number, string> = new Map<number, string>();
-  selectAllProgramAgegroups: boolean = false;
-  cancelAllProgramAgegroups: boolean = false;
+
+  //מקור הנתונים לטבלה של המסגרות
+  dataSource: MatTableDataSource<Setting>;
+  displayedColumns: string[] = ['check', 'nvSettingName', 'nvAddress', 'lSettingAgegroups', 'bSettingMorning', 'bSettingNoon'];
+  settingList: Array<Setting>;
+  lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     this.currentProgram = this.mainService.programForDetails;
     this.lProgramTypeValue = mainService.SysTableList[9];
+    this.lProgramAgegroupsValueForTable = mainService.SysTableList[6];
+    this.settingList = mainService.settingsList;
+    this.dataSource = new MatTableDataSource(this.settingList);
   }
 
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  ngOnInit() { 
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnInit() {
     this.lProgramAgegroupsValue = this.mainService.gItems[6].dParams;
 
     // איתחול רשימת הגילאים של התוכנית 
@@ -49,18 +66,21 @@ export class ProgramDetailsComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    this.ngAfterViewInit();
+
   }
 
 
 
   saveProgram() {
-    this.currentProgram.lProgramAgegroups.splice(0,this.currentProgram.lProgramAgegroups.length)
-     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
-      if (this.ProgramAgegroupsListNg.length > 0) {
-       for (let age of this.ProgramAgegroupsListNg)//מעבר על הרשימה שנבחרה
-       {
-           this.currentProgram.lProgramAgegroups.push(age.Key);
-       }
+  alert(this.currentProgram.lProgramSettings.length)
+    this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
+    //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
+    if (this.ProgramAgegroupsListNg.length > 0) {
+      for (let age of this.ProgramAgegroupsListNg)//מעבר על הרשימה שנבחרה
+      {
+        this.currentProgram.lProgramAgegroups.push(age.Key);
+      }
     }
     debugger
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
@@ -130,5 +150,23 @@ export class ProgramDetailsComponent implements OnInit {
   }
   onDeSelectAll(items: any) {
     console.log(items);
+  }
+  checkedSettings(settingId: number) {
+    //בודק אם כבר קיים
+    var index = this.currentProgram.lProgramSettings.findIndex(x => x == settingId);
+
+    if (index != -1) {//אם קיים סימן שרוצה להסיר ולכן מוציא מהמערך
+      this.currentProgram.lProgramSettings.splice(index, 1);
+      alert(this.currentProgram.lProgramSettings.length + " remove")
+    }
+    else {  //אם לא קיים סימן שרוצה להוסיף ולכן מכניס למערך
+      this.currentProgram.lProgramSettings.push(settingId);
+      alert(this.currentProgram.lProgramSettings.length + " add")
+    }
+  }
+  removeAlSetting() {
+    //צריך לטפל במקרה הזה
+    if (confirm("שים לב" + "\n" + "באם תשמור שינוי זה ימחקו כל הפעילויות המשובצות למסגרת זו לצהריים בתוכנית זו ובשאר תוכניות" + "\n האם אתה בטוח?"))
+      alert("נמחק")
   }
 }
