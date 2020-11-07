@@ -43,9 +43,6 @@ export class Operator {
         public lActivity:Activity[]=[],
 
         public iNumBookkeeping: number=0,
-        public gg: number=0
-
-
 
         // public binProgramsDatabase: boolean=true,
         // public nvOperatorTypeValue:string="",
