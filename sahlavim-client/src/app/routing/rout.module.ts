@@ -28,15 +28,18 @@ import { ProgramDetailsComponent } from '../components/Programs/program-details/
 import { ProgramScheduleComponent } from '../components/Programs/program-schedule/program-schedule.component';
 
 const appTable: Routes = [
- 
+
   { path: "", component: LoginComponent },
   {
     path: "header-menu", component: HeaderMenuComponent,
     children: [
-      { path: "managers-table", component: ManagersTableComponent },
-     
-      
-      { path: "operators", component: OperatorsComponent,
+      {
+        path: "management-menu", component: ManagementMenuComponent, children: [
+          { path: "managers-table", component: ManagersTableComponent },
+        ]
+      },
+      {
+        path: "operators", component: OperatorsComponent,
         children: [
           { path: "operator-table", component: OperatorTableComponent },
           {
@@ -54,16 +57,17 @@ const appTable: Routes = [
         ]
       },
 
-      
-       { path: "programs", component: ProgramsComponent,
+
+      {
+        path: "programs", component: ProgramsComponent,
         children: [
           { path: "programs-table", component: ProgramsTableComponent },
           {
             path: "programs-details-menu/:id", component: ProgramDetailsMenuComponent,
             children: [
-               { path: "programs-details", component: ProgramDetailsComponent },
-               { path: "programs-schedule", component: ProgramScheduleComponent },
-               //{ path: "settings-messages", component: SettingsMessagesComponent },
+              { path: "programs-details", component: ProgramDetailsComponent },
+              { path: "programs-schedule", component: ProgramScheduleComponent },
+              //{ path: "settings-messages", component: SettingsMessagesComponent },
             ]
           },
         ]

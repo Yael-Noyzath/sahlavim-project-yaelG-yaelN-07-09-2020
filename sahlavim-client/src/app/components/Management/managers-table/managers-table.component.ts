@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-managers-table',
@@ -25,13 +26,13 @@ export class ManagersTableComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
   //מערך מפעילים לטבלה
   usersList: Array<User>;
-
-  lUserType:Map<number, string> = new Map<number, string>();
+  editUser: User = new User();
+  lUserTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     this.GetUsers();
     //מילוי הרשימה בצורה של MAP
-    this.lUserType = mainService.SysTableList[0];
+    this.lUserTypeValue = mainService.SysTableList[0];
   }
 
   ngOnInit() {
@@ -69,8 +70,28 @@ export class ManagersTableComponent implements OnInit {
       );
   }
 
-  DetailsUser(user: User) {
-    alert(user.nvUserName);
+  TheEditUser(u: any) {
+    if (u != -1)
+      this.editUser = (u as User);
+    else
+      this.editUser = new User();
   }
-  
+
+  saveUser() {
+    this.mainService.post("AddUpdateUser", { oUser: this.editUser }).then(
+      res => {
+        if (res) {
+          this.GetUsers();
+          alert("update " + this.editUser.nvUserName + " done!");
+
+        }
+        else {
+          alert("err AddUpdateUser")
+        }
+      },
+      err => {
+        alert("err AddUpdateUser")
+      }
+    )
+  }
 }
