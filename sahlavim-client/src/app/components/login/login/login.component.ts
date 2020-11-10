@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   currentUser: User = new User();
   usersList: User[];
   formLogin: FormGroup;
-  userExist:boolean=false;
+  userExist: boolean = false;
 
   ngOnInit() {
     this.UserLoginControls();
@@ -29,19 +29,18 @@ export class LoginComponent implements OnInit {
   // Login to site
   Login() {
     this.user = this.formLogin.value;
-     //חיפוש המשתמש הזה בתוך הרשימה
-     this.currentUser = this.usersList.find(u => u.nvUserName ==this.user.nvUserName && u.nvPassword ==this.user.nvPassword);
-     if(this.currentUser)//אם שם והסיסמה נכונים
-     {
-        //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-        this.mainService.currentUser=this.currentUser 
-        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
-        this.mainService.serviceNavigate("header-menu");
-     }
-     else
-     {
-       alert("שם וסיסמה אינם תקינים");
-     }
+    //חיפוש המשתמש הזה בתוך הרשימה
+    this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
+    if (this.currentUser)//אם שם והסיסמה נכונים
+    {
+      //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+      this.mainService.currentUser = this.currentUser
+      this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
+      this.mainService.serviceNavigate("header-menu");
+    }
+    else {
+      alert("שם וסיסמה אינם תקינים");
+    }
   }
 
 
@@ -49,10 +48,10 @@ export class LoginComponent implements OnInit {
     this.mainService.post("GetUsers", {})
       .then(
         res => {
-            this.usersList = res;
+          this.usersList = res;
         },
         err => {
-          alert(err +"get users err");
+          alert(err + "get users err");
         }
       );
   }
@@ -61,22 +60,22 @@ export class LoginComponent implements OnInit {
   UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
-        res => { 
+        res => {
           if (res.iUserId)
-            this.userExist= true;
-             
+            this.userExist = true;
+
           else {
             alert("userLogin error");
-            this.userExist= false;
+            this.userExist = false;
           }
         },
         err => {
           alert("err")
-          this.userExist= false;
+          this.userExist = false;
         }
       );
   }
-  
+
   //אתחול סיסמא
   resetUser() {
     if (this.enterByUserName)
@@ -85,8 +84,25 @@ export class LoginComponent implements OnInit {
       this.enterByUserName = true;
   }
   //שליחת מייל לאיפוס הסיסמא
-  sentMailToResetPassword() {
-    alert(this.user.nvMail + " we are sorry but our mail dose not work!")
+  sentMailToResetPassword(mail: string) {
+    alert(mail)
+    this.user.nvPassword=null;
+    this.mainService.post("UserReset", { nvMail: mail }).then
+      (
+        res => {
+          alert(res.iUserId)
+          if (!res.iUserId) {
+            alert("לא קים מייל זה")
+          }
+          else {
+            alert("נשלח")
+          }
+        },
+        err => {
+          alert("err UserReset")
+        }
+      )
+
   }
 
   UserLoginControls() {
@@ -96,7 +112,7 @@ export class LoginComponent implements OnInit {
       nvMail: new FormControl(this.user.nvMail)
     });
   }
-  
+
   get nvUserName() {
     return this.formLogin.get("nvUserName");
   }

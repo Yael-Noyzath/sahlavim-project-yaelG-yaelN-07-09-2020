@@ -42,7 +42,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <button (click)="sentMailToResetPassword()" [disabled]="!userMail.valid"
+                    <button (click)="sentMailToResetPassword(nvMail.value)" [disabled]="!nvMail.valid"
                         class="btn  btn-info btn-lg btn-block btn-login">אישור</button>
                 </div>
                 <div class="form-group">
