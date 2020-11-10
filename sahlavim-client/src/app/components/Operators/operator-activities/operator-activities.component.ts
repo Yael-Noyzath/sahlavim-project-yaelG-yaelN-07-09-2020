@@ -14,13 +14,15 @@ export class OperatorActivitiesComponent implements OnInit {
 
   //רשימת פעילויות
   Activities:Activity[]=[];
-// , 'lActivityAgegroups'
+
   //מערך שמות העמודות
-  displayedColumns: string[] = ['nvActivityName','iCategoryType','nvActivityProduct', 'nPrice', 'nShortBreak','nLongBreak', 'bActivityNoon','bActivityMorning'];
+  displayedColumns: string[] = ['nvActivityName','iCategoryType','nvActivityProduct', 'lActivityAgegroups', 'nPrice', 'nShortBreak','nLongBreak', 'bActivityNoon','bActivityMorning'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Activity>;
 
   activityCategories:Map<number,string>=new  Map<number,string>();
+  agesCategories:Map<number,string>=new  Map<number,string>();
+
   constructor(private mainService: MainServiceService) { }
 
   ngOnInit() {
@@ -29,6 +31,8 @@ export class OperatorActivitiesComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.Activities);
     this.ngAfterViewInit();
     this.activityCategories=this.mainService.SysTableList[7];
+    this.agesCategories=this.mainService.SysTableList[6];
+
 
      debugger
   }

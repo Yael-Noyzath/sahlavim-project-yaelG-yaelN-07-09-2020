@@ -62,7 +62,7 @@ export class OperatorDetailsComponent implements OnInit {
             this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
           }
         }
-debugger
+
     //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,

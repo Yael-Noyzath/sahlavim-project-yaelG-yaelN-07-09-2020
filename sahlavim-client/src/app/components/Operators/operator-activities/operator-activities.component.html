@@ -21,11 +21,15 @@
             <td mat-cell *matCellDef="let row"> {{row.nvActivityProduct}} </td>
         </ng-container> 
 
-        <!-- kind Column
-        <ng-container matColumnDef="lActivityAgegroups">
+        <!-- kind Column -->
+        <ng-container matColumnDef="lActivityAgegroups" >
             <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>קטגורית גילאים</th>
-            <td mat-cell *matCellDef="let row"> {{row.lActivityAgegroups}} </td>
-        </ng-container> -->
+            <td mat-cell *matCellDef="let row" >
+                <div *ngFor="let age of row.lActivityAgegroups">
+                    {{ agesCategories.get(age)}}
+                </div> 
+             </td>
+        </ng-container>
 
         <!-- kind Column -->
         <ng-container matColumnDef="nPrice">
