@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   currentUser: User = new User();
   usersList: User[];
   formLogin: FormGroup;
-  userExist:boolean=false;
+  userExist: boolean = false;
 
   ngOnInit() {
     this.UserLoginControls();
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
             debugger
         },
         err => {
-          alert(err +"get users err");
+          alert(err + "get users err");
         }
       );
   }
@@ -64,22 +64,22 @@ export class LoginComponent implements OnInit {
   UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
-        res => { 
+        res => {
           if (res.iUserId)
-            this.userExist= true;
-             
+            this.userExist = true;
+
           else {
             alert("userLogin error");
-            this.userExist= false;
+            this.userExist = false;
           }
         },
         err => {
           alert("err")
-          this.userExist= false;
+          this.userExist = false;
         }
       );
   }
-  
+
   //אתחול סיסמא
   resetUser() {
     if (this.enterByUserName)
@@ -88,8 +88,25 @@ export class LoginComponent implements OnInit {
       this.enterByUserName = true;
   }
   //שליחת מייל לאיפוס הסיסמא
-  sentMailToResetPassword() {
-    alert(this.user.nvMail + " we are sorry but our mail dose not work!")
+  sentMailToResetPassword(mail: string) {
+    alert(mail)
+    this.user.nvPassword=null;
+    this.mainService.post("UserReset", { nvMail: mail }).then
+      (
+        res => {
+          alert(res.iUserId)
+          if (!res.iUserId) {
+            alert("לא קים מייל זה")
+          }
+          else {
+            alert("נשלח")
+          }
+        },
+        err => {
+          alert("err UserReset")
+        }
+      )
+
   }
 
   UserLoginControls() {
@@ -99,7 +116,7 @@ export class LoginComponent implements OnInit {
       nvMail: new FormControl(this.user.nvMail)
     });
   }
-  
+
   get nvUserName() {
     return this.formLogin.get("nvUserName");
   }
