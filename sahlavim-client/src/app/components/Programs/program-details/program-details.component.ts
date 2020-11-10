@@ -73,7 +73,7 @@ export class ProgramDetailsComponent implements OnInit {
 
 
   saveProgram() {
-  alert(this.currentProgram.lProgramSettings.length)
+    alert(this.currentProgram.lProgramSettings.length)
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -82,7 +82,23 @@ export class ProgramDetailsComponent implements OnInit {
         this.currentProgram.lProgramAgegroups.push(age.Key);
       }
     }
-    debugger
+    var lSettingMorning:number[];
+    var lSettingNoon:number[];
+
+    this.mainService.post("ProgramSettingsInsertUpdate", { 
+      iProgramId: this.currentProgram.iProgramId, 
+      lProgramSettings: this.currentProgram.lProgramSettings,
+      lSettingMorning: lSettingMorning,
+      lSettingNoon: lSettingNoon,
+      iUserId: this.mainService.currentUser.iUserId}).then(
+      res => {
+        alert("suc")
+      },
+      err => {
+        alert("err ProgramSettingsInsertUpdate")
+      }
+    )
+
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
@@ -163,10 +179,16 @@ export class ProgramDetailsComponent implements OnInit {
       this.currentProgram.lProgramSettings.push(settingId);
       alert(this.currentProgram.lProgramSettings.length + " add")
     }
+    debugger
   }
   removeAlSetting() {
     //צריך לטפל במקרה הזה
     if (confirm("שים לב" + "\n" + "באם תשמור שינוי זה ימחקו כל הפעילויות המשובצות למסגרת זו לצהריים בתוכנית זו ובשאר תוכניות" + "\n האם אתה בטוח?"))
       alert("נמחק")
+  }
+  ifChecked(id: number) {
+    if (this.currentProgram.lProgramSettings.findIndex(x => x == id) == -1)
+      return false;
+    return true;
   }
 }
