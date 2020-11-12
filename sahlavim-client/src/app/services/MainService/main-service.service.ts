@@ -32,8 +32,6 @@ export class MainServiceService {
     this.getAllOperators();
     this.getSettings();
     this.getPrograms();
-    // let dict = new Dictionary<Number>();
-
   }
 
   gItems: any = [];
@@ -72,9 +70,7 @@ export class MainServiceService {
       res => {
         if (res)
           this.programsList = res;
-        else
-          alert(" get programs err");
-      },
+             },
       err => {
         alert("ProgramsGet err")
       }

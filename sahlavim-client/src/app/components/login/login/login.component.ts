@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.UserLoginControls();
-    debugger
     this.GetUsers();
 
   }
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
   // Login to site
   Login() {
     this.user = this.formLogin.value;
-    debugger
      //חיפוש המשתמש הזה בתוך הרשימה
      this.currentUser = this.usersList.find(u => u.nvUserName ==this.user.nvUserName && u.nvPassword ==this.user.nvPassword);
      if(this.currentUser)//אם שם והסיסמה נכונים
@@ -52,7 +50,6 @@ export class LoginComponent implements OnInit {
       .then(
         res => {
             this.usersList = res;
-            debugger
         },
         err => {
           alert(err + "get users err");
