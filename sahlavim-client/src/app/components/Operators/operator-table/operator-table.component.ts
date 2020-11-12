@@ -22,7 +22,13 @@ export class OperatorTableComponent implements OnInit {
   displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete', 'choose'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
+ 
+  constructor(private mainService: MainServiceService) {
 
+    // Assign the data to the data source for the table to render
+    // if (this.operators[0].OperatorName)
+    //   this.dataSource = new MatTableDataSource(this.operators);
+  }
   ngOnInit() {
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
@@ -39,12 +45,7 @@ export class OperatorTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private mainService: MainServiceService) {
 
-    // Assign the data to the data source for the table to render
-    // if (this.operators[0].OperatorName)
-    //   this.dataSource = new MatTableDataSource(this.operators);
-  }
 
 
   ngAfterViewInit() {
