@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.UserLoginControls();
+    debugger
     this.GetUsers();
 
   }
@@ -29,18 +30,20 @@ export class LoginComponent implements OnInit {
   // Login to site
   Login() {
     this.user = this.formLogin.value;
-    //חיפוש המשתמש הזה בתוך הרשימה
-    this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
-    if (this.currentUser)//אם שם והסיסמה נכונים
-    {
-      //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-      this.mainService.currentUser = this.currentUser
-      this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
-      this.mainService.serviceNavigate("header-menu");
-    }
-    else {
-      alert("שם וסיסמה אינם תקינים");
-    }
+    debugger
+     //חיפוש המשתמש הזה בתוך הרשימה
+     this.currentUser = this.usersList.find(u => u.nvUserName ==this.user.nvUserName && u.nvPassword ==this.user.nvPassword);
+     if(this.currentUser)//אם שם והסיסמה נכונים
+     {
+        //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+        this.mainService.currentUser=this.currentUser 
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
+        this.mainService.serviceNavigate("header-menu");
+     }
+     else
+     {
+       alert("שם וסיסמה אינם תקינים");
+     }
   }
 
 
@@ -48,7 +51,8 @@ export class LoginComponent implements OnInit {
     this.mainService.post("GetUsers", {})
       .then(
         res => {
-          this.usersList = res;
+            this.usersList = res;
+            debugger
         },
         err => {
           alert(err + "get users err");

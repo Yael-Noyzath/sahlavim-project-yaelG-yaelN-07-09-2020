@@ -194,22 +194,33 @@
     <mat-checkbox [(ngModel)]="operator.bActiveAfternoon" [checked]="operator.bActiveAfternoon" name="ActiveAfternoon"
         class="example-margin">עובד בצהרונים</mat-checkbox>
 </section>
+<a data-toggle="modal" data-target="#modalCart"> עריכת לו"ז צהרונים</a>
 
-<section style="direction: rtl;" class="example-section">
+e
+<section style="direction: rtl;" class="example-sction">
     <mat-checkbox [(ngModel)]="operator.bActiveChanukahCamp" [checked]="operator.bActiveChanukahCamp" name="ActiveChanukahCamp"
         class="example-margin">עובד בקייטנת חנוכה</mat-checkbox>
 </section>
+<p> עריכת לו"ז קייטנת חנוכה</p>
+
 
 <section style="direction: rtl;" class="example-section">
     <mat-checkbox [(ngModel)]="operator.bActivePassoverCamp" [checked]="operator.bActivePassoverCamp" name="ActivePassoverCamp"
         class="example-margin">עובד בקייטנת פסח</mat-checkbox>
 </section>
+<p> עריכת לו"ז קייטנת פסח</p>
 
 <section style="direction: rtl;" class="example-section">
     <mat-checkbox [(ngModel)]="operator.bActiveSummerCamp" [checked]="operator.bActiveSummerCamp" name="ActiveSummerCamp"
         class="example-margin">עובד בקייטנת קיץ</mat-checkbox>
 </section>
+<p> עריכת לו"ז קייטנת קיץ</p>
+
 
         <button type="submit" class="btn btn-success">save</button>
     </form>
+</div>
+
+<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"   aria-hidden="true">
+<p>hi</p>
 </div>
