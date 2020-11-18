@@ -130,7 +130,6 @@ export class SettingsDetailsComponent implements OnInit {
         this.currentCoordinator = res;
         this.currentSetting.iCoordinatorId = this.currentCoordinator.iCoordinatorId;
         this.CoordinatorsGet();
-        alert("update " + this.currentCoordinator.nvFirstName + " done!");
       }
       ,
       err => {
@@ -139,7 +138,10 @@ export class SettingsDetailsComponent implements OnInit {
     )
 
   }
-  updateCoordinatorToEdit(c: coordinator) {
-    this.addCoordinator = c;
+  updateCoordinatorToEdit(c: any) {
+    if (c != -1)
+      this.addCoordinator = (c as coordinator);
+    else
+      this.addCoordinator = new coordinator();
   }
 }

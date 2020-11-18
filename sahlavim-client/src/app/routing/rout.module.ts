@@ -26,6 +26,11 @@ import { SettingsMessagesComponent } from '../components/Settings/settings-messa
 import { ProgramsTableComponent } from '../components/Programs/programs-table/programs-table.component';
 import { ProgramDetailsComponent } from '../components/Programs/program-details/program-details.component';
 import { ProgramScheduleComponent } from '../components/Programs/program-schedule/program-schedule.component';
+import { AfternoonComponent } from '../components/Afternoons/afternoon/afternoon.component';
+import { AfternoonDetailsMenuComponent } from '../components/Afternoons/afternoon-details-menu/afternoon-details-menu.component';
+import { AfternoonTableComponent } from '../components/Afternoons/afternoon-table/afternoon-table.component';
+import { AfternoonDetailsComponent } from '../components/Afternoons/afternoon-details/afternoon-details.component';
+import { AfternoonScheduleComponent } from '../components/Afternoons/afternoon-schedule/afternoon-schedule.component';
 
 const appTable: Routes = [
 
@@ -68,6 +73,19 @@ const appTable: Routes = [
               { path: "programs-details", component: ProgramDetailsComponent },
               { path: "programs-schedule", component: ProgramScheduleComponent },
               //{ path: "settings-messages", component: SettingsMessagesComponent },
+            ]
+          },
+        ]
+      },
+      {
+        path: "afternoon", component: AfternoonComponent,
+        children: [
+          { path: "afternoon-table", component: AfternoonTableComponent },
+          {
+            path: "afternoon-details-menu/:id", component: AfternoonDetailsMenuComponent,
+            children: [
+              { path: "afternoon-details", component: AfternoonDetailsComponent },
+              { path: "afternoon-schedule", component: AfternoonScheduleComponent },
             ]
           },
         ]
