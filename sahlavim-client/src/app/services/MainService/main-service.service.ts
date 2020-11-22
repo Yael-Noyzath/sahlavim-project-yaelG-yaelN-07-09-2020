@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
+import { afternoon } from 'src/app/Classes/afternoon';
+
 
 export class forSelect{
   Key:number;
@@ -29,6 +31,7 @@ export class MainServiceService {
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
   programsList: Program[] = [];
+  afternoonsList:afternoon[]=[];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -72,9 +75,20 @@ export class MainServiceService {
       res => {
         if (res)
           this.programsList = res;
-             },
+      },
       err => {
         alert("ProgramsGet err")
+      }
+    );
+  }
+  getAfternoon() {
+    this.post("bProgramAfternoon", {}).then(
+      res => {
+        if (res)
+          this.afternoonsList = res;
+      },
+      err => {
+        alert("getAfternoon err")
       }
     );
   }
@@ -124,10 +138,9 @@ export class MainServiceService {
     this.currentUser = u;
   }
 
-getUser()
-{
-return this.currentUser;
-}
+  getUser() {
+    return this.currentUser;
+  }
 
 
   //שכונות sysTableUd=5

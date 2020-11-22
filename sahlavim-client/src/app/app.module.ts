@@ -37,7 +37,6 @@ import { RoutModule } from './routing/rout.module';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { AfternoonDetailsComponent } from './components/Afternoons/afternoon-details/afternoon-details.component';
 import { AfternoonDetailsMenuComponent } from './components/Afternoons/afternoon-details-menu/afternoon-details-menu.component';
-import { AfternoonMainComponent } from './components/Afternoons/afternoon-main/afternoon-main.component';
 import { AfternoonScheduleComponent } from './components/Afternoons/afternoon-schedule/afternoon-schedule.component';
 import { WeeklySchedulingComponent } from './components/Afternoons/weekly-scheduling/weekly-scheduling.component';
 import { LoginComponent } from './components/Login/login/login.component';
@@ -72,7 +71,8 @@ import { SettingTableComponent } from './components/Settings/setting-table/setti
 import { SettingsScheduleComponent } from './components/Settings/settings-schedule/settings-schedule.component';
 import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
 import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
-
+import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.component';
+import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component'
 
 @NgModule({
   declarations: [
@@ -81,7 +81,6 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     AppComponent,
     AfternoonDetailsComponent,
     AfternoonDetailsMenuComponent,
-    AfternoonMainComponent,
     AfternoonScheduleComponent,
     WeeklySchedulingComponent,
     LoginComponent,
@@ -114,6 +113,8 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     SettingsScheduleComponent,
     SettingsMessagesComponent,
     ProgramsTableComponent,
+    AfternoonComponent,
+    AfternoonTableComponent
   ],
   imports: [
     ReactiveFormsModule,
