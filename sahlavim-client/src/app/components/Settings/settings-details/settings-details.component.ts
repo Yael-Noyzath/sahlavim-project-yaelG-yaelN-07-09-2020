@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 
 
 @Component({
@@ -17,8 +17,8 @@ export class SettingsDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['Cradio', 'edit', 'nvFirstName', 'nvLastName', 'nvPhone', 'bIsActive'];
 
-  lSettingAgegroupsValue: row[] = [];
-  SettingAgegroupsListNg: row[] = [];
+  lSettingAgegroupsValue: forSelect[] = [];
+  SettingAgegroupsListNg: forSelect[] = [];
   dropdownSettingAgegroups: IDropdownSettings;
 
   panelOpenState = false;
@@ -137,7 +137,6 @@ export class SettingsDetailsComponent implements OnInit {
         alert("err saveCoordinator")
       }
     )
-
   }
   updateCoordinatorToEdit(c: coordinator) {
     this.addCoordinator = c;

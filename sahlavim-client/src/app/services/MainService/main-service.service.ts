@@ -7,7 +7,7 @@ import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 
-export class row{
+export class forSelect{
   Key:number;
   Value:string; 
   constructor(key:number,value:string){
@@ -23,16 +23,6 @@ export class row{
 
 
 export class MainServiceService {
-
-
-  constructor(private router: Router, private http: HttpClient) {
-
-    this.globalObj();
-
-    this.getAllOperators();
-    this.getSettings();
-    this.getPrograms();
-  }
 
   gItems: any = [];
 
@@ -53,6 +43,18 @@ export class MainServiceService {
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
   sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+
+  
+  constructor(private router: Router, private http: HttpClient) {
+
+    this.globalObj();
+
+    this.getAllOperators();
+    this.getSettings();
+    this.getPrograms();
+  }
+
+
 
   post(url: string, data: any): Promise<any> {
     console.log(url);

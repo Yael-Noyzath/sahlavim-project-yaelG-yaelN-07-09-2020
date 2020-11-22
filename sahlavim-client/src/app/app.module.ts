@@ -7,6 +7,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {
   MatButtonModule,
   MatMenuModule,
@@ -115,7 +116,11 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
     ProgramsTableComponent,
   ],
   imports: [
-    HttpClientModule ,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
     BrowserModule,

@@ -1,11 +1,12 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
-import { MainServiceService,row } from 'src/app/services/MainService/main-service.service';
+import {  MainServiceService,forSelect } from 'src/app/services/MainService/main-service.service';
 import { MatCheckboxModule } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { operatorsAvailability } from 'src/app/Classes/OperatorsAvailability';
 
 @Component({
   selector: 'app-operator-details',
@@ -16,10 +17,10 @@ export class OperatorDetailsComponent implements OnInit {
 
   dropdownSettings: IDropdownSettings;
   dropdownNeighborhoods: IDropdownSettings;
-
+  operatorsAvailability:operatorsAvailability[]=[];
   //רשימת שכונות
-  NeighborhoodsList:row[]=[];
-  operatorNeighborhoods:row[]=[];;
+  NeighborhoodsList:forSelect[]=[];
+  operatorNeighborhoods:forSelect[]=[];;
   DetailsForm: FormGroup;
   operator: Operator;
   blNeighborhoods: boolean;//פעיל באיזורים מסויימים
@@ -33,8 +34,19 @@ export class OperatorDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס ערכיה
+
+   this.mainService.post("OperatorsAvailabilityGet",{iOperatorId:this.operator.iOperatorId}).then(
+     res=>
+     {
+       this.operatorsAvailability=res;
+     },
+     err=>{
+       alert(err);
+     }
+   );
+debugger
     this.blNeighborhoods = this.operator.lNeighborhoods.length > 0 ? true : false;//האם פעיל באיזורים מסויימם
     this.bSettingslsExclude = this.operator.lSchoolsExcude.length > 0 ? true : false;//האם לא פועל במיסגרות מסויימות
     this.settingsList = this.mainService.settingsList;//רשימת המיסגרות לבחירת לא פעיל במיסגרות מסויימות
@@ -115,7 +127,6 @@ export class OperatorDetailsComponent implements OnInit {
     }
 
 
-    debugger
 
 
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
@@ -163,14 +174,14 @@ export class OperatorDetailsComponent implements OnInit {
   }
 
 
-  onDeSelectNeighborhood(item: row) {//מחיקה
+  onDeSelectNeighborhood(item: forSelect) {//מחיקה
    this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x=>x.Key==item.Key) , 1);
   }
 
-  onSelectNeighborhood(item: row) {//הוספה
+  onSelectNeighborhood(item:forSelect) {//הוספה
 
     this.operator.lNeighborhoods.push(item.Key);
-
+this.operatorNeighborhoods.slice()
     console.log(item);
   }
 
