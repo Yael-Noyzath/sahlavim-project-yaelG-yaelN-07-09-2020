@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
-import { afternoon } from 'src/app/Classes/afternoon';
 
 export class row {
   Key: number;
@@ -33,6 +32,7 @@ export class MainServiceService {
     this.getAllOperators();
     this.getSettings();
     this.getPrograms();
+    this.getAfternoon();
   }
 
   gItems: any = [];
@@ -40,7 +40,7 @@ export class MainServiceService {
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
   programsList: Program[] = [];
-  afternoonsList:afternoon[]=[];
+  afternoonsList:Program[]=[];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -81,10 +81,11 @@ export class MainServiceService {
     );
   }
   getAfternoon() {
-    this.post("bProgramAfternoon", {}).then(
+    this.post("ProgramsGet", {bProgramAfternoon:true}).then(
       res => {
         if (res)
           this.afternoonsList = res;
+          debugger;
       },
       err => {
         alert("getAfternoon err")

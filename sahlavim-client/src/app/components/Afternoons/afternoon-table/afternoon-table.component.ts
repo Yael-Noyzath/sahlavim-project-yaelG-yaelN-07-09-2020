@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { afternoon } from 'src/app/Classes/afternoon';
+import { promise } from 'protractor';
+import { Program } from 'src/app/Classes/program';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 @Component({
@@ -10,11 +11,12 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class AfternoonTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['choose', 'edit', 'iafternoonType', 'nvafternoonName', 'dFromDateFormat', 'dToDateFormat',
-    'lafternoonSettings', 'lafternoonAgegroups', 'nvBudgetItem'];
+  displayedColumns: string[] = ['choose', 'edit', 'iYearType', 'iSemesterType', 'dFromDate', 'dToDate', 'lProgramSettings'];
 
-  afternoonList: Array<afternoon>;
-  dataSource: MatTableDataSource<afternoon>;
+  afternoonList: Array<Program>;
+  dataSource: MatTableDataSource<Program>;
+  YearTypeValue: Map<number, string> = new Map<number, string>();
+  SemesterTypeValue: Map<number, string> = new Map<number, string>();
 
   ngOnInit() {
     this.ngAfterViewInit();
@@ -26,13 +28,18 @@ export class AfternoonTableComponent implements OnInit {
   constructor(private mainService: MainServiceService) {
     this.afternoonList = this.mainService.afternoonsList;
     for (let p of this.afternoonList) {
-      // p.dFromDate=new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
-      // p.dToDate=new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+      p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+      p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+    //  alert(p.dToDate[1])
+    //   if (this.YearTypeValue.get(p.iYearType) != p.dToDate[3]) {
 
-      // // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
+    //   }
+      // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
     }
 
-
+    this.YearTypeValue = mainService.SysTableList[14];
+    this.SemesterTypeValue = mainService.SysTableList[16];
+    this.dataSource = new MatTableDataSource(this.afternoonList);
   }
 
   ngAfterViewInit() {
@@ -41,5 +48,15 @@ export class AfternoonTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  EditAfternoon(prog: Program) {
+    this.mainService.programForDetails = prog;
+    this.mainService.serviceNavigateForId("/header-menu/afternoon/afternoon-details-menu/", prog.iProgramId)
+  }
+
+  addAfternoon() {
+    this.mainService.programForDetails = new Program();
+    this.mainService.serviceNavigateForId("/header-menu/afternoon/afternoon-details-menu/", -1)
+
+  }
 
 }
