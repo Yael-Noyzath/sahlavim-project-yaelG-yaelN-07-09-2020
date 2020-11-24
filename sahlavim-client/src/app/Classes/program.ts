@@ -21,8 +21,8 @@ export class Program {
         public iSysRowStatus: number = -1,//לבדוק מה זה
         public bProgramAfternoon: boolean = false,//האם תוכנית צהרים
         public iSemesterType: number = -1,
-        // public tFirstActivity: Date=new Date(),
-        // public tSecondActivity: Date=new Date(),
+        public tFirstActivity: string="",
+        public tSecondActivity: string="",
         public iYearType: number = -1,//לבדוק
         public iNumActivityInWeek: number = -1,
         public lProgramAgegroups: Array<number> = new Array<number>(),

@@ -66,6 +66,12 @@ export class ProgramDetailsComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    this.currentProgram.tFromTimeMorning = new Date(parseInt(this.currentProgram.tFromTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    this.currentProgram.tToTimeMorning = new Date(parseInt(this.currentProgram.tToTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    this.currentProgram.tFromTimeAfternoon = new Date(parseInt(this.currentProgram.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    this.currentProgram.tToTimeAfternoon = new Date(parseInt(this.currentProgram.tToTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+
     this.ngAfterViewInit();
 
   }
@@ -85,19 +91,24 @@ export class ProgramDetailsComponent implements OnInit {
     var lSettingMorning:number[];
     var lSettingNoon:number[];
 
-    this.mainService.post("ProgramSettingsInsertUpdate", { 
-      iProgramId: this.currentProgram.iProgramId, 
-      lProgramSettings: this.currentProgram.lProgramSettings,
-      lSettingMorning: lSettingMorning,
-      lSettingNoon: lSettingNoon,
-      iUserId: this.mainService.currentUser.iUserId}).then(
-      res => {
-        alert("suc")
-      },
-      err => {
-        alert("err ProgramSettingsInsertUpdate")
-      }
-    )
+    // this.mainService.post("ProgramSettingsInsertUpdate", { 
+    //   iProgramId: this.currentProgram.iProgramId, 
+    //   lProgramSettings: this.currentProgram.lProgramSettings,
+    //   lSettingMorning: lSettingMorning,
+    //   lSettingNoon: lSettingNoon,
+    //   iUserId: this.mainService.currentUser.iUserId}).then(
+    //   res => {
+    //     alert("suc")
+    //   },
+    //   err => {
+    //     alert("err ProgramSettingsInsertUpdate")
+    //   }
+    // )
+
+    this.currentProgram.tFromTimeMorning=this.currentProgram.tFromTimeMorning.toString();
+    this.currentProgram.tToTimeMorning=this.currentProgram.tToTimeMorning.toString();
+    this.currentProgram.tFromTimeAfternoon=this.currentProgram.tFromTimeAfternoon.toString();
+    this.currentProgram.tToTimeAfternoon=this.currentProgram.tToTimeAfternoon.toString();
 
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
@@ -107,7 +118,7 @@ export class ProgramDetailsComponent implements OnInit {
 
       },
       err => {
-        alert("saveProgram err");
+        alert("saveProgram err+\n+צריך לסדר את השעה והתאריך");
       }
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.

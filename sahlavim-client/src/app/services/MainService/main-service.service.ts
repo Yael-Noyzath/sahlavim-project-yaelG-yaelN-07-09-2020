@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
-import { afternoon } from 'src/app/Classes/afternoon';
 
 
 export class forSelect{
@@ -26,12 +25,23 @@ export class forSelect{
 
 export class MainServiceService {
 
+
+  constructor(private router: Router, private http: HttpClient) {
+
+    this.globalObj();
+
+    this.getAllOperators();
+    this.getSettings();
+    this.getPrograms();
+    this.getAfternoon();
+  }
+
   gItems: any = [];
 
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
   programsList: Program[] = [];
-  afternoonsList:afternoon[]=[];
+  afternoonsList: Program[] = [];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -45,18 +55,9 @@ export class MainServiceService {
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
-  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
 
-  
-  constructor(private router: Router, private http: HttpClient) {
-
-    this.globalObj();
-
-    this.getAllOperators();
-    this.getSettings();
-    this.getPrograms();
-  }
-
+  // sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+  sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
 
 
   post(url: string, data: any): Promise<any> {
@@ -71,10 +72,16 @@ export class MainServiceService {
 
   getPrograms() {
     //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
-    this.post("ProgramsGet", {}).then(
+    this.post("ProgramsGet", { bProgramAfternoon: false }).then(
       res => {
-        if (res)
+        if (res) {
           this.programsList = res;
+          for (let p of this.programsList) {
+            p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
+          }
+        }
       },
       err => {
         alert("ProgramsGet err")
@@ -82,10 +89,21 @@ export class MainServiceService {
     );
   }
   getAfternoon() {
-    this.post("bProgramAfternoon", {}).then(
+    this.post("ProgramsGet", { bProgramAfternoon: true }).then(
       res => {
-        if (res)
+        if (res) {
           this.afternoonsList = res;
+          for (let p of this.afternoonsList) {
+            p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            p.dToDate =   new Date(parseInt(  p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            //  alert(p.dToDate[1])
+            //   if (this.YearTypeValue.get(p.iYearType) != p.dToDate[3]) {
+
+            //   }
+            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
+          }
+
+        }
       },
       err => {
         alert("getAfternoon err")
