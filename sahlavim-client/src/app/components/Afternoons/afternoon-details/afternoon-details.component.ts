@@ -58,6 +58,10 @@ export class AfternoonDetailsComponent implements OnInit {
 //  this.currentAfternoon.dToDate= new Date(this.currentAfternoon.dToDate).toLocaleDateString() ;
 //  alert(  this.currentAfternoon.dToDate)
     this.currentAfternoon.tFirstActivity = new Date(parseInt(this.currentAfternoon.tFirstActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    // if(this.currentAfternoon.tFirstActivity.length==7)
+    // {
+    //   this.currentAfternoon.tFirstActivity='0'+this.currentAfternoon.tFirstActivity;
+    // }   
     this.currentAfternoon.tSecondActivity = new Date(parseInt(this.currentAfternoon.tSecondActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
 
     //הגדרות ה multi select
