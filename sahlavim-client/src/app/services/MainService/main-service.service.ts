@@ -100,7 +100,9 @@ export class MainServiceService {
       .then(
         res => {
           if (res) {
-            this.operatorsList = res;
+            this.operatorsList = res;    
+              debugger
+
           }
           else
             alert("get all operators error")

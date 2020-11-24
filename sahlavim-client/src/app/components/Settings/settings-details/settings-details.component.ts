@@ -89,7 +89,8 @@ export class SettingsDetailsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   saveSetting() {
-    this.currentSetting.lSettingAgegroups.splice(0, this.currentSetting.lSettingAgegroups.length)
+
+    this.currentSetting.lSettingAgegroups.splice(0, this.currentSetting.lSettingAgegroups.length)//delete th list
     //  עידכון רשימת הגילאים שלא תוכנית לפי הרשימה שנבחרה 
     if (this.SettingAgegroupsListNg.length > 0) {
       for (let age of this.SettingAgegroupsListNg)//מעבר על הרשימה שנבחרה

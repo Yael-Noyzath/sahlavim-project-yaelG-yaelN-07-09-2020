@@ -8,6 +8,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';   
 @import "~angular2-multiselect-dropdown/themes/default.theme.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css';
 
 /* for multi select */
 .mu-hero-overlay,
@@ -16,6 +23,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: -webkit-linear-gradient(to right, #003A70, #F6BE00);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #003A70, #F6BE00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+.cdk-overlay-container, .cdk-overlay-pane {
+    z-index: 9999 !important;
 }
 
 .mu-primary-btn:hover,

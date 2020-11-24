@@ -126,10 +126,14 @@
                     class="example-margin">מפעיל בחוגי תל"ן</mat-checkbox>
             </section>
 
+            <!-- talan schools settings -->
             <div *ngIf="schoolListforTalan.length">
                 <ng-multiselect-dropdown name="talanSchools" [(ngModel)]="lschool" [placeholder]="'בתי ספר'"
-                    [data]="schoolListforTalan" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
-                    (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)"
+                    [data]="schoolListforTalan" [settings]="dropdownSettings" 
+                    (onSelect)="onItemSelect($event,'talanSchool')"
+                    (onSelectAll)="onSelectAll('talanSchool')" 
+                    (onDeSelectAll)="onDeSelectAll('talanSchool')" 
+                    (onDeSelect)="OnItemDeSelect($event,'talanSchool')"
                     [disabled]="!operator.bTalan">
                 </ng-multiselect-dropdown>
             </div>
@@ -144,12 +148,17 @@
             </section>
 
 
-
+            <!-- Neighborhoods -->
             <div *ngIf="NeighborhoodsList.length">
-                <ng-multiselect-dropdown name="neighborhoods" [settings]="dropdownNeighborhoods"
-                    [(ngModel)]="operatorNeighborhoods" [data]="NeighborhoodsList" [placeholder]="'איזורים'"
-                    (onSelect)="onSelectNeighborhood($event)" (onSelectAll)="onSelectAllNeighborhood($event)"
-                    (onDeSelectAll)="onDeSelectAllNeighborhood($event)" (onDeSelect)="onDeSelectNeighborhood($event)"
+                <ng-multiselect-dropdown name="neighborhoods" 
+                [settings]="dropdownNeighborhoods"
+                    [(ngModel)]="operatorNeighborhoods"
+                     [data]="NeighborhoodsList"
+                      [placeholder]="'איזורים'"
+                    (onSelect)="onSelectNeighborhood($event)"
+                    (onSelectAll)="onSelectAll('neighberhoods')" 
+                    (onDeSelectAll)="onDeSelectAll('neighberhoods')" 
+                    (onDeSelect)="onDeSelectNeighborhood($event)"
                     [disabled]="!blNeighborhoods">
                 </ng-multiselect-dropdown>
             </div>
@@ -163,10 +172,17 @@
                     class="example-margin">לא פעיל במסגרות מסויימות</mat-checkbox>
             </section>
 
+
             <div *ngIf="settingsList.length">
-                <ng-multiselect-dropdown name="schoolExclude" [(ngModel)]="schoolsExcludeList" [placeholder]="'מסגרות'"
-                    [data]="settingsList" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
-                    (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)"
+                <ng-multiselect-dropdown name="schoolExclude"
+                 [(ngModel)]="schoolsExcludeList"
+                  [placeholder]="'מסגרות'"
+                    [data]="settingsList" 
+                    [settings]="dropdownSettings" 
+                    (onSelect)="onItemSelect($event,'settings')"
+                    (onSelectAll)="onSelectAll('settings')" 
+                    (onDeSelectAll)="onDeSelectAll('settings')" 
+                    (onDeSelect)="OnItemDeSelect($event,'settings')"
                     [disabled]="!bSettingslsExclude">
                 </ng-multiselect-dropdown>
             </div>
@@ -225,6 +241,7 @@
             </div>
 
             <!--Body-->
+              
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <div id="Sunday">
 
@@ -280,8 +297,9 @@
                 </div>
 
             </div>
-            <button mat-raised-button color="accent">שמור</button>
-
+            <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                <mat-icon>שמור</mat-icon>
+            </button>
         </div>
     </div>
 </div>

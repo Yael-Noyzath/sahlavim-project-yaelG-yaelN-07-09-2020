@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { AfterViewInit, OnDestroy } from '@angular/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-operator-activities',
@@ -14,6 +15,8 @@ import { AfterViewInit, OnDestroy } from '@angular/core';
   styleUrls: ['./operator-activities.component.css']
 })
 export class OperatorActivitiesComponent implements OnInit {
+
+  dropdownSettings:IDropdownSettings;
 
   //מערך שמות העמודות
   displayedColumns: string[] = ['nvActivityName','iCategoryType','nvActivityProduct', 'lActivityAgegroups', 'nPrice', 'nShortBreak','nLongBreak','bActivityMorning','bActivityNoon','update'];
@@ -26,10 +29,10 @@ export class OperatorActivitiesComponent implements OnInit {
 
   //רשימת פעילויות
   Activities:Activity[]=[];
-  ActivitiesType:forSelect[];
   CurrentActivity:Activity=new Activity();
-
-  activControl:forSelect;
+  agesCategories:forSelect[]=[];
+  
+  activControl:forSelect=new forSelect(0," ");
   activFilterCtrl:FormControl=new FormControl();
   /** list of activities filtered by search keyword */
   public filteredActivities: ReplaySubject<forSelect[]> = new ReplaySubject<forSelect[]>(1);
@@ -39,29 +42,38 @@ export class OperatorActivitiesComponent implements OnInit {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
   
-  agesCategories:Map<number,string>=new  Map<number,string>();
   activityCategories:Map<number,string>=new  Map<number,string>();
+  agesForTable:Map<number,string>=new  Map<number,string>();
+  AgesSelected: forSelect[]=[];
+  ActivitiesType: forSelect[]=[];
+  activeType:forSelect;
+  
   constructor(private mainService: MainServiceService) { }
 
 
   ngOnInit() {
 
     this.Activities = this.mainService.operatorForDetails.lActivity;
-    this.dataSource = new MatTableDataSource(this.Activities);
+    this.dataSource = new MatTableDataSource(this.Activities);  
+    this.agesForTable=this.mainService.SysTableList[6];
+
     this.ngAfterViewInit();
     this.ActivitiesType=this.mainService.gItems[7].dParams;
-    this.agesCategories=this.mainService.SysTableList[6];
+    this.agesCategories=this.mainService.gItems[6].dParams;
     this.activityCategories=this.mainService.SysTableList[7];
 
-    // load the initial bank list
-    this.filteredActivities.next(this.ActivitiesType.slice());
 
-    // listen for search field value changes
-    this.activFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterActivities();
-      });
+
+          //הגדרות ה multi select
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'Key',
+      textField: 'Value',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
   ngAfterViewInit() {
@@ -70,23 +82,6 @@ export class OperatorActivitiesComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  protected filterActivities() {
-    if (!this.ActivitiesType) {
-      return;
-    }
-    // get the search keyword
-    let search = this.activControl.Value;
-    if (!search) {
-      this.filteredActivities.next(this.ActivitiesType.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the banks
-    this.filteredActivities.next(
-      this.ActivitiesType.filter(activ => activ.Value.toLowerCase().indexOf(search) > -1)
-    );
-  }
 
 
   ngOnDestroy() {
@@ -112,14 +107,37 @@ export class OperatorActivitiesComponent implements OnInit {
   
  
 
-
-
-
-
   EditActivity(Activity:Activity)
   {
     this.CurrentActivity=Activity;
     this.activControl=this.ActivitiesType.find(x=>x.Key== this.CurrentActivity.iCategoryType);
-    debugger
+    if(this.CurrentActivity.lActivityAgegroups!=null)
+                {
+                    for(let a of this.CurrentActivity.lActivityAgegroups)
+                     this.AgesSelected.push(this.agesCategories.find(x=>x.Key==a));
+                }
+                debugger
+  }
+
+  saveActiveChanges(){
+
+console.log(this.CurrentActivity);
+debugger
+
+  }
+
+  onItemSelect(a:forSelect)
+  {
+    this.CurrentActivity.lActivityAgegroups.push(a.Key)
+  }
+  onSelectAll(a:forSelect[]){
+    this.CurrentActivity.lActivityAgegroups=Array.from( this.mainService.SysTableList[6].keys());
+  }
+
+  OnItemDeSelect(a:forSelect){
+    this.CurrentActivity.lActivityAgegroups.splice( this.CurrentActivity.lActivityAgegroups.findIndex(x=>x==a.Key),1);
+  }
+  onDeSelectAll(){
+this.CurrentActivity.lActivityAgegroups=[];
   }
 }
