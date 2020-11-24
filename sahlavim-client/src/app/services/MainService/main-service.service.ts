@@ -7,12 +7,13 @@ import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 
-export class row {
-  Key: number;
-  Value: string;
-  constructor(key: number, value: string) {
-    this.Key = key;
-    this.Value = value;
+
+export class forSelect{
+  Key:number;
+  Value:string; 
+  constructor(key:number,value:string){
+    this.Key=key;
+    this.Value=value;
   }
 }
 
@@ -54,6 +55,7 @@ export class MainServiceService {
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
+
   // sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
 
@@ -116,7 +118,9 @@ export class MainServiceService {
       .then(
         res => {
           if (res) {
-            this.operatorsList = res;
+            this.operatorsList = res;    
+              debugger
+
           }
           else
             alert("get all operators error")

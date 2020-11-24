@@ -1,11 +1,12 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
-import { MainServiceService,row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 import { MatCheckboxModule } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { operatorsAvailability } from 'src/app/Classes/OperatorsAvailability';
 
 @Component({
   selector: 'app-operator-details',
@@ -13,13 +14,12 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./operator-details.component.css']
 })
 export class OperatorDetailsComponent implements OnInit {
-
   dropdownSettings: IDropdownSettings;
   dropdownNeighborhoods: IDropdownSettings;
-
+  operatorsAvailability: operatorsAvailability[] = [];
   //רשימת שכונות
-  NeighborhoodsList:row[]=[];
-  operatorNeighborhoods:row[]=[];;
+  NeighborhoodsList: forSelect[] = [];
+  operatorNeighborhoods: forSelect[] = [];;
   DetailsForm: FormGroup;
   operator: Operator;
   blNeighborhoods: boolean;//פעיל באיזורים מסויימים
@@ -35,6 +35,17 @@ export class OperatorDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס ערכיה
+debugger
+
+    this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
+      res => {
+        this.operatorsAvailability = res;
+      },
+      err => {
+        alert(err);
+      }
+    );
+
     this.blNeighborhoods = this.operator.lNeighborhoods.length > 0 ? true : false;//האם פעיל באיזורים מסויימם
     this.bSettingslsExclude = this.operator.lSchoolsExcude.length > 0 ? true : false;//האם לא פועל במיסגרות מסויימות
     this.settingsList = this.mainService.settingsList;//רשימת המיסגרות לבחירת לא פעיל במיסגרות מסויימות
@@ -54,15 +65,15 @@ export class OperatorDetailsComponent implements OnInit {
       }
     }
 
-    this.NeighborhoodsList=this.mainService.gItems[4].dParams;
+    this.NeighborhoodsList = this.mainService.gItems[4].dParams;
 
-        // איתחול רשימת שכונות של המפעיל 
-        if (this.operator.lNeighborhoods.length > 0) {
-          for (let nlId of this.operator.lNeighborhoods) {
-            this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
-          }
-        }
-
+    // איתחול רשימת שכונות של המפעיל 
+    if (this.operator.lNeighborhoods.length > 0) {
+      for (let nlId of this.operator.lNeighborhoods) {
+        this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
+      }
+    }
+debugger
     //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,
@@ -92,39 +103,40 @@ export class OperatorDetailsComponent implements OnInit {
   save() {
 
     console.log(this.operator);
-
-    //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
-    if (this.schoolsExcludeList.length > 0) {
-      for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
-      {
-        if (this.operator.lSchoolsExcude.indexOf(school.iSettingId) == -1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
-        {
-          this.operator.lSchoolsExcude.push(school.iSettingId);
-        }
-      }
-    }
-
-    //  עידכון בתי הספר בהם מפעיל חוגי תל"ן
-    if (this.lschool.length > 0) {
-      for (let schoolid of this.lschool) {
-        if (this.operator.lSchools.indexOf(schoolid.iSettingId) == -1)//אם הבי"הס לא כלול ברשימה 
-        {
-          this.operator.lSchools.push(schoolid.iSettingId);
-        }
-      }
-    }
+debugger
+    // //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
+    // if (this.schoolsExcludeList.length > 0) {
+    //   for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
+    //   {
+    //     if (this.operator.lSchoolsExcude.indexOf(school.iSettingId) == -1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
+    //     {
+    //       this.operator.lSchoolsExcude.push(school.iSettingId);
+    //     }
+    //   }
+    // }
 
 
-    debugger
+    // //  עידכון בתי הספר בהם מפעיל חוגי תל"ן
+    // if (this.lschool.length > 0) {
+    //   for (let schoolid of this.lschool) {
+    //     if (this.operator.lSchools.indexOf(schoolid.iSettingId) == -1)//אם הבי"הס לא כלול ברשימה 
+    //     {
+    //       this.operator.lSchools.push(schoolid.iSettingId);
+    //     }
+    //   }
+    // }
+
+
 
 
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
-            alert("update "+this.operator.nvOperatorName+" done!"); 
-               //קבלה מהשרת את רשימת מפעילים המעודכנת
-                this.mainService.getAllOperators();
-                this.mainService.serviceNavigate("/header-menu/operators/operator-table");
+          alert("update " + this.operator.nvOperatorName + " done!");
+          let o=res;
+          //קבלה מהשרת את רשימת מפעילים המעודכנת
+          this.mainService.getAllOperators();
+          this.mainService.serviceNavigate("/header-menu/operators/operator-table");
 
         }
         , err => {
@@ -134,44 +146,85 @@ export class OperatorDetailsComponent implements OnInit {
 
   }
 
-  //בינתיים
-  onItemSelect(item: Setting) {
-    //this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
-    console.log(item);
-    console.log(this.schoolsExcludeList);
-  }
-  OnItemDeSelect(item: Setting) {
-    //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
+  //add school/setting to the list
+  onItemSelect(item: Setting, type: string) {
 
-    console.log(item);
-    console.log(this.schoolsExcludeList);
-  }
-  onSelectAll(items: any) {
+    switch (type) {
+      case 'talanSchool':
+        this.operator.lSchools.push(item.iSettingId);
+        break;
+      case 'settings':
+        this.operator.lSchoolsExcude.push(item.iSettingId);
+        break;
 
-    console.log(items);
-  }
+      default:
+        break;
+    }
 
-  onSelectAllNeighborhood(items: any) {
-
-    this.operator.lNeighborhoods=Array.from( this.mainService.SysTableList[4].keys());
-    console.log(items);
   }
 
-  onDeSelectAllNeighborhood(items: any){
-    this.operator.lNeighborhoods=[];
-    debugger
+  //delete school/setting from the list
+  OnItemDeSelect(item: Setting, type: string) {
+
+    switch (type) {
+      case 'talanSchool':
+        this.operator.lSchools.splice(this.operator.lSchools.findIndex(x => x == item.iSettingId), 1);
+        break;
+      case 'settings':
+        this.operator.lSchoolsExcude.splice(this.operator.lSchoolsExcude.findIndex(x => x == item.iSettingId), 1);
+
+        break;
+
+      default:
+        break;
+    }
   }
 
+  onSelectAll(type: string) {
 
-  onDeSelectNeighborhood(item: row) {//מחיקה
-   this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x=>x.Key==item.Key) , 1);
+    switch (type) {
+      case 'talanSchool':
+        this.operator.lSchools = this.schoolListforTalan.map((item) => item.iSettingId);
+        debugger
+        break;
+      case 'settings':
+        this.operator.lSchoolsExcude = this.settingsList.map((item) => item.iSettingId);
+        debugger
+        break;
+      case 'neighberhoods':
+        this.operator.lNeighborhoods = Array.from(this.mainService.SysTableList[4].keys());
+      default:
+        break;
+    }
   }
 
-  onSelectNeighborhood(item: row) {//הוספה
+    onDeSelectAll(type: string)
+    {
+      switch (type) {
+        case 'talanSchool':
+          this.operator.lSchools =[];
+          debugger
+          break;
+        case 'settings':
+          this.operator.lSchoolsExcude = [];
+          debugger
+          break;
+        case 'neighberhoods':
+          this.operator.lNeighborhoods = [];
+        default:
+          break;
+      }
+    }
 
-    this.operator.lNeighborhoods.push(item.Key);
 
-    console.log(item);
+    onDeSelectNeighborhood(item: forSelect) {//מחיקה
+      this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x => x.Key == item.Key), 1);
+    }
+
+    onSelectNeighborhood(item: forSelect) {//הוספה
+
+      this.operator.lNeighborhoods.push(item.Key);
+      console.log(item);
+    }
+
   }
-
-}

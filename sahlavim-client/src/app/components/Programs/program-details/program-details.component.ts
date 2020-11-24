@@ -4,7 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 
 @Component({
   selector: 'app-program-details',
@@ -14,8 +14,8 @@ import { MainServiceService, row } from 'src/app/services/MainService/main-servi
 
 export class ProgramDetailsComponent implements OnInit {
 
-  lProgramAgegroupsValue: row[] = [];
-  ProgramAgegroupsListNg: row[] = [];
+  lProgramAgegroupsValue: forSelect[] = [];
+  ProgramAgegroupsListNg: forSelect[] = [];
   dropdownProgramAgegroups: IDropdownSettings;
 
 

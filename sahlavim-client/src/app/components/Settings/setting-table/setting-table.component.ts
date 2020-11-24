@@ -1,5 +1,5 @@
 import { User } from 'src/app/classes/user';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 import { AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

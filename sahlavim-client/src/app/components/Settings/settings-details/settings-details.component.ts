@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 
 
 @Component({
@@ -17,8 +17,8 @@ export class SettingsDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['Cradio', 'edit', 'nvFirstName', 'nvLastName', 'nvPhone', 'bIsActive'];
 
-  lSettingAgegroupsValue: row[] = [];
-  SettingAgegroupsListNg: row[] = [];
+  lSettingAgegroupsValue: forSelect[] = [];
+  SettingAgegroupsListNg: forSelect[] = [];
   dropdownSettingAgegroups: IDropdownSettings;
 
   panelOpenState = false;
@@ -89,7 +89,8 @@ export class SettingsDetailsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   saveSetting() {
-    this.currentSetting.lSettingAgegroups.splice(0, this.currentSetting.lSettingAgegroups.length)
+
+    this.currentSetting.lSettingAgegroups.splice(0, this.currentSetting.lSettingAgegroups.length)//delete th list
     //  עידכון רשימת הגילאים שלא תוכנית לפי הרשימה שנבחרה 
     if (this.SettingAgegroupsListNg.length > 0) {
       for (let age of this.SettingAgegroupsListNg)//מעבר על הרשימה שנבחרה
@@ -136,7 +137,6 @@ export class SettingsDetailsComponent implements OnInit {
         alert("err saveCoordinator")
       }
     )
-
   }
   updateCoordinatorToEdit(c: any) {
     if (c != -1)
