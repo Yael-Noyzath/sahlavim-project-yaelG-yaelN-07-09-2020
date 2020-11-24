@@ -17,7 +17,6 @@ export class forSelect{
   }
 }
 
-
 @Injectable({
   providedIn: 'root'
 })

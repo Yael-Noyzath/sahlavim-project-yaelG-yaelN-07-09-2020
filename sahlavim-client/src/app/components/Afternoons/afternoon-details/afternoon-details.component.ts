@@ -4,7 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, row } from 'src/app/services/MainService/main-service.service';
+import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
 
 @Component({
   selector: 'app-afternoon-details',
@@ -15,8 +15,8 @@ export class AfternoonDetailsComponent implements OnInit {
 
   currentAfternoon: Program = new Program();
 
-  lProgramAgegroupsValue: row[] = [];
-  ProgramAgegroupsListNg: row[] = [];
+  lProgramAgegroupsValue: forSelect[] = [];
+  ProgramAgegroupsListNg: forSelect[] = [];
   dropdownProgramAgegroups: IDropdownSettings;
   YearTypeValue: Map<number, string> = new Map<number, string>();
   SemesterTypeValue: Map<number, string> = new Map<number, string>();
