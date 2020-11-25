@@ -104,6 +104,11 @@ debugger
 
     console.log(this.operator);
 debugger
+this.operator.lNeighborhoods=this.operator.lSchools=this.operator.lSchoolsExcude=[];
+this.operator.lSchools = this.lschool.map((item) => item.iSettingId);
+this.operator.lSchoolsExcude = this.schoolsExcludeList.map((item) => item.iSettingId);
+this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key);
+debugger
     // //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     // if (this.schoolsExcludeList.length > 0) {
     //   for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
