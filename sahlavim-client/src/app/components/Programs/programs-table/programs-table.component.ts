@@ -28,13 +28,6 @@ export class ProgramsTableComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.programList = this.mainService.programsList;
-    for(let p of this.programList)
-    {  
-      p.dFromDate=new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
-      p.dToDate=new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
-      // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
-    }
-
     this.spliceProgramsList();
     //קבלת הרשימות מהסרויס
     this.lProgramAgegroupsValue = mainService.SysTableList[6];
