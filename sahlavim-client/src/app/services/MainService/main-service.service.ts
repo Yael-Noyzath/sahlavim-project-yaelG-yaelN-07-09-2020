@@ -17,6 +17,7 @@ export class forSelect{
   }
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,7 +41,7 @@ export class MainServiceService {
   operatorsList: Operator[] = [];
   settingsList: Setting[] = [];
   programsList: Program[] = [];
-  afternoonsList:Program[]=[];
+  afternoonsList: Program[] = [];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -57,8 +58,8 @@ export class MainServiceService {
 
   // sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
   sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
- 
- 
+
+
   post(url: string, data: any): Promise<any> {
     console.log(url);
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
@@ -71,27 +72,45 @@ export class MainServiceService {
 
   getPrograms() {
     //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
-    this.post("ProgramsGet", {}).then(
+    this.post("ProgramsGet", { bProgramAfternoon: false }).then(
       res => {
-        if (res)
+        if (res) {
           this.programsList = res;
+          for (let p of this.programsList) {
+            p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
+          }
+        }
       },
       err => {
         alert("ProgramsGet err")
       }
     );
+    debugger
   }
   getAfternoon() {
-    this.post("ProgramsGet", {bProgramAfternoon:true}).then(
+    this.post("ProgramsGet", { bProgramAfternoon: true }).then(
       res => {
-        if (res)
+        if (res) {
           this.afternoonsList = res;
-          debugger;
+          for (let p of this.afternoonsList) {
+            p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            p.dToDate =   new Date(parseInt(  p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0,10);
+            //  alert(p.dToDate[1])
+            //   if (this.YearTypeValue.get(p.iYearType) != p.dToDate[3]) {
+
+            //   }
+            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
+          }
+
+        }
       },
       err => {
         alert("getAfternoon err")
       }
     );
+  
   }
 
   //רשימת המפעילים

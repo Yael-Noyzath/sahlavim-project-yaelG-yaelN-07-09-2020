@@ -116,7 +116,6 @@ export class OperatorActivitiesComponent implements OnInit {
                     for(let a of this.CurrentActivity.lActivityAgegroups)
                      this.AgesSelected.push(this.agesCategories.find(x=>x.Key==a));
                 }
-                debugger
   }
 
   saveActiveChanges(){
