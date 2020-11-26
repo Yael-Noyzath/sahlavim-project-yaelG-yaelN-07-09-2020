@@ -67,10 +67,10 @@ export class ProgramDetailsComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    this.currentProgram.tFromTimeMorning = new Date(parseInt(this.currentProgram.tFromTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
-    this.currentProgram.tToTimeMorning = new Date(parseInt(this.currentProgram.tToTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
-    this.currentProgram.tFromTimeAfternoon = new Date(parseInt(this.currentProgram.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
-    this.currentProgram.tToTimeAfternoon = new Date(parseInt(this.currentProgram.tToTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    this.currentProgram.tFromTimeMorning = new Date(parseInt(this.currentProgram.tFromTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+    this.currentProgram.tToTimeMorning = new Date(parseInt(this.currentProgram.tToTimeMorning.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+    this.currentProgram.tFromTimeAfternoon = new Date(parseInt(this.currentProgram.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
+    this.currentProgram.tToTimeAfternoon = new Date(parseInt(this.currentProgram.tToTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
 
     this.ngAfterViewInit();
 
