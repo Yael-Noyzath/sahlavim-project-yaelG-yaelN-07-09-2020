@@ -56,10 +56,9 @@ export class MainServiceService {
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
 
-  // sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
-  sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
-
-
+  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+ 
+ 
   post(url: string, data: any): Promise<any> {
     console.log(url);
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();

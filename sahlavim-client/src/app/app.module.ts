@@ -6,6 +6,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
+
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ScheduleModule,DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
@@ -125,8 +126,8 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule,
-    DropDownListModule,
+    // NgxMatSelectSearchModule,
+    // DropDownListModule,
 
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,

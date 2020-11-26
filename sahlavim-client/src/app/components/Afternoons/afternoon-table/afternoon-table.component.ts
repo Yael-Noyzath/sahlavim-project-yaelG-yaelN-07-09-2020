@@ -27,7 +27,6 @@ export class AfternoonTableComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.afternoonList = this.mainService.afternoonsList;
-    
     this.YearTypeValue = mainService.SysTableList[14];
     this.SemesterTypeValue = mainService.SysTableList[16];
     this.dataSource = new MatTableDataSource(this.afternoonList);
