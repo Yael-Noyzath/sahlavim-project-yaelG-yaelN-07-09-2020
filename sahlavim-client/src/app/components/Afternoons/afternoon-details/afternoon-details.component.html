@@ -6,6 +6,7 @@
                 <mat-option *ngFor="let s of YearTypeValue.keys()" [value]="s">{{this.YearTypeValue.get(s)}}
                 </mat-option>
             </mat-select>
+            
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>

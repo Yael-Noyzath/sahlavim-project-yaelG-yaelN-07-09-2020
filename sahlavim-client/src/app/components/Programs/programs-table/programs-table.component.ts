@@ -28,7 +28,7 @@ export class ProgramsTableComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.programList = this.mainService.programsList;
-    
+   
 
     this.spliceProgramsList();
     //קבלת הרשימות מהסרויס
