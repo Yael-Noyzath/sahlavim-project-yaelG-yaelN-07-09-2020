@@ -125,7 +125,6 @@
                 <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
                     class="example-margin">מפעיל בחוגי תל"ן</mat-checkbox>
             </section>
-
             <!-- talan schools settings -->
             <div *ngIf="schoolListforTalan.length">
                 <ng-multiselect-dropdown name="talanSchools" [(ngModel)]="lschool" [placeholder]="'בתי ספר'"
