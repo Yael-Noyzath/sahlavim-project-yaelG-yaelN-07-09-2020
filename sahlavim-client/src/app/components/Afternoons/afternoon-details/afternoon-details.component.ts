@@ -4,7 +4,8 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
-import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
+import { forSelect, MainServiceService } from 'src/app/services/MainService/main-service.service';
+
 
 @Component({
   selector: 'app-afternoon-details',
