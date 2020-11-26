@@ -38,8 +38,16 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="nvOperatorName">
-            <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header> שם </th>
+            <th class="header"  mat-header-cell *matHeaderCellDef mat-sort-header>
+                 שם
+               <br> <mat-form-field class="filter" floatLabel="never">
+                    <mat-label>Search</mat-label>
+                    <input matInput >
+                  </mat-form-field>
+             </th>
+           
             <td mat-cell *matCellDef="let row"> {{row.nvOperatorName}} </td>
+      
         </ng-container>
 
         

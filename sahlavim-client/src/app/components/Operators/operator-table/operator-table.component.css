@@ -19,3 +19,16 @@ input.matInput{
   direction: rtl;
 }
 
+p {
+  font-family: Lato;
+}
+
+
+.header {
+  padding: 5px;
+}
+
+.filter {
+  display: block;
+}
+

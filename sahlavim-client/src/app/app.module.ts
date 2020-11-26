@@ -8,6 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ScheduleModule,DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 
 import {
   MatButtonModule,
@@ -118,6 +119,7 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     AfternoonTableComponent
   ],
   imports: [
+    ScheduleModule,
     BrowserModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -164,7 +166,7 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
    AgGridModule
 
   ],
-  providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
+  providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
