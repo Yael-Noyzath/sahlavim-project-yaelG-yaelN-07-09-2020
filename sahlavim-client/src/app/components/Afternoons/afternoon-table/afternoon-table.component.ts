@@ -27,16 +27,6 @@ export class AfternoonTableComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.afternoonList = this.mainService.afternoonsList;
-    for (let p of this.afternoonList) {
-      p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
-      p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toString();
-    //  alert(p.dToDate[1])
-    //   if (this.YearTypeValue.get(p.iYearType) != p.dToDate[3]) {
-
-    //   }
-      // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
-    }
-
     this.YearTypeValue = mainService.SysTableList[14];
     this.SemesterTypeValue = mainService.SysTableList[16];
     this.dataSource = new MatTableDataSource(this.afternoonList);

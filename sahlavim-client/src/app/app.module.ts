@@ -6,9 +6,9 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
+// import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+// import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+// import { SourceAndMapMixin } from '@angular-devkit/build-angular';
 import {
   MatButtonModule,
   MatMenuModule,
@@ -123,8 +123,8 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule,
-    DropDownListModule,
+    // NgxMatSelectSearchModule,
+    // DropDownListModule,
 
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
