@@ -27,6 +27,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css';
 
+/* Add application styles & imports to this file! */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+* {
+  box-sizing: border-box;
+}
+mat-sort-header-button{
+display: none;
+}
+.imageBackground{
+    background-color: aquamarine;
+    /* url('/assets/Images/two-daisies-in-the-grass.jpg') no-repeat center center fixed; */
+    
+      /* Full height */
+      height: 100%;
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
 /* for multi select */
 .mu-hero-overlay,
 .mu-video-overlay {

@@ -126,8 +126,8 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
-    // NgxMatSelectSearchModule,
-    // DropDownListModule,
+    NgxMatSelectSearchModule,
+     DropDownListModule,
 
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
