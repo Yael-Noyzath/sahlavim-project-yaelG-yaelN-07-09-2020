@@ -18,42 +18,47 @@ export class OperatorTableComponent implements OnInit {
 
   ContactNameFilter= new FormControl('');
   nameFilter = new FormControl('');
+  OperatorTypeFilter = new FormControl(''); 
+  CompanyNameFilter= new FormControl(''); 
+  categoryFilter=new FormControl(''); 
+  IdentityFilter=new FormControl('');
+  ContactPersonPhoneFilter=new FormControl('');
+  ContactPersonMailFilter=new FormControl('');
   //מערך מפעילים לטבלה
   operators: Operator[];
   //מערך שמות העמודות
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete', 'choose'];
+  displayedColumns: string[] = ['iOperatorType','nvOperatorName', 'nvContactPerson', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete', 'choose'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
  
-  
-
+operatorTypes: Map<number, string> = new Map<number, string>();
+//array of the filter colomns
+filterValues = {
+  nvOperatorName: '',
+  nvContactPerson: '',
+  iOperatorType: '',
+  nvCompanyName: '',
+  nvActivityies:'',
+  nvIdentity:'',
+   nvContactPersonPhone:'',
+   nvContactPersonMail:''
+  // bInProgramPool:''
+};
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
-
-    // Assign the data to the data source for the table to render
-    // if (this.operators[0].OperatorName)
-    //   this.dataSource = new MatTableDataSource(this.operators);
-  }
-
-//array of the filter colomns
-  filterValues = {
-    nvOperatorName: ''
-    // nvContactPerson: '',
-    // nvOperatorTypeValue: '',
-    // nvCompanyName: '',
-    // nvActivityies:'',
-    //  nvIdentity:'', 
-    //  nvContactPersonPhone:'',
-    //   nvContactPersonMail:'', 
-    // bInProgramPool:''
-  };
-
-  ngOnInit() {
+this.operatorTypes=this.mainService.SysTableList[2];
+debugger
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
+
+  }
+
+
+  ngOnInit() {
+    
     this.ngAfterViewInit();
    
     this.nameFilter.valueChanges.subscribe(
@@ -62,24 +67,69 @@ export class OperatorTableComponent implements OnInit {
         this.dataSource.filter = JSON.stringify(this.filterValues);
       }
     )
-    // this.ContactNameFilter.valueChanges.subscribe(
-    //   name => {
-    //     this.filterValues.nvContactPerson = name;
-    //     this.dataSource.filter = JSON.stringify(this.filterValues);
-    //   }
-    // )
+
+     this.ContactNameFilter.valueChanges.subscribe(
+      cname => {
+        this.filterValues.nvContactPerson = cname;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
     
-  
+    this.OperatorTypeFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.iOperatorType = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.CompanyNameFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvCompanyName = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.categoryFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvActivityies = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.IdentityFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvIdentity = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+    this.ContactPersonPhoneFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvContactPersonPhone = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.ContactPersonMailFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvContactPersonMail = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+    
   }
 
   createFilter(): (data: any, filter: string) => boolean {
-    debugger
+    
     let filterFunction = function(data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
+      let searchTerms = JSON.parse(filter);debugger
       return data.nvOperatorName.toLowerCase().indexOf(searchTerms.nvOperatorName) !== -1
-        // && data.nvContactPerson.toString().toLowerCase().indexOf(searchTerms.id) !== -1
-        // && data.nvOperatorTypeValue.toLowerCase().indexOf(searchTerms.colour) !== -1
-        // && data.pnvCompanyNameet.toLowerCase().indexOf(searchTerms.pet) !== -1;
+         && data.nvContactPerson.toLowerCase().indexOf(searchTerms.nvContactPerson) !== -1
+          //  && this.operatorTypes.get(data.iOperatorType).toLowerCase().indexOf(searchTerms.iOperatorType) !== -1
+          && data.nvCompanyName.toLowerCase().indexOf(searchTerms.nvCompanyName) !== -1
+          && data.nvActivityies.toLowerCase().indexOf(searchTerms.nvActivityies) !== -1
+          && data.nvIdentity.toLowerCase().indexOf(searchTerms.nvIdentity) !== -1
+          && data.nvContactPersonPhone.toLowerCase().indexOf(searchTerms.nvContactPersonPhone) !== -1
+          && data.nvContactPersonMail.toLowerCase().indexOf(searchTerms.nvContactPersonMail) !== -1;
     }
     return filterFunction;
   }

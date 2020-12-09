@@ -45,7 +45,7 @@ export class Operator {
         public iNumBookkeeping: number=0,
 
         // public binProgramsDatabase: boolean=true,
-        // public nvOperatorTypeValue:string="",
+        //public nvOperatorTypeValue:string="",
         // public nvActivityies:string="",
 
         ) 

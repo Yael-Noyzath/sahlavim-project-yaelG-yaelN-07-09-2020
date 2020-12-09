@@ -33,75 +33,102 @@
     </mat-form-field>
 </div> -->
 
-<div class="mat-elevation-z8" style="text-align:right;" dir="rtl">
-    <table mat-table [dataSource]="dataSource" matSort>
+<div class="container-" style="text-align:right; " dir="rtl">
+    
+    <table mat-table [dataSource]="dataSource" matSort >
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="nvOperatorName">
-            <th class="header" mat-header-cell *matHeaderCellDef>
-                שם
-                    <mat-form-field class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="nameFilter"> 
-                    </mat-form-field>
-            </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvOperatorName}} </td>
-        </ng-container>
-
-        <!-- Contact Name Column -->
-        <ng-container matColumnDef="nvContactPerson">
-            <th class="header"  mat-header-cell *matHeaderCellDef> שם איש קשר
-                <mat-form-field class="filter" floatLabel="never">
+        <!-- operatorType Column -->
+        <ng-container matColumnDef="iOperatorType">
+            <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>סוג
+                <mat-form-field style="width: 80px;"  class="filter" floatLabel="never">
                     <mat-label> חפש</mat-label>
-                    <input matInput ><!--[formControl]="ContactNameFilter"-->
+                    <input matInput [formControl]="OperatorTypeFilter">
                 </mat-form-field>
             </th>
-            <td mat-cell *matCellDef="let row"> {{row.nvContactPerson}} </td>
-        </ng-container>
-
-
-        <!-- kind Column -->
-        <ng-container matColumnDef="nvOperatorTypeValue">
-            <th style="width: 5%;" mat-header-cell *matHeaderCellDef>סוג</th>
-            <td mat-cell *matCellDef="let row"> {{row.nvOperatorTypeValue}} </td>
+            <td mat-cell *matCellDef="let row"> {{operatorTypes.get(row.iOperatorType)}} </td>
         </ng-container>
 
         <!-- companyName Column -->
         <ng-container matColumnDef="nvCompanyName">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef>
-
+            <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>שם חברה
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="CompanyNameFilter">
+                </mat-form-field>
             </th>
             <td mat-cell *matCellDef="let row"> {{row.nvCompanyName}} </td>
         </ng-container>
 
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nvOperatorName">
+            <th style="width: 10%;" class="header" mat-header-cell *matHeaderCellDef>
+                שם מפעיל
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="nameFilter">
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{row.nvOperatorName}} </td>
+        </ng-container>
+
         <!-- category activities Column -->
         <ng-container matColumnDef="nvActivityies">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef>קטגורית פעילות</th>
+            <th style="width: 50px;" class="header" mat-header-cell *matHeaderCellDef>קטגורית פעילות
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="categoryFilter">
+                </mat-form-field>
+            </th>
             <td mat-cell *matCellDef="let row"> {{row.nvActivityies}} </td>
         </ng-container>
 
-
         <!-- Identity  Column -->
         <ng-container matColumnDef="nvIdentity">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef> ת.ז </th>
+            <th style="width: 10%;" class="header" mat-header-cell *matHeaderCellDef> ת.ז 
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="IdentityFilter">
+                </mat-form-field>
+            </th>
             <td mat-cell *matCellDef="let row"> {{row.nvIdentity}} </td>
         </ng-container>
 
+        <!-- Contact Name Column -->
+        <ng-container matColumnDef="nvContactPerson">
+            <th style="width: 10%;" class="header" mat-header-cell *matHeaderCellDef> שם איש קשר
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="ContactNameFilter">
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let row"> {{ row.nvContactPerson}} </td>
+        </ng-container>
+        
         <!-- phone number Column -->
         <ng-container matColumnDef="nvContactPersonPhone">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef> טלפון </th>
+            <th style="width: 10%;" class="header" mat-header-cell *matHeaderCellDef> טלפון 
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="ContactPersonPhoneFilter">
+                </mat-form-field></th>
             <td mat-cell *matCellDef="let row"> {{row.nvContactPersonPhone}} </td>
         </ng-container>
 
         <!-- Email Column -->
         <ng-container matColumnDef="nvContactPersonMail">
-            <th style="width: 10%;" mat-header-cell *matHeaderCellDef> מייל </th>
+            <th style="width: 10%;" class="header" mat-header-cell *matHeaderCellDef> מייל
+                <mat-form-field style="width: 100px;" class="filter" floatLabel="never">
+                    <mat-label> חפש</mat-label>
+                    <input matInput [formControl]="ContactPersonMailFilter">
+                </mat-form-field> 
+            </th>
             <td mat-cell *matCellDef="let row"> {{row.nvContactPersonMail}} </td>
         </ng-container>
         <!--is in Programs database Column -->
         <ng-container matColumnDef="bInProgramPool">
             <th style="width: 8%;" mat-header-cell *matHeaderCellDef>קיים במאגר התוכניות</th>
-            <td mat-cell *matCellDef="let row"> {{row.bInProgramPool==true?'לא':'כן'}}
+            <td mat-cell style="text-align: center;" *matCellDef="let row"> {{row.bInProgramPool==true?'לא':'כן'}}
             </td>
         </ng-container>
         <!-- Update -->
