@@ -6,6 +6,7 @@ import { Operator } from 'src/app/Classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { from } from 'rxjs';
 })
 export class OperatorTableComponent implements OnInit {
 
-
+  ContactNameFilter= new FormControl('');
+  nameFilter = new FormControl('');
   //מערך מפעילים לטבלה
   operators: Operator[];
   //מערך שמות העמודות
@@ -23,29 +25,64 @@ export class OperatorTableComponent implements OnInit {
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
  
+  
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
   constructor(private mainService: MainServiceService) {
 
     // Assign the data to the data source for the table to render
     // if (this.operators[0].OperatorName)
     //   this.dataSource = new MatTableDataSource(this.operators);
   }
+
+//array of the filter colomns
+  filterValues = {
+    nvOperatorName: ''
+    // nvContactPerson: '',
+    // nvOperatorTypeValue: '',
+    // nvCompanyName: '',
+    // nvActivityies:'',
+    //  nvIdentity:'', 
+    //  nvContactPersonPhone:'',
+    //   nvContactPersonMail:'', 
+    // bInProgramPool:''
+  };
+
   ngOnInit() {
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
+    this.dataSource.filterPredicate = this.createFilter();
     this.ngAfterViewInit();
+   
+    this.nameFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvOperatorName = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+    // this.ContactNameFilter.valueChanges.subscribe(
+    //   name => {
+    //     this.filterValues.nvContactPerson = name;
+    //     this.dataSource.filter = JSON.stringify(this.filterValues);
+    //   }
+    // )
+    
+  
   }
 
-  // //קבלת כל המפעילים
-  // getAllOperators() {
-
-  //   this.dataSource = new MatTableDataSource(this.mainService.operatorsList); 
-
-  // }
-
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-
+  createFilter(): (data: any, filter: string) => boolean {
+    debugger
+    let filterFunction = function(data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+      return data.nvOperatorName.toLowerCase().indexOf(searchTerms.nvOperatorName) !== -1
+        // && data.nvContactPerson.toString().toLowerCase().indexOf(searchTerms.id) !== -1
+        // && data.nvOperatorTypeValue.toLowerCase().indexOf(searchTerms.colour) !== -1
+        // && data.pnvCompanyNameet.toLowerCase().indexOf(searchTerms.pet) !== -1;
+    }
+    return filterFunction;
+  }
 
 
   ngAfterViewInit() {

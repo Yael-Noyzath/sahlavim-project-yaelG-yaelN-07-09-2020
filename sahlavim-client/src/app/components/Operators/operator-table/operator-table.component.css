@@ -3,26 +3,27 @@
     font-size: 14px;
     width: 100%;
   } */
- 
-  table {
-    width: 100%;
-    /* overflow-x: auto;
-    overflow-y: hidden;
-    min-width: 500px; */
-} 
+/* 
 th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
- 
+.mat-sort-header{
+  display: inline;
+}
 input.matInput{
   direction: rtl;
-}
+} */
+
+
 
 p {
   font-family: Lato;
 }
 
+table {
+  width: 100%;
+}
 
 .header {
   padding: 5px;
@@ -31,4 +32,3 @@ p {
 .filter {
   display: block;
 }
-
