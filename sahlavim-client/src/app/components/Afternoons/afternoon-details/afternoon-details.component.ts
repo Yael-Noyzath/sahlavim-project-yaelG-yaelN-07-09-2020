@@ -76,6 +76,7 @@ export class AfternoonDetailsComponent implements OnInit {
   }
 
   saveAfternoon() {
+    alert(this.currentAfternoon.iProgramId)
     this.currentAfternoon.lProgramAgegroups.splice(0, this.currentAfternoon.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -84,8 +85,8 @@ export class AfternoonDetailsComponent implements OnInit {
         this.currentAfternoon.lProgramAgegroups.push(age.Key);
       }
     }
-    var lSettingMorning: number[];
-    var lSettingNoon: number[];
+    // var lSettingMorning: number[];
+    // var lSettingNoon: number[];
 
     // this.mainService.post("ProgramSettingsInsertUpdate", { 
     //   iProgramId: this.currentAfternoon.iProgramId, 
@@ -100,19 +101,23 @@ export class AfternoonDetailsComponent implements OnInit {
     //     alert("err ProgramSettingsInsertUpdate")
     //   }
     // )
+     
+    this.currentAfternoon.tFirstActivity=this.currentAfternoon.tFirstActivity.toString();
+    this.currentAfternoon.tSecondActivity=this.currentAfternoon.tSecondActivity.toString();
 
+    debugger;
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentAfternoon, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
-        this.mainService.getPrograms();
+        this.mainService.getAfternoon();
         alert("update " + this.currentAfternoon.nvProgramName + " done!");
-        this.mainService.serviceNavigate("/header-menu/programs/programs-table");
+        this.mainService.serviceNavigate("/header-menu/afternoon/afternoon-table");
       },
       err => {
         alert("saveAfternoon err\nצריך לסדר את השעה והתאריך");
       }
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
-    this.mainService.getPrograms();
+    this.mainService.getAfternoon();
   }
 
   testDate() {
