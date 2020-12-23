@@ -14,7 +14,16 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ScheduleModule,DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 
+
+// for calender
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { CommonModule } from '@angular/common';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import {
+  
   MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
@@ -122,9 +131,12 @@ import { TableComponent } from './table/table.component';
     ProgramsTableComponent,
     AfternoonComponent,
     AfternoonTableComponent,
-    TableComponent
+    TableComponent,
+
   ],
   imports: [
+    CommonModule,
+    
     ScheduleModule,
     BrowserModule, 
     ReactiveFormsModule,
@@ -133,6 +145,7 @@ import { TableComponent } from './table/table.component';
     MatFormFieldModule,
     NgxMatSelectSearchModule,
      DropDownListModule,
+     CalendarModule ,
 
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,

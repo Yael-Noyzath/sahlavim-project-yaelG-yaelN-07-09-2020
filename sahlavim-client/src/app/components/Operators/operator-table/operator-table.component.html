@@ -37,9 +37,30 @@
     
     <table mat-table [dataSource]="dataSource" matSort >
 
+        <ng-container matColumnDef="select">
+            <th>בחירה</th>
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            >
+                            <!-- [aria-label]="checkboxLabel()" -->
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            >
+                            <!-- [aria-label]="checkboxLabel(row)" -->
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
         <!-- operatorType Column -->
-        <ng-container matColumnDef="iOperatorType">
-            <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>סוג
+      
+      <ng-container matColumnDef="iOperatorType"><!-- mat-sort-header -->
+            <th class="header" style="width: 10%;"  mat-header-cell *matHeaderCellDef>סוג
                 <mat-form-field style="width: 80px;"  class="filter" floatLabel="never">
                     <mat-label> חפש</mat-label>
                     <input matInput [formControl]="OperatorTypeFilter">
@@ -153,13 +174,7 @@
             </td>
         </ng-container>
 
-        <!-- Choose Column -->
-        <ng-container matColumnDef="choose">
-            <th style="width:4%;" mat-header-cell *matHeaderCellDef> בחירה </th>
-            <td mat-cell *matCellDef="let element">
-                <input type="checkbox">
-            </td>
-        </ng-container>
+
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
