@@ -8,6 +8,7 @@ import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Item } from 'angular2-multiselect-dropdown';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class OperatorTableComponent implements OnInit {
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
  
-  selection = new SelectionModel<Operator>(true, []);
+  emailAddress:Array<string>=new Array<string>();
+  emailContent:string;
+  emailSubject:string;
 
 operatorTypes: Map<number, string> = new Map<number, string>();
 //array of the filter colomns
@@ -215,10 +218,36 @@ debugger
     //מעבר לעמוד של עריכה
 
   }
+  emailList()
+  {
 
+  this.emailAddress=this.selection.selected.map(obj=>obj.nvContactPersonMail);
+  debugger
+  }
 
-  /** Whether the number of selected elements matches the total number of rows. */
+sendEmail()
+{
+ debugger
+//   this.operator.lSchools = this.schoolListforTalan.map((item) => item.iSettingId);
+// this.emailAddress=this.selection.selected.map((item)=>Item.nvContactPersonMail);
+  this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody:this.emailContent,emailAddressesList:this.emailAddress ,filePath:""}).then(
+    res => {
+      
+      let r = res;
+      alert(res);
+    },
+    err => {
+      alert(err);
+    }
+  );
+}
+  /** Multi Select
+   *  Whether the number of selected elements matches the total number of rows. */
+  selection = new SelectionModel<Operator>(true, []);
+
   isAllSelected() {
+    debugger
+    this.selection.selected
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
@@ -226,6 +255,7 @@ debugger
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
+    debugger
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));

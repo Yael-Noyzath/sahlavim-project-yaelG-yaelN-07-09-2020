@@ -130,13 +130,13 @@ export class MainServiceService {
       );
   }
 
+   
 
   //רשימת המיסגרות
   getSettings() {
     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
-
       },
       err => {
         alert("SettingsGet err")
