@@ -7,6 +7,8 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Item } from 'angular2-multiselect-dropdown';
 
 
 @Component({
@@ -18,42 +20,51 @@ export class OperatorTableComponent implements OnInit {
 
   ContactNameFilter= new FormControl('');
   nameFilter = new FormControl('');
+  OperatorTypeFilter = new FormControl(''); 
+  CompanyNameFilter= new FormControl(''); 
+  categoryFilter=new FormControl(''); 
+  IdentityFilter=new FormControl('');
+  ContactPersonPhoneFilter=new FormControl('');
+  ContactPersonMailFilter=new FormControl('');
   //מערך מפעילים לטבלה
   operators: Operator[];
   //מערך שמות העמודות
-  displayedColumns: string[] = ['nvOperatorName', 'nvContactPerson', 'nvOperatorTypeValue', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete', 'choose'];
+  displayedColumns: string[] = ['select','iOperatorType','nvOperatorName', 'nvContactPerson', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
  
-  
+  emailAddress:Array<string>=new Array<string>();
+  emailContent:string;
+  emailSubject:string;
 
+operatorTypes: Map<number, string> = new Map<number, string>();
+//array of the filter colomns
+filterValues = {
+  nvOperatorName: '',
+  nvContactPerson: '',
+  iOperatorType: '',
+  nvCompanyName: '',
+  nvActivityies:'',
+  nvIdentity:'',
+   nvContactPersonPhone:'',
+   nvContactPersonMail:''
+  // bInProgramPool:''
+};
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private mainService: MainServiceService) {
-
-    // Assign the data to the data source for the table to render
-    // if (this.operators[0].OperatorName)
-    //   this.dataSource = new MatTableDataSource(this.operators);
-  }
-
-//array of the filter colomns
-  filterValues = {
-    nvOperatorName: ''
-    // nvContactPerson: '',
-    // nvOperatorTypeValue: '',
-    // nvCompanyName: '',
-    // nvActivityies:'',
-    //  nvIdentity:'', 
-    //  nvContactPersonPhone:'',
-    //   nvContactPersonMail:'', 
-    // bInProgramPool:''
-  };
-
-  ngOnInit() {
+this.operatorTypes=this.mainService.SysTableList[2];
+debugger
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
+
+  }
+
+
+  ngOnInit() {
+    
     this.ngAfterViewInit();
    
     this.nameFilter.valueChanges.subscribe(
@@ -62,24 +73,69 @@ export class OperatorTableComponent implements OnInit {
         this.dataSource.filter = JSON.stringify(this.filterValues);
       }
     )
-    // this.ContactNameFilter.valueChanges.subscribe(
-    //   name => {
-    //     this.filterValues.nvContactPerson = name;
-    //     this.dataSource.filter = JSON.stringify(this.filterValues);
-    //   }
-    // )
+
+     this.ContactNameFilter.valueChanges.subscribe(
+      cname => {
+        this.filterValues.nvContactPerson = cname;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
     
-  
+    this.OperatorTypeFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.iOperatorType = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.CompanyNameFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvCompanyName = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.categoryFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvActivityies = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.IdentityFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvIdentity = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+    this.ContactPersonPhoneFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvContactPersonPhone = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+
+    this.ContactPersonMailFilter.valueChanges.subscribe(
+      name => {
+        this.filterValues.nvContactPersonMail = name;
+        this.dataSource.filter = JSON.stringify(this.filterValues);
+      }
+    )
+    
   }
 
   createFilter(): (data: any, filter: string) => boolean {
-    debugger
+    
     let filterFunction = function(data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
+      let searchTerms = JSON.parse(filter);debugger
       return data.nvOperatorName.toLowerCase().indexOf(searchTerms.nvOperatorName) !== -1
-        // && data.nvContactPerson.toString().toLowerCase().indexOf(searchTerms.id) !== -1
-        // && data.nvOperatorTypeValue.toLowerCase().indexOf(searchTerms.colour) !== -1
-        // && data.pnvCompanyNameet.toLowerCase().indexOf(searchTerms.pet) !== -1;
+         && data.nvContactPerson.toLowerCase().indexOf(searchTerms.nvContactPerson) !== -1
+          //  && this.operatorTypes.get(data.iOperatorType).toLowerCase().indexOf(searchTerms.iOperatorType) !== -1
+          && data.nvCompanyName.toLowerCase().indexOf(searchTerms.nvCompanyName) !== -1
+          && data.nvActivityies.toLowerCase().indexOf(searchTerms.nvActivityies) !== -1
+          && data.nvIdentity.toLowerCase().indexOf(searchTerms.nvIdentity) !== -1
+          && data.nvContactPersonPhone.toLowerCase().indexOf(searchTerms.nvContactPersonPhone) !== -1
+          && data.nvContactPersonMail.toLowerCase().indexOf(searchTerms.nvContactPersonMail) !== -1;
     }
     return filterFunction;
   }
@@ -162,6 +218,56 @@ export class OperatorTableComponent implements OnInit {
     //מעבר לעמוד של עריכה
 
   }
+  emailList()
+  {
+
+  this.emailAddress=this.selection.selected.map(obj=>obj.nvContactPersonMail);
+  debugger
+  }
+
+sendEmail()
+{
+ debugger
+//   this.operator.lSchools = this.schoolListforTalan.map((item) => item.iSettingId);
+// this.emailAddress=this.selection.selected.map((item)=>Item.nvContactPersonMail);
+  this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody:this.emailContent,emailAddressesList:this.emailAddress ,filePath:""}).then(
+    res => {
+      
+      let r = res;
+      alert(res);
+    },
+    err => {
+      alert(err);
+    }
+  );
+}
+  /** Multi Select
+   *  Whether the number of selected elements matches the total number of rows. */
+  selection = new SelectionModel<Operator>(true, []);
+
+  isAllSelected() {
+    debugger
+    this.selection.selected
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    debugger
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  // checkboxLabel(row?: Operator): string {
+  //   if (!row) {
+  //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  //   }
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  // }
 }
 
 

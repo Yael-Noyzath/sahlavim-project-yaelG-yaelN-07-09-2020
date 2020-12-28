@@ -86,7 +86,6 @@ export class MainServiceService {
         alert("ProgramsGet err")
       }
     );
-    debugger
   }
   getAfternoon() {
     this.post("ProgramsGet", { bProgramAfternoon: true }).then(
@@ -120,7 +119,6 @@ export class MainServiceService {
         res => {
           if (res) {
             this.operatorsList = res;    
-              debugger
 
           }
           else
@@ -132,13 +130,13 @@ export class MainServiceService {
       );
   }
 
+   
 
   //רשימת המיסגרות
   getSettings() {
     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
-
       },
       err => {
         alert("SettingsGet err")

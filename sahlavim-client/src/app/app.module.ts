@@ -6,19 +6,31 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ScheduleModule,DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
 
+
+// for calender
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { CommonModule } from '@angular/common';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import {
+  
   MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
+  
+
   MatDatepickerModule,
   MatDatepicker,
   MatNativeDateModule,
@@ -28,12 +40,11 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatCheckboxModule,
-  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatTableModule,MatProgressSpinnerModule
+  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher,MatProgressSpinnerModule
 } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RoutModule } from './routing/rout.module';
@@ -75,10 +86,12 @@ import { SettingsScheduleComponent } from './components/Settings/settings-schedu
 import { SettingsMessagesComponent } from './components/Settings/settings-messages/settings-messages.component';
 import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
 import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.component';
-import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component'
+import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
+    TableComponent,
     AppComponent,
     AppComponent,
     AppComponent,
@@ -117,9 +130,13 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     SettingsMessagesComponent,
     ProgramsTableComponent,
     AfternoonComponent,
-    AfternoonTableComponent
+    AfternoonTableComponent,
+    TableComponent,
+
   ],
   imports: [
+    CommonModule,
+    
     ScheduleModule,
     BrowserModule, 
     ReactiveFormsModule,
@@ -128,6 +145,7 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     MatFormFieldModule,
     NgxMatSelectSearchModule,
      DropDownListModule,
+     CalendarModule ,
 
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
@@ -162,7 +180,7 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
     MatExpansionModule,
 
 
-
+ 
    //FlexLayoutModule
    AgGridModule
 
