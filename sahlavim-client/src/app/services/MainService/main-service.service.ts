@@ -71,7 +71,7 @@ export class MainServiceService {
 
   getPrograms() {
     //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
-    this.post("ProgramsGet", { bProgramAfternoon: false }).then(
+    this.post("ProgramsGet", { bProgramAfternoon: false || null }).then(
       res => {
         if (res) {
           this.programsList = res;

@@ -17,6 +17,9 @@ import { element } from 'protractor';
 export class ManagersTableComponent implements OnInit {
 
 
+  arr:string[]=["nvLastName","nvFirstName"]
+  row:string[]=["row.nvLastName","row.nvFirstName"]
+  
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
