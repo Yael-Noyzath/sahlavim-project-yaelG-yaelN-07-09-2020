@@ -88,6 +88,7 @@ import { ProgramsTableComponent } from './components/Programs/programs-table/pro
 import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.component';
 import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component';
 import { TableComponent } from './table/table.component';
+import * as XLSX from 'xlsx';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,6 @@ import { TableComponent } from './table/table.component';
   ],
   imports: [
     CommonModule,
-    
     ScheduleModule,
     BrowserModule, 
     ReactiveFormsModule,

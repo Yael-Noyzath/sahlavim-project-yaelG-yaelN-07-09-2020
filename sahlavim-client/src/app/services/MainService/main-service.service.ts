@@ -57,6 +57,7 @@ export class MainServiceService {
   // http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/ שרת בדיקות מרוחק
 
   sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+  //sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";
  
  
   post(url: string, data: any): Promise<any> {

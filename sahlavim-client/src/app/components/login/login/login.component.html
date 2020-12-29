@@ -4,7 +4,7 @@
     </div>
     <mat-card-content>
 
-        <form [formGroup]="formLogin" (ngSubmit)="Login()">
+        <form [formGroup]="formLogin">
 
             <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4" *ngIf="enterByUserName==true">
 
@@ -24,8 +24,8 @@
                 </mat-form-field>
 
                 <div class="form-group">
-                    <input type="submit" value="כניסה" class="btn btn-info btn-lg btn-block btn-login "
-                        [disabled]="!formLogin.valid">
+                    <input type="button" (click)="Login()" value="כניסה"
+                        class="btn btn-info btn-lg btn-block btn-login " [disabled]="!formLogin.valid">
                 </div>
                 <div class="form-group">
 
@@ -36,23 +36,22 @@
 
             <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4"
                 *ngIf="enterByUserName==false">
-
-                <div class="form-group">
-                    <input type="email" class="form-control" formControlName="nvMail" name="nvMail"
-                        placeholder="*הזן כתובת מייל לשחזור סיסמא" required />
-                    <mat-icon matSuffix mat-icon-button>mail</mat-icon>
-                </div>
-
+                <div class="spinner-border text-primary" role="status" *ngIf="spinnerWork==true">
+                    <span class="sr-only">Loading...</span>
+                </div><br>
+                <mat-form-field appearance="standard">
+                    <mat-label>הזן כתובת מייל לשחזור סיסמא</mat-label>
+                    <input matInput type="email" formControlName="nvMail" class="form-control" name="nvMail"
+                        placeholder="הזן כתובת מייל" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
                 <div class="form-group">
                     <button (click)="sentMailToResetPassword(nvMail.value)" [disabled]="!nvMail.valid"
                         class="btn  btn-info btn-lg btn-block btn-login">אישור</button>
                 </div>
                 <div class="form-group">
-                    <a (click)="resetUser()" style="color:red">כניסה באמצעות שם משתמש וסיסמא</a>
+                    <button mat-button (click)="resetUser()">כניסה באמצעות שם משתמש וסיסמא</button>
 
-                </div>
-                <div class="spinner-border text-primary" role="status" *ngIf="enterByUserName==false">
-                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </form>

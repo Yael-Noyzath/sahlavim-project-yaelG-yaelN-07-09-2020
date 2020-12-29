@@ -1,6 +1,6 @@
 import { User } from 'src/app/classes/user';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
-import { AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader, ElementRef } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,6 +11,7 @@ import { Setting } from 'src/app/Classes/setting';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { flatten } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import * as XLSX from 'XLSX';
 
 @Component({
   selector: 'app-setting-table',
@@ -37,8 +38,8 @@ export class SettingTableComponent implements OnInit {
   coordinatorList: Array<coordinator>;
   coordinator: coordinator = new coordinator();
   openDetails: boolean = false;
-  lSettingAgegroupsValue:Map<number, string> = new Map<number, string>();
-  lSettingTypeValue:Map<number, string> = new Map<number, string>();
+  lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
+  lSettingTypeValue: Map<number, string> = new Map<number, string>();
 
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
@@ -50,56 +51,66 @@ export class SettingTableComponent implements OnInit {
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
 
-   
-}
+
+  }
 
   ngOnInit() {
 
- 
+
     this.ngAfterViewInit();
   }
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild('epltable', { static: false }) epltable: ElementRef;
 
-
-ngAfterViewInit() {
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
-}
-
-
-CoordinatorsGet() {
-  this.mainService.post("CoordinatorsGet", {}).then(
-    res => {
-      this.coordinatorList = res;
-    },
-    err => {
-      alert("CoordinatorsGet err")
-    }
-  );
-}
-
-CoordinatorDetails(sett: Setting, CoordinatorId: number) {
-  this.currentSetting = sett;
-  if (this.openDetails == true)
-    this.openDetails = false;
-  else
-    this.openDetails = true;
-
-  if (CoordinatorId) {
-    this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
-}
-EditSetting(setting: Setting) {
-  this.mainService.settingForDetails = setting;
-  this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
-}
-addSetting() {
-  this.mainService.settingForDetails = new Setting();
-  this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
 
-}
-chooseAllSettings() {
-  alert("select all doesnt work")
-}
+
+  CoordinatorsGet() {
+    this.mainService.post("CoordinatorsGet", {}).then(
+      res => {
+        this.coordinatorList = res;
+      },
+      err => {
+        alert("CoordinatorsGet err")
+      }
+    );
+  }
+
+  CoordinatorDetails(sett: Setting, CoordinatorId: number) {
+    this.currentSetting = sett;
+    if (this.openDetails == true)
+      this.openDetails = false;
+    else
+      this.openDetails = true;
+
+    if (CoordinatorId) {
+      this.coordinator = this.coordinatorList.find(c => c.iCoordinatorId == CoordinatorId);
+    }
+  }
+  EditSetting(setting: Setting) {
+    this.mainService.settingForDetails = setting;
+    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', setting.iSettingId);
+  }
+  addSetting() {
+    this.mainService.settingForDetails = new Setting();
+    this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
+
+  }
+  chooseAllSettings() {
+    alert("select all doesnt work")
+  }
+
+  ExportTOExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.epltable.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'setting.xlsx');
+
+  }
 }
