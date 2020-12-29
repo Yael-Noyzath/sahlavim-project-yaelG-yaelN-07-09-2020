@@ -146,49 +146,6 @@ debugger
     this.dataSource.sort = this.sort;
   }
 
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
-  //פונקצית חיפוש לכל עמודה
-  // applyFilter(event: Event, prop: string) {
-  //   //alert(prop);
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   //העתקת הרשימה
-  //   var list = this.operators;
-  //   //מציאת הרשימה העונה על הדרישות
-  //   switch (prop) {
-  //     case 'nvOperatorName': this.operators = this.operators.filter((m) => (m.nvOperatorName.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvContactPerson': this.operators = this.operators.filter((m) => (m.nvContactPerson.indexOf(filterValue) > -1));
-  //       break;
-  //     //iOperatorType צריך לעשות לו המרה מ 
-  //     case 'nvOperatorTypeValue': this.operators = this.operators.filter((m) => (m.nvOperatorTypeValue.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvCompanyName': this.operators = this.operators.filter((m) => (m.nvCompanyName.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvActivityies': this.operators = this.operators.filter((m) => (m.nvActivityies.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvIdentity': this.operators = this.operators.filter((m) => (m.nvIdentity.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvContactPersonPhone': this.operators = this.operators.filter((m) => (m.nvContactPersonPhone.indexOf(filterValue) > -1));
-  //       break;
-  //     case 'nvContactPersonMail': this.operators = this.operators.filter((m) => (m.nvContactPersonMail.indexOf(filterValue) > -1));
-  //       break;
-  //     // case 'bInProgramPool': this.operators = this.operators.filter((m) => (m.bInProgramPool.indexOf(filterValue) > -1));
-  //     //   break;
-  //   }
-  //   //שמירת הרשימה שנמצאה
-  //   this.dataSource.data = this.operators;
-  //   //החזרת הרשימה הראשונה
-  //   this.operators = list;
-  // }
-
-
 
   //מחיקת מפעיל
   DeleteOperator(oper: Operator) {
@@ -208,10 +165,7 @@ debugger
 
   //עריכת מפעיל
   EditOperator(operator: Operator) {
-    // settingsActiveTab = 0;
-    // bNeighborhood = false;
-    // bSchoolsExcude = false;
-    // iOperatorId = oper.iOperatorId;
+
     this.mainService.operatorForDetails = operator;
     this.mainService.serviceNavigateForId("/header-menu/operators/operator-menu/", operator.iOperatorId);
 
@@ -222,14 +176,10 @@ debugger
   {
 
   this.emailAddress=this.selection.selected.map(obj=>obj.nvContactPersonMail);
-  debugger
   }
 
 sendEmail()
 {
- debugger
-//   this.operator.lSchools = this.schoolListforTalan.map((item) => item.iSettingId);
-// this.emailAddress=this.selection.selected.map((item)=>Item.nvContactPersonMail);
   this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody:this.emailContent,emailAddressesList:this.emailAddress ,filePath:""}).then(
     res => {
       
@@ -241,6 +191,7 @@ sendEmail()
     }
   );
 }
+
   /** Multi Select
    *  Whether the number of selected elements matches the total number of rows. */
   selection = new SelectionModel<Operator>(true, []);
@@ -261,13 +212,7 @@ sendEmail()
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: Operator): string {
-  //   if (!row) {
-  //     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-  //   }
-  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  // }
+ 
 }
 
 

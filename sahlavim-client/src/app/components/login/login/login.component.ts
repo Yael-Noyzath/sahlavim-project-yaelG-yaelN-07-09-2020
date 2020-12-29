@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
     else
       this.enterByUserName = true;
   }
+
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {
     this.spinnerWork = true;
