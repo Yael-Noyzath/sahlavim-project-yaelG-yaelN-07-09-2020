@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                     <input type="button" (click)="Login()" value="כניסה"
-                        class="btn btn-info btn-lg btn-block btn-login " [disabled]="!formLogin.valid">
+                        class="btn btn-info btn-lg btn-block btn-login " [disabled]="!nvPassword.valid || !nvUserName.valid">
                 </div>
                 <div class="form-group">
 
