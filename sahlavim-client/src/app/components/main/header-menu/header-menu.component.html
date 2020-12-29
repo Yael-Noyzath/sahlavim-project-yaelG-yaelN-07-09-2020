@@ -1,28 +1,37 @@
-<div class="container" dir="rtl">
-    <div class="col-lg-12">
-        <a href="/" class="col-lg-offset-2">
-            <img style="text-align:center" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
-        </a>
-        
-        <a routerLink="operators/operator-table" routerLinkActive="activeLink" class="button operatorBtn" mat-button value="operator" >מפעילים</a>
+<body>
 
-        <a routerLink="settings/setting-table" routerLinkActive="activeLink" class="button settingBtn" mat-button value="setting" >מסגרות</a>
-        
-        <a routerLink="programs/programs-table" routerLinkActive="activeLink" class="button programBtn" mat-button value="program" >תוכניות</a>
-       
-        <a routerLink="afternoon/afternoon-table" routerLinkActive="activeLink" class="button afternonBtn" mat-button value="afternoon" >צהרונים</a>
-      
-        <a routerLink="management-menu/managers-table" routerLinkActive="activeLink" class="button managementBtn" mat-button value="management" >ניהול</a>
-        
-        <a href="/">התנתק</a>
-    </div>
-    <p>שלום {{currentUser.nvUserName}}</p>
-</div>
+    <div class="container" dir="rtl">
+        <div class="col-lg-12">
+            <a href="/" class="col-lg-offset-2">
+                <img style="text-align:center" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
+            </a>
 
-<hr>
+            <a routerLink="operators/operator-table" routerLinkActive="activeLink" class="button operatorBtn" mat-button
+                value="operator">מפעילים</a>
 
-<!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
+            <a routerLink="settings/setting-table" routerLinkActive="activeLink" class="button settingBtn" mat-button
+                value="setting">מסגרות</a>
+
+            <a routerLink="programs/programs-table" routerLinkActive="activeLink" class="button programBtn" mat-button
+                value="program">תוכניות</a>
+
+            <a routerLink="afternoon/afternoon-table" routerLinkActive="activeLink" class="button afternonBtn"
+                mat-button value="afternoon">צהרונים</a>
+
+            <a routerLink="management-menu/managers-table" routerLinkActive="activeLink" class="button managementBtn"
+                mat-button value="management">ניהול</a>
+
+            <a href="/">התנתק</a>
+            <p>שלום {{currentUser.nvUserName}}</p>
+
+        </div>
+
+        <hr>
+
+        <!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
     <h1>ברוכה הבאה <br>
         למנהלי עמותת סחלבים</h1>
 </div> -->
-<router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+    </div>
+</body>
