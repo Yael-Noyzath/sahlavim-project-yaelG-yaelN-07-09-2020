@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-  import { CalendarEvent, CalendarView, DAYS_OF_WEEK , CalendarDateFormatter} from 'angular-calendar';
+import { CalendarEvent, CalendarView, DAYS_OF_WEEK , CalendarDateFormatter} from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 
 

@@ -84,10 +84,10 @@ export class LoginComponent implements OnInit {
     else
       this.enterByUserName = true;
   }
+
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {
-    alert(mail)
-    this.user.nvPassword=null;
+   // this.user.nvPassword=null;
     this.mainService.post("UserReset", { nvMail: mail }).then
       (
         res => {
