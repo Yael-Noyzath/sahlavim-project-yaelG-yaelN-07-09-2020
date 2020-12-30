@@ -37,6 +37,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-sort-header-button{
 display: none;
 }
+
+* {
+    direction: rtl;
+  }
+  input{
+    unicode-bidi:bidi-override; 
+    direction: RTL; 
+    text-align: right
+  }
+
 .imageBackground{
     background-color: aquamarine;
     /* url('/assets/Images/two-daisies-in-the-grass.jpg') no-repeat center center fixed; */

@@ -1,9 +1,6 @@
-<div class="body">
-
-    <div class="form-container" style="text-align:center;margin: auto;" dir="rtl">
-        <div>
-            <img style="margin-bottom:2% ;" height="120px" width="190px" src="assets/Images/logo-JPG.jpg">
-        </div>
+<!--<div class="body">
+    <div class="form-container" dir="rtl">
+       
 
             <form [formGroup]="formLogin" (ngSubmit)="Login()">
                 <div class="container text-center col-lg-4 col-lg-offset-4 col-md-3 col-sm-4"
@@ -22,7 +19,7 @@
                         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     </mat-form-field> -->
 
-                    <mat-form-field appearance="standard">
+<!-- <mat-form-field appearance="standard">
                         <mat-label>סיסמא</mat-label>
                         <input matInput type="password" class="form-control" formControlName="nvPassword"
                             name="nvPassword" placeholder="סיסמא" required [type]="hide ? 'password' : 'text'">
@@ -69,17 +66,50 @@
 
 
     </div>
-</div>
+</div>-->
 
-<!--
-<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FJerusalem&amp;src=eWFlbDk3NDI0MDJAZ21haWwuY29t&amp;src=aXcuamV3aXNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%230B8043"
- style="border:solid 1px #777" 
- width="800" 
- height="600" 
- frameborder="0" 
- scrolling="no">
-</iframe>
-<br>
+<section id="cover" class="min-vh-100">
+    <div id="cover-caption">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-4 col-lg-5 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                    <div>
+                        <img height="130px" width="210px" src="assets/Images/logo-JPG.jpg">
+                    </div>
+                    <label class="display-4 py-2 text-truncate">כניסה</label>
+                    <div class="px-2">
+                        <form [formGroup]="formLogin" (ngSubmit)="Login()" class="justify-content-center">
 
-<a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=MjBuN2FpMzFmYzA4dHA5ZmF1aDg4YXJhdXMgeWFlbDk3NDI0MDJAbQ&amp;tmsrc=yael9742402%40gmail.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_iw.gif"></a>
--->
+                            <mat-form-field appearance="legacy">
+                                <mat-label>שם משתמש</mat-label>
+                                <input formControlName="nvUserName" required name="nvUserName" matInput
+                                    placeholder="שם משתמש">
+                                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field  appearance="legacy">
+                                <mat-label>סיסמה</mat-label>
+                                <input matInput type="password" formControlName="nvPassword" name="nvPassword"
+                                    placeholder="סיסמא" required [type]="hide ? 'password' : 'text'">
+                                <mat-icon matSuffix mat-icon-button (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">{{hide ?
+                                    'visibility_off' : 'visibility'}} </mat-icon>
+                            </mat-form-field>
+                       <br>
+                                <button style="width: 70%; font-size: 20px;" type="submit" mat-raised-button color="black" >כניסה</button>
+
+                            <div class="b" >
+                            <button style="font-size: 20px;" mat-button (click)="resetUser()">שכחתי סיסמא</button>
+
+                            </div>
+
+                            <!-- <input type="button" (click)="Login()" value="כניסה"
+                                class="btn btn-info btn-lg btn-block btn-login "
+                                > -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

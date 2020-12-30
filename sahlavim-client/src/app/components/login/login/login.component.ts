@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
     debugger
     this.user = this.formLogin.value;
     //חיפוש המשתמש הזה בתוך הרשימה
-    this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
+    if(!this.user)
+    {
+          this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
     if (this.currentUser)//אם שם והסיסמה נכונים
     {
       //שנכנס למערכת לשמירה בסרויס user שליחה של ה
@@ -41,8 +43,11 @@ export class LoginComponent implements OnInit {
       this.mainService.serviceNavigate("header-menu");
     }
     else {
+      
       alert("שם וסיסמה אינם תקינים");
     }
+    }
+
   }
 
   GetUsers() {
