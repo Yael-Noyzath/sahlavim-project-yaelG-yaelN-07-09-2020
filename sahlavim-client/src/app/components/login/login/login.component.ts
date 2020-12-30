@@ -29,20 +29,23 @@ export class LoginComponent implements OnInit {
 
   // Login to site
   Login() {
-    debugger
     this.user = this.formLogin.value;
     //חיפוש המשתמש הזה בתוך הרשימה
-    this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
-    if (this.currentUser)//אם שם והסיסמה נכונים
-    {
-      //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-      this.mainService.currentUser = this.currentUser
-      this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
-      this.mainService.serviceNavigate("header-menu");
+    if (this.user) {
+      this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
+      if (this.currentUser)//אם שם והסיסמה נכונים
+      {
+        //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+        this.mainService.currentUser = this.currentUser
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
+        this.mainService.serviceNavigate("header-menu");
+      }
+      else {
+
+        alert("שם וסיסמה אינם תקינים");
+      }
     }
-    else {
-      alert("שם וסיסמה אינם תקינים");
-    }
+
   }
 
   GetUsers() {
@@ -76,9 +79,10 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-
+  forgot: boolean = false;
   //אתחול סיסמא
   resetUser() {
+    this.forgot = true;
     if (this.enterByUserName)
       this.enterByUserName = false;
     else
@@ -87,6 +91,8 @@ export class LoginComponent implements OnInit {
 
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {
+debugger
+
     this.spinnerWork = true;
     this.user.nvPassword = null;
     this.mainService.post("UserReset", { nvMail: mail }).then
