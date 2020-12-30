@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   // Login to site
   Login() {
-    debugger
     this.user = this.formLogin.value;
     //חיפוש המשתמש הזה בתוך הרשימה
     if (this.user) {
@@ -92,11 +91,7 @@ export class LoginComponent implements OnInit {
 
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {
-    // if(this.nvMail)
-    // {
-    //  this.forgot=false;
-
-    // }
+debugger
 
     this.spinnerWork = true;
     this.user.nvPassword = null;
