@@ -41,11 +41,7 @@ display: none;
 * {
     direction: rtl;
   }
-  input{
-    unicode-bidi:bidi-override; 
-    direction: RTL; 
-    text-align: right
-  }
+
 
 .imageBackground{
     background-color: aquamarine;

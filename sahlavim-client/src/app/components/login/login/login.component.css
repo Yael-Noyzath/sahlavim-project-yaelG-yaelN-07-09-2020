@@ -75,6 +75,7 @@ form:before {
 .row{
     height: 570px;
 }
+
 mat-form-field{
 text-align: right;
 }

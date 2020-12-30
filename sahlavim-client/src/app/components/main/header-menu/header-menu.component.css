@@ -1,7 +1,7 @@
 
 body{
 /* Location of the image */
-  /* background-image: url(src\Images\image.jpeg);  */
+  background-image: url(src\Images\image.jpeg);  
 
   /* Background image is centered vertically and horizontally at all times */
   background-position: center center;
