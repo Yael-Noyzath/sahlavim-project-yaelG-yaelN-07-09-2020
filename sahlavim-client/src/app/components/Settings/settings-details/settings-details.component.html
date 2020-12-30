@@ -125,7 +125,7 @@
         <div>
             <h3 class="settingColor">פרטי פעילות</h3>
 
-            <div class="col-md-2 col-sm-12" style="margin: auto; display: inline-block;">
+            <div class="col-md-3 col-sm-12" style="margin: auto; display: inline-block;">
                 <p style="font-size: smaller; color: rgb(109, 108, 108);">קטגורית גילאים</p>
                 <ng-multiselect-dropdown name="SettingAgegroups" [settings]="dropdownSettingAgegroups"
                     [data]="lSettingAgegroupsValue" [(ngModel)]="SettingAgegroupsListNg"
@@ -134,7 +134,7 @@
                 </ng-multiselect-dropdown>
             </div>
 
-            <mat-form-field class="example-form-field col-sm-2">
+            <mat-form-field class="example-form-field col-sm-3">
                 <mat-label>מיקום פעילות</mat-label>
                 <input matInput type="text" [(ngModel)]="currentSetting.nvOperatingLocation"
                     name="nvOperatingLocation" />
@@ -181,16 +181,16 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">החלפת רכזת</h4>
+                <h4 class="settingColor modal-title" id="myModalLabel">החלפת רכזת</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+                <button type="button" class="btn settingColor" data-dismiss="modal">
                     <mat-icon>check</mat-icon>
                 </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" (click)="updateCoordinatorToEdit(-1)"
+                <button style="background-color: rgb(47, 50, 150); color:white;" class="btn" type="button" data-toggle="modal" (click)="updateCoordinatorToEdit(-1)"
                     data-target="#mmm">הוספת רכזת</button>
             </div>
             <!--Body-->
@@ -229,7 +229,7 @@
                         <th style="width:5%;" mat-header-cell *matHeaderCellDef>עריכה </th>
                         <td mat-cell *matCellDef="let row">
                             <!-- (click)="redirectToDelete(element.id)" -->
-                            <button mat-icon-button color="warn" (click)="updateCoordinatorToEdit(row)"
+                            <button mat-icon-button class="settingColor" (click)="updateCoordinatorToEdit(row)"
                                 data-toggle="modal" data-target="#mmm">
                                 <mat-icon class="mat-18">edit</mat-icon>
                             </button>
@@ -256,7 +256,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">הוספת רכזת</h4>
+                <h4 class="settingColor modal-title" id="myModalLabel">הוספת רכזת</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -272,7 +272,7 @@
                                 (click)="value=''">
                                 <mat-icon>close</mat-icon>
                             </button>
-                        </mat-form-field>
+                        </mat-form-field><br>
                         <mat-form-field class="example-form-field">
                             <mat-label>שם משפחה</mat-label>
                             <input matInput type="text" [(ngModel)]="addCoordinator.nvLastName" name="nvLastName" />
@@ -280,7 +280,7 @@
                                 (click)="value=''">
                                 <mat-icon>close</mat-icon>
                             </button>
-                        </mat-form-field>
+                        </mat-form-field><br>
                         <mat-form-field class="example-form-field">
                             <mat-label>פלאפון</mat-label>
                             <input matInput type="text" [(ngModel)]="addCoordinator.nvPhone" name="nvPhone" />
@@ -288,7 +288,7 @@
                                 (click)="value=''">
                                 <mat-icon>close</mat-icon>
                             </button>
-                        </mat-form-field>
+                        </mat-form-field><br>
                         <mat-form-field class="example-form-field">
                             <mat-label>מייל</mat-label>
                             <input matInput type="text" [(ngModel)]="addCoordinator.nvMail" name="nvMail" />
@@ -297,8 +297,8 @@
                                 <mat-icon>close</mat-icon>
                             </button>
 
-                        </mat-form-field>
-                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                        </mat-form-field><br>
+                        <button mat-icon-button class="settingColor" aria-label="Example icon button with a home icon">
                             <mat-icon>save</mat-icon>
                         </button>
                     </form>
