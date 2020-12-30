@@ -23,7 +23,7 @@ export class ManagersTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['nvLastName', 'nvFirstName', 'iUserType', 'nvUserName', 'nvMobile', 'nvMail', 'details'];
+  displayedColumns: string[] = ['details','nvLastName', 'nvFirstName', 'iUserType', 'nvUserName', 'nvMobile', 'nvMail'];
 
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<User>;

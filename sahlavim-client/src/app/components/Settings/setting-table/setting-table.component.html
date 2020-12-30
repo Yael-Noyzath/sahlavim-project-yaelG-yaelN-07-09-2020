@@ -94,7 +94,7 @@
             <th style="width:5%;" mat-header-cell *matHeaderCellDef> פרטי רכזת </th>
             <td mat-cell *matCellDef="let element">
                 <!-- (click)="redirectToDelete(element.id)" -->
-                <button mat-icon-button color="warn" (click)="CoordinatorDetails(element,element.iCoordinatorId)">
+                <button mat-icon-button class="settingColor" (click)="CoordinatorDetails(element,element.iCoordinatorId)">
                     <mat-icon class="mat-18">list</mat-icon>
                 </button>
 
@@ -106,7 +106,7 @@
             <th style="width:5%;" mat-header-cell *matHeaderCellDef>עריכה </th>
             <td mat-cell *matCellDef="let element">
                 <!-- (click)="redirectToDelete(element.id)" -->
-                <button mat-icon-button color="warn" (click)="EditSetting(element)">
+                <button mat-icon-button class="settingColor" (click)="EditSetting(element)">
                     <mat-icon class="mat-18">edit</mat-icon>
                 </button>
             </td>
