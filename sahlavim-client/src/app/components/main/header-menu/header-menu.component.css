@@ -16,10 +16,7 @@ body{
   /* This is what makes the background image rescale based
      on the container's size */
   background-size: cover;
-  
-  /* Set a background color that will be displayed
-     while the background image is loading */
-  background-color: #464646;
+
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -58,4 +55,7 @@ a{
 .activeLink{
     border: solid;
     border-color: lightslategrey;
+}
+.container-fluid{
+    margin: auto;
 }

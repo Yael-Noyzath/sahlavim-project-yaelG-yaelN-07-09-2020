@@ -43,7 +43,7 @@
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="select">
                 <th>בחירה</th>

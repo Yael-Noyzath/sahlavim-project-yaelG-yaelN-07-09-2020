@@ -9,3 +9,21 @@
     background-size: cover;
     background-image: url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg); 
 }
+
+.form-container{
+margin-bottom: 10%;  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  padding: 30px;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center; 
+  background-color: white;
+   width: 25%;
+    height: 80%;
+}
+input{
+    font-weight: 400;
+}
