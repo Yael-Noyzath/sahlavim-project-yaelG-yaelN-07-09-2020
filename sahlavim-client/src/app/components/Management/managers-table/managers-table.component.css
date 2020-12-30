@@ -1,5 +1,8 @@
-
 .managementColor {
     color:rgb(57, 120, 110);
 
+}
+.managementBtn {
+    background-color:rgb(57, 120, 110);
+    color: white;
 }

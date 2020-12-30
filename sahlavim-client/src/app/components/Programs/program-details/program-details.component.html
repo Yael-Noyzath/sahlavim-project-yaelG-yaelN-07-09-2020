@@ -27,7 +27,7 @@
                 </button>
             </mat-form-field><br>
             <div class="col-sm-6" style="margin: auto;">
-                <p>קטגורית גילאים</p>
+                <p style="font-size: smaller;" class="programColor">קטגורית גילאים</p>
                 <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
                     [data]="lProgramAgegroupsValue" [(ngModel)]="ProgramAgegroupsListNg"
                     [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
@@ -198,13 +198,13 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">שיוך מסגרות</h4>
+                <h4 class="programColor modal-title" id="myModalLabel">שיוך מסגרות</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+                <button type="button" class="btn programColor" data-dismiss="modal">
                     <mat-icon>check</mat-icon>
                 </button>
             </div>
