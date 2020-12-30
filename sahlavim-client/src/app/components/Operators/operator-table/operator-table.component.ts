@@ -29,7 +29,7 @@ export class OperatorTableComponent implements OnInit {
   //מערך מפעילים לטבלה
   operators: Operator[];
   //מערך שמות העמודות
-  displayedColumns: string[] = ['select','iOperatorType','nvOperatorName', 'nvContactPerson', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool', 'update', 'delete'];
+  displayedColumns: string[] = ['select','update','iOperatorType','nvOperatorName', 'nvContactPerson', 'nvCompanyName', 'nvActivityies', 'nvIdentity', 'nvContactPersonPhone', 'nvContactPersonMail', 'bInProgramPool','delete'];
   //סוג מקור הנתונים
   dataSource: MatTableDataSource<Operator>;
  

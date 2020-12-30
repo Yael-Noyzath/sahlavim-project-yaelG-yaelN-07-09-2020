@@ -63,7 +63,7 @@ export class ProgramDetailsComponent implements OnInit {
       textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 5,
       allowSearchFilter: true
     };
 
