@@ -167,7 +167,7 @@
                 <th style="width:4%;" class="header" mat-header-cell *matHeaderCellDef> עריכה </th>
                 <td mat-cell *matCellDef="let element">
                     <!-- (click)="redirectToUpdate(element.id)" -->
-                    <button mat-icon-button color="accent" (click)="EditOperator(element)">
+                    <button mat-icon-button class="operatorColor" (click)="EditOperator(element)">
                         <mat-icon matSuffix>create</mat-icon>
                     </button>
                 </td>
@@ -178,7 +178,7 @@
                 <th style="width:4%;" class="header" mat-header-cell *matHeaderCellDef> מחיקה </th>
                 <td mat-cell *matCellDef="let element">
                     <!-- (click)="redirectToDelete(element.id)" -->
-                    <button mat-icon-button color="warn" (click)="DeleteOperator(element)">
+                    <button mat-icon-button class="operatorColor" (click)="DeleteOperator(element)">
                         <mat-icon matSuffix>delete</mat-icon>
                     </button>
                 </td>

@@ -16,7 +16,10 @@ input.matInput{
   direction: rtl;
 } */ 
 
+.operatorColor{
+  color:rgb(236, 116, 19);
 
+}
 .container{
   background-image:url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg) ;
 }
