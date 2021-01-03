@@ -65,9 +65,9 @@ form:before {
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,1) 27%, rgba(255,255,255,0.6365896700477065) 68%);
       z-index: -1;
-    /* border-radius: 10px;
+    /* border-radius: 10px; */
  border: double 15px rgba(255,255,255,0.7);
-    background-clip: padding-box; */
+    background-clip: padding-box;
 }
 .b{
     margin-top: 7%;
@@ -79,4 +79,8 @@ form:before {
 mat-form-field{
 text-align: right;
 }
+
+/* button{
+    cursor: pointer;
+} */
 
