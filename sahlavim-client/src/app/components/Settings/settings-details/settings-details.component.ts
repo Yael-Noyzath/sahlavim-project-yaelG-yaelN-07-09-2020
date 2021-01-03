@@ -59,7 +59,7 @@ export class SettingsDetailsComponent implements OnInit {
       textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 2,
       allowSearchFilter: true
     };
     this.ngAfterViewInit();

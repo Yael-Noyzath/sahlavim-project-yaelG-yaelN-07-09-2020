@@ -1,4 +1,4 @@
-<input type="button" class="btn btn-danger" (click)="TheEditUser(-1)" data-toggle="modal" data-target="#mo"
+<input type="button" class="btn managementBtn" (click)="TheEditUser(-1)" data-toggle="modal" data-target="#mo"
     value="הוספת משתמש">
 
 <div class="mat-elevation-z8" style="text-align:right;" dir="rtl">
@@ -77,7 +77,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">עריכת משתמש</h4>
+                <h4 class="managementColor modal-title" id="myModalLabel">עריכת משתמש</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -149,7 +149,7 @@
 
                         </mat-form-field><br>
 
-                        <button  mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                        <button mat-icon-button class="managementColor" aria-label="Example icon button with a home icon">
                             <mat-icon>save</mat-icon>
                         </button>
                     </form>
