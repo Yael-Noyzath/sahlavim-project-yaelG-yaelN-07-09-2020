@@ -1,6 +1,6 @@
 
 body{
-    overflow: auto;
+    /* overflow: auto; */
  
 /* Location of the image */
   background-image: url(src\Images\image.jpeg);  
@@ -25,45 +25,43 @@ body{
   background-repeat:repeat;
 
     }
-.container-fluid{
-    background-color:white;
 
-}
-
-.button{
-    width:110px;
-    margin-left: 50px;
-}
-.settingBtn{
-    background-color:rgb(47, 50, 150);
-}
-
-.managementBtn {
-    background-color:rgb(57, 120, 110);
-
-}
-.operatorBtn{
-    background-color:rgb(236, 116, 19);
-
-}
-.afternonBtn{
-    background-color:rgb(240, 236, 20, 0.904);
-
-}
-
-.programBtn{
-background-color: rgb(98, 169, 29);
-}
 
 a{
     text-decoration: none;
+    padding-left: 9%;
+    outline: none;
 
 }
-.activeLink{
-    border: solid;
-    border-color: lightslategrey;
+
+
+.middle{  
+    
+    margin-top: 60px;
+
+    /* padding-top: 5%; */
+
+
 }
+.middle a{
+    font-size: 20px;
+}
+
 .container-fluid{
-    margin: auto;
+    background-color:white;
+    height: 16%;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+
 }
 
+.img{
+margin-top: 1.5%;
+}
+img{
+    float: right;
+}
+p{
+    text-align: center;
+    padding-top: 9%;
+    font-size: 130%;
+}

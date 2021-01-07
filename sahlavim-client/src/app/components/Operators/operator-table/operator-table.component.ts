@@ -20,7 +20,7 @@ export class OperatorTableComponent implements OnInit {
 
   ContactNameFilter= new FormControl('');
   nameFilter = new FormControl('');
-  OperatorTypeFilter = new FormControl(''); 
+  OperatorTypeFilter = new FormControl('ספורט'); 
   CompanyNameFilter= new FormControl(''); 
   categoryFilter=new FormControl(''); 
   IdentityFilter=new FormControl('');
