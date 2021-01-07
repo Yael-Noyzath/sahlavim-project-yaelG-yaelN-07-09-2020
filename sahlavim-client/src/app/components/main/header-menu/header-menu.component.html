@@ -1,38 +1,47 @@
-<body>
-
-    <div class="container-fluid" dir="rtl">
-        <div class="container">
+<body data-mdb-perfect-scrollbar='true'>
 
 
-            <a href="/" class="col-lg-offset-2">
-                <img style="text-align:center" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
-            </a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="img col-3">
+                <a href="/">
+                    <img class="img-responsive" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
+                </a>
+            </div>
 
-            <a routerLink="operators/operator-table" routerLinkActive="activeLink" class="button operatorBtn" mat-button
-                value="operator">מפעילים</a>
+            <div class="middle col-6">
 
-            <a routerLink="settings/setting-table" routerLinkActive="activeLink" class="button settingBtn" mat-button
-                value="setting">מסגרות</a>
+                <a routerLink="operators/operator-table" routerLinkActive="activeLink"
+                    value="operator">מפעילים</a>
 
-            <a routerLink="programs/programs-table" routerLinkActive="activeLink" class="button programBtn" mat-button
-                value="program">תוכניות</a>
+                <a  routerLink="settings/setting-table" routerLinkActive="activeLink"
+                    value="setting">מסגרות</a>
 
-            <a routerLink="afternoon/afternoon-table" routerLinkActive="activeLink" class="button afternonBtn"
-                mat-button value="afternoon">צהרונים</a>
+                <a   routerLink="programs/programs-table" routerLinkActive="activeLink"
+                    value="program">תוכניות</a>
 
-            <a routerLink="management-menu/managers-table" routerLinkActive="activeLink" class="button managementBtn"
-                mat-button value="management">ניהול</a>
+                <a   routerLink="afternoon/afternoon-table" routerLinkActive="activeLink"
+                    value="afternoon">צהרונים</a>
 
-            <a href="/">התנתק</a>
-            <p>שלום {{currentUser.nvUserName}}</p>
+                <a   routerLink="management-menu/managers-table" routerLinkActive="activeLink"
+                    value="management">ניהול</a>
+            </div>
+
+            <div style="text-align: center;" class="col-3">
+                <p >שלום {{currentUser.nvUserName}}</p>
+                <a style="text-align: center;" href="/">התנתק</a>
+            </div>
         </div>
 
-        <hr>
+    </div>
 
-        <!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
+
+
+
+    <!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
     <h1>ברוכה הבאה <br>
         למנהלי עמותת סחלבים</h1>
 </div> -->
-        <router-outlet></router-outlet>
-    </div>
+
+    <router-outlet></router-outlet>
 </body>

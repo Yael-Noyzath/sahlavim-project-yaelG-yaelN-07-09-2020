@@ -3,6 +3,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';    
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';   
@@ -37,7 +39,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-sort-header-button{
 display: none;
 }
-
+button{
+    cursor: pointer;
+}
 * {
     direction: rtl;
   }

@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
   // Login to site
   Login() {
     this.user = this.formLogin.value;
-    //חיפוש המשתמש הזה בתוך הרשימה
+   debugger //חיפוש המשתמש הזה בתוך הרשימה
     if (this.user) {
       this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
       if (this.currentUser)//אם שם והסיסמה נכונים
       {
-        //שנכנס למערכת לשמירה בסרויס user שליחה של ה
+        //שנכנס לשמירה בסרויס user שליחה של ה
         this.mainService.currentUser = this.currentUser
-        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת??  
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת 
         this.mainService.serviceNavigate("header-menu");
       }
       else {
@@ -79,15 +79,9 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+  
   forgot: boolean = false;
-  //אתחול סיסמא
-  resetUser() {
-    this.forgot = true;
-    if (this.enterByUserName)
-      this.enterByUserName = false;
-    else
-      this.enterByUserName = true;
-  }
+
 
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {

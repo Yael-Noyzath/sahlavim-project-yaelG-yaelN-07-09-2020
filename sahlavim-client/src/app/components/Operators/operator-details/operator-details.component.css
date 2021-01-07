@@ -33,3 +33,9 @@
   padding: 10px;
 
 }
+
+.form-group{
+  
+  overflow-y: auto;
+
+}
