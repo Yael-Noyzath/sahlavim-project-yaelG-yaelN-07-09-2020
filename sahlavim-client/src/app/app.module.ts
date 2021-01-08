@@ -144,7 +144,8 @@ import { CommonModule } from '@angular/common';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),
+    }),    
+
     CommonModule,
     ScheduleModule,
     BrowserModule, 
