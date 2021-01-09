@@ -73,7 +73,7 @@ export class OperatorScheduleComponent implements OnInit {
     this.view = view;
   }
 
-  locale: string = 'en';
+  locale: string = 'he';
 
   viewChange = new EventEmitter<CalendarView>();
 
