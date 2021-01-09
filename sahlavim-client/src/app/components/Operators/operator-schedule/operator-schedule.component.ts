@@ -27,6 +27,7 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
+  DateFormatterParams,
 } from 'angular-calendar';
 import { OnInit } from '@angular/core';
 import {
@@ -35,6 +36,7 @@ import {
   DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { formatDate } from '@angular/common';
 
 const colors: any = {
   red: {
@@ -62,8 +64,6 @@ const colors: any = {
 export class OperatorScheduleComponent implements OnInit {
 
 
-
-
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
   weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
@@ -88,12 +88,19 @@ export class OperatorScheduleComponent implements OnInit {
   ngOnInit() {
   }
   
+   dayViewHour({ date, locale }: DateFormatterParams): string {
+    return formatDate(date, 'HH:mm', locale);
+  }
 
+   weekViewHour({ date, locale }: DateFormatterParams): string {
+    return this.dayViewHour({ date, locale });
+   }
+    
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: '3 ימי אירוע',
       color: colors.red,
       // actions: this.actions,
       allDay: true,
@@ -105,14 +112,14 @@ export class OperatorScheduleComponent implements OnInit {
     },
     {
       start: startOfDay(new Date()),
-      title: 'An event with no end date',
+      title: 'אירוע ללא תאריך סופי',
       color: colors.yellow,
       // actions: this.actions,
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: 'אירוע 2 חודשים',
       color: colors.blue,
       allDay: true,
     },
