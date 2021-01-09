@@ -86,6 +86,8 @@ import { AfternoonTableComponent } from './components/Afternoons/afternoon-table
 import { TableComponent } from './table/table.component';
 import * as XLSX from 'xlsx';
 
+import localeHe from '@angular/common/locales/he';
+registerLocaleData(localeHe);
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -144,7 +146,8 @@ import { CommonModule } from '@angular/common';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),
+    }),    
+
     CommonModule,
     ScheduleModule,
     BrowserModule, 
