@@ -29,6 +29,12 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { OnInit } from '@angular/core';
+import {
+  CalendarDateFormatter,
+
+  DAYS_OF_WEEK,
+} from 'angular-calendar';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
 
 const colors: any = {
   red: {
@@ -55,6 +61,17 @@ const colors: any = {
 })
 export class OperatorScheduleComponent implements OnInit {
 
+
+
+
+  weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+
+  weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
 
   locale: string = 'en';
 
