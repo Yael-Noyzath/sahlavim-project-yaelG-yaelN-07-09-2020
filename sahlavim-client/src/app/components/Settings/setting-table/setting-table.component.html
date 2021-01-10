@@ -5,7 +5,7 @@
             (click)="emailList()">שליחת הודעה</button>
         <button mat-stroked-button class="settingColor" (click)="addSetting()"> הוספת תוכנית</button>
     </div>
-    <div style="width: 90%;margin: auto;" class="overflow-auto">
+    <div *ngIf="openDetails==false" style="width: 90%;margin: auto;" class="overflow-auto">
 
         <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
 
