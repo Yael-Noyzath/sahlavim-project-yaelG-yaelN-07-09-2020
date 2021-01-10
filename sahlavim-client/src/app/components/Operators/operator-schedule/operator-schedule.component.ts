@@ -123,16 +123,5 @@ export class OperatorScheduleComponent implements OnInit {
       color: colors.blue,
       allDay: true,
     },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      // actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+    
   ];}
