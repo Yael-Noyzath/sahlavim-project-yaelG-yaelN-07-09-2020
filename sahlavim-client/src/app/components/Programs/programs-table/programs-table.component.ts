@@ -11,7 +11,7 @@ import { parse } from 'url';
 })
 export class ProgramsTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['choose', 'edit', 'iProgramType', 'nvProgramName', 'dFromDateFormat', 'dToDateFormat',
+  displayedColumns: string[] = [ 'edit', 'iProgramType', 'nvProgramName', 'dFromDateFormat', 'dToDateFormat',
     'lProgramSettings', 'lProgramAgegroups', 'nvBudgetItem'];
 
   programList: Array<Program>;

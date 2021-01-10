@@ -12,6 +12,9 @@ import { coordinator } from 'src/app/Classes/coordinator';
 import { flatten } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as XLSX from 'XLSX';
+import { SelectionModel } from '@angular/cdk/collections';
+import { FormControl } from '@angular/forms';
+import { Item } from 'angular2-multiselect-dropdown';
 
 @Component({
   selector: 'app-setting-table',
@@ -25,7 +28,7 @@ export class SettingTableComponent implements OnInit {
   // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',
   //   'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroupsValue', 'nvFullName',
   //   'nvMail', 'nvPhoneCoordinator','edit','choose'];
-  displayedColumns: string[] = ['choose', 'edit', 'iSettingId', 'nvSettingName', 'nvSettingCode', 'iSettingType', 'nvAddress', 'nvPhone',
+  displayedColumns: string[] = ['select', 'edit', 'iSettingId', 'nvSettingName', 'iSettingType', 'nvAddress', 'nvPhone',
     'nvContactPerson', 'nvContactPersonMail', 'nvContactPersonPhone', 'lSettingAgegroups', 'CoordinatorDetails'
   ];
 
@@ -40,6 +43,11 @@ export class SettingTableComponent implements OnInit {
   openDetails: boolean = false;
   lSettingAgegroupsValue: Map<number, string> = new Map<number, string>();
   lSettingTypeValue: Map<number, string> = new Map<number, string>();
+
+  emailAddress: Array<string> = new Array<string>();
+  emailContent: string;
+  emailSubject: string;
+
 
   constructor(private mainService: MainServiceService) {
     //this.lSettingAgegroups = this.lSysTable[7-1].dParams;
@@ -100,9 +108,6 @@ export class SettingTableComponent implements OnInit {
     this.mainService.serviceNavigateForId('/header-menu/settings/settings-details-menu/', -1);
 
   }
-  chooseAllSettings() {
-    alert("select all doesnt work")
-  }
 
   ExportTOExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.epltable.nativeElement);
@@ -113,4 +118,41 @@ export class SettingTableComponent implements OnInit {
     XLSX.writeFile(wb, 'setting.xlsx');
 
   }
+  emailList() {
+    this.emailAddress = this.selection.selected.map(obj => obj.nvContactPersonMail);
+  }
+
+  sendEmail() {
+    this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody: this.emailContent, emailAddressesList: this.emailAddress, filePath: "" }).then(
+      res => {
+
+        let r = res;
+        alert(res);
+      },
+      err => {
+        alert(err);
+      }
+    );
+  }
+
+  /** Multi Select
+  *  Whether the number of selected elements matches the total number of rows. */
+  selection = new SelectionModel<Setting>(true, []);
+
+  isAllSelected() {
+    debugger
+    this.selection.selected
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    debugger
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
 }
