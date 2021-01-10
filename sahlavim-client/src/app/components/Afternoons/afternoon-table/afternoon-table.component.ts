@@ -11,7 +11,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class AfternoonTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['choose', 'edit', 'iYearType', 'iSemesterType', 'dFromDate', 'dToDate', 'lProgramSettings'];
+  displayedColumns: string[] = ['edit', 'iYearType', 'iSemesterType', 'dFromDate', 'dToDate', 'lProgramSettings'];
 
   afternoonList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
