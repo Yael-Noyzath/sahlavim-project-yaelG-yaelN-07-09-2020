@@ -58,6 +58,12 @@ const colors: any = {
   selector: 'app-operator-schedule',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './operator-schedule.component.html',
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter
+    }
+  ],
   styleUrls: ['./operator-schedule.component.css'],
 
 })
