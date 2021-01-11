@@ -85,6 +85,7 @@ import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.
 import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component';
 import { TableComponent } from './table/table.component';
 import * as XLSX from 'xlsx';
+import { CalendarHeaderComponent } from './components/Operators/operator-schedule/calendar-header-component';
 
 import localeHe from '@angular/common/locales/he';
 registerLocaleData(localeHe);
@@ -137,7 +138,7 @@ import { CommonModule } from '@angular/common';
     AfternoonComponent,
     AfternoonTableComponent,
     TableComponent,
-
+    CalendarHeaderComponent
   ],
   imports: [
 

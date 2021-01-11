@@ -1,16 +1,21 @@
 <div class="form-group col-sm-12" style=" text-align: center;margin-top: 3%;direction: rtl;" class="Details">
+ <div class="bg-text row-sm-4">
+        </div>
     <form (ngSubmit)="testDate()">
-        <div>
-            <h3 class="programColor">פרטי תוכנית</h3>
+       
+
+        <div >
+            <h3 style="z-index: 20;" class="programColor">פרטי תוכנית</h3>
             <mat-form-field class="example-form-field col-sm-2">
                 <mat-select [(ngModel)]="currentProgram.iProgramType" required placeholder="סוג תוכנית"
                     name="iProgramType">
-                    <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">{{this.lProgramTypeValue.get(s)}}
+                    <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">
+                        {{this.lProgramTypeValue.get(s)}}
                     </mat-option>
                 </mat-select>
                 <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
+            <mat-icon>close</mat-icon>
+        </button> -->
             </mat-form-field>
             <mat-form-field class="example-form-field col-sm-2">
                 <mat-label>שם תוכנית</mat-label>
@@ -53,49 +58,49 @@
         </div>
 
         <!-- <mat-form-field>
-            <mat-select [(ngModel)]="currentProgram.lProgramAgegroups" required placeholder="קטגורית גילאים" name="lProgramAgegroups">
-                <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue[s]}}</mat-option>
-            </mat-select> -->
+        <mat-select [(ngModel)]="currentProgram.lProgramAgegroups" required placeholder="קטגורית גילאים" name="lProgramAgegroups">
+            <mat-option *ngFor="let s of lProgramAgegroupsValue.keys()" [value]="s">{{this.lProgramAgegroupsValue[s]}}</mat-option>
+        </mat-select> -->
 
 
         <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
+            <mat-icon>close</mat-icon>
+        </button> -->
         <!-- </mat-form-field><br> -->
         <!-- 
-        <mat-accordion style="text-align:center;">
-            <mat-expansion-panel class="text-center col-lg-3 col-lg-offset-4" (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-description>
-                        נבחרו: {{shoes.selectedOptions.selected.length}}
-                    </mat-panel-description>
-                    <mat-panel-title>
-                        קטגורית גילאים
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+    <mat-accordion style="text-align:center;">
+        <mat-expansion-panel class="text-center col-lg-3 col-lg-offset-4" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                    נבחרו: {{shoes.selectedOptions.selected.length}}
+                </mat-panel-description>
+                <mat-panel-title>
+                    קטגורית גילאים
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-                <mat-selection-list #shoes [(ngModel)]="currentProgram.lProgramAgegroups" required
-                    placeholder="קטגורית גילאים" name="lProgramAgegroups">
-                    <div *ngFor="let s of lProgramAgegroupsValue.keys()">
+            <mat-selection-list #shoes [(ngModel)]="currentProgram.lProgramAgegroups" required
+                placeholder="קטגורית גילאים" name="lProgramAgegroups">
+                <div *ngFor="let s of lProgramAgegroupsValue.keys()">
 
-                        <div *ngIf="isSelected(s)">
-                            <div *ngIf="selected">
-                                <mat-list-option selected [value]="s">
-                                    {{this.lProgramAgegroupsValue.get(s)}}
-                                </mat-list-option>
-                            </div>
-                            <div *ngIf="!selected">
-                                <mat-list-option [value]="s">
-                                    {{this.lProgramAgegroupsValue.get(s)}}
-                                </mat-list-option>
-                            </div>
+                    <div *ngIf="isSelected(s)">
+                        <div *ngIf="selected">
+                            <mat-list-option selected [value]="s">
+                                {{this.lProgramAgegroupsValue.get(s)}}
+                            </mat-list-option>
+                        </div>
+                        <div *ngIf="!selected">
+                            <mat-list-option [value]="s">
+                                {{this.lProgramAgegroupsValue.get(s)}}
+                            </mat-list-option>
                         </div>
                     </div>
+                </div>
 
-                </mat-selection-list>
-            </mat-expansion-panel>
-        </mat-accordion> -->
+            </mat-selection-list>
+        </mat-expansion-panel>
+    </mat-accordion> -->
 
         <div>
             <mat-form-field class="example-form-field col-sm-2">
@@ -180,7 +185,8 @@
         </div><br>
         <div>
             <!-- Button trigger modal-->
-            <button type="button" style="background-color:rgb(98, 169, 29); color: white;" class="btn col-sm-4" data-toggle="modal" data-target="#modalCart">שיוך
+            <button type="button" style="background-color:rgb(98, 169, 29); color: white;" class="btn col-sm-4"
+                data-toggle="modal" data-target="#modalCart">שיוך
                 מסגרות</button>
 
         </div>
