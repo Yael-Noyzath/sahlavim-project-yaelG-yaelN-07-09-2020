@@ -61,41 +61,40 @@ const colors: any = {
   styleUrls: ['./operator-schedule.component.css'],
 
 })
+
 export class OperatorScheduleComponent implements OnInit {
 
+  view: string = 'month';
 
-  weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+  viewDate: Date = new Date();
 
-  weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+  locale: string = 'he';
 
+  weekStartsOn: number = DAYS_OF_WEEK.SUNDAY;
+
+  weekendDays: number[] = [DAYS_OF_WEEK.SUNDAY, DAYS_OF_WEEK.SATURDAY];
+
+  viewChange = new EventEmitter<CalendarView>();
+
+  viewDateChange = new EventEmitter<Date>();
 
   setView(view: CalendarView) {
     this.view = view;
   }
 
-  locale: string = 'he';
-
-  viewChange = new EventEmitter<CalendarView>();
-
- viewDateChange = new EventEmitter<Date>();
-
-  view: CalendarView = CalendarView.Month;
-
-  viewDate: Date = new Date();
-
   CalendarView = CalendarView;
- 
+
   ngOnInit() {
   }
-  
-   dayViewHour({ date, locale }: DateFormatterParams): string {
+
+  dayViewHour({ date, locale }: DateFormatterParams): string {
     return formatDate(date, 'HH:mm', locale);
   }
 
-   weekViewHour({ date, locale }: DateFormatterParams): string {
+  weekViewHour({ date, locale }: DateFormatterParams): string {
     return this.dayViewHour({ date, locale });
-   }
-    
+  }
+
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
@@ -123,5 +122,5 @@ export class OperatorScheduleComponent implements OnInit {
       color: colors.blue,
       allDay: true,
     },
-    
-  ];}
+  ];
+}

@@ -42,10 +42,6 @@ display: none;
 button{
     cursor: pointer;
 }
-* {
-    direction: rtl;
-  }
-
 
 .imageBackground{
     background-color: aquamarine;
