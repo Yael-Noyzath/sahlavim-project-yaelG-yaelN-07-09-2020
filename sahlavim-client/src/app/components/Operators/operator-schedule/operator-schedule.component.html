@@ -1,103 +1,22 @@
-<body>
+<div>
+  <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
+  </mwl-demo-utils-calendar-header>
 
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-      >
-        קודם
-      </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
-        היום
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-      >
-        הבא
-      </div>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+      [cellTemplate]="customCellTemplate" [locale]="locale" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+      [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale">
+    </mwl-calendar-day-view>
+  </div>
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
-  </div>
-  
-
-    
-  <div class="col-md-4">
-    <h3>
-      {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
-    </h3>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
-      >
-        חודש
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week"
-      >
-        שבוע
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
-      >
-        יום
-      </div>
-    </div>
-  </div>
+    <small *ngIf="day.events.length" style="margin: 5px;">ישנם {{ day.events.length }} אירועים ביום זה</small>
+  </ng-template>
 </div>
-<br />
-
-
-<ng-template #customCellTemplate let-day="day" let-locale="locale">
-  <div class="cal-cell-top">
-    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0"
-      >{{ day.badgeTotal }}</span
-    >
-    <span class="cal-day-number"
-      >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
-    >
-  </div>
-  <small *ngIf="day.events.length" style="margin: 5px;"
-    >ישנם {{ day.events.length }} אירועים ביום זה</small
-  >
-</ng-template>
-
-<div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="'month'"
-    [viewDate]="viewDate"
-    [events]="events"
-    [cellTemplate]="customCellTemplate"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="'week'"
-    [viewDate]="viewDate"
-    [events]="events"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="'day'"
-    [viewDate]="viewDate"
-    [events]="events"
-  >
-  </mwl-calendar-day-view>
-</div>
-</body>

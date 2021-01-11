@@ -1,22 +1,6 @@
+.cal-week-view .cal-day-headers{
+  padding-left: 0px !important;
+  display: flex;
+  padding-right: 70px !important;
 
-h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }
-
-  .container{
-      background-color: white;
-      width: 70%;
-      height: 80%;
-  }
-  .cal-month-view{
-      width: 80%;
-      margin: auto;
-  }
-  body{
-      width: 80%;
-margin: auto;  }
+}

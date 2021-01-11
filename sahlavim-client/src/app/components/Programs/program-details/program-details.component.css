@@ -4,7 +4,8 @@
 
   
   /* Position text in the middle of the page/image */
-  .bg-text {
+  
+  /* .bg-text {
     background-image: url(src\Images\image.jpeg);  
     filter: blur(8px);
     -webkit-filter: blur(8px);
@@ -15,4 +16,4 @@
     top:95%;
     left: 50%;
     text-align: center; 
-  }
+  } */
