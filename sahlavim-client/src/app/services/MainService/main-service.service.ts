@@ -119,7 +119,7 @@ export class MainServiceService {
         res => {
           if (res) {
             this.operatorsList = res;    
-
+            
           }
           else
             alert("get all operators error")
