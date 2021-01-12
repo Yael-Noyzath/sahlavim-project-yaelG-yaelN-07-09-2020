@@ -1,4 +1,4 @@
-<body data-mdb-perfect-scrollbar='true'>
+<body data-mdb-perfect-scrollbar='true' dir="rtl">
 
 
     <div class="container-fluid">
@@ -11,37 +11,33 @@
 
             <div class="middle col-6">
 
-                <a routerLink="operators/operator-table" routerLinkActive="activeLink"
-                    value="operator">מפעילים</a>
+                <a routerLink="operators/operator-table" routerLinkActive="activeLink" value="operator">מפעילים</a>
 
-                <a  routerLink="settings/setting-table" routerLinkActive="activeLink"
-                    value="setting">מסגרות</a>
+                <a routerLink="settings/setting-table" routerLinkActive="activeLink" value="setting">מסגרות</a>
 
-                <a   routerLink="programs/programs-table" routerLinkActive="activeLink"
-                    value="program">תוכניות</a>
+                <a routerLink="programs/programs-table" routerLinkActive="activeLink" value="program">תוכניות</a>
 
-                <a   routerLink="afternoon/afternoon-table" routerLinkActive="activeLink"
-                    value="afternoon">צהרונים</a>
+                <a routerLink="afternoon/afternoon-table" routerLinkActive="activeLink" value="afternoon">צהרונים</a>
 
-                <a   routerLink="management-menu/managers-table" routerLinkActive="activeLink"
+                <a routerLink="management-menu/managers-table" routerLinkActive="activeLink"
                     value="management">ניהול</a>
             </div>
 
             <div style="text-align: center;" class="col-3">
-                <p >שלום {{currentUser.nvUserName}}</p>
+                <p>שלום {{currentUser.nvUserName}}</p>
                 <a style="text-align: center;" href="/">התנתק</a>
             </div>
         </div>
-
     </div>
 
 
 
 
-    <!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
+
+        <!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
     <h1>ברוכה הבאה <br>
         למנהלי עמותת סחלבים</h1>
-</div> -->
+   </div> -->
+        <router-outlet></router-outlet>
 
-    <router-outlet></router-outlet>
 </body>

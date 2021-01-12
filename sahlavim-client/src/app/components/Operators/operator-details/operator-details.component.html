@@ -1,4 +1,4 @@
-<div class="form-group" style="background:transparent; text-align: center;margin-top: 3%;direction: rtl;" class="Details">
+<div class="form-group" style="background:white; width: 60%;margin: auto; text-align: center;margin-top: 3%;direction: rtl;" class="Details">
     <form operator="ngform" (ngSubmit)="save()">
        
 
@@ -90,7 +90,7 @@
 
         <mat-form-field appearance="fill" style="direction: rtl;">
             <mat-label>תנאי תשלום</mat-label>
-            <mat-select [(value)]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
+            <mat-select [value]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
                 <mat-option value="8">30 + שוטף</mat-option>
                 <mat-option value="9"> שוטף + 60</mat-option>
                 <mat-option value="10">מזומן</mat-option>
