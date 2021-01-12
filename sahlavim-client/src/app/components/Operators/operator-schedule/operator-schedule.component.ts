@@ -21,7 +21,7 @@ import {
 
 
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -62,13 +62,32 @@ const colors: any = {
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
-    }
+    },
+    {provide: NgbCalendar, useClass: NgbCalendarHebrew},
+    {provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew}
   ],
   styleUrls: ['./operator-schedule.component.css'],
 
 })
 
 export class OperatorScheduleComponent implements OnInit {
+
+  model: NgbDateStruct;
+
+  constructor(private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
+    this.dayTemplateData = this.dayTemplateData.bind(this);
+  }
+
+  dayTemplateData(date: NgbDate) {
+    return {
+      gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
+    };
+  }
+
+  selectToday() {
+    this.model = this.calendar.getToday();
+  }
+
 
   view: string = 'month';
 
@@ -78,7 +97,7 @@ export class OperatorScheduleComponent implements OnInit {
 
   weekStartsOn: number = DAYS_OF_WEEK.SUNDAY;
 
-  weekendDays: number[] = [DAYS_OF_WEEK.SUNDAY, DAYS_OF_WEEK.SATURDAY];
+  weekendDays: number[] = [ DAYS_OF_WEEK.SATURDAY];
 
   viewChange = new EventEmitter<CalendarView>();
 

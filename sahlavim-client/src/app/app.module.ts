@@ -95,6 +95,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CommonModule } from '@angular/common';
+import { HebrewDatePipe } from './pipe/hebrew-date.pipe';
 @NgModule({
   declarations: [
     TableComponent,
@@ -138,7 +139,8 @@ import { CommonModule } from '@angular/common';
     AfternoonComponent,
     AfternoonTableComponent,
     TableComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    HebrewDatePipe
   ],
   imports: [
 

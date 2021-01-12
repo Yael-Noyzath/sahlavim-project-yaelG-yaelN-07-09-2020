@@ -1,7 +1,7 @@
 
 body{
     /* overflow: auto; */
- 
+ height: 130%;
 /* Location of the image */
   background-image: url(src\Images\image.jpeg);  
   /* Background image is centered vertically and horizontally at all times */
@@ -48,7 +48,7 @@ a{
 
 .container-fluid{
     background-color:white;
-    height: 16%;
+    height: 120px;
     box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
 
 }
