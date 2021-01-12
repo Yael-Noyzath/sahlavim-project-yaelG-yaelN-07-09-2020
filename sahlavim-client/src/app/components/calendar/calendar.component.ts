@@ -39,6 +39,7 @@ import { CustomDateFormatter } from './../calendar/custom-date-formatter.provide
 import { formatDate } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { th } from 'date-fns/locale';
+import { schedule } from 'src/app/Classes/schedule';
 
 const colors: any = {
   red: {
@@ -102,6 +103,8 @@ export class CalendarComponent implements OnInit {
 
   viewDateChange = new EventEmitter<Date>();
 
+  events: CalendarEvent<schedule>[];
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -112,15 +115,19 @@ export class CalendarComponent implements OnInit {
 
   types = {
     iOperatorId: -1,
+    iSettingId: -1,
     iProgramId: -1,
-    iSettingId: -1
+    dDate: null 
   };
 
   ngOnInit() {
-    alert(this.calendarId);
-    alert(this.type);
+    //alert(this.calendarId);
     this.types[this.type]=this.calendarId;
-    this.mainService.post("SchedulesGet", { iOperatorId: this.types[1], iSettingId:this.types[1], iProgramId: this.types[1], dDate: null })
+    // alert("iOperatorId"+this.types["iOperatorId"]);
+    // alert("iProgramId"+this.types["iProgramId"]);
+    // alert("iSettingId"+this.types["iSettingId"]);
+
+    this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
           this.events = res;
@@ -139,7 +146,4 @@ export class CalendarComponent implements OnInit {
   weekViewHour({ date, locale }: DateFormatterParams): string {
     return this.dayViewHour({ date, locale });
   }
-
-  events: CalendarEvent[];
-
 }

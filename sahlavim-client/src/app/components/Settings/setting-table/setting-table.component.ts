@@ -1,6 +1,6 @@
 import { User } from 'src/app/classes/user';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
-import { AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy,AfterViewInit, ViewChild, Component, OnInit, SystemJsNgModuleLoader, ElementRef } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -22,7 +22,6 @@ import { Item } from 'angular2-multiselect-dropdown';
   styleUrls: ['./setting-table.component.css']
 })
 export class SettingTableComponent implements OnInit {
-
 
 
   // displayedColumns: string[] = ['iSettingId', 'nvSettingName', 'nvSettingCode', 'nvSettingTypeValue', 'nvAddress', 'nvPhone',

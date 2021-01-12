@@ -97,6 +97,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CommonModule } from '@angular/common';
 import { HebrewDatePipe } from './pipe/hebrew-date.pipe';
 import { CalendarComponent } from './components/calendar/calendar.component';
+
 @NgModule({
   declarations: [
     TableComponent,
@@ -142,7 +143,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     TableComponent,
     CalendarHeaderComponent,
     HebrewDatePipe,
-    CalendarComponent
+    CalendarComponent,
   ],
   imports: [
 

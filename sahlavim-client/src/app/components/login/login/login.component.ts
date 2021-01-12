@@ -85,8 +85,6 @@ export class LoginComponent implements OnInit {
 
   //שליחת מייל לאיפוס הסיסמא
   sentMailToResetPassword(mail: string) {
-debugger
-
     this.spinnerWork = true;
     this.user.nvPassword = null;
     this.mainService.post("UserReset", { nvMail: mail }).then
@@ -97,8 +95,8 @@ debugger
             alert("לא קים מייל זה")
           }
           else {
+            this.forgot = false;
             alert("סיסמתך נשלחה בהצלחה!")
-            this.enterByUserName = true;
           }
         },
         err => {
