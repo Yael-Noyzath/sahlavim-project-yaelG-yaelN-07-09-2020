@@ -9,7 +9,7 @@
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
         <span style="float: left; padding-left: 10px;" class="cal-day-number">{{  day.date | hebrewDate }}</span>
       </div>
-      <small *ngIf="day.events.length" style="margin: 5px;">ישנם {{ day.events.length }} אירועים ביום זה</small>
+      <small *ngIf="day.events.length" style="margin:5px;">ישנם {{ day.events.length }} אירועים ביום זה</small>
     </ng-template>
   
     <div [ngSwitch]="view">
