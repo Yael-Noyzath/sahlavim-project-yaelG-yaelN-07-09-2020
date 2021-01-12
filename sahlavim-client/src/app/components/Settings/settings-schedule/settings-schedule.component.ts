@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-settings-schedule',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsScheduleComponent implements OnInit {
 
-  constructor() { }
+  idSetting:number;
+
+  constructor( private route: ActivatedRoute) { 
+    this.idSetting = parseInt(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit() {
   }

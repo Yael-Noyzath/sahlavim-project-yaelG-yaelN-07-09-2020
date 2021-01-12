@@ -51,7 +51,7 @@ const appTable: Routes = [
             path: 'operator-menu/:id', component: OperatorMenuComponent,
             children: [
               { path: "operator-details", component: OperatorDetailsComponent },
-              { path: "operator-schedule", component: OperatorScheduleComponent },
+              { path: "operator-schedule/:id", component: OperatorScheduleComponent },
               { path: "operator-activities", component: OperatorActivitiesComponent },
               { path: "operator-activity-report", component: OperatorActivityReportComponent },
               { path: "operator-credit", component: OperatorCreditComponent },
@@ -71,7 +71,7 @@ const appTable: Routes = [
             path: "programs-details-menu/:id", component: ProgramDetailsMenuComponent,
             children: [
               { path: "programs-details", component: ProgramDetailsComponent },
-              { path: "programs-schedule", component: ProgramScheduleComponent },
+              { path: "programs-schedule/:id", component: ProgramScheduleComponent },
               //{ path: "settings-messages", component: SettingsMessagesComponent },
             ]
           },
@@ -85,7 +85,7 @@ const appTable: Routes = [
             path: "afternoon-details-menu/:id", component: AfternoonDetailsMenuComponent,
             children: [
               { path: "afternoon-details", component: AfternoonDetailsComponent },
-              { path: "afternoon-schedule", component: AfternoonScheduleComponent },
+              { path: "afternoon-schedule/:id", component: AfternoonScheduleComponent },
             ]
           },
         ]
@@ -98,7 +98,7 @@ const appTable: Routes = [
             path: "settings-details-menu/:id", component: SettingsDetailsMenuComponent,
             children: [
               { path: "settings-details", component: SettingsDetailsComponent },
-              { path: "settings-schedule", component: SettingsScheduleComponent },
+              { path: "settings-schedule/:id", component: SettingsScheduleComponent },
               { path: "settings-messages", component: SettingsMessagesComponent },
             ]
           },

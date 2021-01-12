@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-afternoon-schedule',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AfternoonScheduleComponent implements OnInit {
 
-  constructor() { }
-
+  idProgram:number;
+  constructor( private route: ActivatedRoute) { 
+    this.idProgram = parseInt(this.route.snapshot.paramMap.get('id'));
+  }
   ngOnInit() {
   }
 
