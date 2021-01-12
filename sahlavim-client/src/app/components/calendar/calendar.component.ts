@@ -1,5 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import {
-  Component,
+  
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
@@ -29,13 +30,12 @@ import {
   CalendarView,
   DateFormatterParams,
 } from 'angular-calendar';
-import { OnInit } from '@angular/core';
 import {
   CalendarDateFormatter,
 
   DAYS_OF_WEEK,
 } from 'angular-calendar';
-import { CustomDateFormatter } from '../../calendar/custom-date-formatter.provider';
+import { CustomDateFormatter } from './../calendar/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
 
 const colors: any = {
@@ -53,11 +53,9 @@ const colors: any = {
   },
 };
 
-
 @Component({
-  selector: 'app-operator-schedule',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './operator-schedule.component.html',
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
   providers: [
     {
       provide: CalendarDateFormatter,
@@ -66,11 +64,10 @@ const colors: any = {
     {provide: NgbCalendar, useClass: NgbCalendarHebrew},
     {provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew}
   ],
-  styleUrls: ['./operator-schedule.component.css'],
-
+  styleUrls: ['./calendar.component.css']
 })
+export class CalendarComponent implements OnInit {
 
-export class OperatorScheduleComponent implements OnInit {
 
   model: NgbDateStruct;
 
@@ -148,4 +145,5 @@ export class OperatorScheduleComponent implements OnInit {
       allDay: true,
     },
   ];
+
 }
