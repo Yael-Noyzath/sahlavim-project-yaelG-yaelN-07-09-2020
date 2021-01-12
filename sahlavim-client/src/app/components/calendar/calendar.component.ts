@@ -108,12 +108,32 @@ export class CalendarComponent implements OnInit {
   CalendarView = CalendarView;
   @Input() calendarName: string;
   @Input() calendarId: number;
-
+  iOperatorId: number;
+  iSettingId: number;
+  iProgramId: number;
 
   ngOnInit() {
-    alert(this.calendarId);
-    alert(this.calendarName);
-    this.mainService.post("SchedulesGet", { iOperatorId: this.calendarId, iSettingId: -1, iProgramId: -1, dDate: null })
+    this.iOperatorId = -1;
+    this.iSettingId = -1;
+    this.iProgramId = -1;
+    // alert(this.calendarId);
+    // alert(this.calendarName);
+    switch (this.calendarName) {
+      case "operator": {
+        this.iOperatorId = this.calendarId;
+      };
+        break;
+      case "program": {
+        this.iProgramId = this.calendarId;
+      }
+        break;
+      case "setting": {
+        this.iSettingId = this.calendarId;
+      };
+        break;
+    }
+    //alert("operator "+this.iOperatorId+" setting "+this.iSettingId+" program "+this.iProgramId)
+    this.mainService.post("SchedulesGet", { iOperatorId: this.iOperatorId, iSettingId: this.iSettingId, iProgramId: this.iProgramId, dDate: null })
       .then(
         res => {
           this.events = res;
