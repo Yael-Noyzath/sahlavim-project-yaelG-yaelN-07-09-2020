@@ -12,7 +12,6 @@
       <small *ngIf="day.events.length" style="margin: 5px;">ישנם {{ day.events.length }} אירועים ביום זה</small>
     </ng-template>
   
-    
     <div [ngSwitch]="view">
       <mwl-calendar-month-view  *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
         [cellTemplate]="customCellTemplate" [locale]="locale" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays">

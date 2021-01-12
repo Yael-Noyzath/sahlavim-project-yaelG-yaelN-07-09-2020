@@ -37,6 +37,7 @@ import {
 } from 'angular-calendar';
 import { CustomDateFormatter } from '../../calendar/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -72,80 +73,11 @@ const colors: any = {
 
 export class OperatorScheduleComponent implements OnInit {
 
-  model: NgbDateStruct;
-
-  constructor(private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
-    this.dayTemplateData = this.dayTemplateData.bind(this);
+  idOperator:number;
+  constructor( private route: ActivatedRoute) { 
+    this.idOperator = parseInt(this.route.snapshot.paramMap.get('id'));
   }
+  ngOnInit(){
 
-  dayTemplateData(date: NgbDate) {
-    return {
-      gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
-    };
   }
-
-  selectToday() {
-    this.model = this.calendar.getToday();
-  }
-
-
-  view: string = 'month';
-
-  viewDate: Date = new Date();
-
-  locale: string = 'he';
-
-  weekStartsOn: number = DAYS_OF_WEEK.SUNDAY;
-
-  weekendDays: number[] = [ DAYS_OF_WEEK.SATURDAY];
-
-  viewChange = new EventEmitter<CalendarView>();
-
-  viewDateChange = new EventEmitter<Date>();
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  CalendarView = CalendarView;
-
-  ngOnInit() {
-  }
-
-  dayViewHour({ date, locale }: DateFormatterParams): string {
-    return formatDate(date, 'HH:mm', locale);
-  }
-
-  weekViewHour({ date, locale }: DateFormatterParams): string {
-    return this.dayViewHour({ date, locale });
-  }
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: '3 ימי אירוע',
-      color: colors.red,
-      // actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'אירוע ללא תאריך סופי',
-      color: colors.yellow,
-      // actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'אירוע 2 חודשים',
-      color: colors.blue,
-      allDay: true,
-    },
-  ];
 }
