@@ -105,8 +105,11 @@ export class CalendarComponent implements OnInit {
   }
 
   CalendarView = CalendarView;
+  @Input() calendarId: string;
+
 
   ngOnInit() {
+     alert(this.calendarId)
   }
 
   dayViewHour({ date, locale }: DateFormatterParams): string {
