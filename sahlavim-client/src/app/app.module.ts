@@ -85,7 +85,7 @@ import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.
 import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component';
 import { TableComponent } from './table/table.component';
 import * as XLSX from 'xlsx';
-import { CalendarHeaderComponent } from './components/Operators/operator-schedule/calendar-header-component';
+import { CalendarHeaderComponent } from './components/calendar/calendar-header-component';
 
 import localeHe from '@angular/common/locales/he';
 registerLocaleData(localeHe);
@@ -96,6 +96,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CommonModule } from '@angular/common';
 import { HebrewDatePipe } from './pipe/hebrew-date.pipe';
+import { CalendarComponent } from './components/calendar/calendar.component';
 @NgModule({
   declarations: [
     TableComponent,
@@ -140,7 +141,8 @@ import { HebrewDatePipe } from './pipe/hebrew-date.pipe';
     AfternoonTableComponent,
     TableComponent,
     CalendarHeaderComponent,
-    HebrewDatePipe
+    HebrewDatePipe,
+    CalendarComponent
   ],
   imports: [
 
