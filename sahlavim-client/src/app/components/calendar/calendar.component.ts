@@ -38,6 +38,7 @@ import {
 import { CustomDateFormatter } from './../calendar/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { th } from 'date-fns/locale';
 
 const colors: any = {
   red: {
@@ -106,21 +107,27 @@ export class CalendarComponent implements OnInit {
   }
 
   CalendarView = CalendarView;
-  @Input() calendarName: string;
+  @Input() type: number;
   @Input() calendarId: number;
 
+  types = {
+    iOperatorId: -1,
+    iProgramId: -1,
+    iSettingId: -1
+  };
 
   ngOnInit() {
     alert(this.calendarId);
-    alert(this.calendarName);
-    this.mainService.post("SchedulesGet", { iOperatorId: this.calendarId, iSettingId: -1, iProgramId: -1, dDate: null })
+    alert(this.type);
+    this.types[this.type]=this.calendarId;
+    this.mainService.post("SchedulesGet", { iOperatorId: this.types[1], iSettingId:this.types[1], iProgramId: this.types[1], dDate: null })
       .then(
         res => {
           this.events = res;
           alert(this.events.length);
         },
         err => {
-          alert("errrrrrrrr SchedulesGet")
+          alert("errrr SchedulesGet")
         }
       )
   }
