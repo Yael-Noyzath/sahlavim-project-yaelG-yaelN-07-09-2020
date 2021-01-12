@@ -38,6 +38,7 @@ import {
 import { CustomDateFormatter } from './../calendar/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
+import { th } from 'date-fns/locale';
 
 const colors: any = {
   red: {
@@ -106,41 +107,27 @@ export class CalendarComponent implements OnInit {
   }
 
   CalendarView = CalendarView;
-  @Input() calendarName: string;
+  @Input() type: number;
   @Input() calendarId: number;
-  iOperatorId: number;
-  iSettingId: number;
-  iProgramId: number;
+
+  types = {
+    iOperatorId: -1,
+    iProgramId: -1,
+    iSettingId: -1
+  };
 
   ngOnInit() {
-    this.iOperatorId = -1;
-    this.iSettingId = -1;
-    this.iProgramId = -1;
-    // alert(this.calendarId);
-    // alert(this.calendarName);
-    switch (this.calendarName) {
-      case "operator": {
-        this.iOperatorId = this.calendarId;
-      };
-        break;
-      case "program": {
-        this.iProgramId = this.calendarId;
-      }
-        break;
-      case "setting": {
-        this.iSettingId = this.calendarId;
-      };
-        break;
-    }
-    //alert("operator "+this.iOperatorId+" setting "+this.iSettingId+" program "+this.iProgramId)
-    this.mainService.post("SchedulesGet", { iOperatorId: this.iOperatorId, iSettingId: this.iSettingId, iProgramId: this.iProgramId, dDate: null })
+    alert(this.calendarId);
+    alert(this.type);
+    this.types[this.type]=this.calendarId;
+    this.mainService.post("SchedulesGet", { iOperatorId: this.types[1], iSettingId:this.types[1], iProgramId: this.types[1], dDate: null })
       .then(
         res => {
           this.events = res;
           alert(this.events.length);
         },
         err => {
-          alert("errrrrrrrr SchedulesGet")
+          alert("errrr SchedulesGet")
         }
       )
   }
