@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  
+
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
@@ -37,6 +37,7 @@ import {
 } from 'angular-calendar';
 import { CustomDateFormatter } from './../calendar/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
+import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
 const colors: any = {
   red: {
@@ -61,8 +62,8 @@ const colors: any = {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
     },
-    {provide: NgbCalendar, useClass: NgbCalendarHebrew},
-    {provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew}
+    { provide: NgbCalendar, useClass: NgbCalendarHebrew },
+    { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew }
   ],
   styleUrls: ['./calendar.component.css']
 })
@@ -71,7 +72,7 @@ export class CalendarComponent implements OnInit {
 
   model: NgbDateStruct;
 
-  constructor(private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
+  constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
     this.dayTemplateData = this.dayTemplateData.bind(this);
   }
 
@@ -94,7 +95,7 @@ export class CalendarComponent implements OnInit {
 
   weekStartsOn: number = DAYS_OF_WEEK.SUNDAY;
 
-  weekendDays: number[] = [ DAYS_OF_WEEK.SATURDAY];
+  weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY];
 
   viewChange = new EventEmitter<CalendarView>();
 
@@ -105,11 +106,23 @@ export class CalendarComponent implements OnInit {
   }
 
   CalendarView = CalendarView;
-  @Input() calendarId: string;
+  @Input() calendarName: string;
+  @Input() calendarId: number;
 
 
   ngOnInit() {
-     alert(this.calendarId)
+    alert(this.calendarId);
+    alert(this.calendarName);
+    this.mainService.post("SchedulesGet", { iOperatorId: this.calendarId, iSettingId: -1, iProgramId: -1, dDate: null })
+      .then(
+        res => {
+          this.events = res;
+          alert(this.events.length);
+        },
+        err => {
+          alert("errrrrrrrr SchedulesGet")
+        }
+      )
   }
 
   dayViewHour({ date, locale }: DateFormatterParams): string {
@@ -120,33 +133,6 @@ export class CalendarComponent implements OnInit {
     return this.dayViewHour({ date, locale });
   }
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: '3 ימי אירוע',
-      color: colors.red,
-      // actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'אירוע ללא תאריך סופי',
-      color: colors.yellow,
-      // actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'אירוע 2 חודשים',
-      color: colors.blue,
-      allDay: true,
-    },
-  ];
+  events: CalendarEvent[];
 
 }
