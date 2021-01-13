@@ -35,7 +35,7 @@ export class OperatorDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס ערכיה
-debugger
+  
 
     this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
       res => {
@@ -73,7 +73,7 @@ debugger
         this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
       }
     }
-debugger
+  
     //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,
@@ -103,12 +103,12 @@ debugger
   save() {
 
     console.log(this.operator);
-debugger
+  
 this.operator.lNeighborhoods=this.operator.lSchools=this.operator.lSchoolsExcude=[];
 this.operator.lSchools = this.lschool.map((item) => item.iSettingId);
 this.operator.lSchoolsExcude = this.schoolsExcludeList.map((item) => item.iSettingId);
 this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key);
-debugger
+  
     // //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     // if (this.schoolsExcludeList.length > 0) {
     //   for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
@@ -190,11 +190,11 @@ debugger
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools = this.schoolListforTalan.map((item) => item.iSettingId);
-        debugger
+          
         break;
       case 'settings':
         this.operator.lSchoolsExcude = this.settingsList.map((item) => item.iSettingId);
-        debugger
+          
         break;
       case 'neighberhoods':
         this.operator.lNeighborhoods = Array.from(this.mainService.SysTableList[4].keys());
@@ -208,11 +208,11 @@ debugger
       switch (type) {
         case 'talanSchool':
           this.operator.lSchools =[];
-          debugger
+            
           break;
         case 'settings':
           this.operator.lSchoolsExcude = [];
-          debugger
+            
           break;
         case 'neighberhoods':
           this.operator.lNeighborhoods = [];
