@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   // Login to site
   Login() {
     this.user = this.formLogin.value;
-   debugger //חיפוש המשתמש הזה בתוך הרשימה
+    //חיפוש המשתמש הזה בתוך הרשימה
     if (this.user) {
       this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
       if (this.currentUser)//אם שם והסיסמה נכונים

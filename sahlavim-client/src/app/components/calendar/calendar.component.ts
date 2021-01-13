@@ -25,6 +25,8 @@ import { Subject } from 'rxjs';
 import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
+  CalendarEvent,
+  CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
@@ -103,7 +105,7 @@ export class CalendarComponent implements OnInit {
 
   viewDateChange = new EventEmitter<Date>();
 
-  events: CalendarEvent<schedule>[];
+  events= new CalendarEvent<schedule>();
 
   setView(view: CalendarView) {
     this.view = view;
@@ -121,11 +123,7 @@ export class CalendarComponent implements OnInit {
   };
 
   ngOnInit() {
-    //alert(this.calendarId);
     this.types[this.type]=this.calendarId;
-    // alert("iOperatorId"+this.types["iOperatorId"]);
-    // alert("iProgramId"+this.types["iProgramId"]);
-    // alert("iSettingId"+this.types["iSettingId"]);
 
     this.mainService.post("SchedulesGet", this.types)
       .then(
@@ -137,6 +135,7 @@ export class CalendarComponent implements OnInit {
           alert("errrr SchedulesGet")
         }
       )
+      debugger
   }
 
   dayViewHour({ date, locale }: DateFormatterParams): string {
