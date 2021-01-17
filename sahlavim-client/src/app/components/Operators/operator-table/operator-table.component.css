@@ -25,6 +25,10 @@ input.matInput{
   text-align: center;
   margin-bottom: 10px;
 }
+.addMsg button{
+  background-color: white;
+  margin-left: 20px;
+}
 .example-form {
   min-width: 150px;
   max-width: 500px;

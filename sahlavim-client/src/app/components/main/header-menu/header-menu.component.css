@@ -26,9 +26,12 @@
     }
     
 .welcome h1, p{
+    
     color: #000000;
     z-index: 1;
-    padding-right: 50px
+    padding-right: 50px;
+    text-shadow: 2px 2px 5px white;
+    font-family: inherit;
 }
 .welcome{
     background-color: #ffffff8c; 
@@ -38,12 +41,23 @@
     padding-top: 75px;   
     height: 85%;
 }
+h1{
+    font-weight: 500;
+}
+
 a{
+    height: 40px;
     text-decoration: none;
-    padding-left: 10%;
     outline: none;
     color: black;
-    border-bottom: black;
+}
+
+.p{
+    font-weight: 500;
+    padding-top: 5%;
+    text-align: right;
+
+    font-size: 140%;
 
 }
 
@@ -74,10 +88,11 @@ img{
     float: right;
 }
 p{
+
     text-align: center;
     padding-top: 9%;
     font-size: 130%;
 }
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+/* ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: #398efd;
-}
+} */
