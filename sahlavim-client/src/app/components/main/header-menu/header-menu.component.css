@@ -27,11 +27,11 @@
     
 .welcome h1, p{
     
-    color: #000000;
+    color: #ffffff;
     z-index: 1;
     padding-right: 50px;
-    text-shadow: 2px 2px 5px white;
-    font-family: inherit;
+    text-shadow: 2px 2px 10px #3d0a00;
+     font-family: inherit;
 }
 .welcome{
     background-color: #ffffff8c; 

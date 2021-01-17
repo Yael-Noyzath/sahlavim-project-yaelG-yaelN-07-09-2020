@@ -20,7 +20,9 @@ input.matInput{
   color:rgb(236, 116, 19);
 
 }
-
+.container{
+  padding-top: 80px;
+}
 .addMsg{
   text-align: center;
   margin-bottom: 10px;
