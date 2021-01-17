@@ -9,7 +9,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class HeaderMenuComponent implements OnInit {
 
-  showWelcome: boolean = true;
+  wel: boolean = true;
   currentUser: User = new User();
 
   ngOnInit() {
