@@ -20,8 +20,8 @@ input.matInput{
   color:rgb(236, 116, 19);
 
 }
-.container{
-  padding-top: 80px;
+.container-{
+  padding-top: 50px;
 }
 .addMsg{
   text-align: center;
@@ -30,6 +30,9 @@ input.matInput{
 .addMsg button{
   background-color: white;
   margin-left: 20px;
+  color:rgb(192, 31, 31) ;
+  font-family: inherit;
+
 }
 .example-form {
   min-width: 150px;

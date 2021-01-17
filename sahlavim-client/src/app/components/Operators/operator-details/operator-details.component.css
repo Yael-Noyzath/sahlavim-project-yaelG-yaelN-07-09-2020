@@ -34,8 +34,24 @@
 
 }
 
+.example-section{
+  padding-top: 40px;
+
+}
+
+
+
+form {
+      width: 60%;
+      margin: auto;
+      text-align: center;
+      direction: rtl;
+      background-color: #ffffffcf;
+}
 .form-group{
-  
+  width: 100%;
   overflow-y: auto;
+  height: 610px;
+  scrollbar-width: none;  
 
 }
