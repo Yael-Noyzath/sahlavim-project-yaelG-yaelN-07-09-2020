@@ -102,7 +102,6 @@ export class OperatorDetailsComponent implements OnInit {
 
   save() {
 
-    console.log(this.operator);
   
 this.operator.lNeighborhoods=this.operator.lSchools=this.operator.lSchoolsExcude=[];
 this.operator.lSchools = this.lschool.map((item) => item.iSettingId);

@@ -55,7 +55,7 @@ filterValues = {
 
   constructor(private mainService: MainServiceService) {
 this.operatorTypes=this.mainService.SysTableList[2];
-debugger
+
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
