@@ -35,7 +35,7 @@ import {
 
   DAYS_OF_WEEK,
 } from 'angular-calendar';
-import { CustomDateFormatter } from '../../calendar/custom-date-formatter.provider';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 

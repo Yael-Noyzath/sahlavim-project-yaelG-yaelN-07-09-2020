@@ -25,8 +25,6 @@ import { Subject } from 'rxjs';
 import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
-  CalendarEvent,
-  CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
@@ -37,7 +35,7 @@ import {
 
   DAYS_OF_WEEK,
 } from 'angular-calendar';
-import { CustomDateFormatter } from './../calendar/custom-date-formatter.provider';
+import { CustomDateFormatter } from '../Operators/operator-schedule/custom-date-formatter.provider';
 import { formatDate } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { th } from 'date-fns/locale';
@@ -105,7 +103,7 @@ export class CalendarComponent implements OnInit {
 
   viewDateChange = new EventEmitter<Date>();
 
-  events= new CalendarEvent<schedule>();
+  events: CalendarEvent[];
 
   setView(view: CalendarView) {
     this.view = view;
@@ -128,14 +126,28 @@ export class CalendarComponent implements OnInit {
     this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
-          this.events = res;
-          alert(this.events.length);
+        let eventsFromSer = res;
+          debugger
         },
         err => {
-          alert("errrr SchedulesGet")
+          alert("err SchedulesGet")
         }
       )
-      debugger
+
+      this.events= [
+        {
+          title: 'An all day event',
+          color: colors.yellow,
+          start: new Date(),
+          allDay: true,
+        },
+        {
+          title: 'A non all day event',
+          color: colors.blue,
+          start: new Date(),
+        },
+      ];
+      
   }
 
   dayViewHour({ date, locale }: DateFormatterParams): string {

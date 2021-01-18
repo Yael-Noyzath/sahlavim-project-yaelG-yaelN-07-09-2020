@@ -20,12 +20,19 @@ input.matInput{
   color:rgb(236, 116, 19);
 
 }
-.container{
-  background-image:url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg) ;
+.container-{
+  padding-top: 50px;
 }
 .addMsg{
   text-align: center;
   margin-bottom: 10px;
+}
+.addMsg button{
+  background-color: white;
+  margin-left: 20px;
+  color:rgb(192, 31, 31) ;
+  font-family: inherit;
+
 }
 .example-form {
   min-width: 150px;
