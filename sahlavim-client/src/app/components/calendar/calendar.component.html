@@ -10,7 +10,7 @@
             <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | hebrewDate }}</span>
         </div>
         <!-- <small *ngIf="day.events.length" style="margin:5px;">ישנם {{ day.events.length }} אירועים ביום זה</small> -->
-        <a *ngIf="day.badgeTotal > 0" style="text-align: center;" data-toggle="modal" data-target="#modalCart">פירוט
+        <a (click)="createArrayForDetails(day.date)" *ngIf="day.badgeTotal > 0" style="text-align: center;" data-toggle="modal" data-target="#modalCart">פירוט
             האירועים</a>
     </ng-template>
 
@@ -31,14 +31,13 @@
 
 
 
-
 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">bbb</h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">{{dayDetails}} האירועים לתאריך</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
