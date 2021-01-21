@@ -41,6 +41,7 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 import { th } from 'date-fns/locale';
 import { schedule } from 'src/app/Classes/schedule';
 import { CalendarEventActionsComponent } from 'angular-calendar/modules/common/calendar-event-actions.component';
+import { element } from 'protractor';
 
 const colors: any = {
   red: {
@@ -105,9 +106,9 @@ export class CalendarComponent implements OnInit {
 
   viewDateChange = new EventEmitter<Date>();
 
-  events: CalendarEvent[]=[];
+  events: CalendarEvent[] = [];
 
-   eventsFromSer: schedule[]=[];
+  eventsFromSer: schedule[] = [];
 
   setView(view: CalendarView) {
     this.view = view;
@@ -121,7 +122,7 @@ export class CalendarComponent implements OnInit {
     iOperatorId: -1,
     iSettingId: -1,
     iProgramId: -1,
-    dDate:null
+    dDate: null
     // dDate:new Date('11/08/2020')
 
   };
@@ -131,21 +132,21 @@ export class CalendarComponent implements OnInit {
 
     this.mainService.post("SchedulesGet", this.types)
       .then(
-         res => {
-           
+        res => {
+
           this.eventsFromSer = res;
 
           this.eventsFromSer.forEach(element => {
-            element.dtStartTime=new Date(parseInt(element.dtStartTime.substr(6))).toString();
+            element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
             this.events.push({
               title: element.nvProgramValue,
               start: new Date(element.dtStartTime),
-            
- 
-          });
-        });
 
-         console.log(this.events);
+
+            });
+          });
+
+          console.log(this.events);
 
         },
         err => {
@@ -154,20 +155,27 @@ export class CalendarComponent implements OnInit {
       )
   }
 
-  eventsArrayByDate:schedule[]=[];
-  dayDetails:Date=new Date();
-  createArrayForDetails(date:Date)
-  {
-    
-    this.eventsFromSer.forEach(element => {
-      new Date(element.dtStartTime).getDay==date.getDay
-    &&new Date(element.dtStartTime).getMonth==date.getMonth
-    &&new Date(element.dtStartTime).getFullYear==date.getFullYear
-    ? this.eventsArrayByDate.push(element):this.eventsArrayByDate;
+  eventsArrayByDate: schedule[] = [];
+  dayDetails: string;
 
-});
-this.dayDetails=date;
-console.log(this.eventsArrayByDate);
+  getShortDate(date: Date) {
+    let mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+  createArrayForDetails(date: Date)//יצירת מערך להצגת פרטי אירועים ליום מסויים שנבחר
+  {
+    this.dayDetails = this.getShortDate(date);
+
+    this.eventsFromSer.forEach(element => {
+      console.log(new Date(element.dtStartTime));
+
+      if (this.getShortDate(new Date(element.dtStartTime)) == this.dayDetails)
+        this.eventsArrayByDate.push(element);
+
+    });
+
+    console.log(this.eventsArrayByDate);
 
   }
 
@@ -178,4 +186,5 @@ console.log(this.eventsArrayByDate);
   weekViewHour({ date, locale }: DateFormatterParams): string {
     return this.dayViewHour({ date, locale });
   }
+
 }
