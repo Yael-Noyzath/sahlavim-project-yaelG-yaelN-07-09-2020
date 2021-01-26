@@ -59,6 +59,7 @@ this.operatorTypes=this.mainService.SysTableList[2];
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
+    debugger
 
   }
 

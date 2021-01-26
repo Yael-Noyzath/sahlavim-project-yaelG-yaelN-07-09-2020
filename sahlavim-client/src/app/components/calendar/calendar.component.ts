@@ -42,6 +42,9 @@ import { th } from 'date-fns/locale';
 import { schedule } from 'src/app/Classes/schedule';
 import { CalendarEventActionsComponent } from 'angular-calendar/modules/common/calendar-event-actions.component';
 import { element } from 'protractor';
+import { Program } from 'src/app/Classes/program';
+import { Operator } from 'src/app/classes/operator';
+import { Setting } from 'src/app/classes/setting';
 
 const colors: any = {
   red: {
@@ -75,25 +78,10 @@ export class CalendarComponent implements OnInit {
 
 
   model: NgbDateStruct;
-  // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
-  //   this.dayTemplateData = this.dayTemplateData.bind(this);
-  // }
-  constructor(private mainService: MainServiceService) {
-  }
-
-  // dayTemplateData(date: NgbDate) {
-  //   return {
-  //     gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
-  //   };
-  // }
-
-  // selectToday() {
-  //   this.model = this.calendar.getToday();
-  // }
-
-
+  programsList: Program[] = [];
   view: string = 'month';
-
+  operator: Operator;
+  settings: Setting[] = [];
   viewDate: Date = new Date();
 
   locale: string = 'he';
@@ -127,9 +115,36 @@ export class CalendarComponent implements OnInit {
 
   };
 
-  ngOnInit() {
-    this.types[this.type] = this.calendarId;
+  newActive = {
+    program: -1,
+    setting: -1,
+    activity: -1,
+    date: "",
+    time: ""
 
+  }
+
+  // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
+  //   this.dayTemplateData = this.dayTemplateData.bind(this);
+  // }
+  constructor(private mainService: MainServiceService) {
+  }
+
+  // dayTemplateData(date: NgbDate) {
+  //   return {
+  //     gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
+  //   };
+  // }
+
+  // selectToday() {
+  //   this.model = this.calendar.getToday();
+  // }
+
+
+  ngOnInit() {
+    this.programsList = this.mainService.programsList;
+    this.types[this.type] = this.calendarId;
+    debugger
     this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
@@ -153,6 +168,18 @@ export class CalendarComponent implements OnInit {
           alert("err SchedulesGet")
         }
       )
+
+
+    if (this.types["iOperatorId"] != -1) {//import the operator by the id
+      this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
+    }
+    this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
+      if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
+        this.settings.push(element);
+      }
+    });
+
+    debugger
   }
 
   eventsArrayByDate: schedule[] = [];
