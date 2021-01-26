@@ -9,6 +9,7 @@ import {
   Output,
 } from '@angular/core';
 
+
 import {
   startOfDay,
   endOfDay,
@@ -20,6 +21,12 @@ import {
   addHours,
 } from 'date-fns';
 
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import { Subject } from 'rxjs';
 import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -36,7 +43,7 @@ import {
   DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { CustomDateFormatter } from '../Operators/operator-schedule/custom-date-formatter.provider';
-import { formatDate } from '@angular/common';
+import { formatDate, Time } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { th } from 'date-fns/locale';
 import { schedule } from 'src/app/Classes/schedule';
@@ -69,6 +76,15 @@ const colors: any = {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
     },
+
+      {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
+      {
+        provide: DateAdapter,
+        useClass: MomentDateAdapter,
+        deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+      },
+      {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+
     { provide: NgbCalendar, useClass: NgbCalendarHebrew },
     { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew }
   ],
@@ -115,14 +131,16 @@ export class CalendarComponent implements OnInit {
 
   };
 
-  newActive = {
-    program: -1,
-    setting: -1,
-    activity: -1,
-    date: "",
-    time: ""
+  
 
-  }
+
+    program: number;
+    setting:number;
+    activity:number;
+    date:string;
+    time: Time;
+
+
 
   // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
   //   this.dayTemplateData = this.dayTemplateData.bind(this);
@@ -144,7 +162,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.programsList = this.mainService.programsList;
     this.types[this.type] = this.calendarId;
-    debugger
+    
     this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
@@ -179,7 +197,7 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    debugger
+  
   }
 
   eventsArrayByDate: schedule[] = [];
@@ -214,4 +232,7 @@ export class CalendarComponent implements OnInit {
     return this.dayViewHour({ date, locale });
   }
 
+  addEvent(){
+debugger
+  }
 }

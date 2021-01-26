@@ -6,3 +6,6 @@
 #calendar{
     width: 85%;height: 50%; background: transparent;margin: auto;
 }
+mat-form-field {
+    margin-right: 12px;
+  }

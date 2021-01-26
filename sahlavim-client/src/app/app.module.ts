@@ -36,7 +36,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatCheckboxModule,
-  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher,MatProgressSpinnerModule
+  MatSlideToggleModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher,MatProgressSpinnerModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS
 } from '@angular/material';
 
 
@@ -203,7 +203,12 @@ import { CalendarComponent } from './components/calendar/calendar.component';
    AgGridModule
 
   ],
-  providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService],
+  providers: [
+
+
+      {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
+  
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

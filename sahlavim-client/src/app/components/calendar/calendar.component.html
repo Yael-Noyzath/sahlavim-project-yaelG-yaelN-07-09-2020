@@ -56,9 +56,9 @@
 </div>
 
 
-<div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div  class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
@@ -70,13 +70,13 @@
 
             <!--Body-->
 
-            <div class="modal-body" style="text-align:right;" dir="rtl">
+            <div class="modal-body" style="text-align:right;margin:auto;" dir="rtl">
                 <section class="example-section">
-                    <label class="example-margin">תוכנית</label><br>
-                    <mat-form-field appearance="fill">
-                      <mat-label>לאיזו תוכנית להוסיף את הפעילות?</mat-label>
-                      <mat-select [(ngModel)]="newActive.program" name="program">
-                        <mat-option *ngFor="let p of programsList" [value]="p.iProgramId.value">
+                    <label class="example-margin">לתוכנית:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר תוכנית</mat-label>
+                      <mat-select [(ngModel)]="program" name="program">
+                        <mat-option *ngFor="let p of programsList" [value]="p.iProgramId">
                           {{p.nvProgramName}}
                         </mat-option>
                       </mat-select>
@@ -84,11 +84,11 @@
                 </section>
 
                 <section class="example-section">
-                    <label class="example-margin">מסגרת</label><br>
-                    <mat-form-field appearance="fill">
-                      <mat-label>לאיזו מיסגרת להוסיף את הפעילות?</mat-label>
-                      <mat-select [(ngModel)]="newActive.setting" name="setting">
-                        <mat-option *ngFor="let s of settings" [value]="s.iSettingId.value">
+                    <label class="example-margin">למסגרת:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר מיסגרת</mat-label>
+                      <mat-select [(ngModel)]="setting" name="setting">
+                        <mat-option *ngFor="let s of settings" [value]="s.iSettingId">
                           {{s.nvSettingName}}
                         </mat-option>
                       </mat-select>
@@ -96,21 +96,36 @@
                 </section>
 
                 <section class="example-section">
-                    <label class="example-margin">פעילות</label><br>
-                    <mat-form-field appearance="fill">
-                      <mat-label>איזה פעילות להוסיף?</mat-label>
-                      <mat-select [(ngModel)]="newActive.activity" name="activity">
-                        <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId.value">
+                    <label class="example-margin">פעילות:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר פעילות</mat-label>
+                      <mat-select [(ngModel)]="activity" name="activity">
+                        <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId">
                           {{a.nvActivityName}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-                </section>
+                </section> 
+                
+                <mat-form-field >
+                <mat-label>תאריך:</mat-label>
+                <input matInput [matDatepicker]="dp">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+              </mat-form-field><br>
+
+              <mat-form-field class="example-form-field">
+                <mat-label>שעה:</mat-label>
+                <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
+              </mat-form-field>
+
             </div>
 
-            <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
-                <button mat-raised-button color="accent">אישור</button>
-            </div>
+        
+
+            <div style="margin: auto;" class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
+              </div>
         </div>
     </div>
 </div>

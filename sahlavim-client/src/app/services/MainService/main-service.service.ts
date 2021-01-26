@@ -32,6 +32,7 @@ export class MainServiceService {
     this.getAllOperators();
     this.getPrograms();
     this.getAfternoon();
+    debugger
   }
 
   gItems: any = [];
@@ -116,10 +117,6 @@ export class MainServiceService {
         res => {
           if (res) {
             this.operatorsList = res;
-
-           
-
-
           }
           else
             alert("get all operators error")
@@ -128,9 +125,9 @@ export class MainServiceService {
           alert("err");
         }
       );
+      
 
   }
-
 
 
   //רשימת המיסגרות
