@@ -9,3 +9,11 @@
 mat-form-field {
     margin-right: 12px;
   }
+
+  .btnOp{
+    background-color: white;
+    color:rgb(192, 31, 31) ;
+    font-family: inherit;
+    text-align: center;
+    margin: auto;
+  }

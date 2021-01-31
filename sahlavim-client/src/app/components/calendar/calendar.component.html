@@ -1,8 +1,10 @@
  
-    <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
+   <div style="width: 100%;margin: auto;text-align: center;">
+         <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
     </mwl-demo-utils-calendar-header>
+   
+    <button class="btnOp" data-toggle="modal" data-target="#addEvent" mat-stroked-button >הוספת פעילות</button>
 
-<button class="mat-button" data-toggle="modal" data-target="#addEvent">הוספת פעילות</button>
     <ng-template #customCellTemplate let-day="day" let-locale="locale">
         <div class="cal-cell-top">
             <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
@@ -28,6 +30,8 @@
         </mwl-calendar-day-view>
     </div>
 
+   </div>
+ 
 
 
 <div class="modal fade" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -36,7 +40,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">{{dayDetails}} האירועים לתאריך</h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של  {{operator.nvOperatorName}} לתאריך {{dayDetails}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -45,7 +49,14 @@
             <!--Body-->
 
             <div class="modal-body" style="text-align:right;" dir="rtl">
-                
+                <div *ngFor="let event of eventsArrayByDate">
+    <h5>שעה: 
+   {{event.dtStartTime}} 
+                datepipe:{{event.dtStartTime | date}}
+</h5>   
+
+<p>{{event.nvProgramValue}}</p>
+                </div>
             </div>
 
             <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
@@ -100,7 +111,7 @@
                     <mat-form-field >
                       <mat-label>בחר פעילות</mat-label>
                       <mat-select [(ngModel)]="activity" name="activity">
-                        <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId">
+                        <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId" >
                           {{a.nvActivityName}}
                         </mat-option>
                       </mat-select>

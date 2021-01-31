@@ -1,9 +1,8 @@
 <div class="form-group"  >
     <form operator="ngform" (ngSubmit)="save()">
-        <h2 *ngIf="!operator.nvOperatorName" >הוספת מפעיל חדש</h2>
 
         <section class="example-section">
-            <label class="example-margin">סוג:</label>
+            <label class="example-margin">סוג:</label><br>
             <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
                 <mat-radio-button class="example-margin" value="5" [checked]="operator.iOperatorType==5">פרטי
                 </mat-radio-button>
@@ -121,7 +120,7 @@
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
 
-        <div id="TalanSchool" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
+        <div id="TalanSchool" style="width: 40%; margin: auto; padding: 10px; ">
 
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
@@ -140,7 +139,7 @@
             </div>
         </div>
 
-        <div id="TalanSchool" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
+        <div id="TalanSchool" style="width: 40%; margin: auto; padding: 10px; ">
 
             <!--  לטפל! רשימת שכונות -->
             <section style="direction: rtl;" class="example-section">
@@ -166,7 +165,7 @@
         </div>
 
 
-        <div id="SettingslsExclude" style="border: solid;width: 40%; margin: auto; padding: 30px; ">
+        <div id="SettingslsExclude" style="width: 40%; margin: auto; padding: 10px; ">
             <!-- לשלוף מטבלת מסגרות -->
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [checked]="bSettingslsExclude" (change)="bSettingslsExclude=!bSettingslsExclude"
@@ -224,7 +223,9 @@
         </div>
 
 
-        <button type="submit" class="btn btn-success">save</button>
+        <button mat-icon-button style="color: rgb(192, 31, 31) ;" aria-label="Example icon button with a home icon">
+            <mat-icon>save</mat-icon>
+        </button>    
     </form>
 </div>
 
@@ -289,18 +290,18 @@
 
                 <div id="Thursday">
                     <section style="direction: rtl;" class="example-section">
-                        <mat-checkbox name="אhursday" class="example-margin">חמישי</mat-checkbox>
+                        <mat-checkbox name="thursday" class="example-margin">חמישי</mat-checkbox>
                     </section>
                     <mat-form-field class="example-full-width">
                         <mat-label>מספר מדריכים</mat-label>
                         <input type="number" min="0" matInput placeholder="הכנס מיספר">
                     </mat-form-field>
                 </div>
-
-            </div>
-            <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
-                <mat-icon>שמור</mat-icon>
+  <button mat-icon-button style="color: rgb(192, 31, 31) ;" aria-label="Example icon button with a home icon">
+                <mat-icon>save</mat-icon>
             </button>
+            </div>
+          
         </div>
     </div>
 </div>

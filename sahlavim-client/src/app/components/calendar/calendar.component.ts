@@ -204,16 +204,17 @@ export class CalendarComponent implements OnInit {
   dayDetails: string;
 
   getShortDate(date: Date) {
+    let hours=date.getHours();
+    debugger
     let mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
   }
   createArrayForDetails(date: Date)//יצירת מערך להצגת פרטי אירועים ליום מסויים שנבחר
-  {
+  {debugger
     this.dayDetails = this.getShortDate(date);
 
     this.eventsFromSer.forEach(element => {
-      console.log(new Date(element.dtStartTime));
 
       if (this.getShortDate(new Date(element.dtStartTime)) == this.dayDetails)
         this.eventsArrayByDate.push(element);
@@ -233,6 +234,5 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(){
-debugger
   }
 }
