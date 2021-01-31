@@ -20,7 +20,7 @@ export class OperatorTableComponent implements OnInit {
 
   ContactNameFilter= new FormControl('');
   nameFilter = new FormControl('');
-  OperatorTypeFilter = new FormControl('ספורט'); 
+  OperatorTypeFilter = new FormControl(''); 
   CompanyNameFilter= new FormControl(''); 
   categoryFilter=new FormControl(''); 
   IdentityFilter=new FormControl('');
@@ -59,6 +59,7 @@ this.operatorTypes=this.mainService.SysTableList[2];
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
+    debugger
 
   }
 
@@ -162,7 +163,10 @@ this.operatorTypes=this.mainService.SysTableList[2];
     }
 
   }
-
+  addOperator(){
+    this.mainService.operatorForDetails=new Operator();
+this.mainService.serviceNavigateForId('/header-menu/operators/operator-menu/',-1);
+  }
   //עריכת מפעיל
   EditOperator(operator: Operator) {
 

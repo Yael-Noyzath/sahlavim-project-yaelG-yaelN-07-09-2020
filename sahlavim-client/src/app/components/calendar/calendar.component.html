@@ -1,9 +1,9 @@
-    <a>
-        <button type="button" data-toggle="modal" data-target="#addEvent" class="btn btn-outline-dark">הוסף פעילות</button>
-    </a>
-    <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
+ 
+   <div style="width: 100%;margin: auto;text-align: center;">
+         <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
     </mwl-demo-utils-calendar-header>
-
+   
+    <button class="btnOp" data-toggle="modal" data-target="#addEvent" mat-stroked-button >הוספת פעילות</button>
 
     <ng-template #customCellTemplate let-day="day" let-locale="locale">
         <div class="cal-cell-top">
@@ -12,7 +12,7 @@
             <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | hebrewDate }}</span>
         </div>
         <!-- <small *ngIf="day.events.length" style="margin:5px;">ישנם {{ day.events.length }} אירועים ביום זה</small> -->
-        <a (click)="createArrayForDetails(day.date)" *ngIf="day.badgeTotal > 0" style="cursor: pointer; text-align: center;  text-decoration: underline;" data-toggle="modal" data-target="#modalCart">פירוט
+        <a (click)="createArrayForDetails(day.date)" *ngIf="day.badgeTotal > 0" style="cursor: pointer; text-align: center;  text-decoration: underline;" data-toggle="modal" data-target="#eventDetails">פירוט
             האירועים</a>
     </ng-template>
 
@@ -30,15 +30,17 @@
         </mwl-calendar-day-view>
     </div>
 
+   </div>
+ 
 
 
-<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">{{dayDetails}} האירועים לתאריך</h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של  {{operator.nvOperatorName}} לתאריך {{dayDetails}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -47,7 +49,14 @@
             <!--Body-->
 
             <div class="modal-body" style="text-align:right;" dir="rtl">
+                <div *ngFor="let event of eventsArrayByDate">
+    <h5>שעה: 
+   {{event.dtStartTime}} 
+                datepipe:{{event.dtStartTime | date}}
+</h5>   
 
+<p>{{event.nvProgramValue}}</p>
+                </div>
             </div>
 
             <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
@@ -58,9 +67,9 @@
 </div>
 
 
-<div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div  class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
@@ -72,13 +81,62 @@
 
             <!--Body-->
 
-            <div class="modal-body" style="text-align:right;" dir="rtl">
+            <div class="modal-body" style="text-align:right;margin:auto;" dir="rtl">
+                <section class="example-section">
+                    <label class="example-margin">לתוכנית:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר תוכנית</mat-label>
+                      <mat-select [(ngModel)]="program" name="program">
+                        <mat-option *ngFor="let p of programsList" [value]="p.iProgramId">
+                          {{p.nvProgramName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </section>
+
+                <section class="example-section">
+                    <label class="example-margin">למסגרת:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר מיסגרת</mat-label>
+                      <mat-select [(ngModel)]="setting" name="setting">
+                        <mat-option *ngFor="let s of settings" [value]="s.iSettingId">
+                          {{s.nvSettingName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </section>
+
+                <section class="example-section">
+                    <label class="example-margin">פעילות:</label><br>
+                    <mat-form-field >
+                      <mat-label>בחר פעילות</mat-label>
+                      <mat-select [(ngModel)]="activity" name="activity">
+                        <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId" >
+                          {{a.nvActivityName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </section> 
+                
+                <mat-form-field >
+                <mat-label>תאריך:</mat-label>
+                <input matInput [matDatepicker]="dp">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+              </mat-form-field><br>
+
+              <mat-form-field class="example-form-field">
+                <mat-label>שעה:</mat-label>
+                <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
+              </mat-form-field>
 
             </div>
 
-            <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
-                <button mat-raised-button color="accent">אישור</button>
-            </div>
+        
+
+            <div style="margin: auto;" class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
+              </div>
         </div>
     </div>
 </div>

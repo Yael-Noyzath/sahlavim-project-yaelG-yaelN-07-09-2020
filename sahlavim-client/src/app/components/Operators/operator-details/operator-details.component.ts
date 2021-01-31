@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { operatorsAvailability } from 'src/app/Classes/OperatorsAvailability';
+import { operatorsAvailability } from 'src/app/Classes/operatorsAvailability';
 
 @Component({
   selector: 'app-operator-details',
@@ -159,6 +159,8 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
         break;
       case 'settings':
         this.operator.lSchoolsExcude.push(item.iSettingId);
+        this.operator.settings.splice(this.operator.settings.findIndex(x => x.iSettingId == item.iSettingId), 1);
+
         break;
 
       default:
@@ -176,7 +178,7 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
         break;
       case 'settings':
         this.operator.lSchoolsExcude.splice(this.operator.lSchoolsExcude.findIndex(x => x == item.iSettingId), 1);
-
+this.operator.settings.push(item);
         break;
 
       default:
@@ -193,6 +195,7 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
         break;
       case 'settings':
         this.operator.lSchoolsExcude = this.settingsList.map((item) => item.iSettingId);
+        this.operator.settings=[];
           
         break;
       case 'neighberhoods':
@@ -211,6 +214,7 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
           break;
         case 'settings':
           this.operator.lSchoolsExcude = [];
+          this.operator.settings=this.settingsList;
             
           break;
         case 'neighberhoods':

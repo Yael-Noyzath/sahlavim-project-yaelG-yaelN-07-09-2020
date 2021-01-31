@@ -47,7 +47,6 @@ const appTable: Routes = [
         path: "operators", component: OperatorsComponent,
         children: [
           { path: "operator-table", component: OperatorTableComponent },
-          { path: "new-operator", component: OperatorDetailsComponent },
           {
             path: 'operator-menu/:id', component: OperatorMenuComponent,
             children: [

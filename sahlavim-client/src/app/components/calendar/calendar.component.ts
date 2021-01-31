@@ -9,6 +9,7 @@ import {
   Output,
 } from '@angular/core';
 
+
 import {
   startOfDay,
   endOfDay,
@@ -20,6 +21,12 @@ import {
   addHours,
 } from 'date-fns';
 
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import { Subject } from 'rxjs';
 import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -36,12 +43,15 @@ import {
   DAYS_OF_WEEK,
 } from 'angular-calendar';
 import { CustomDateFormatter } from '../Operators/operator-schedule/custom-date-formatter.provider';
-import { formatDate } from '@angular/common';
+import { formatDate, Time } from '@angular/common';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { th } from 'date-fns/locale';
 import { schedule } from 'src/app/Classes/schedule';
 import { CalendarEventActionsComponent } from 'angular-calendar/modules/common/calendar-event-actions.component';
 import { element } from 'protractor';
+import { Program } from 'src/app/Classes/program';
+import { Operator } from 'src/app/classes/operator';
+import { Setting } from 'src/app/classes/setting';
 
 const colors: any = {
   red: {
@@ -66,6 +76,15 @@ const colors: any = {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter
     },
+
+      {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
+      {
+        provide: DateAdapter,
+        useClass: MomentDateAdapter,
+        deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+      },
+      {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+
     { provide: NgbCalendar, useClass: NgbCalendarHebrew },
     { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew }
   ],
@@ -75,25 +94,10 @@ export class CalendarComponent implements OnInit {
 
 
   model: NgbDateStruct;
-  // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
-  //   this.dayTemplateData = this.dayTemplateData.bind(this);
-  // }
-  constructor(private mainService: MainServiceService) {
-  }
-
-  // dayTemplateData(date: NgbDate) {
-  //   return {
-  //     gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
-  //   };
-  // }
-
-  // selectToday() {
-  //   this.model = this.calendar.getToday();
-  // }
-
-
+  programsList: Program[] = [];
   view: string = 'month';
-
+  operator: Operator;
+  settings: Setting[] = [];
   viewDate: Date = new Date();
 
   locale: string = 'he';
@@ -127,9 +131,38 @@ export class CalendarComponent implements OnInit {
 
   };
 
-  ngOnInit() {
-    this.types[this.type] = this.calendarId;
+  
 
+
+    program: number;
+    setting:number;
+    activity:number;
+    date:string;
+    time: Time;
+
+
+
+  // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
+  //   this.dayTemplateData = this.dayTemplateData.bind(this);
+  // }
+  constructor(private mainService: MainServiceService) {
+  }
+
+  // dayTemplateData(date: NgbDate) {
+  //   return {
+  //     gregorian: (this.calendar as NgbCalendarHebrew).toGregorian(date)
+  //   };
+  // }
+
+  // selectToday() {
+  //   this.model = this.calendar.getToday();
+  // }
+
+
+  ngOnInit() {
+    this.programsList = this.mainService.programsList;
+    this.types[this.type] = this.calendarId;
+    
     this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
@@ -153,22 +186,35 @@ export class CalendarComponent implements OnInit {
           alert("err SchedulesGet")
         }
       )
+
+
+    if (this.types["iOperatorId"] != -1) {//import the operator by the id
+      this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
+    }
+    this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
+      if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
+        this.settings.push(element);
+      }
+    });
+
+  
   }
 
   eventsArrayByDate: schedule[] = [];
   dayDetails: string;
 
   getShortDate(date: Date) {
+    let hours=date.getHours();
+    debugger
     let mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
   }
   createArrayForDetails(date: Date)//יצירת מערך להצגת פרטי אירועים ליום מסויים שנבחר
-  {
+  {debugger
     this.dayDetails = this.getShortDate(date);
 
     this.eventsFromSer.forEach(element => {
-      console.log(new Date(element.dtStartTime));
 
       if (this.getShortDate(new Date(element.dtStartTime)) == this.dayDetails)
         this.eventsArrayByDate.push(element);
@@ -187,4 +233,6 @@ export class CalendarComponent implements OnInit {
     return this.dayViewHour({ date, locale });
   }
 
+  addEvent(){
+  }
 }
