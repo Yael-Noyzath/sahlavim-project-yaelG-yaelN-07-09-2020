@@ -8,6 +8,7 @@ import { Operator } from 'src/app/Classes/operator';
 import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
 import { from } from 'rxjs';
 import { element } from 'protractor';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-managers-table',
@@ -41,8 +42,27 @@ export class ManagersTableComponent implements OnInit {
   ngOnInit() {
     this.ngAfterViewInit();
   }
+  ProgramNameFilter = new FormControl('');
+  FromDateFormatFilter = new FormControl('');
+  ToDateFormatFilter = new FormControl('');
+  BudgetItemFilter = new FormControl('');
 
-
+  filterValues = {
+    nvProgramName: '',
+    dFromDateFormat: '',
+    dToDateFormat: '',
+    nvBudgetItem: '',
+  };
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function (data, filter): boolean {
+      let searchTerms = JSON.parse(filter); debugger
+      return data.nvProgramName.toLowerCase().indexOf(searchTerms.nvProgramName) !== -1
+        && data.dFromDateFormat.toLowerCase().indexOf(searchTerms.dFromDateFormat) !== -1
+        && data.dToDateFormat.toLowerCase().indexOf(searchTerms.dToDateFormat) !== -1
+        && data.nvBudgetItem.toLowerCase().indexOf(searchTerms.nvBudgetItem) !== -1
+    }
+    return filterFunction;
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
