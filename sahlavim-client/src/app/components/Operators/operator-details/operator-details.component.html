@@ -1,14 +1,17 @@
-<div class="form-group"  >
-    <form operator="ngform" (ngSubmit)="save()">
-
+<div class="form-group row" >
+    
+<form operator="ngform" (ngSubmit)="save()">
+  <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
+        <mat-icon>save</mat-icon>
+    </button>  
         <section class="example-section">
             <label class="example-margin">סוג:</label><br>
             <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
-                <mat-radio-button class="example-margin" value="5" [checked]="operator.iOperatorType==5">פרטי
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="5" >פרטי
                 </mat-radio-button>
-                <mat-radio-button class="example-margin" value="6" [checked]="operator.iOperatorType==6">חברה
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="6" >חברה
                 </mat-radio-button>
-                <mat-radio-button class="example-margin" value="7" [checked]="operator.iOperatorType==7">שכיר
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="7" >שכיר
                 </mat-radio-button>
             </mat-radio-group>
         </section>
@@ -16,73 +19,55 @@
         <mat-form-field class="example-form-field">
             <mat-label>שם מפעיל</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName" >
-            <button mat-button type="button"  matSuffix mat-icon-button aria-label="Clear" (click)="operator.nvOperatorName=''">
-                <mat-icon>close</mat-icon>
-            </button>
+           
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>שם חברה</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="operator.nvCompanyName=''">
-                <mat-icon>close</mat-icon>
-            </button>
+           
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>ת.ז</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>שם איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="nvContactPerson">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>טלפון איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label> מייל איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="nvContactPersonMail">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר מדריכים</mat-label>
             <input matInput type="text" [(ngModel)]="operator.iNumLeaders" name="iNumLeaders" >
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>הגבלת מספר חוגים ביום</mat-label>
             <input matInput type="number" [(ngModel)]="operator.iNumOperationsDay" name="iNumOperationsDay">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>הגבלת מספר חוגים בשבוע</mat-label>
             <input matInput type="number" [(ngModel)]="operator.iNumOperationsWeek" name="NumActivityWeek">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
 
@@ -98,17 +83,13 @@
         <mat-form-field class="example-form-field">
             <mat-label>מספר ספק</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר הנהלת חשבונות</mat-label>
             <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
-            <button mat-button type="button"   matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
+       
         </mat-form-field><br>
 
         <section style="direction: rtl;" class="example-section">
@@ -120,7 +101,7 @@
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
 
-        <div id="TalanSchool" style="width: 40%; margin: auto; padding: 10px; ">
+        <div id="TalanSchool" >
 
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
@@ -139,9 +120,8 @@
             </div>
         </div>
 
-        <div id="TalanSchool" style="width: 40%; margin: auto; padding: 10px; ">
+        <div id="Neighborhoods" >
 
-            <!--  לטפל! רשימת שכונות -->
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
                     class="example-margin">פעיל באזורים מסוימים</mat-checkbox>
@@ -165,7 +145,7 @@
         </div>
 
 
-        <div id="SettingslsExclude" style="width: 40%; margin: auto; padding: 10px; ">
+        <div id="SettingslsExclude" >
             <!-- לשלוף מטבלת מסגרות -->
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [checked]="bSettingslsExclude" (change)="bSettingslsExclude=!bSettingslsExclude"
@@ -214,7 +194,7 @@
             <a data-toggle="modal" data-target="#modalCart"> עריכת לו"ז קייטנת פסח</a>
         </div>
 
-        <div class="d">
+        <div class="d" style="margin-bottom: 10px;    ">
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bActiveSummerCamp" [checked]="operator.bActiveSummerCamp"
                     name="ActiveSummerCamp" class="example-margin">עובד בקייטנת קיץ</mat-checkbox>
@@ -223,9 +203,7 @@
         </div>
 
 
-        <button mat-icon-button style="color: rgb(192, 31, 31) ;" aria-label="Example icon button with a home icon">
-            <mat-icon>save</mat-icon>
-        </button>    
+       
     </form>
 </div>
 
