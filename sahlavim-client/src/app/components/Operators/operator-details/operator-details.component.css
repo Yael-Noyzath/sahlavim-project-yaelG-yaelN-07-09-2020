@@ -16,7 +16,7 @@
     float: left;
     margin-left: 30px;
 }
-.a section,a{
+section,a{
    display: inline-block;
    padding: 10px;
 
@@ -27,21 +27,12 @@
   text-decoration: underline;
 
  }
- .b section,a{
-  display: inline-block;
-  padding: 10px;
+ section{
+  text-align: right;
+  padding-right: 15%;
+  width: 30%;
+ }
 
-}
-.c section,a{
-  display: inline-block;
-  padding: 10px;
-
-}
-.d section,a{
-  display: inline-block;
-  padding: 10px;
-
-}
 
 .example-section{
   padding-top: 40px;
