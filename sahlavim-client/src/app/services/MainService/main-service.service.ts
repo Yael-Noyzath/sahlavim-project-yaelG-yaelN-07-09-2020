@@ -32,6 +32,7 @@ export class MainServiceService {
     this.getAllOperators();
     this.getPrograms();
     this.getAfternoon();
+
     debugger
   }
 
@@ -54,8 +55,8 @@ export class MainServiceService {
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
 
-  // sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
-  sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";//שרת מרוחק
+  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+  // sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";//שרת מרוחק
 
 
   post(url: string, data: any): Promise<any> {
@@ -115,17 +116,30 @@ export class MainServiceService {
     this.post("GetOperators", {})
       .then(
         res => {
-          if (res) {
-            this.operatorsList = res;
-          }
-          else
-            alert("get all operators error")
+          this.operatorsList = res;
+
+          //Delete duplicates valus from schollexcude list in every operator
+          this.operatorsList.forEach(element => {
+            element.lSchoolsExcude = element.lSchoolsExcude.filter(
+              function (elem, index, self) {
+                return index === self.indexOf(elem)
+              });
+          });
+
+          //Delete duplicates valus from neighborhoods list in every operator
+          this.operatorsList.forEach(element => {
+            element.lNeighborhoods = element.lNeighborhoods.filter(
+              function (elem, index, self) {
+                return index === self.indexOf(elem)
+              });
+          });
+
         }
         , err => {
           alert("err");
         }
       );
-      
+
 
   }
 

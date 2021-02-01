@@ -5,7 +5,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
-import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
+import { MySearchPipe } from 'src/app/Pipes/my-search.pipe';
 import { from } from 'rxjs';
 import { Setting } from 'src/app/Classes/setting';
 import { coordinator } from 'src/app/Classes/coordinator';

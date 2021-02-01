@@ -16,9 +16,7 @@ import { SettingsDetailsComponent } from '../components/Settings/settings-detail
 import { OperatorDetailsComponent } from '../components/Operators/operator-details/operator-details.component';
 import { OperatorActivitiesComponent } from '../components/Operators/operator-activities/operator-activities.component';
 import { OperatorActivityReportComponent } from '../components/Operators/operator-activity-report/operator-activity-report.component';
-import { OperatorCreditComponent } from '../components/Operators/operator-credit/operator-credit.component';
 import { OperatorMessagesComponent } from '../components/Operators/operator-messages/operator-messages.component';
-import { OperatorReviewComponent } from '../components/Operators/operator-review/operator-review.component';
 import { OperatorScheduleComponent } from '../components/Operators/operator-schedule/operator-schedule.component';
 import { SettingTableComponent } from '../components/Settings/setting-table/setting-table.component';
 import { SettingsScheduleComponent } from '../components/Settings/settings-schedule/settings-schedule.component';
@@ -54,9 +52,7 @@ const appTable: Routes = [
               { path: "operator-schedule/:id", component: OperatorScheduleComponent },
               { path: "operator-activities", component: OperatorActivitiesComponent },
               { path: "operator-activity-report", component: OperatorActivityReportComponent },
-              { path: "operator-credit", component: OperatorCreditComponent },
               { path: "operator-messages", component: OperatorMessagesComponent },
-              { path: "operator-review", component: OperatorReviewComponent },
             ]
           }
         ]

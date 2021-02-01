@@ -131,16 +131,11 @@ export class CalendarComponent implements OnInit {
 
   };
 
-  
-
-
     program: number;
     setting:number;
     activity:number;
     date:string;
     time: Time;
-
-
 
   // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
   //   this.dayTemplateData = this.dayTemplateData.bind(this);
@@ -174,8 +169,6 @@ export class CalendarComponent implements OnInit {
             this.events.push({
               title: element.nvProgramValue,
               start: new Date(element.dtStartTime),
-
-
             });
           });
 
@@ -198,6 +191,10 @@ export class CalendarComponent implements OnInit {
     });
 
   
+  }
+  
+  resetArray(){
+    this.eventsArrayByDate=new Array<schedule>();
   }
 
   eventsArrayByDate: schedule[] = [];
