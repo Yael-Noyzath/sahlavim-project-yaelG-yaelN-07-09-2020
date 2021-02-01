@@ -34,6 +34,17 @@
 </div>
 
 
+<div class="modal fade" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header" style="text-align:center;">
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של  {{operator.nvOperatorName}} לתאריך {{dayDetails}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" (click)="resetArray()">×</span>
+                </button>
+            </div>
 
 
 <div *ngIf='types["iOperatorId"] != -1'>
@@ -67,7 +78,15 @@
                 <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
                     <button mat-raised-button color="accent">שלח</button>
                 </div>
+            <div class="modal-body" style="text-align:right;" dir="rtl">
+                <dl *ngFor="let event of eventsArrayByDate">
+    <dt> {{event.dtStartTime| date:'shortTime'}} | {{event.nvSettingName}} </dt> <a style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</a>  
+
+    <dd>תוכנית: {{event.nvProgramValue}}</dd>
+                </dl>
             </div>
+
+
         </div>
     </div>
 

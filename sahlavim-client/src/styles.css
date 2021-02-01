@@ -39,7 +39,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-sort-header-button{
 display: none;
 }
-button{
+a, button{
     cursor: pointer;
 }
 
@@ -168,7 +168,11 @@ button{
 body {    
     margin: 0;    
     font-family: Roboto, sans-serif;    
-}    
+    
+}   
+body::-webkit-scrollbar {
+    display: none;
+  } 
     
 mat-card {    
     max-width: 80%;    

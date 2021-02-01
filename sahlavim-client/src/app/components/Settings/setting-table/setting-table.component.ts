@@ -10,7 +10,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
-import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
+import { MySearchPipe } from 'src/app/Pipes/my-search.pipe';
 import { from } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';

@@ -67,13 +67,14 @@ export class OperatorDetailsComponent implements OnInit {
 
     this.NeighborhoodsList = this.mainService.gItems[4].dParams;
 
-    // איתחול רשימת שכונות של המפעיל 
+    // איתחול רשימת איזורים 
     if (this.operator.lNeighborhoods.length > 0) {
       for (let nlId of this.operator.lNeighborhoods) {
         this.operatorNeighborhoods.push(this.NeighborhoodsList.find(x => x.Key == nlId));
       }
     }
   
+
     //הגדרות ה multi select
     this.dropdownSettings = {
       singleSelection: false,
@@ -104,40 +105,17 @@ export class OperatorDetailsComponent implements OnInit {
 
   
 this.operator.lNeighborhoods=this.operator.lSchools=this.operator.lSchoolsExcude=[];
-this.operator.lSchools = this.lschool.map((item) => item.iSettingId);
-this.operator.lSchoolsExcude = this.schoolsExcludeList.map((item) => item.iSettingId);
-this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key);
+
+this.operator.bTalan==false? this.operator.lSchools=[]:this.lschool.map((item) => item.iSettingId);
+this.bSettingslsExclude==false? this.operator.lSchoolsExcude=[]:this.schoolsExcludeList.map((item) => item.iSettingId);
+this.blNeighborhoods==false? this.operator.lNeighborhoods=[]:this.operatorNeighborhoods.map((item) => item.Key);
   
-    // //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
-    // if (this.schoolsExcludeList.length > 0) {
-    //   for (let school of this.schoolsExcludeList)//מעבר על הרשימה שנבחרה
-    //   {
-    //     if (this.operator.lSchoolsExcude.indexOf(school.iSettingId) == -1)//אם המיסגרת לא כלולה ברשימה אז הוסף אותה
-    //     {
-    //       this.operator.lSchoolsExcude.push(school.iSettingId);
-    //     }
-    //   }
-    // }
-
-
-    // //  עידכון בתי הספר בהם מפעיל חוגי תל"ן
-    // if (this.lschool.length > 0) {
-    //   for (let schoolid of this.lschool) {
-    //     if (this.operator.lSchools.indexOf(schoolid.iSettingId) == -1)//אם הבי"הס לא כלול ברשימה 
-    //     {
-    //       this.operator.lSchools.push(schoolid.iSettingId);
-    //     }
-    //   }
-    // }
-
-
-
 
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
-          alert("update " + this.operator.nvOperatorName + " done!");
           let o=res;
+          debugger
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
           this.mainService.serviceNavigate("/header-menu/operators/operator-table");
@@ -159,7 +137,6 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
         break;
       case 'settings':
         this.operator.lSchoolsExcude.push(item.iSettingId);
-        this.operator.settings.splice(this.operator.settings.findIndex(x => x.iSettingId == item.iSettingId), 1);
 
         break;
 
@@ -169,16 +146,19 @@ this.operator.lNeighborhoods = this.operatorNeighborhoods.map((item) => item.Key
 
   }
 
-  //delete school/setting from the list
+  //Delete school/setting from the list
   OnItemDeSelect(item: Setting, type: string) {
 
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools.splice(this.operator.lSchools.findIndex(x => x == item.iSettingId), 1);
+     this.operator.lSchools.length==0?this.operator.bTalan=false:true;
+
         break;
       case 'settings':
         this.operator.lSchoolsExcude.splice(this.operator.lSchoolsExcude.findIndex(x => x == item.iSettingId), 1);
-this.operator.settings.push(item);
+        this.operator.lSchoolsExcude.length==0?  this.bSettingslsExclude=false:true;
+
         break;
 
       default:
@@ -207,28 +187,35 @@ this.operator.settings.push(item);
 
     onDeSelectAll(type: string)
     {
+
       switch (type) {
         case 'talanSchool':
           this.operator.lSchools =[];
+          this.operator.bTalan=false;
             
           break;
         case 'settings':
           this.operator.lSchoolsExcude = [];
-          this.operator.settings=this.settingsList;
-            
+          this.bSettingslsExclude=false;
           break;
         case 'neighberhoods':
           this.operator.lNeighborhoods = [];
+          this.blNeighborhoods=false;
         default:
           break;
       }
     }
 
-
-    onDeSelectNeighborhood(item: forSelect) {//מחיקה
+//When deselect neighborhood
+    onDeSelectNeighborhood(item: forSelect) {
+      debugger
       this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x => x.Key == item.Key), 1);
+  if(this.operator.lNeighborhoods.length==0)
+  {
+    this.blNeighborhoods=false;
+  }
     }
-
+//When select neighborhood
     onSelectNeighborhood(item: forSelect) {//הוספה
 
       this.operator.lNeighborhoods.push(item.Key);

@@ -5,7 +5,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Operator } from 'src/app/Classes/operator';
-import { MySearchPipe } from 'src/app/pipe/my-search.pipe';
+import { MySearchPipe } from 'src/app/Pipes/my-search.pipe';
 import { from } from 'rxjs';
 import { element } from 'protractor';
 import { FormControl } from '@angular/forms';
@@ -32,6 +32,7 @@ export class ManagersTableComponent implements OnInit {
   usersList: Array<User>;
   editUser: User = new User();
   lUserTypeValue: Map<number, string> = new Map<number, string>();
+
 
   constructor(private mainService: MainServiceService) {
     this.GetUsers();
@@ -101,7 +102,7 @@ export class ManagersTableComponent implements OnInit {
   }
 
   saveUser() {
-    debugger
+    
     this.mainService.post("AddUpdateUser", { oUser: this.editUser }).then(
       res => {
         if (res) {
