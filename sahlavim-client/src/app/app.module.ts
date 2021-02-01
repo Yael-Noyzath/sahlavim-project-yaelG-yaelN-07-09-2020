@@ -83,7 +83,6 @@ import { SettingsMessagesComponent } from './components/Settings/settings-messag
 import { ProgramsTableComponent } from './components/Programs/programs-table/programs-table.component';
 import { AfternoonComponent } from './components/Afternoons/afternoon/afternoon.component';
 import { AfternoonTableComponent } from './components/Afternoons/afternoon-table/afternoon-table.component';
-import { TableComponent } from './table/table.component';
 import * as XLSX from 'xlsx';
 import { CalendarHeaderComponent } from './components/calendar/calendar-header-component';
 
@@ -100,7 +99,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
-    TableComponent,
     AppComponent,
     AppComponent,
     AppComponent,
@@ -140,7 +138,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     ProgramsTableComponent,
     AfternoonComponent,
     AfternoonTableComponent,
-    TableComponent,
     CalendarHeaderComponent,
     HebrewDatePipe,
     CalendarComponent,
