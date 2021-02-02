@@ -1,9 +1,10 @@
-<button mat-raised-button class="settingBtn btn" (click)="ExportTOExcel()">Export as Excel</button>
-<div class="containerz-" style="text-align:right;margin: auto; " dir="rtl">
+<div class="container-" style="text-align:right;margin: auto; " dir="rtl">
     <div class="addMsg">
         <button mat-stroked-button class="settingColor" data-toggle="modal" data-target="#modalCart"
             (click)="emailList()">שליחת הודעה</button>
         <button mat-stroked-button class="settingColor" (click)="addSetting()"> הוספת מסגרת</button>
+        <button mat-raised-button class="settingBtn btn" (click)="ExportTOExcel()">ייצא לאקסל</button>
+
     </div>
     <div *ngIf="openDetails==false" style="width: 90%;margin: auto;" class="overflow-auto">
         <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>

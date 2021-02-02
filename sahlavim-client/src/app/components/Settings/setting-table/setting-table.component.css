@@ -2,6 +2,8 @@
 .settingBtn{
     background-color:rgb(47, 50, 150);
     color:white;
+    float: left;
+    margin-left: 80px;
 }
 .settingColor{
     color: rgb(47, 50, 150);
