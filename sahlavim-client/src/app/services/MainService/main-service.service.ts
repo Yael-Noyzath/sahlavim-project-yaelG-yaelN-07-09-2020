@@ -32,6 +32,7 @@ export class MainServiceService {
     this.getAllOperators();
     this.getPrograms();
     this.getAfternoon();
+    this.getUsers();
 
     debugger
   }
@@ -42,6 +43,7 @@ export class MainServiceService {
   settingsList: Setting[] = [];
   programsList: Program[] = [];
   afternoonsList: Program[] = [];
+  usersList: User[] = [];
   //משתמש שנכנס למערכת
   currentUser: User = new User();
   // לעריכת מפעיל
@@ -155,7 +157,27 @@ export class MainServiceService {
       }
     );
   }
-
+  getUsers() {
+    this.post("GetUsers", {})
+      .then(
+        res => {
+          //if (res) {
+            this.usersList = res;
+            // this.usersList.forEach(element => {
+            //   switch(element.iUserType)
+            //   {
+            //     case 1:
+            //   }
+            // });
+          //}
+          // else
+          //   alert("GetUsers management error");
+        },
+        err => {
+          alert("error");
+        }
+      );
+  }
   serviceNavigate(path: string) {
     this.router.navigate([path]);
   }
