@@ -16,10 +16,13 @@
     float: left;
     margin-left: 30px;
 }
-.a section,a{
+#work section,a{
    display: inline-block;
    padding: 10px;
 
+ }
+ #work section{
+   margin-right: 110px;
  }
  a{
   font-size: 14px;
@@ -27,38 +30,32 @@
   text-decoration: underline;
 
  }
- .b section,a{
-  display: inline-block;
-  padding: 10px;
 
-}
-.c section,a{
-  display: inline-block;
-  padding: 10px;
 
-}
-.d section,a{
-  display: inline-block;
-  padding: 10px;
-
+#work{
+  margin-top: 20px;
+  width: 60%;
+  margin: auto;
+  text-align: right;  
+  padding-bottom: 30px;
 }
 
-.example-section{
-  padding-top: 40px;
-
-}
 mat-icon{
   font-size: 40px;
   text-shadow: 10px 10px 20px #ffffff;
 }
-section{
-  width: 50%;
-    margin: auto;
+
+
+.s{
+  width: 30%;
+  text-align: justify;
+  margin: auto;
+  margin-right: 42%;
 }
 
 form {
       width: 60%;
-      height: 620px;
+      height: 610px;
       margin: auto;
       text-align: center;
       direction: rtl; 
@@ -85,5 +82,6 @@ mat-form-field{
 
 #SettingslsExclude, #Neighborhoods, #TalanSchool
 {
-  width: 50%; margin: auto; padding: 10px; 
+  width: 50%; margin: auto;  padding-top: 35px;
+
 }
