@@ -1,21 +1,21 @@
 <div class="form-group row">
 
     <form operator="ngform" (ngSubmit)="save()">
-        <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
+        <button  class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
             <mat-icon>save</mat-icon>
         </button>
-        <div style="height: 170px;
-       margin: auto;
-       width: 50%;
-       padding-top: 25px;">
+
+        <div style="height: 170px;margin: auto;width: 50%;padding-top: 25px;">
             <mat-form-field class="example-form-field">
                 <mat-label>שם מפעיל</mat-label>
-                <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName">
+                <input  matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName">
+                <mat-hint align="end" >{{ operator.nvOperatorName|string }}</mat-hint>
 
             </mat-form-field><br>
             <mat-form-field class="example-form-field">
                 <mat-label>שם חברה</mat-label>
                 <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
+                <mat-hint align="end" >{{ operator.nvOperatorName|string }}</mat-hint>
 
             </mat-form-field>
         </div>
@@ -49,6 +49,7 @@
         <mat-form-field class="example-form-field">
             <mat-label>טלפון איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
+            <mat-hint align="end" >{{ operator.nvContactPersonPhone| phone }}</mat-hint>
 
         </mat-form-field><br>
 
@@ -76,15 +77,19 @@
 
         </mat-form-field><br>
 
-
-        <mat-form-field appearance="fill" style="direction: rtl;">
-            <mat-label>תנאי תשלום</mat-label>
-            <mat-select [value]="operator.iOperatorPaymentType" matNativeControl required name="iOperatorPaymentType">
-                <mat-option value="8">30 + שוטף</mat-option>
-                <mat-option value="9"> שוטף + 60</mat-option>
-                <mat-option value="10">מזומן</mat-option>
-            </mat-select>
-        </mat-form-field><br>
+        <section class="example-section">
+            <label class="example-margin">תנאי תשלום: </label>
+            <mat-radio-group [(ngModel)]="operator.iOperatorPaymentType" name="iOperatorPaymentType">
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="8">30 + שוטף
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="9">שוטף + 60
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="10">מזומן
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <br>
+ 
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר ספק</mat-label>
