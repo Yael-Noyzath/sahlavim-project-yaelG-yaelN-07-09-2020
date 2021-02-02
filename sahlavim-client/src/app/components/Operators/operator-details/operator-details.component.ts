@@ -146,6 +146,8 @@ this.blNeighborhoods==false? this.operator.lNeighborhoods=[]:this.operatorNeighb
 
   }
 
+
+
   //Delete school/setting from the list
   OnItemDeSelect(item: Setting, type: string) {
 

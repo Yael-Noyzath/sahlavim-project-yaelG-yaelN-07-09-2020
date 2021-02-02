@@ -90,6 +90,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CommonModule } from '@angular/common';
 import { HebrewDatePipe } from './Pipes/hebrew-date.pipe';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { StringPipe } from './Pipes/Validation/string.pipe';
+import { PhonePipe } from './Pipes/Validation/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -129,6 +131,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     CalendarHeaderComponent,
     HebrewDatePipe,
     CalendarComponent,
+    StringPipe,
+    PhonePipe,
   ],
   imports: [
 
