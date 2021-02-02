@@ -144,4 +144,8 @@ export class SettingsDetailsComponent implements OnInit {
     else
       this.addCoordinator = new coordinator();
   }
+
+  validation(){
+    
+  }
 }

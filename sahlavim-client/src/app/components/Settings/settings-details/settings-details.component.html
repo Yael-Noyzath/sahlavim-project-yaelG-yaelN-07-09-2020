@@ -12,11 +12,11 @@
                 <h3 class="settingColor">פרטי מסגרת</h3>
                 <mat-form-field class="example-form-field">
                     <mat-label>שם מסגרת</mat-label>
-                    <input matInput type="text" [(ngModel)]="currentSetting.nvSettingName" name="nvSettingName"
-                        required />
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <input matInput type="text" minlength="2" [(ngModel)]="currentSetting.nvSettingName"
+                        name="nvSettingName" required #nvSettingName="ngModel" />
+                    <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                         <mat-icon>close</mat-icon>
-                    </button>
+                    </button> -->
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-select [(ngModel)]="currentSetting.iSettingType" required placeholder="סוג מסגרת"
