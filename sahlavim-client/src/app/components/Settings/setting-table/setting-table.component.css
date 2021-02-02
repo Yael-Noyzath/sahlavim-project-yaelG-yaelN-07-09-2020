@@ -38,3 +38,8 @@ table {
 
   width: 100%;
 }
+element.style {
+  text-align: center;
+  margin-top: 0%;
+  direction: rtl;
+}
