@@ -59,6 +59,7 @@ export class SettingTableComponent implements OnInit {
     this.lSettingTypeValue = mainService.SysTableList[5];
     this.lSettingAgegroupsValue = mainService.SysTableList[6];
     this.dataSource.filterPredicate = this.createFilter();
+    debugger
 
   }
   SettingIdFilter = new FormControl('');

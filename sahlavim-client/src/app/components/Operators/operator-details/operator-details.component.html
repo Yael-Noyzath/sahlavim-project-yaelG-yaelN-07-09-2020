@@ -1,73 +1,79 @@
-<div class="form-group row" >
-    
-<form operator="ngform" (ngSubmit)="save()">
-  <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
-        <mat-icon>save</mat-icon>
-    </button>  
+<div class="form-group row">
+
+    <form operator="ngform" (ngSubmit)="save()">
+        <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
+            <mat-icon>save</mat-icon>
+        </button>
+        <div style="height: 170px;
+       margin: auto;
+       width: 50%;
+       padding-top: 25px;">
+            <mat-form-field class="example-form-field">
+                <mat-label>שם מפעיל</mat-label>
+                <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName">
+
+            </mat-form-field><br>
+            <mat-form-field class="example-form-field">
+                <mat-label>שם חברה</mat-label>
+                <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
+
+            </mat-form-field>
+        </div>
+        <br>
+
+
         <section class="example-section">
-            <label class="example-margin">סוג:</label><br>
+            <label class="example-margin">סוג: </label>
             <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="5" >פרטי
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="5">פרטי
                 </mat-radio-button>
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="6" >חברה
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="6">חברה
                 </mat-radio-button>
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="7" >שכיר
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="7">שכיר
                 </mat-radio-button>
             </mat-radio-group>
         </section>
         <br>
         <mat-form-field class="example-form-field">
-            <mat-label>שם מפעיל</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName" >
-           
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>שם חברה</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
-           
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
             <mat-label>ת.ז</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>שם איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="nvContactPerson">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>טלפון איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label> מייל איש קשר</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="nvContactPersonMail">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר מדריכים</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.iNumLeaders" name="iNumLeaders" >
-       
+            <input matInput type="text" [(ngModel)]="operator.iNumLeaders" name="iNumLeaders">
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>הגבלת מספר חוגים ביום</mat-label>
             <input matInput type="number" [(ngModel)]="operator.iNumOperationsDay" name="iNumOperationsDay">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>הגבלת מספר חוגים בשבוע</mat-label>
             <input matInput type="number" [(ngModel)]="operator.iNumOperationsWeek" name="NumActivityWeek">
-       
+
         </mat-form-field><br>
 
 
@@ -83,25 +89,25 @@
         <mat-form-field class="example-form-field">
             <mat-label>מספר ספק</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
-       
+
         </mat-form-field><br>
 
         <mat-form-field class="example-form-field">
             <mat-label>מספר הנהלת חשבונות</mat-label>
             <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
-       
+
         </mat-form-field><br>
 
-        <section style="direction: rtl;" class="example-section">
+        <section class="example-section s">
             <mat-checkbox [(ngModel)]="operator.bActivityPriority" [checked]="operator.bActivityPriority"
                 name="ActivityPriority" class="example-margin">עדיפות בשיבוץ</mat-checkbox>
         </section>
 
-        <section style="direction: rtl;" class="example-section">
+        <section class="example-section s">
             <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
         </section>
 
-        <div id="TalanSchool" >
+        <div id="TalanSchool">
 
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bTalan" [checked]="operator.bTalan" name="TalanCheckbox"
@@ -110,17 +116,15 @@
             <!-- talan schools settings -->
             <div *ngIf="schoolListforTalan.length">
                 <ng-multiselect-dropdown name="talanSchools" [(ngModel)]="lschool" [placeholder]="'בתי ספר'"
-                    [data]="schoolListforTalan" [settings]="dropdownSettings" 
-                    (onSelect)="onItemSelect($event,'talanSchool')"
-                    (onSelectAll)="onSelectAll('talanSchool')" 
-                    (onDeSelectAll)="onDeSelectAll('talanSchool')" 
-                    (onDeSelect)="OnItemDeSelect($event,'talanSchool')"
+                    [data]="schoolListforTalan" [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event,'talanSchool')" (onSelectAll)="onSelectAll('talanSchool')"
+                    (onDeSelectAll)="onDeSelectAll('talanSchool')" (onDeSelect)="OnItemDeSelect($event,'talanSchool')"
                     [disabled]="!operator.bTalan">
                 </ng-multiselect-dropdown>
             </div>
         </div>
 
-        <div id="Neighborhoods" >
+        <div id="Neighborhoods">
 
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [checked]="blNeighborhoods" (change)="blNeighborhoods=!blNeighborhoods"
@@ -130,22 +134,17 @@
 
             <!-- Neighborhoods -->
             <div *ngIf="NeighborhoodsList.length">
-                <ng-multiselect-dropdown name="neighborhoods" 
-                [settings]="dropdownNeighborhoods"
-                    [(ngModel)]="operatorNeighborhoods"
-                     [data]="NeighborhoodsList"
-                      [placeholder]="'איזורים'"
-                    (onSelect)="onSelectNeighborhood($event)"
-                    (onSelectAll)="onSelectAll('neighberhoods')" 
-                    (onDeSelectAll)="onDeSelectAll('neighberhoods')" 
-                    (onDeSelect)="onDeSelectNeighborhood($event)"
+                <ng-multiselect-dropdown name="neighborhoods" [settings]="dropdownNeighborhoods"
+                    [(ngModel)]="operatorNeighborhoods" [data]="NeighborhoodsList" [placeholder]="'איזורים'"
+                    (onSelect)="onSelectNeighborhood($event)" (onSelectAll)="onSelectAll('neighberhoods')"
+                    (onDeSelectAll)="onDeSelectAll('neighberhoods')" (onDeSelect)="onDeSelectNeighborhood($event)"
                     [disabled]="!blNeighborhoods">
                 </ng-multiselect-dropdown>
             </div>
         </div>
 
 
-        <div id="SettingslsExclude" >
+        <div id="SettingslsExclude" style="padding-bottom: 30px;">
             <!-- לשלוף מטבלת מסגרות -->
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [checked]="bSettingslsExclude" (change)="bSettingslsExclude=!bSettingslsExclude"
@@ -154,21 +153,16 @@
 
 
             <div *ngIf="settingsList.length">
-                <ng-multiselect-dropdown name="schoolExclude"
-                 [(ngModel)]="schoolsExcludeList"
-                  [placeholder]="'מסגרות'"
-                    [data]="settingsList" 
-                    [settings]="dropdownSettings" 
-                    (onSelect)="onItemSelect($event,'settings')"
-                    (onSelectAll)="onSelectAll('settings')" 
-                    (onDeSelectAll)="onDeSelectAll('settings')" 
-                    (onDeSelect)="OnItemDeSelect($event,'settings')"
-                    [disabled]="!bSettingslsExclude">
+                <ng-multiselect-dropdown name="schoolExclude" [(ngModel)]="schoolsExcludeList" [placeholder]="'מסגרות'"
+                    [data]="settingsList" [settings]="dropdownSettings" (onSelect)="onItemSelect($event,'settings')"
+                    (onSelectAll)="onSelectAll('settings')" (onDeSelectAll)="onDeSelectAll('settings')"
+                    (onDeSelect)="OnItemDeSelect($event,'settings')" [disabled]="!bSettingslsExclude">
                 </ng-multiselect-dropdown>
             </div>
         </div>
 
-   
+        <div id="work">
+
             <section style="direction: rtl;  " class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bActiveAfternoon" [checked]="operator.bActiveAfternoon"
                     name="ActiveAfternoon" class="example-margin">עובד בצהרונים</mat-checkbox>
@@ -181,9 +175,6 @@
                     name="ActiveChanukahCamp" class="example-margin">עובד בקייטנת חנוכה</mat-checkbox>
             </section>
             <a data-toggle="modal" data-target="#modalCart"> עריכת לו"ז קייטנת חנוכה</a><br>
-
-
-
 
             <section style="direction: rtl;" class="example-section">
                 <mat-checkbox [(ngModel)]="operator.bActivePassoverCamp" [checked]="operator.bActivePassoverCamp"
@@ -199,7 +190,8 @@
             <a data-toggle="modal" data-target="#modalCart">עריכת לו"ז קייטנת קיץ</a>
 
 
-       
+        </div>
+
     </form>
 </div>
 
@@ -217,7 +209,7 @@
             </div>
 
             <!--Body-->
-              
+
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <div id="Sunday">
 
@@ -271,11 +263,12 @@
                         <input type="number" min="0" matInput placeholder="הכנס מיספר">
                     </mat-form-field>
                 </div>
-  <button mat-icon-button style="color: rgb(192, 31, 31) ;" aria-label="Example icon button with a home icon">
-                <mat-icon>save</mat-icon>
-            </button>
+                <button mat-icon-button style="color: rgb(192, 31, 31) ;"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>save</mat-icon>
+                </button>
             </div>
-          
+
         </div>
     </div>
 </div>
