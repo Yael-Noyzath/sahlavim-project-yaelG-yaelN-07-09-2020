@@ -41,21 +41,45 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <!--Header-->
-            <!-- {{operator.nvOperatorName}} לתאריך {{dayDetails}} -->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של </h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של {{objName}} <br> {{dayDetails}} </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" (click)="resetArray()">×</span>
+                    <span aria-hidden="true" >×</span>
                 </button>
             </div>
 
             <!--Body-->
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <dl *ngFor="let event of eventsArrayByDate">
-                    <dt> {{event.dtStartTime| date:'shortTime'}} | {{event.nvSettingName}} </dt> <a
+                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> <a
                         style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</a>
 
                     <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
+
+                    <!-- public iOperatorId: number = -1,
+                    public iActivityId: number = -1,
+                    public iScheduleId: number = -1,
+                    public iSettingId: number = -1,
+                    public iProgramId: number = -1,
+                    public dtStartTime: string='',
+                    public nvProgramValue: string = '',
+                    public bClosedDay: boolean = false,
+                    public bLongDay: boolean = false,
+                    public dtDoneDate: Date = new Date(),
+                    public iActivityDetailsId: number = -1,
+                    public iCategoryType: number = -1,
+                    public iClusterId: number = -1,
+                    public iDayInWeek: number = -1,
+                    public iLeaderNumber: number = -1,
+                    public nvActivityName: string = '',
+                    public nvAddress: string = '',
+                    public nvCategoryValue: string = '',
+                    public nvComment: string='',
+                    public nvCompanyName: string='',
+                    public nvOperatingLocation: string='',
+                    public nvOperatorName: string='',
+                    public nvPhone: string='',
+                    public nvSettingName: string='' -->
                 </dl>
             </div>
         </div>
@@ -122,18 +146,20 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                </section>
-            </div>
-
-            <mat-form-field class="example-form-field">
+                </section>  
+                
+                <mat-form-field class="example-form-field">
                 <mat-label>שעה:</mat-label>
                 <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
             </mat-form-field>
+            </div>
 
-        </div>
-
-        <div style="margin: auto;" class="modal-footer">
+      <div style="margin: auto;" class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
         </div>
+
+        </div>
+
+        
     </div>
 </div>
