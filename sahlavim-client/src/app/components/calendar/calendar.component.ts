@@ -115,6 +115,8 @@ export class CalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
 
   eventsFromSer: schedule[] = [];
+  currentSetting: Setting=new Setting();
+currentProgram:Program=new Program();
 
   setView(view: CalendarView) {
     this.view = view;
@@ -155,12 +157,27 @@ export class CalendarComponent implements OnInit {
   //   this.model = this.calendar.getToday();
   // }
 
-
+objName:string;
   ngOnInit() {
     this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
     this.settingsList = this.mainService.settingsList;
     this.types[this.type] = this.calendarId;
+
+    if (this.types["iOperatorId"] != -1) {//import the operator by the id
+      this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
+      this.objName=this.operator.nvOperatorName;
+    }
+    if (this.types["iSettingId"] != -1) {//import the setting by the id
+      this.currentSetting = this.mainService.settingsList.find(x => x.iSettingId == this.types["iSettingId"]);
+      this.objName=this.currentSetting.nvSettingName;
+    }
+    if (this.types["iProgramId"] != -1) {//import the program by the id
+      this.currentProgram = this.mainService.programsList.find(x => x.iProgramId ==this.types["iProgramId"]);
+      this.objName=this.currentProgram.nvProgramName;
+
+    }
+
 
     this.mainService.post("SchedulesGet", this.types)
       .then(
@@ -185,9 +202,7 @@ export class CalendarComponent implements OnInit {
       )
 
 
-    if (this.types["iOperatorId"] != -1) {//import the operator by the id
-      this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
-    }
+    
 
 
 
@@ -236,9 +251,6 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  resetArray() {
-    this.eventsArrayByDate = new Array<schedule>();
-  }
 
   eventsArrayByDate: schedule[] = [];
   dayDetails: string;
@@ -254,6 +266,7 @@ export class CalendarComponent implements OnInit {
   {
     debugger
     this.dayDetails = this.getShortDate(date);
+      this.eventsArrayByDate=[];
 
     this.eventsFromSer.forEach(element => {
 
