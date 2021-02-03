@@ -57,8 +57,8 @@ export class MainServiceService {
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
 
-  sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
-  //sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";//שרת מרוחק
+  //sahlavimUrl = "http://localhost:53070/Service1.svc/";//שרת מקומי
+  sahlavimUrl = "http://qa.webit-track.com/SachlavimQA/Service/Service1.svc/";//שרת מרוחק
 
 
   post(url: string, data: any): Promise<any> {
