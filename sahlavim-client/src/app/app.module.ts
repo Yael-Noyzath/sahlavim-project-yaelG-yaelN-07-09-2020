@@ -93,6 +93,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { StringPipe } from './Pipes/Validation/string.pipe';
 import { PhonePipe } from './Pipes/Validation/phone.pipe';
 import { IdNumberPipe } from './Pipes/Validation/id-number.pipe';
+import { RequiredPipe } from './Pipes/Validation/required.pipe';
 import { EmailPipe } from './Pipes/Validation/email.pipe';
 
 @NgModule({
@@ -136,6 +137,7 @@ import { EmailPipe } from './Pipes/Validation/email.pipe';
     StringPipe,
     PhonePipe,
     IdNumberPipe,
+    RequiredPipe,
     EmailPipe,
   ],
   imports: [

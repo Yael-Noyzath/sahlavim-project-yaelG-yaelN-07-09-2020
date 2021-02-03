@@ -96,8 +96,9 @@ export class CalendarComponent implements OnInit {
   model: NgbDateStruct;
   programsList: Program[] = [];
   view: string = 'month';
-  operator: Operator;
-  settings: Setting[] = [];
+  operator: Operator=new Operator();
+  operatorList:Operator[]=[];
+  operatorSettings: Setting[] = [];
   viewDate: Date = new Date();
 
   locale: string = 'he';
@@ -155,6 +156,8 @@ export class CalendarComponent implements OnInit {
 
 
   ngOnInit() {
+      this.operatorList=this.mainService.operatorsList;
+      debugger
     this.programsList = this.mainService.programsList;
     this.types[this.type] = this.calendarId;
     
@@ -184,13 +187,15 @@ export class CalendarComponent implements OnInit {
     if (this.types["iOperatorId"] != -1) {//import the operator by the id
       this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
     }
+    
     this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
       if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
-        this.settings.push(element);
+        this.operatorSettings.push(element);
       }
     });
 
-  
+  //מילוי רשימת מפעילים שעובדים במיסגרת מסויימת שנבחרה לתוכנית
+
   }
   
   resetArray(){
