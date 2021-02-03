@@ -235,7 +235,7 @@ export class CalendarComponent implements OnInit {
     }
 
   }
-
+  
   resetArray() {
     this.eventsArrayByDate = new Array<schedule>();
   }
