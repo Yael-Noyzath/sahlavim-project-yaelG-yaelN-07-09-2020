@@ -37,6 +37,7 @@
         <mat-form-field class="example-form-field">
             <mat-label>ת.ז</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
+            <mat-hint align="end" >{{ operator.nvIdentity| idNumber }}</mat-hint>
 
         </mat-form-field><br>
 
