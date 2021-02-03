@@ -77,13 +77,35 @@
 
             <!--Body-->
             <div class="modal-body" style="text-align:right;margin:auto;" dir="rtl">
-              
-                <section *ngIf="types['iOperatorId']==-1"  class="example-section">
+
+                <section *ngIf="types['iProgramId']==-1" class="example-section">
+                    <label class="example-margin">לתוכנית:</label><br>
+                    <mat-form-field>
+                        <mat-label>בחר תוכנית</mat-label>
+                        <mat-select [(ngModel)]="program" name="program" (click)="fillOperatorsList()">
+                            <mat-option *ngFor="let p of programsList" [value]="p">
+                                {{p.nvProgramName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </section>
+                <section *ngIf="types['iSettingId']==-1" class="example-section">
+                    <label class="example-margin">למסגרת:</label><br>
+                    <mat-form-field>
+                        <mat-label>בחר מיסגרת</mat-label>
+                        <mat-select name="setting" [(ngModel)]="settingId" (click)="fillOperatorsList()">
+                            <mat-option *ngFor="let s of settingsList" [value]="s.iSettingId">
+                                {{s.nvSettingName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </section>
+                <section *ngIf="types['iOperatorId']==-1" class="example-section">
                     <label class="example-margin">למפעיל:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מפעיל</mat-label>
                         <mat-select [(ngModel)]="operator" name="operator">
-                            <mat-option  *ngFor="let o of operatorList" [value]="o">
+                            <mat-option *ngFor="let o of operatorList" [value]="o">
                                 {{o.nvOperatorName}}
                             </mat-option>
                         </mat-select>
@@ -101,53 +123,17 @@
                         </mat-select>
                     </mat-form-field>
                 </section>
-
-               <section *ngIf="types['iSettingId']==-1" class="example-section">
-                    <label class="example-margin">למסגרת:</label><br>
-                    <mat-form-field>
-                        <mat-label>בחר מיסגרת</mat-label>
-                        <mat-select [(ngModel)]="setting" name="setting">
-                            <mat-option *ngFor="let s of settingsList" [value]="s.iSettingId">
-                                {{s.nvSettingName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </section>
- <!-- 
-              <section *ngIf="types['iProgramId']==-1" class="example-section">
-                        <label class="example-margin">לתוכנית:</label><br>
-                        <mat-form-field>
-                            <mat-label>בחר תוכנית</mat-label>
-                            <mat-select [(ngModel)]="program" name="program">
-                                <mat-option *ngFor="let p of programsList" [value]="p.iProgramId">
-                                    {{p.nvProgramName}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </section> -->
-
-                    
-
-
-                    <mat-form-field>
-                        <mat-label>תאריך:</mat-label>
-                        <input matInput [matDatepicker]="dp">
-                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-                        <mat-datepicker #dp></mat-datepicker>
-                    </mat-form-field><br>
-
-                    <mat-form-field class="example-form-field">
-                        <mat-label>שעה:</mat-label>
-                        <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
-                    </mat-form-field>
-
             </div>
 
+            <mat-form-field class="example-form-field">
+                <mat-label>שעה:</mat-label>
+                <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
+            </mat-form-field>
 
+        </div>
 
-            <div style="margin: auto;" class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
-            </div>
+        <div style="margin: auto;" class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
         </div>
     </div>
 </div>

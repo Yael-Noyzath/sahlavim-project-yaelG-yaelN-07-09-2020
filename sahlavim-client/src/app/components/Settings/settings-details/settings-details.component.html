@@ -4,6 +4,7 @@
         <form (ngSubmit)="saveSetting()">
             <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
                 <mat-icon>save</mat-icon>
+
             </button>
             <div style="height: 170px;margin: auto;width: 50%;padding-top: 25px;">
                 <h3 class="settingColor">פרטי מסגרת</h3>
@@ -11,7 +12,8 @@
                     <mat-label>שם מסגרת</mat-label>
                     <input matInput type="text" [(ngModel)]="currentSetting.nvSettingName" name="nvSettingName"
                         required />
-           
+                        <mat-hint align="end">{{ currentSetting.nvSettingName| string }}</mat-hint>
+
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-select [(ngModel)]="currentSetting.iSettingType" required placeholder="סוג מסגרת"
@@ -99,7 +101,8 @@
                     <mat-label>פלאפון איש קשר</mat-label>
                     <input matInput type="text" [(ngModel)]="currentSetting.nvContactPersonPhone"
                         name="nvContactPersonPhone" />
-           
+                        <mat-hint align="end" >{{ currentSetting.nvContactPersonPhone| phone }}</mat-hint>
+
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-label>מייל איש קשר</mat-label>

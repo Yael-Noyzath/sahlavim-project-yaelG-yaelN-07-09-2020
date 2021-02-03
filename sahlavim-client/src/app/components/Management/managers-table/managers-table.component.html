@@ -119,18 +119,15 @@
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם פרטי</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvFirstName" name="nvFirstName" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            
+                            <mat-hint align="end" >{{ editUser.nvFirstName| string }}</mat-hint>
+
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם משפחה</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvLastName" name="nvLastName" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            <mat-hint align="end" >{{ editUser.nvLastName| string }}</mat-hint>
+
                         </mat-form-field><br>
                         <mat-form-field>
                             <mat-select [(ngModel)]="editUser.iUserType" required placeholder="הרשאה" name="iUserType">
@@ -138,44 +135,31 @@
                                     {{this.lUserTypeValue.get(s)}}
                                 </mat-option>
                             </mat-select>
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>פלאפון</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvMobile" name="nvMobile" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            <mat-hint align="end" >{{ editUser.nvMobile| phone }}</mat-hint>
+                            
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>מייל</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvMail" name="nvMail" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            <mat-hint align="end" >{{ editUser.nvMail| email }}</mat-hint>
+
 
                         </mat-form-field><br>
 
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם משתמש</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvUserName" name="nvUserName" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>סיסמא</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvPassword" name="nvPassword" />
-                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="value=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
+                            
 
                         </mat-form-field><br>
 

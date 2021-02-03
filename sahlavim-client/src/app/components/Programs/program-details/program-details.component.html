@@ -25,16 +25,13 @@
                     <mat-label>שם תוכנית</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvProgramName" name="nvProgramName"
                         required />
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
+                        <mat-hint align="end" >{{ currentProgram.nvProgramName| string }}</mat-hint>
+
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-label>סעיף תקציבי</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvBudgetItem" name="nvBudgetItem" />
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
+
                 </mat-form-field><br>
                 <div class="col-sm-12" style="margin: auto;">
                     <p style="font-size: smaller;" class="programColor">קטגורית גילאים</p>
@@ -48,17 +45,13 @@
                     <mat-label>מתאריך</mat-label>
                     <input matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
                     <p style="color: red;">יש להזין תאריך עתידי</p>
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
+
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
                     <input matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
                     <p style="color: red;">יש להזין תאריך הגדול מתאריך ההתחלה</p>
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
+
                 </mat-form-field><br>
 
 
@@ -196,9 +189,7 @@
                 <div class="col-sm-12">
                     <input type="checkbox" [(ngModel)]="currentProgram.bTwoActivitiesThatDay"
                         name="bTwoActivitiesThatDay" />
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
+
                     <mat-label>האם לאפשר מספר פעילויות ליום</mat-label>
                 </div><br>
                 <div>

@@ -26,7 +26,7 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { Subject } from 'rxjs';
 import { NgbCalendar, NgbCalendarHebrew, NgbDate, NgbDatepickerI18n, NgbDatepickerI18nHebrew, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -77,13 +77,13 @@ const colors: any = {
       useClass: CustomDateFormatter
     },
 
-      {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
-      {
-        provide: DateAdapter,
-        useClass: MomentDateAdapter,
-        deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-      },
-      {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    { provide: MAT_DATE_LOCALE, useValue: 'he-IL' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
 
     { provide: NgbCalendar, useClass: NgbCalendarHebrew },
     { provide: NgbDatepickerI18n, useClass: NgbDatepickerI18nHebrew }
@@ -96,9 +96,10 @@ export class CalendarComponent implements OnInit {
   model: NgbDateStruct;
   programsList: Program[] = [];
   view: string = 'month';
-  operator: Operator=new Operator();
-  operatorList:Operator[]=[];
+  operator: Operator = new Operator();
+  operatorList: Operator[] = [];
   operatorSettings: Setting[] = [];
+  settingsList: Setting[] = [];
   viewDate: Date = new Date();
 
   locale: string = 'he';
@@ -132,11 +133,11 @@ export class CalendarComponent implements OnInit {
 
   };
 
-    program: number;
-    setting:number;
-    activity:number;
-    date:string;
-    time: Time;
+  program: Program = new Program();
+  settingId: number = 0;
+  activity: number;
+  date: string;
+  time: Time;
 
   // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
   //   this.dayTemplateData = this.dayTemplateData.bind(this);
@@ -156,11 +157,11 @@ export class CalendarComponent implements OnInit {
 
 
   ngOnInit() {
-      this.operatorList=this.mainService.operatorsList;
-      debugger
+    this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
+    this.settingsList = this.mainService.settingsList;
     this.types[this.type] = this.calendarId;
-    
+
     this.mainService.post("SchedulesGet", this.types)
       .then(
         res => {
@@ -187,33 +188,71 @@ export class CalendarComponent implements OnInit {
     if (this.types["iOperatorId"] != -1) {//import the operator by the id
       this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
     }
-    
+
+
+
     this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
       if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
         this.operatorSettings.push(element);
       }
     });
 
-  //מילוי רשימת מפעילים שעובדים במיסגרת מסויימת שנבחרה לתוכנית
 
   }
-  
-  resetArray(){
-    this.eventsArrayByDate=new Array<schedule>();
+  flag: number = 0;
+  ps:Setting;
+  fillOperatorsList() {
+    debugger;
+    alert("fd")
+    //מילוי רשימת מפעילים שעובדים במיסגרת מסויימת שנבחרה לתוכנית
+    if (this.settingId != 0) {
+      //מאתחל את הרשימה הנוכחית
+      this.operatorList = new Array<Operator>();
+      //עובר על הרשימה של כל המפעילים
+      this.mainService.operatorsList.forEach(operator => {
+        //בודק לכל מפעיל אם עובד במסגרת הספציפית שנבחרה
+        this.flag = operator.lSchoolsExcude.findIndex(s => s == this.settingId);
+        if (this.flag == -1) {
+          //מוסיף לרשימה הנוכחית
+          this.operatorList.push(operator);
+        }
+      });
+    }
+    //מילוי רשימת מסגרות שתואמות לתוכנית שנבחרה
+    if (this.program.iProgramId != -1) {
+      //מאתחל את הרשימה הנוכחית
+      this.settingsList = new Array<Setting>();
+      //של המסגרות שמתאימות לתוכנית Idעובר על רשימת ה
+      this.program.lProgramSettings.forEach(p => {
+        //מקבל את המסגרת עצמה בתור אוביקט
+        this.ps=this.mainService.settingsList.find(s => s.iSettingId == p);
+        if (this.ps.iSettingId != -1) {
+          //מוסיף לרשימה הנוכחית
+          this.settingsList.push(this.ps);
+        }
+      }
+      );
+    }
+
+  }
+
+  resetArray() {
+    this.eventsArrayByDate = new Array<schedule>();
   }
 
   eventsArrayByDate: schedule[] = [];
   dayDetails: string;
 
   getShortDate(date: Date) {
-    let hours=date.getHours();
+    let hours = date.getHours();
     debugger
     let mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
   }
   createArrayForDetails(date: Date)//יצירת מערך להצגת פרטי אירועים ליום מסויים שנבחר
-  {debugger
+  {
+    debugger
     this.dayDetails = this.getShortDate(date);
 
     this.eventsFromSer.forEach(element => {
@@ -235,6 +274,6 @@ export class CalendarComponent implements OnInit {
     return this.dayViewHour({ date, locale });
   }
 
-  addEvent(){
+  addEvent() {
   }
 }
