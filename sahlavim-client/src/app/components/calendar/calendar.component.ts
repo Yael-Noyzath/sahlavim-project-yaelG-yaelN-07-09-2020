@@ -170,11 +170,11 @@ objName:string;
     }
     if (this.types["iSettingId"] != -1) {//import the setting by the id
       this.currentSetting = this.mainService.settingsList.find(x => x.iSettingId == this.types["iSettingId"]);
-      this.objName=this.currentSetting.nvSettingName;
+      this.objName='מסגרת '+this.currentSetting.nvSettingName;
     }
     if (this.types["iProgramId"] != -1) {//import the program by the id
       this.currentProgram = this.mainService.programsList.find(x => x.iProgramId ==this.types["iProgramId"]);
-      this.objName=this.currentProgram.nvProgramName;
+      this.objName='תוכנית '+this.currentProgram.nvProgramName;
 
     }
 
