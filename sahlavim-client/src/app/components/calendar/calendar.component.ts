@@ -135,7 +135,7 @@ export class CalendarComponent implements OnInit {
 
   };
 
-  program: Program = new Program();
+  programId: number = 0;
   settingId: number = 0;
   activity: number;
   date: string;
@@ -161,8 +161,8 @@ export class CalendarComponent implements OnInit {
     this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
     this.settingsList = this.mainService.settingsList;
-
-    if (this.type == 'Operator') {//import the operator by the id
+    debugger
+    if (this.type == 'iOperatorId') {//import the operator by the id
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
@@ -178,11 +178,9 @@ export class CalendarComponent implements OnInit {
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
 
     }
-    
     //אם לא מפעיל/מסגרת/תוכנית חדשה
-    //אז לקבל 
-    
-    if (!(this.types['iSettingId'] ==-1&& this.types['iProgramId'] ==-1&& this.types['iOperatorId'] == -1)) {
+    //אז לקבל אירועים
+    if (!(this.types['iSettingId'] == -1 && this.types['iProgramId'] == -1 && this.types['iOperatorId'] == -1)) {
       this.mainService.post("SchedulesGet", this.types)
         .then(
           res => {
@@ -219,18 +217,18 @@ export class CalendarComponent implements OnInit {
 debugger
   }
   flag: number = 0;
-  ps:Setting;
-  fillLists(str:string) {
+  ps: Setting;
+  fillLists(str: string) {
     debugger
     //מופעל רק בתוכניות וצהרונים
     //מילוי רשימת מפעילים שעובדים במיסגרת מסוימת שנבחרה לתוכנית
-    if (this.settingId != 0 && this.types["iOperatorId"] == -1) {
+    if (this.eventToEdit.iSettingId != 0 && this.types["iOperatorId"] == -1) {
       //מאתחל את הרשימה הנוכחית
       this.operatorList = new Array<Operator>();
       //עובר על הרשימה של כל המפעילים
       this.mainService.operatorsList.forEach(operator => {
         //בודק לכל מפעיל אם עובד במסגרת הספציפית שנבחרה
-        this.flag = operator.lSchoolsExcude.findIndex(s => s == this.settingId);
+        this.flag = operator.lSchoolsExcude.findIndex(s => s == this.eventToEdit.iSettingId);
         if (this.flag == -1) {
           //מוסיף לרשימה הנוכחית
           this.operatorList.push(operator);
@@ -239,36 +237,43 @@ debugger
     }
     //מופעל רק במפעילים
     //מילוי רשימת מסגרות שתואמות לתוכנית שנבחרה
-    if (this.eventToEdit.iProgramId != -1 && str=='program' && this.types["iSettingId"] == -1) {
+    if (this.eventToEdit.iProgramId != -1 && str == 'program' && this.types["iSettingId"] == -1) {
+    debugger
+      this.currentProgram = this.mainService.programsList.find(p => p.iProgramId ==this.eventToEdit.iProgramId);
       //מאתחל את הרשימה הנוכחית
       this.settingsList = new Array<Setting>();
       //של המסגרות שמתאימות לתוכנית Idעובר על רשימת ה
-      this.program.lProgramSettings.forEach(p => {
+      this.currentProgram.lProgramSettings.forEach(p => {
         //מקבל את המסגרת עצמה בתור אוביקט
         this.ps = this.mainService.settingsList.find(s => s.iSettingId == p);
-        if (this.ps.iSettingId != -1) {
+        //בודק אם המפעיל הנוכחי פעיל במסגרת הזו
+        var s = this.mainService.operatorForDetails.lSchoolsExcude.findIndex(s => s == this.ps.iSettingId);
+        if (this.ps.iSettingId != -1 && s==-1) {
           //מוסיף לרשימה הנוכחית
           this.settingsList.push(this.ps);
         }
       }
       );
     }
-
+    if(str=='operator')
+    {
+      this.operator=this.mainService.operatorsList.find(p=>p.iOperatorId==this.eventToEdit.iOperatorId);
+    }
   }
-  dtStartTime:string="";
-  editEvent(e:schedule){
+  dtStartTime: string = "";
+  editEvent(e: schedule) {
     debugger
-    this.eventToEdit=e;
-    this.dtStartTime=this.eventToEdit.dtStartTime.substr(16,5);
+    this.eventToEdit = e;
+    this.dtStartTime = this.eventToEdit.dtStartTime.substr(16, 5);
     alert(this.eventToEdit.iActivityId);
   }
-  
+
   // resetArray() {
   //   this.eventsArrayByDate = new Array<schedule>();
   // }
 
   eventsArrayByDate: schedule[] = [];
-  eventToEdit:schedule=new schedule();
+  eventToEdit: schedule = new schedule();
   dayDetails: string;
 
   getShortDate(date: Date) {
@@ -304,5 +309,9 @@ debugger
   }
 
   addEvent() {
+  }
+  resetEventToEdit()
+  {
+    this.eventToEdit=new schedule();
   }
 }

@@ -1,16 +1,16 @@
-
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
     <div class="addMsg">
-        <button  mat-stroked-button  data-toggle="modal" data-target="#modalCart"
-            (click)="emailList()">שליחת הודעה</button>
-           <button (click)="addOperator()" mat-stroked-button >הוספת מפעיל</button>
-        </div>
+        <button mat-stroked-button data-toggle="modal" data-target="#modalCart" (click)="emailList()">שליחת
+            הודעה</button>
+        <button (click)="addOperator()" mat-stroked-button>הוספת מפעיל</button>
+        <button mat-button class="managementColor" (click)="exporter.exportTable('xls')">exportTable</button>
+
+    </div>
 
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
-
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
-
+        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+            mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="select">
                 <th>בחירה</th>
                 <th class="header" style="width:7%;" mat-header-cell *matHeaderCellDef>
@@ -155,7 +155,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-            
+
         </table>
 
         <mat-paginator [pageSizeOptions]="[9]"></mat-paginator>
