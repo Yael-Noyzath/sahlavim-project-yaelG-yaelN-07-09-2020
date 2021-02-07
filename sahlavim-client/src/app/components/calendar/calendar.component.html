@@ -8,7 +8,7 @@
         <div class="cal-cell-top">
             <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
             <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
-            <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | hebrewDate }}</span>
+            <span class="cal-day-number">{{ day.date | hebrewDate }}</span>
         </div>
         <!-- <small *ngIf="day.events.length" style="margin:5px;">ישנם {{ day.events.length }} אירועים ביום זה</small> -->
         <a (click)="createArrayForDetails(day.date)" *ngIf="day.badgeTotal > 0"
@@ -42,18 +42,18 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של {{objName}} <br> {{dayDetails}} </h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel"> האירועים של {{objName}} <br>
+                    {{dayDetails}} </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" >×</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
 
             <!--Body-->
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <dl *ngFor="let event of eventsArrayByDate">
-                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> <a
-                        style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</a>
-
+                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> 
+                    <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEvent" style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</button>
                     <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
 
                     <!-- public iOperatorId: number = -1,
@@ -106,8 +106,8 @@
                     <label class="example-margin">לתוכנית:</label><br>
                     <mat-form-field>
                         <mat-label>בחר תוכנית</mat-label>
-                        <mat-select [(ngModel)]="program" name="program" (change)="fillOperatorsList()">
-                            <mat-option *ngFor="let p of programsList" [value]="p">
+                        <mat-select [(ngModel)]="eventToEdit.iProgramId" name="programId" (ngModelChange)="fillLists('program')">
+                            <mat-option *ngFor="let p of programsList" [value]="p.iProgramId">
                                 {{p.nvProgramName}}
                             </mat-option>
                         </mat-select>
@@ -118,7 +118,7 @@
                     <label class="example-margin">למסגרת:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מיסגרת</mat-label>
-                        <mat-select name="setting" [(ngModel)]="settingId" (change)="fillOperatorsList()">
+                        <mat-select name="settingId" [(ngModel)]="eventToEdit.iSettingId" (ngModelChange)="fillLists('setting')">
                             <mat-option *ngFor="let s of settingsList" [value]="s.iSettingId">
                                 {{s.nvSettingName}}
                             </mat-option>
@@ -130,8 +130,8 @@
                     <label class="example-margin">למפעיל:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מפעיל</mat-label>
-                        <mat-select [(ngModel)]="operator" name="operator">
-                            <mat-option *ngFor="let o of operatorList" [value]="o">
+                        <mat-select [(ngModel)]="eventToEdit.iOperatorId" name="operatorId">
+                            <mat-option *ngFor="let o of operatorList" [value]="o.iOperatorId">
                                 {{o.nvOperatorName}}
                             </mat-option>
                         </mat-select>
@@ -142,7 +142,7 @@
                     <label class="example-margin">פעילות</label><br>
                     <mat-form-field>
                         <mat-label>בחר פעילות</mat-label>
-                        <mat-select [(ngModel)]="activity" name="activity">
+                        <mat-select [(ngModel)]="eventToEdit.iActivityId" name="activityId">
                             <mat-option *ngFor="let a of operator.lActivity" [value]="a.iActivityId">
                                 {{a.nvActivityName}}
                             </mat-option>
@@ -152,19 +152,19 @@
 
                 <mat-form-field class="example-form-field col-sm-12">
                     <mat-label>שעה:</mat-label>
-                    <input [(ngModel)]="time" matInput type="time" placeholder="00:00">
+                    <input [(ngModel)]="dtStartTime" matInput type="time" placeholder="00:00">
                 </mat-form-field>
-                
+
             </div>
 
 
 
-      <div style="margin: auto;" class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
-        </div>
+            <div style="margin: auto;" class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEvent()">שמור</button>
+            </div>
 
         </div>
 
-        
+
     </div>
 </div>

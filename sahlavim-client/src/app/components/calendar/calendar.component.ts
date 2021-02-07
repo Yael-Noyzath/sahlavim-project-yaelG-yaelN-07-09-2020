@@ -216,11 +216,11 @@ objName:string;
   }
   flag: number = 0;
   ps:Setting;
-  fillOperatorsList() {
-    debugger;
-    alert("fd")
-    //מילוי רשימת מפעילים שעובדים במיסגרת מסויימת שנבחרה לתוכנית
-    if (this.settingId != 0) {
+  fillLists(str:string) {
+    debugger
+    //מופעל רק בתוכניות וצהרונים
+    //מילוי רשימת מפעילים שעובדים במיסגרת מסוימת שנבחרה לתוכנית
+    if (this.settingId != 0 && this.types["iOperatorId"] == -1) {
       //מאתחל את הרשימה הנוכחית
       this.operatorList = new Array<Operator>();
       //עובר על הרשימה של כל המפעילים
@@ -233,8 +233,9 @@ objName:string;
         }
       });
     }
+    //מופעל רק במפעילים
     //מילוי רשימת מסגרות שתואמות לתוכנית שנבחרה
-    if (this.program.iProgramId != -1) {
+    if (this.eventToEdit.iProgramId != -1 && str=='program' && this.types["iSettingId"] == -1) {
       //מאתחל את הרשימה הנוכחית
       this.settingsList = new Array<Setting>();
       //של המסגרות שמתאימות לתוכנית Idעובר על רשימת ה
@@ -250,12 +251,20 @@ objName:string;
     }
 
   }
+  dtStartTime:string="";
+  editEvent(e:schedule){
+    debugger
+    this.eventToEdit=e;
+    this.dtStartTime=this.eventToEdit.dtStartTime.substr(16,5);
+    alert(this.eventToEdit.iActivityId);
+  }
   
   // resetArray() {
   //   this.eventsArrayByDate = new Array<schedule>();
   // }
 
   eventsArrayByDate: schedule[] = [];
+  eventToEdit:schedule=new schedule();
   dayDetails: string;
 
   getShortDate(date: Date) {
