@@ -9,6 +9,10 @@
             <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
             <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
             <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | hebrewDate }}</span>
+            <!-- <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ watch(day.date) }}</span> -->
+            <!-- <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | parasha }}</span> -->
+            <!-- <span style="float: left; padding-left: 10px;" class="cal-day-number">{{ day.date | hebrewDate }}</span> -->
+
         </div>
         <!-- <small *ngIf="day.events.length" style="margin:5px;">ישנם {{ day.events.length }} אירועים ביום זה</small> -->
         <a (click)="createArrayForDetails(day.date)" *ngIf="day.badgeTotal > 0"
@@ -51,8 +55,10 @@
             <!--Body-->
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <dl *ngFor="let event of eventsArrayByDate">
-                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> <a
-                        style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</a>
+                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> 
+                    <dt> </dt>
+                    <a style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</a>
+
 
                     <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
 
