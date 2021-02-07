@@ -1,15 +1,15 @@
 <div class="body" data-mdb-perfect-scrollbar='true' dir="rtl">
 
 
-    <div class="container-fluid">
+    <div class="container-fluid col-lg-12">
         <div class="row">
-            <div class="img col-lg-3">
+            <div class="img col-sm-3">
                 <a href="/">
-                    <img class="img-responsive" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
+                    <img class="img-responsive" src="assets/Images/logo-JPG.jpg">
                 </a>
             </div>
 
-            <div style="display: flex;justify-content: space-between;" class="middle col-lg-6">
+            <div style="display: flex;justify-content: space-between;" class="middle col-lg-6 col-sm-8">
 
                 <a style="border-bottom: 3px solid rgb(192, 31, 31);" (click)="wel=false" routerLink="operators/operator-table" routerLinkActive="activeLink"
                     value="operator">מפעילים</a>
@@ -27,7 +27,7 @@
                     value="management">ניהול</a>
             </div>
 
-            <div style="text-align: center;" class="col-3">
+            <div style="text-align: center;" class="col-sm-1 col-lg-3">
                 <p>שלום {{currentUser.nvUserName}}</p>
                 <a style="text-align: center;" href="/">התנתק</a>
             </div>
