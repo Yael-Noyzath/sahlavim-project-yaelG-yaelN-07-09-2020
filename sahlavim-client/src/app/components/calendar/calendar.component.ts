@@ -165,29 +165,30 @@ export class CalendarComponent implements OnInit {
     if (this.type == 'Operator') {//import the operator by the id
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
-      this.types[0] = this.mainService.operatorForDetails.iOperatorId;
+      this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
-      this.types[1] = this.mainService.settingForDetails.iSettingId;
+      this.types['iSettingId'] = this.mainService.settingForDetails.iSettingId;
       this.objName = 'מסגרת ' + this.currentSetting.nvSettingName;
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
-      this.types[2] = this.mainService.programForDetails.iProgramId;
+      this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
 
     }
-    debugger
+    
     //אם לא מפעיל/מסגרת/תוכנית חדשה
-    //אז לקבל אירועים
+    //אז לקבל 
+    
     if (!(this.types['iSettingId'] ==-1&& this.types['iProgramId'] ==-1&& this.types['iOperatorId'] == -1)) {
       this.mainService.post("SchedulesGet", this.types)
         .then(
           res => {
 
             this.eventsFromSer = res;
-
+            
             this.eventsFromSer.forEach(element => {
               element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
               this.events.push({
@@ -205,12 +206,6 @@ export class CalendarComponent implements OnInit {
         )
     }
 
-
-
-
-
-
-
     this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
       if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
         this.operatorSettings.push(element);
@@ -220,7 +215,9 @@ export class CalendarComponent implements OnInit {
 
   }
 
-
+  watch(date:any){
+debugger
+  }
   flag: number = 0;
   ps:Setting;
   fillLists(str:string) {

@@ -17,12 +17,7 @@ export class HebrewDatePipe implements PipeTransform {
     {
      console.log(day.holidays(true)[0].getDesc('h'))
     }
-    if(day.getDay()==6)
-    {
-      console.log(day.getSedra('h')[0])
-      return this.Hebcal.gematriya(day.getDate())+' '+day.getSedra('h')[0];
-
-    }
+  
     return this.Hebcal.gematriya(day.getDate());
     }
 
