@@ -5,4 +5,8 @@ li{
 mat-form-field{
     direction: rtl;
 }
-
+.navbar-nav li a:hover,
+ .navbar-nav li a:focus
+ {
+    color: rgb(192, 31, 31) ;
+ }

@@ -24,7 +24,8 @@
             <!-- Last Name Column -->
             <ng-container matColumnDef="nvLastName">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> שם משפחה
-                   <br> <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="LastNameFilter">
                     </mat-form-field>
@@ -35,7 +36,8 @@
             <!-- First Name Column -->
             <ng-container matColumnDef="nvFirstName">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> שם פרטי
-                   <br> <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="FirstNameFilter">
                     </mat-form-field>
@@ -58,7 +60,8 @@
             <!-- User Name Column -->
             <ng-container matColumnDef="nvUserName">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>שם משתמש
-                   <br> <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="UserNameFilter">
                     </mat-form-field>
@@ -69,7 +72,8 @@
             <!-- Mobile Column -->
             <ng-container matColumnDef="nvMobile">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>טלפון נייד
-                   <br> <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="MobileFilter">
                     </mat-form-field>
@@ -80,7 +84,8 @@
             <!-- Mail  Column -->
             <ng-container matColumnDef="nvMail">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> מייל
-                   <br> <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="MailFilter">
                     </mat-form-field>
@@ -119,14 +124,14 @@
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם פרטי</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvFirstName" name="nvFirstName" />
-                            
-                            <mat-hint align="end" >{{ editUser.nvFirstName| string }}</mat-hint>
+
+                            <mat-hint align="end">{{ editUser.nvFirstName| string }}</mat-hint>
 
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם משפחה</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvLastName" name="nvLastName" />
-                            <mat-hint align="end" >{{ editUser.nvLastName| string }}</mat-hint>
+                            <mat-hint align="end">{{ editUser.nvLastName| string }}</mat-hint>
 
                         </mat-form-field><br>
                         <mat-form-field>
@@ -135,18 +140,18 @@
                                     {{this.lUserTypeValue.get(s)}}
                                 </mat-option>
                             </mat-select>
-                            
+
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>פלאפון</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvMobile" name="nvMobile" />
-                            <mat-hint align="end" >{{ editUser.nvMobile| phone }}</mat-hint>
-                            
+                            <mat-hint align="end">{{ editUser.nvMobile| phone }}</mat-hint>
+
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>מייל</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvMail" name="nvMail" />
-                            <mat-hint align="end" >{{ editUser.nvMail| email }}</mat-hint>
+                            <mat-hint align="end">{{ editUser.nvMail| email }}</mat-hint>
 
 
                         </mat-form-field><br>
@@ -154,18 +159,17 @@
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם משתמש</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvUserName" name="nvUserName" />
-                            
+
                         </mat-form-field><br>
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>סיסמא</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvPassword" name="nvPassword" />
-                            
+
 
                         </mat-form-field><br>
-
-                        <button mat-icon-button class="managementColor"
+                        <button mat-icon-button data-dismiss="modal" aria-label="Close" class="close managementColor"
                             aria-label="Example icon button with a home icon">
-                            <mat-icon>save</mat-icon>
+                            <mat-icon aria-hidden="true">save</mat-icon>
                         </button>
                     </form>
                 </mat-card-content>
