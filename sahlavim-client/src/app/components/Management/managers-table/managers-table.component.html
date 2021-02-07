@@ -2,13 +2,15 @@
     <div class="addMsg">
         <button mat-stroked-button class="managementColor" (click)="TheEditUser(-1)" data-toggle="modal"
             data-target="#mo">הוספת משתמש</button>
+        <button mat-button class="managementColor" (click)="exporter.exportTable('xls')">exportTable</button>
+
     </div>
 
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
-
+        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+            mat-table [dataSource]="dataSource" matSort>
             <!-- Details Column -->
             <ng-container matColumnDef="details">
                 <th style="width:5%;" mat-header-cell *matHeaderCellDef> עריכה </th>

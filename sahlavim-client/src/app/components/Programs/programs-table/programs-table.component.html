@@ -1,12 +1,14 @@
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
     <div class="addMsg">
         <button mat-stroked-button class="programColor" (click)="addProgram()">הוספת תוכנית</button>
+        <button mat-button class="programColor" (click)="exporter.exportTable('xls')">exportTable</button>
     </div>
 
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
+        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+            mat-table [dataSource]="dataSource" matSort>
 
             <!-- ProgramTypeValue Column -->
             <ng-container matColumnDef="iProgramType">
@@ -21,7 +23,8 @@
             <!-- ProgramName Column -->
             <ng-container matColumnDef="nvProgramName">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>שם תוכנית
-                    <br><mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="ProgramNameFilter">
                     </mat-form-field>
@@ -33,7 +36,8 @@
             <!-- FromDateFormat Column -->
             <ng-container matColumnDef="dFromDateFormat">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>מתאריך
-                    <br><mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="FromDateFormatFilter">
                     </mat-form-field>
@@ -45,7 +49,8 @@
             <!-- ToDateFormat Column -->
             <ng-container matColumnDef="dToDateFormat">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>עד תאריך
-                    <br><mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="ToDateFormatFilter">
                     </mat-form-field>
@@ -77,7 +82,8 @@
             <!-- BudgetItem  Column -->
             <ng-container matColumnDef="nvBudgetItem">
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> סעיף תקציבי
-                    <br><mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <br>
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <mat-label> חפש</mat-label>
                         <input matInput [formControl]="BudgetItemFilter">
                     </mat-form-field>
@@ -101,7 +107,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-           
+
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

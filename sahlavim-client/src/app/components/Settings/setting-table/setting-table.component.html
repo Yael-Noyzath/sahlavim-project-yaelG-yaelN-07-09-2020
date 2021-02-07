@@ -3,11 +3,13 @@
         <button mat-stroked-button class="settingColor" data-toggle="modal" data-target="#modalCart"
             (click)="emailList()">שליחת הודעה</button>
         <button mat-stroked-button class="settingColor" (click)="addSetting()"> הוספת מסגרת</button>
-        <button mat-raised-button class="settingBtn btn" (click)="ExportTOExcel()">ייצא לאקסל</button>
 
     </div>
+
     <div *ngIf="openDetails==false" style="width: 90%;margin: auto;" class="overflow-auto">
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" mat-table [dataSource]="dataSource" matSort>
+        <button mat-button style="direction: ltr;" class="settingBtn" (click)="exporter.exportTable('xls')">יצוא לאקסל</button>
+        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+            mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="select">
                 <th>בחירה</th>
                 <th class="header" style="width:2%;" mat-header-cell *matHeaderCellDef>
@@ -174,7 +176,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-          
+
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
