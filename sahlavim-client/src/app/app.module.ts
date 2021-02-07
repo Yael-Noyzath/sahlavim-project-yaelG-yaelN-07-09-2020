@@ -96,6 +96,7 @@ import { IdNumberPipe } from './Pipes/Validation/id-number.pipe';
 import { RequiredPipe } from './Pipes/Validation/required.pipe';
 import { EmailPipe } from './Pipes/Validation/email.pipe';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { ParashaPipe } from './Pipes/parasha.pipe';
 
 @NgModule({
   declarations: [
@@ -140,6 +141,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     IdNumberPipe,
     RequiredPipe,
     EmailPipe,
+    ParashaPipe,
   ],
   imports: [
 

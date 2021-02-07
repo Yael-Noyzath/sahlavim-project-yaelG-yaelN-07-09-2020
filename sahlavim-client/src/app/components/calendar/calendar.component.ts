@@ -186,7 +186,7 @@ export class CalendarComponent implements OnInit {
           res => {
 
             this.eventsFromSer = res;
-
+            
             this.eventsFromSer.forEach(element => {
               element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
               this.events.push({
@@ -204,12 +204,6 @@ export class CalendarComponent implements OnInit {
         )
     }
 
-
-
-
-
-
-
     this.mainService.settingsList.forEach(element => {//fill the settings list where the op active.
       if (!this.operator.lSchoolsExcude.find(x => x == element.iSettingId)) {
         this.operatorSettings.push(element);
@@ -219,7 +213,9 @@ export class CalendarComponent implements OnInit {
 
   }
 
-
+  watch(date:any){
+debugger
+  }
   flag: number = 0;
   ps: Setting;
   fillLists(str: string) {
