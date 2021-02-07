@@ -95,7 +95,7 @@
             <div class="modal-header" style="text-align:center;">
                 <h4 style="width: 100%;" class="modal-title" id="myModalLabel">הוספת אירוע חדש</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true" (click)="resetEventToEdit()">×</span>
                 </button>
             </div>
 
@@ -130,7 +130,7 @@
                     <label class="example-margin">למפעיל:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מפעיל</mat-label>
-                        <mat-select [(ngModel)]="eventToEdit.iOperatorId" name="operatorId">
+                        <mat-select [(ngModel)]="eventToEdit.iOperatorId" name="operatorId" (ngModelChange)="fillLists('operator')">
                             <mat-option *ngFor="let o of operatorList" [value]="o.iOperatorId">
                                 {{o.nvOperatorName}}
                             </mat-option>
