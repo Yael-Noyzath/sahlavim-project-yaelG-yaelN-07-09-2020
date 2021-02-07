@@ -115,16 +115,16 @@ export class CalendarComponent implements OnInit {
   events: CalendarEvent[] = [];
 
   eventsFromSer: schedule[] = [];
-  currentSetting: Setting=new Setting();
-currentProgram:Program=new Program();
+  currentSetting: Setting = new Setting();
+  currentProgram: Program = new Program();
+  objName: string;
 
   setView(view: CalendarView) {
     this.view = view;
   }
 
   CalendarView = CalendarView;
-  @Input() type: number;
-  @Input() calendarId: number;
+  @Input() type: string;
 
   types = {
     iOperatorId: -1,
@@ -157,52 +157,57 @@ currentProgram:Program=new Program();
   //   this.model = this.calendar.getToday();
   // }
 
-objName:string;
   ngOnInit() {
     this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
     this.settingsList = this.mainService.settingsList;
-    this.types[this.type] = this.calendarId;
 
-    if (this.types["iOperatorId"] != -1) {//import the operator by the id
-      this.operator = this.mainService.operatorsList.find(x => x.iOperatorId == this.types["iOperatorId"]);
-      this.objName=this.operator.nvOperatorName;
+    if (this.type == 'Operator') {//import the operator by the id
+      this.operator = this.mainService.operatorForDetails;
+      this.objName = this.operator.nvOperatorName;
+      this.types[0] = this.mainService.operatorForDetails.iOperatorId;
     }
-    if (this.types["iSettingId"] != -1) {//import the setting by the id
-      this.currentSetting = this.mainService.settingsList.find(x => x.iSettingId == this.types["iSettingId"]);
-      this.objName='מסגרת '+this.currentSetting.nvSettingName;
+    if (this.type == "iSettingId") {//import the setting by the id
+      this.currentSetting = this.mainService.settingForDetails;
+      this.types[1] = this.mainService.settingForDetails.iSettingId;
+      this.objName = 'מסגרת ' + this.currentSetting.nvSettingName;
     }
-    if (this.types["iProgramId"] != -1) {//import the program by the id
-      this.currentProgram = this.mainService.programsList.find(x => x.iProgramId ==this.types["iProgramId"]);
-      this.objName='תוכנית '+this.currentProgram.nvProgramName;
+    if (this.type == "iProgramId") {//import the program by the id
+      this.currentProgram = this.mainService.programForDetails;
+      this.types[2] = this.mainService.programForDetails.iProgramId;
+      this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
 
     }
+    debugger
+    //אם לא מפעיל/מסגרת/תוכנית חדשה
+    //אז לקבל אירועים
+    if (!(this.types['iSettingId'] ==-1&& this.types['iProgramId'] ==-1&& this.types['iOperatorId'] == -1)) {
+      this.mainService.post("SchedulesGet", this.types)
+        .then(
+          res => {
 
+            this.eventsFromSer = res;
 
-    this.mainService.post("SchedulesGet", this.types)
-      .then(
-        res => {
-
-          this.eventsFromSer = res;
-
-          this.eventsFromSer.forEach(element => {
-            element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
-            this.events.push({
-              title: element.nvProgramValue,
-              start: new Date(element.dtStartTime),
+            this.eventsFromSer.forEach(element => {
+              element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
+              this.events.push({
+                title: element.nvProgramValue,
+                start: new Date(element.dtStartTime),
+              });
             });
-          });
 
-          console.log(this.events);
+            console.log(this.events);
 
-        },
-        err => {
-          alert("err SchedulesGet")
-        }
-      )
+          },
+          err => {
+            alert("err SchedulesGet")
+          }
+        )
+    }
 
 
-    
+
+
 
 
 
@@ -214,6 +219,8 @@ objName:string;
 
 
   }
+
+
   flag: number = 0;
   ps:Setting;
   fillLists(str:string) {
@@ -241,7 +248,7 @@ objName:string;
       //של המסגרות שמתאימות לתוכנית Idעובר על רשימת ה
       this.program.lProgramSettings.forEach(p => {
         //מקבל את המסגרת עצמה בתור אוביקט
-        this.ps=this.mainService.settingsList.find(s => s.iSettingId == p);
+        this.ps = this.mainService.settingsList.find(s => s.iSettingId == p);
         if (this.ps.iSettingId != -1) {
           //מוסיף לרשימה הנוכחית
           this.settingsList.push(this.ps);
@@ -278,7 +285,7 @@ objName:string;
   {
     debugger
     this.dayDetails = this.getShortDate(date);
-      this.eventsArrayByDate=[];
+    this.eventsArrayByDate = [];
 
     this.eventsFromSer.forEach(element => {
 
