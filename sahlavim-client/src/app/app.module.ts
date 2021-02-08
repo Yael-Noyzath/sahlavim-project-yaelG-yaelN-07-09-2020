@@ -97,6 +97,7 @@ import { RequiredPipe } from './Pipes/Validation/required.pipe';
 import { EmailPipe } from './Pipes/Validation/email.pipe';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { ParashaPipe } from './Pipes/parasha.pipe';
+import { HolidaysPipe } from './Pipes/holidays.pipe';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { ParashaPipe } from './Pipes/parasha.pipe';
     RequiredPipe,
     EmailPipe,
     ParashaPipe,
+    HolidaysPipe,
   ],
   imports: [
 
