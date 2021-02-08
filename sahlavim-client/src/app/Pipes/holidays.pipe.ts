@@ -12,17 +12,15 @@ export class HolidaysPipe implements PipeTransform {
     var day = new this.Hebcal.HDate(date);
 
     if (day.holidays(true).length > 1) {
-      for (let i = 0; i < day.holidays(true).length; i++) {
-        console.log(day.holidays(true)[i].getDesc('h')) //ההדפסה מאיטה את ההרצה
+      {
+        if (day.holidays(true)[0].getDesc('h').includes('שבת') == false) {
+          return day.holidays(true)[0].getDesc('h');
+
+        }
+
+
       }
-      if(day.holidays(true)[0].getDesc('h')!='ערב שבת')
-    {
-            return day.holidays(true)[0].getDesc('h');
-
     }
-      debugger
 
-    }
   }
-
 }
