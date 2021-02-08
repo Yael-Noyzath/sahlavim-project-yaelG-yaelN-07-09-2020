@@ -34,7 +34,7 @@ export class MainServiceService {
     this.getAfternoon();
     this.getUsers();
 
-    debugger
+    
   }
 
   gItems: any = [];
