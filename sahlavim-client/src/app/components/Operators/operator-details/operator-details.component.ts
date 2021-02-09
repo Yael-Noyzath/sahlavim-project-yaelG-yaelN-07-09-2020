@@ -140,7 +140,7 @@ list.forEach(function(Item) {
     this.bSettingslsExclude == false ? this.operator.lSchoolsExcude = [] : this.schoolsExcludeList.map((item) => item.iSettingId);
     this.blNeighborhoods == false ? this.operator.lNeighborhoods = [] : this.operatorNeighborhoods.map((item) => item.Key);
 debugger
-    this.mainService.post("UpdateOperator", { oOperator: this.operator })
+    this.mainService.post("AddOperator", { oOperator: this.operator })
       .then(
         res => {
           let o = res;
