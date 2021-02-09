@@ -34,8 +34,7 @@
                 <mat-form-field class="example-form-field">
                     <mat-label>טלפון</mat-label>
                     <input matInput type="text" [(ngModel)]="currentSetting.nvPhone" name="nvPhone" />
-                    <mat-hint align="end" #matHint>{{currentSetting.nvPhone|required}} , {{ currentSetting.nvPhone|
-                        phone}}, matHint.value</mat-hint>
+                    <mat-hint align="end" #matHint>{{currentSetting.nvPhone|phone}} </mat-hint>
 
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
