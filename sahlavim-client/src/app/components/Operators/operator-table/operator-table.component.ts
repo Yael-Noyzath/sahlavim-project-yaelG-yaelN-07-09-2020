@@ -59,7 +59,7 @@ this.operatorTypes=this.mainService.SysTableList[2];
     this.operators = this.mainService.operatorsList
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
-    debugger
+    
 
   }
 
@@ -200,7 +200,7 @@ sendEmail()
   selection = new SelectionModel<Operator>(true, []);
 
   isAllSelected() {
-    debugger
+    
     this.selection.selected
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -209,7 +209,7 @@ sendEmail()
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    debugger
+    
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));

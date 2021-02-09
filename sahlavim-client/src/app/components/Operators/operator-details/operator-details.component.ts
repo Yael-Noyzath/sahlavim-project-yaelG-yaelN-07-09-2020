@@ -115,22 +115,24 @@ h:boolean=false;
 
   checkFormValid() {
     //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
 
-    document.querySelectorAll<HTMLInputElement>("mat-hint").forEach(element => {
-      if(element.innerHTML != '')
-      {
-        alert('נא שים לב לתוכן תקין');
-        this.h = true;
-      }
-    });   
+list.forEach(function(Item) {
+  if(Item.innerHTML != '')
+  {
+    alert('נא שים לב לתוכן תקין');
+    this.h = true;
+    return false
+  }
+});
+     
     debugger
 
-    if (this.h == true) {
+    if (this.h == false) {
       this.save()
     }
   }
 
-  
   save() {
 
     this.operator.lNeighborhoods = this.operator.lSchools = this.operator.lSchoolsExcude = [];
