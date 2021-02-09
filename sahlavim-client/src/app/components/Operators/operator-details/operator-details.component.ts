@@ -32,8 +32,8 @@ export class OperatorDetailsComponent implements OnInit {
   settingsList: Setting[] = [];//רשימת המיסגרות
   newOp: boolean = true;
 
-mat:ElementRef;
-isValid:boolean=false;
+  mat: ElementRef;
+  isValid: boolean = false;
 
   constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
   }
@@ -111,32 +111,38 @@ isValid:boolean=false;
 
   }
 
-checkFormValid(){
+h:boolean=false;
 
-  //check if no mat-hint with context 
-    if(document.querySelector<HTMLInputElement>("mat-hint").innerHTML!='')
-    {
-alert('נא שים לב לתוכן תקין');
-debugger
-    }
-    else
-    {
-      this.save();
-    }
-}
+  checkFormValid() {
+    //check if no mat-hint with context 
 
+    document.querySelectorAll<HTMLInputElement>("mat-hint").forEach(element => {
+      if(element.innerHTML != '')
+      {
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+      }
+    });   
+    debugger
+
+    if (this.h == true) {
+      this.save()
+    }
+  }
+
+  
   save() {
 
     this.operator.lNeighborhoods = this.operator.lSchools = this.operator.lSchoolsExcude = [];
     this.operator.bTalan == false ? this.operator.lSchools = [] : this.lschool.map((item) => item.iSettingId);
     this.bSettingslsExclude == false ? this.operator.lSchoolsExcude = [] : this.schoolsExcludeList.map((item) => item.iSettingId);
     this.blNeighborhoods == false ? this.operator.lNeighborhoods = [] : this.operatorNeighborhoods.map((item) => item.Key);
-
+debugger
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
           let o = res;
-          
+
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
           this.mainService.serviceNavigate("/header-menu/operators/operator-table");
