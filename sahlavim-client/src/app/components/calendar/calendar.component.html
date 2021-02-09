@@ -2,7 +2,7 @@
     <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
     </mwl-demo-utils-calendar-header>
 
-    <button class="btnOp" data-toggle="modal" data-target="#addEvent" mat-stroked-button>הוספת פעילות</button>
+    <button class="btnOp" data-toggle="modal"  data-target="#addEditEvent" (click)="resetEventToEdit()" mat-stroked-button>הוספת פעילות</button>
 
     <ng-template #customCellTemplate let-day="day" let-locale="locale">
         <div class="cal-cell-top">
@@ -61,7 +61,7 @@
                     <p>טלפון איש קשר: {{event.nvPhone}}</p>
                     <p>פעילות: {{event.nvActivityName}}</p> 
 
-                    <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEvent" 
+                    <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEditEvent" 
                     style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</button>
 
                     <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
@@ -97,7 +97,7 @@
 </div>
 
 
-<div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="addEditEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -105,7 +105,7 @@
             <div class="modal-header" style="text-align:center;">
                 <h4 style="width: 100%;" class="modal-title" id="myModalLabel">הוספת אירוע חדש</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" (click)="resetEventToEdit()">×</span>
+                    <span aria-hidden="true" >×</span>
                 </button>
             </div>
 
