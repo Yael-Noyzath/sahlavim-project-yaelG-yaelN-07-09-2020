@@ -1,7 +1,7 @@
 <div class="form-group row">
 
     <form operator="ngform" (ngSubmit)="checkFormValid()">
-        <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
+        <button type="submit" class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
             <mat-icon>save</mat-icon>
         </button>
         <h3 class="newObj" *ngIf="newOp">מפעיל חדש</h3>
@@ -35,7 +35,7 @@
                     </mat-radio-button>
 
                 </mat-radio-group> <br>
-                <mat-hint align="end">{{operator.iOperatorType|required }}</mat-hint>
+                <mat-hint style="font-size: 13px;color: red;"  align="end">{{operator.iOperatorType|required }}</mat-hint>
 
         </section>
 
@@ -98,7 +98,7 @@
                 </mat-radio-button>
             </mat-radio-group>
         </section>
-        <mat-hint align="end">{{operator.iOperatorPaymentType|required }}</mat-hint>
+        <mat-hint style="font-size: 13px;color: red;"  align="end">{{operator.iOperatorPaymentType|required }}</mat-hint>
 
         <br>
 
@@ -205,12 +205,10 @@
                     name="ActiveSummerCamp" class="example-margin">עובד בקייטנת קיץ</mat-checkbox>
             </section>
             <a data-toggle="modal" data-target="#modalCart">עריכת לו"ז קייטנת קיץ</a>
-
-
         </div>
-
     </form>
 </div>
+
 
 
 <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
