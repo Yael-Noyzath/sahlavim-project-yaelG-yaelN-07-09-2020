@@ -56,10 +56,14 @@
             <!--Body-->
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <dl *ngFor="let event of eventsArrayByDate">
-                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt> 
+                    <dt> {{event.dtStartTime| date:'shortTime'}} | מסגרת: {{event.nvSettingName}} </dt>
+                    <p>כתובת: {{event.nvAddress}}</p> 
+                    <p>טלפון איש קשר: {{event.nvPhone}}</p>
+                    <p>פעילות: {{event.nvActivityName}}</p> 
 
-                    <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEvent" style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</button>
-                   
+                    <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEvent" 
+                    style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</button>
+
                     <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
 
                     <!-- public iOperatorId: number = -1,
@@ -112,7 +116,8 @@
                     <label class="example-margin">לתוכנית:</label><br>
                     <mat-form-field>
                         <mat-label>בחר תוכנית</mat-label>
-                        <mat-select [(ngModel)]="eventToEdit.iProgramId" name="programId" (ngModelChange)="fillLists('program')">
+                        <mat-select [(ngModel)]="eventToEdit.iProgramId" name="programId"
+                            (ngModelChange)="fillLists('program')">
                             <mat-option *ngFor="let p of programsList" [value]="p.iProgramId">
                                 {{p.nvProgramName}}
                             </mat-option>
@@ -124,7 +129,8 @@
                     <label class="example-margin">למסגרת:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מיסגרת</mat-label>
-                        <mat-select name="settingId" [(ngModel)]="eventToEdit.iSettingId" (ngModelChange)="fillLists('setting')">
+                        <mat-select name="settingId" [(ngModel)]="eventToEdit.iSettingId"
+                            (ngModelChange)="fillLists('setting')">
                             <mat-option *ngFor="let s of settingsList" [value]="s.iSettingId">
                                 {{s.nvSettingName}}
                             </mat-option>
@@ -136,7 +142,8 @@
                     <label class="example-margin">למפעיל:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מפעיל</mat-label>
-                        <mat-select [(ngModel)]="eventToEdit.iOperatorId" name="operatorId" (ngModelChange)="fillLists('operator')">
+                        <mat-select [(ngModel)]="eventToEdit.iOperatorId" name="operatorId"
+                            (ngModelChange)="fillLists('operator')">
                             <mat-option *ngFor="let o of operatorList" [value]="o.iOperatorId">
                                 {{o.nvOperatorName}}
                             </mat-option>
