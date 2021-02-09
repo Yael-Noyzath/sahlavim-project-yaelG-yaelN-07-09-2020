@@ -52,6 +52,7 @@ import { element } from 'protractor';
 import { Program } from 'src/app/Classes/program';
 import { Operator } from 'src/app/classes/operator';
 import { Setting } from 'src/app/classes/setting';
+import { User } from 'src/app/classes/user';
 
 const colors: any = {
   red: {
@@ -186,7 +187,7 @@ export class CalendarComponent implements OnInit {
           res => {
 
             this.eventsFromSer = res;
-            
+
             this.eventsFromSer.forEach(element => {
               element.dtStartTime = new Date(parseInt(element.dtStartTime.substr(6))).toString();
               this.events.push({
@@ -212,8 +213,8 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  watch(date:any){
-debugger
+  watch(date: any) {
+    debugger
   }
   flag: number = 0;
   ps: Setting;
@@ -237,8 +238,8 @@ debugger
     //מופעל רק במפעילים
     //מילוי רשימת מסגרות שתואמות לתוכנית שנבחרה
     if (this.eventToEdit.iProgramId != -1 && str == 'program' && this.types["iSettingId"] == -1) {
-    debugger
-      this.currentProgram = this.mainService.programsList.find(p => p.iProgramId ==this.eventToEdit.iProgramId);
+      debugger
+      this.currentProgram = this.mainService.programsList.find(p => p.iProgramId == this.eventToEdit.iProgramId);
       //מאתחל את הרשימה הנוכחית
       this.settingsList = new Array<Setting>();
       //של המסגרות שמתאימות לתוכנית Idעובר על רשימת ה
@@ -247,16 +248,15 @@ debugger
         this.ps = this.mainService.settingsList.find(s => s.iSettingId == p);
         //בודק אם המפעיל הנוכחי פעיל במסגרת הזו
         var s = this.mainService.operatorForDetails.lSchoolsExcude.findIndex(s => s == this.ps.iSettingId);
-        if (this.ps.iSettingId != -1 && s==-1) {
+        if (this.ps.iSettingId != -1 && s == -1) {
           //מוסיף לרשימה הנוכחית
           this.settingsList.push(this.ps);
         }
       }
       );
     }
-    if(str=='operator')
-    {
-      this.operator=this.mainService.operatorsList.find(p=>p.iOperatorId==this.eventToEdit.iOperatorId);
+    if (str == 'operator') {
+      this.operator = this.mainService.operatorsList.find(p => p.iOperatorId == this.eventToEdit.iOperatorId);
     }
   }
   dtStartTime: string = "";
@@ -306,11 +306,27 @@ debugger
   weekViewHour({ date, locale }: DateFormatterParams): string {
     return this.dayViewHour({ date, locale });
   }
-
   addEvent() {
+    this.mainService.post('ScheduleUpdate', {
+      iScheduleId: this.eventToEdit.iScheduleId,
+      iOperatorId: this.eventToEdit.iOperatorId,
+      iActivityId: this.eventToEdit.iActivityId,
+      iSettingId: this.eventToEdit.iSettingId,
+      iProgramId: this.eventToEdit.iProgramId,
+      dtStartTime: this.eventToEdit.dtStartTime,
+      bCopyAllWeeks: false,
+      iUserId: this.mainService.currentUser.iUserId
+    }).then(
+      res => {
+        alert("exelent")
+      },
+      err => {
+        alert("err")
+      }
+    )
+
   }
-  resetEventToEdit()
-  {
-    this.eventToEdit=new schedule();
+  resetEventToEdit() {
+    this.eventToEdit = new schedule();
   }
 }

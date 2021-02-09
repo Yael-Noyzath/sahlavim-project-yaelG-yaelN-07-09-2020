@@ -2,14 +2,14 @@
     <div class="addMsg">
         <button mat-stroked-button class="managementColor" (click)="TheEditUser(-1)" data-toggle="modal"
             data-target="#mo">הוספת משתמש</button>
-        <button mat-button class="managementColor" (click)="exporter.exportTable('xls')">exportTable</button>
+        <button mat-button class="managementColor" (click)="exporter.exportTable('xls',{fileName:'managementTable'})">exportTable</button>
 
     </div>
 
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 
-        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+        <table  [hiddenColumns]=[0] mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
             mat-table [dataSource]="dataSource" matSort>
             <!-- Details Column -->
             <ng-container matColumnDef="details">
@@ -28,8 +28,8 @@
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> שם משפחה
                     <br>
                     <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="LastNameFilter">
+                        
+                        <input matInput value="חפש" [formControl]="LastNameFilter">
                     </mat-form-field>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvLastName}} </td>
@@ -40,8 +40,8 @@
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> שם פרטי
                     <br>
                     <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="FirstNameFilter">
+                        
+                        <input matInput value="חפש" [formControl]="FirstNameFilter">
                     </mat-form-field>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvFirstName}} </td>
@@ -64,8 +64,8 @@
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>שם משתמש
                     <br>
                     <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="UserNameFilter">
+                        
+                        <input matInput value="חפש" [formControl]="UserNameFilter">
                     </mat-form-field>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvUserName}} </td>
@@ -76,8 +76,8 @@
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef>טלפון נייד
                     <br>
                     <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="MobileFilter">
+                        
+                        <input matInput value="חפש" [formControl]="MobileFilter">
                     </mat-form-field>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvMobile}} </td>
@@ -88,8 +88,8 @@
                 <th style="width: 10%;" mat-header-cell *matHeaderCellDef> מייל
                     <br>
                     <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
-                        <mat-label> חפש</mat-label>
-                        <input matInput [formControl]="MailFilter">
+                        
+                        <input matInput value="חפש" [formControl]="MailFilter">
                     </mat-form-field>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvMail}} </td>
