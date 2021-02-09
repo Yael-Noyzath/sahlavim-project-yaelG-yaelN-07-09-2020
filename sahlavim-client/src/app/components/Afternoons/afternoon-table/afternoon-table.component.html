@@ -1,13 +1,13 @@
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
     <div class="addMsg">
         <button mat-stroked-button class="afternonColor" (click)="addAfternoon()">הוספת סמסטר</button>
-        <button mat-button class="afternonColor" (click)="exporter.exportTable('xls')">exportTable</button>
+        <button mat-button class="afternonColor" (click)="exporter.exportTable('xls',{fileName:'afternonTable'})">exportTable</button>
     </div>
 
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 
-        <table mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
+        <table [hiddenColumns]=[0] mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200" #exporter="matTableExporter"
             mat-table [dataSource]="dataSource" matSort>
             <!-- year Value Column -->
             <ng-container matColumnDef="iYearType">
