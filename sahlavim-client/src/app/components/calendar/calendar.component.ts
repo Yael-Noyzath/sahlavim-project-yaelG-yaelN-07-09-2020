@@ -324,6 +324,14 @@ export class CalendarComponent implements OnInit {
     this.StartTime.setHours(+this.dTime.substr(0,2));
     this.StartTime.setMinutes(+this.dTime.substr(3,2));
 console.log(this.StartTime);
+//     this.StartTime.setHours(+this.dTime.substr(0,2),+this.dTime.substr(3,2));
+// console.log(this.StartTime);
+let date=new Date(
+  this.StartTime.getFullYear(),
+  this.StartTime.getMonth(),
+  this.StartTime.getDay(),
+  +this.dTime.substr(0,2),
+  +this.dTime.substr(3,2),0)
     debugger
     this.mainService.post('ScheduleUpdate', {
       iScheduleId: this.eventToEdit.iScheduleId,
@@ -331,7 +339,7 @@ console.log(this.StartTime);
       iActivityId: this.eventToEdit.iActivityId,
       iSettingId: this.eventToEdit.iSettingId,
       iProgramId: this.eventToEdit.iProgramId,
-      dtStartTime:this.StartTime.toISOString(),
+      dtStartTime:new Date(), 
       bCopyAllWeeks: false,
       iUserId: this.mainService.currentUser.iUserId
     }).then(
