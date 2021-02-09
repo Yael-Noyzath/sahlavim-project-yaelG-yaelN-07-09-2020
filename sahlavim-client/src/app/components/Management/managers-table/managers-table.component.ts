@@ -117,7 +117,7 @@ export class ManagersTableComponent implements OnInit {
   }
 
   saveUser() {
-
+alert('gf')
     this.mainService.post("AddUpdateUser", { oUser: this.editUser }).then(
       res => {
         if (res) {

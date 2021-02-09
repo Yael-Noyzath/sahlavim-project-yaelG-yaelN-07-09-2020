@@ -212,48 +212,23 @@
                     </ng-container>
                     <!-- Setting Name Column -->
                     <ng-container matColumnDef="nvSettingName">
-                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>שם מסגרת</th>
+                        <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header>שם מסגרת</th>
                         <td mat-cell *matCellDef="let row" name="coor"> {{row.nvSettingName}} </td>
                     </ng-container>
                     <!-- Setting Address Column -->
                     <ng-container matColumnDef="nvAddress">
-                        <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header>כתובת</th>
+                        <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header>כתובת</th>
                         <td mat-cell *matCellDef="let row"> {{row.nvAddress}} </td>
                     </ng-container>
                     <!-- Setting Age groups Column -->
                     <ng-container matColumnDef="lSettingAgegroups">
-                        <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> קטגוריות גילאים
+                        <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header> קטגוריות גילאים
                         </th>
                         <td mat-cell *matCellDef="let row">
                             <div *ngFor="let r of row.lSettingAgegroups" style="display: inline;">
                                 {{this.lProgramAgegroupsValueForTable.get(r)}},
                             </div>
                     </ng-container>
-                    <!-- Setting Morning Column -->
-                    <ng-container matColumnDef="bSettingMorning">
-                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>מסגרת בוקר</th>
-                        <td mat-cell *matCellDef="let row">
-                            <div *ngIf="row.bSettingMorning==true">
-                                <input type="checkbox" checked (click)="removeAlSetting()">
-                            </div>
-                            <div *ngIf="row.bSettingMorning==false">
-                                <input type="checkbox">
-                            </div>
-                        </td>
-                    </ng-container>
-                    <!-- Setting Noon Column -->
-                    <ng-container matColumnDef="bSettingNoon">
-                        <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>מסגרת צהריים</th>
-                        <td mat-cell *matCellDef="let row">
-                            <div *ngIf="row.bSettingNoon==true">
-                                <input type="checkbox" checked>
-                            </div>
-                            <div *ngIf="row.bSettingNoon==false">
-                                <input type="checkbox">
-                            </div>
-                        </td>
-                    </ng-container>
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

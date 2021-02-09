@@ -131,12 +131,12 @@ debugger
     this.operator.bTalan == false ? this.operator.lSchools = [] : this.lschool.map((item) => item.iSettingId);
     this.bSettingslsExclude == false ? this.operator.lSchoolsExcude = [] : this.schoolsExcludeList.map((item) => item.iSettingId);
     this.blNeighborhoods == false ? this.operator.lNeighborhoods = [] : this.operatorNeighborhoods.map((item) => item.Key);
-
+debugger
     this.mainService.post("UpdateOperator", { oOperator: this.operator })
       .then(
         res => {
           let o = res;
-          
+          debugger
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
           this.mainService.serviceNavigate("/header-menu/operators/operator-table");
@@ -146,6 +146,7 @@ debugger
           alert("err");
         }
       );
+      
   }
 
   //add school/setting to the list

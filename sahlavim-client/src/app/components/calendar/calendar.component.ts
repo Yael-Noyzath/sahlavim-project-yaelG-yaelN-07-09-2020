@@ -321,8 +321,8 @@ export class CalendarComponent implements OnInit {
     // this.eventToEdit.dtStartTime=this.StartTime.toUTCString();
     //alert(JSON.stringify(this.eventToEdit.dtStartTime))
     //עדכון השעה לאובייקט התאריך
-    this.StartTime?.setHours(+this.dTime.substr(0,2));
-    this.StartTime?.setMinutes(+this.dTime.substr(3,2));
+    this.StartTime.setHours(+this.dTime.substr(0,2));
+    this.StartTime.setMinutes(+this.dTime.substr(3,2));
 console.log(this.StartTime);
     debugger
     this.mainService.post('ScheduleUpdate', {
