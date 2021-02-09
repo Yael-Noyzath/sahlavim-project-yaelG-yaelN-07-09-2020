@@ -11,19 +11,19 @@
 
             <div style="display: flex;justify-content: space-between;" class="middle col-lg-6 col-sm-8">
 
-                <a style="border-bottom: 3px solid rgb(192, 31, 31);" (click)="wel=false" routerLink="operators/operator-table" routerLinkActive="activeLink"
+                <a style="border-bottom: 3px solid rgb(192, 31, 31);" [ngStyle]="{'font-size':activeLink==1? '25px': '20px'}" (click)="wel=false;activeLink=1" routerLink="operators/operator-table" 
                     value="operator">מפעילים</a>
 
-                <a style="border-bottom:3px solid rgb(51, 67, 211);" (click)="wel=false" routerLink="settings/setting-table" routerLinkActive="activeLink"
+                <a style="border-bottom:3px solid rgb(51, 67, 211);" [ngStyle]="{'font-size':activeLink==2? '25px': '20px'}" (click)="wel=false;activeLink=2" routerLink="settings/setting-table" 
                     value="setting">מסגרות</a>
 
-                <a style="border-bottom:3px solid rgb(89, 218, 72);" (click)="wel=false" routerLink="programs/programs-table" routerLinkActive="activeLink"
+                <a style="border-bottom:3px solid rgb(89, 218, 72);" [ngStyle]="{'font-size':activeLink==3? '25px': '20px'}" (click)="wel=false;activeLink=3" routerLink="programs/programs-table" 
                     value="program">תוכניות</a>
 
-                <a style="border-bottom:3px solid rgb(220, 255, 24);" (click)="wel=false" routerLink="afternoon/afternoon-table" routerLinkActive="activeLink"
+                <a style="border-bottom:3px solid rgb(220, 255, 24);" [ngStyle]="{'font-size':activeLink==4? '25px': '20px'}" (click)="wel=false;activeLink=4" routerLink="afternoon/afternoon-table" 
                     value="afternoon">צהרונים</a>
 
-                <a style="border-bottom:3px solid rgb(57, 120, 110);" (click)="wel=false" routerLink="management-menu/managers-table" routerLinkActive="activeLink"
+                <a style="border-bottom:3px solid rgb(57, 120, 110);" [ngStyle]="{'font-size':activeLink==5? '25px': '20px'}" (click)="wel=false;activeLink=5" routerLink="management-menu/managers-table" 
                     value="management">ניהול</a>
             </div>
 

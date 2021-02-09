@@ -210,7 +210,6 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-
   }
 
   watch(date:any){
