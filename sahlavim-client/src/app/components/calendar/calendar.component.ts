@@ -259,14 +259,7 @@ export class CalendarComponent implements OnInit {
       this.operator = this.mainService.operatorsList.find(p => p.iOperatorId == this.eventToEdit.iOperatorId);
     }
   }
-  dtStartTime: string = "";
-  editEvent(e: schedule) {
-    debugger
-    this.eventToEdit = e;
-    this.dtStartTime = this.eventToEdit.dtStartTime.substr(16, 5);
-    alert(this.eventToEdit.iActivityId);
-  }
-
+ 
   // resetArray() {
   //   this.eventsArrayByDate = new Array<schedule>();
   // }
@@ -306,14 +299,39 @@ export class CalendarComponent implements OnInit {
   weekViewHour({ date, locale }: DateFormatterParams): string {
     return this.dayViewHour({ date, locale });
   }
-  addEvent() {
+
+  StartTime: Date = new Date();
+  dTime: string;
+  editEvent(e: schedule) {
+    
+    this.StartTime = new Date(e.dtStartTime);
+    this.dTime = e.dtStartTime.substr(16, 5);
+    this.eventToEdit = e;
+
+
+  }
+  //new Date(2015, 10, 10, 14, 57, 0)
+
+  addEditEvent() {
+    
+    //alert((new Date(this.dTime).getHours()).toString());
+    //alert(this.dTime.substr(0,2)+':'+this.dTime.substr(3,2));
+
+    // this.StartTime.setHours(+this.dTime.substr(0,2),+this.dTime.substr(3,2));
+    // this.eventToEdit.dtStartTime=this.StartTime.toUTCString();
+    //alert(JSON.stringify(this.eventToEdit.dtStartTime))
+    //עדכון השעה לאובייקט התאריך
+    this.StartTime?.setHours(+this.dTime.substr(0,2));
+    this.StartTime?.setMinutes(+this.dTime.substr(3,2));
+console.log(this.StartTime);
+    debugger
     this.mainService.post('ScheduleUpdate', {
       iScheduleId: this.eventToEdit.iScheduleId,
       iOperatorId: this.eventToEdit.iOperatorId,
       iActivityId: this.eventToEdit.iActivityId,
       iSettingId: this.eventToEdit.iSettingId,
       iProgramId: this.eventToEdit.iProgramId,
-      dtStartTime: this.eventToEdit.dtStartTime,
+      dtStartTime:this.StartTime.toISOString(),
       bCopyAllWeeks: false,
       iUserId: this.mainService.currentUser.iUserId
     }).then(
