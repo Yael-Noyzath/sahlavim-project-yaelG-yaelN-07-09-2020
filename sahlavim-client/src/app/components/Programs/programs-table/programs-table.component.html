@@ -1,9 +1,19 @@
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
-    <div class="addMsg">
-        <button mat-stroked-button class="programColor" (click)="addProgram()">הוספת תוכנית</button>
-        <button mat-button class="programColor" (click)="exporter.exportTable('xls',{fileName:'programTable'})">exportTable</button>
-    </div>
+   
+    <div class="addMsg row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+           
+            <button mat-stroked-button class="programColor" (click)="addProgram()"> הוספת מסגרת</button>
+        </div>
+        <div class="col-lg-3">
+            <button mat-button class="programBtn" (click)="exporter.exportTable('xls',{fileName:'programTable'})">ייצא ל Excel</button>
 
+        </div>
+
+
+    </div>
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 

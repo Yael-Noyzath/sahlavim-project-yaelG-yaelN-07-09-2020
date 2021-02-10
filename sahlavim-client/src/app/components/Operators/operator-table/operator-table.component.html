@@ -1,9 +1,21 @@
+
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
-    <div class="addMsg">
-        <button mat-stroked-button data-toggle="modal" data-target="#modalCart" (click)="emailList()">שליחת
-            הודעה</button>
-        <button (click)="addOperator()" mat-stroked-button>הוספת מפעיל</button>
-        <button mat-button class="managementColor" (click)="exporter.exportTable('xls',{fileName:'operatorsTable'})">exportTable</button>
+
+
+
+    <div class="addMsg row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            <button mat-stroked-button class="operatorColor" data-toggle="modal" data-target="#modalCart"
+                (click)="emailList()">שליחת הודעה</button>
+            <button mat-stroked-button class="operatorColor" (click)="addOperator()"> הוספת מפעיל</button>
+        </div>
+        <div class="col-lg-3">
+            <button mat-button class="operatorBtn" (click)="exporter.exportTable('xls',{fileName:'settingsTable'})">ייצא
+                ל Excel</button>
+        </div>
+
 
     </div>
 
@@ -140,8 +152,6 @@
                     </button>
                 </td>
             </ng-container>
-
-
 
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

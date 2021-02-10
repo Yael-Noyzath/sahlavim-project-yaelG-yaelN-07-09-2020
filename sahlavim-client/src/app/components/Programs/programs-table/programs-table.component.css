@@ -16,7 +16,11 @@ mat-form-field {
     font-size: 14px;
     width: 80px;
   } 
-
+  .header {
+    padding: 5px;
+    font-size: 14px;
+  
+  }
 
 /* .container{
   background-image:url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg) ;

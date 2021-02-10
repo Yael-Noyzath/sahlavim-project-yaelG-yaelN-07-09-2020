@@ -4,6 +4,12 @@ mat-form-field {
     width: 80px;
   } 
 
+  
+.operatorBtn{
+  background-color:rgb(192, 31, 31);
+  color:white;
+  /* margin-left: 80px; */
+}
 th.mat-header-cell {
 
     /* text-align: left;
@@ -17,7 +23,7 @@ input.matInput{
 } */ 
 
 .operatorColor{
-  color:rgb(236, 116, 19);
+  color:rgb(192, 31, 31);
 
 }
 
@@ -26,9 +32,7 @@ input.matInput{
   margin-bottom: 10px;
 }
 .addMsg button{
-  background-color: white;
   margin-left: 20px;
-  color:rgb(192, 31, 31) ;
   font-family: inherit;
 
 }
