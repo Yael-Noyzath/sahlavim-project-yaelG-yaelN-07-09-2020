@@ -144,7 +144,7 @@ debugger
       .then(
         res => {
           let o = res;
-
+          debugger
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
 
@@ -153,6 +153,7 @@ debugger
           alert("err");
         }
       );
+      
   }
 
   //add school/setting to the list
