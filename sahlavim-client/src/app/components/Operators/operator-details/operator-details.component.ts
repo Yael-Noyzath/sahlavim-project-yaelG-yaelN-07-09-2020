@@ -147,7 +147,6 @@ debugger
 
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
-          this.mainService.serviceNavigate("/header-menu/operators/operator-table");
 
         }
         , err => {

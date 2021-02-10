@@ -163,6 +163,7 @@ export class MainServiceService {
         res => {
           //if (res) {
             this.usersList = res;
+            debugger
             // this.usersList.forEach(element => {
             //   switch(element.iUserType)
             //   {

@@ -113,8 +113,6 @@ export class ProgramDetailsComponent implements OnInit {
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
-        alert("update " + this.currentProgram.nvProgramName + " done!");
-        this.mainService.serviceNavigate("/header-menu/programs/programs-table");
 
       },
       err => {

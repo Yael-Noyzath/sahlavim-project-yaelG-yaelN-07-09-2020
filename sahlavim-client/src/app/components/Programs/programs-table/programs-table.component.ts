@@ -17,6 +17,7 @@ export class ProgramsTableComponent implements OnInit {
 
   programList: Array<Program>;
   dataSource: MatTableDataSource<Program>;
+
   lProgramAgegroupsValue: Map<number, string> = new Map<number, string>();
   lProgramTypeValue: Map<number, string> = new Map<number, string>();
 
