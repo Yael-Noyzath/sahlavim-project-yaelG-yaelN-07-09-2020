@@ -22,8 +22,13 @@ export class LoginComponent implements OnInit {
   spinnerWork: boolean = false;
 
   ngOnInit() {
-    this.UserLoginControls();
-    this.GetUsers();
+
+    this.formLogin = new FormGroup({
+      nvUserName: new FormControl(this.user.nvUserName),
+      nvPassword: new FormControl(this.user.nvPassword),
+      nvMail: new FormControl(this.user.nvMail)
+    });  
+      this.GetUsers();
 
   }
 
@@ -31,14 +36,14 @@ export class LoginComponent implements OnInit {
   Login() {
     debugger
     this.user = this.formLogin.value;
-    //חיפוש המשתמש הזה בתוך הרשימה
+    //חיפוש המשתמש בתוך הרשימה
     if (this.user) {
       this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
       if (this.currentUser)//אם שם והסיסמה נכונים
       {
         //שנכנס לשמירה בסרויס user שליחה של ה
         this.mainService.currentUser = this.currentUser
-        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון היוזר הנוכחי בשרת 
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון המשתמש הנוכחי בשרת 
         this.mainService.serviceNavigate("header-menu");
       }
       else {
@@ -48,7 +53,7 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
+ 
   GetUsers() {
     this.mainService.post("GetUsers", {})
       .then(
@@ -106,13 +111,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  UserLoginControls() {
-    this.formLogin = new FormGroup({
-      nvUserName: new FormControl(this.user.nvUserName),
-      nvPassword: new FormControl(this.user.nvPassword),
-      nvMail: new FormControl(this.user.nvMail)
-    });
-  }
+  
 
   get nvUserName() {
     return this.formLogin.get("nvUserName");

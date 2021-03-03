@@ -1,9 +1,9 @@
 .programBtn{
-    background-color: rgb(98, 169, 29);
+    background-color:var(--programClr);
     color: white;
 }
 .programColor{
-    color:rgb(98, 169, 29);
+    color:var(--programClr)
 }
 
 .header {

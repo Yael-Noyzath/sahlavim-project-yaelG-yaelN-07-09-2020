@@ -56,7 +56,8 @@ filterValues = {
   constructor(private mainService: MainServiceService) {
 this.operatorTypes=this.mainService.SysTableList[2];
 
-    this.operators = this.mainService.operatorsList
+    this.operators = this.mainService.operatorsList;
+    
     this.dataSource = new MatTableDataSource(this.operators);
     this.dataSource.filterPredicate = this.createFilter();
     
@@ -154,6 +155,7 @@ this.operatorTypes=this.mainService.SysTableList[2];
       this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.mainService.currentUser.iUserId }).then(
         res => {
           this.mainService.operatorsList = res;
+          debugger
         },
         err => {
           alert(err);

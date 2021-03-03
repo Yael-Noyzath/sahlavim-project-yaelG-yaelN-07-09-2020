@@ -1,11 +1,25 @@
 <div class="container-" style="text-align:right;margin: auto; " dir="rtl">
     <div class="addMsg">
-        <button mat-stroked-button class="managementColor" (click)="TheEditUser(-1)" data-toggle="modal"
-            data-target="#mo">הוספת משתמש</button>
-        <button mat-button class="managementColor" (click)="exporter.exportTable('xls',{fileName:'managementTable'})">exportTable</button>
+
 
     </div>
 
+    <div class="addMsg row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            <button mat-stroked-button class="managementColor" (click)="TheEditUser(-1)" data-toggle="modal"
+            data-target="#mo">הוספת משתמש</button>
+
+            <button mat-stroked-button class="managementColor" data-toggle="modal" data-target="#modalCart"
+            (click)="emailList()">שליחת הודעה</button>
+        </div>
+        <div class="col-lg-3">
+            <button mat-button class="managementBtn" (click)="exporter.exportTable('xls',{fileName:'managementTable'})">ייצא ל Exel</button>
+
+        </div>
+    </div>
+    
     <div style="width: 90%;margin: auto;" class="overflow-auto">
 
 

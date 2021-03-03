@@ -1,11 +1,11 @@
 
 .settingBtn{
-    background-color:rgb(47, 50, 150);
+    background-color:var(--settingClr);
     color:white;
     /* margin-left: 80px; */
 }
 .settingColor{
-    color: rgb(47, 50, 150);
+    color: var(--settingClr);
 }
 .header {
     padding: 5px;

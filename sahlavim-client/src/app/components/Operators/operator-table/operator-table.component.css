@@ -6,15 +6,11 @@ mat-form-field {
 
   
 .operatorBtn{
-  background-color:rgb(192, 31, 31);
+  background-color:var(--operatorClr);
   color:white;
   /* margin-left: 80px; */
 }
-th.mat-header-cell {
 
-    /* text-align: left;
-    max-width: 50px; */
-}
 /* .mat-sort-header{
   display: inline;
 }
@@ -23,19 +19,10 @@ input.matInput{
 } */ 
 
 .operatorColor{
-  color:rgb(192, 31, 31);
-
+  color:var(--operatorClr);
 }
 
-.addMsg{
-  text-align: center;
-  margin-bottom: 10px;
-}
-.addMsg button{
-  margin-left: 20px;
-  font-family: inherit;
 
-}
 .example-form {
   min-width: 150px;
   max-width: 500px;

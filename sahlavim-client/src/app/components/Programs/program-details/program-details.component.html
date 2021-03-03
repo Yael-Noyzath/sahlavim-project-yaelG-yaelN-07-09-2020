@@ -31,8 +31,8 @@
                 <mat-form-field class="example-form-field">
                     <mat-label>סעיף תקציבי</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvBudgetItem" name="nvBudgetItem" />
-
                 </mat-form-field><br>
+                
                 <div class="col-sm-12" style="margin: auto;">
                     <p style="font-size: smaller;" class="programColor">קטגורית גילאים</p>
                     <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
@@ -45,14 +45,11 @@
                 <mat-form-field class="example-form-field">
                     <mat-label>מתאריך</mat-label>
                     <input matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
-                    <p style="color: red;">יש להזין תאריך עתידי</p>
-
                 </mat-form-field><br>
+
                 <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
                     <input matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
-                    <p style="color: red;">יש להזין תאריך הגדול מתאריך ההתחלה</p>
-
                 </mat-form-field><br>
 
                 <div>

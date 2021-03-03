@@ -45,12 +45,12 @@ export class Operator {
  
         public lActivity:Activity[]=[],
 
-        public iNumBookkeeping: number=0
+        public iNumBookkeeping: number=0,
 
 
         // public binProgramsDatabase: boolean=true,
         //public nvOperatorTypeValue:string="",
-        // public nvActivityies:string="",
+         public nvActivityies:string=""
 
         ) 
         {}

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
@@ -7,6 +7,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { operatorsAvailability } from 'src/app/Classes/operatorsAvailability';
+import { Activity } from 'src/app/classes/activity';
 
 @Component({
   selector: 'app-operator-details',
@@ -21,7 +22,10 @@ export class OperatorDetailsComponent implements OnInit {
 
   //רשימת שכונות
   NeighborhoodsList: forSelect[] = [];
-  operatorNeighborhoods: forSelect[] = [];;
+  operatorNeighborhoods: forSelect[] = [];
+  activityCategories: forSelect[] = [];
+
+
   DetailsForm: FormGroup;
   operator: Operator;
   blNeighborhoods: boolean;//פעיל באיזורים מסויימים
@@ -31,25 +35,33 @@ export class OperatorDetailsComponent implements OnInit {
   schoolsExcludeList: Setting[] = [];//רשימת המיסגרות בהן המפעיל לא פעיל
   settingsList: Setting[] = [];//רשימת המיסגרות
   newOp: boolean = true;
-
+  iCategory: number=0;
   mat: ElementRef;
   isValid: boolean = false;
-
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) {
+  Activities: Activity[]=[];
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService,private elementRef: ElementRef) {
   }
 
   ngOnInit() {
 
+
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס עריכה
     this.settingsList = this.mainService.settingsList;
+    this.activityCategories = this.mainService.gItems[7].dParams;
 
+    //find id category of operator activities
+    this.activityCategories.forEach(element => {
+      this.iCategory = this.operator.nvActivityies.includes(element.Value) ? element.Key : this.iCategory;
+      
+    });
+    
     //אתחול רשימת איזורים
     this.NeighborhoodsList = this.mainService.gItems[4].dParams;
 
     //שליפת רשימת מיסגרות מסוג ביה"ס- לחוגי תל"ן
     this.schoolListforTalan = this.settingsList.filter(x => x.iSettingType === 18);
     //Check if is not new operator
-    if (this.operator.iOperatorId != 1) {
+    if (this.operator.iOperatorId != -1) {
       this.newOp = false;
 
       this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
@@ -111,21 +123,28 @@ export class OperatorDetailsComponent implements OnInit {
 
   }
 
-h:boolean=false;
+modal:boolean=true;
+  showCategoryModal(event:any){
+if(this.operator.iOperatorId!=-1)
+{
+  this.modal=true;
+}
+  }
+  h: boolean = false;
 
   checkFormValid() {
     //check if no mat-hint with context 
-    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
+    const dom: HTMLElement = this.elementRef.nativeElement;
+    const list = document.querySelectorAll('.mat-hint');
+debugger
+    list.forEach(function (Item) {
+      if (Item.innerHTML != '') {
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+        return false
+      }
+    });
 
-list.forEach(function(Item) {
-  if(Item.innerHTML != '')
-  {
-    alert('נא שים לב לתוכן תקין');
-    this.h = true;
-    return false
-  }
-});
-     
     debugger
 
     if (this.h == false) {
@@ -135,12 +154,18 @@ list.forEach(function(Item) {
 
   save() {
 
+    this.Activities = this.mainService.operatorForDetails.lActivity;
+    this.Activities.forEach(element => {
+      element.iCategoryType=this.iCategory;
+    });
+
     this.operator.lNeighborhoods = this.operator.lSchools = this.operator.lSchoolsExcude = [];
     this.operator.bTalan == false ? this.operator.lSchools = [] : this.lschool.map((item) => item.iSettingId);
     this.bSettingslsExclude == false ? this.operator.lSchoolsExcude = [] : this.schoolsExcludeList.map((item) => item.iSettingId);
     this.blNeighborhoods == false ? this.operator.lNeighborhoods = [] : this.operatorNeighborhoods.map((item) => item.Key);
-debugger
-    this.mainService.post("AddOperator", { oOperator: this.operator })
+    debugger
+    let func=this.newOp==true?'AddOperator':'UpdateOperator';
+    this.mainService.post(func, { oOperator: this.operator })
       .then(
         res => {
           let o = res;
@@ -153,7 +178,7 @@ debugger
           alert("err");
         }
       );
-      
+
   }
 
   //add school/setting to the list

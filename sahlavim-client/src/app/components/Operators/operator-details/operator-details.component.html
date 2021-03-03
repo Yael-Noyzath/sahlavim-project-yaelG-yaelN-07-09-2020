@@ -1,41 +1,42 @@
 <div class="form-group row">
 
     <form operator="ngform" (ngSubmit)="checkFormValid()">
-        <button type="submit" class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
+        <button type="submit" class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon"
+            title="שמור">
             <mat-icon>save</mat-icon>
         </button>
-        <h3 class="newObj" *ngIf="newOp">מפעיל חדש</h3>
-
-        <div style="height: 170px;margin: auto;width: 50%;padding-top: 25px;">
+        <!-- <h3 class="newObj" *ngIf="newOp">מפעיל חדש</h3> -->
+        <h4>פרטי מפעיל</h4>
+        <div style="height: 170px;margin: auto;width: 50%;">
             <mat-form-field class="example-form-field">
                 <mat-label>שם מפעיל</mat-label>
                 <input matInput type="text" [(ngModel)]="operator.nvOperatorName" name="nvOperatorName">
-                <mat-hint align="end">{{ operator.nvOperatorName|string }}</mat-hint>
+                <mat-hint class="mat-hint" align="end">{{ operator.nvOperatorName|string }}</mat-hint>
 
             </mat-form-field><br>
             <mat-form-field class="example-form-field">
                 <mat-label>שם חברה</mat-label>
                 <input matInput type="text" [(ngModel)]="operator.nvCompanyName" name="nvCompanyName">
-                <mat-hint align="end">{{ operator.nvCompanyName|string }}</mat-hint>
+                <mat-hint class="mat-hint" align="end">{{ operator.nvCompanyName|string }}</mat-hint>
 
             </mat-form-field>
         </div>
         <br>
 
 
-        <section class="example-section">
+        <section class="example-section" style="padding-top: 3%;">
             <label class="example-margin">סוג: </label>
 
-                <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
-                    <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="5">פרטי
-                    </mat-radio-button>
-                    <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="6">חברה
-                    </mat-radio-button>
-                    <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="7">שכיר
-                    </mat-radio-button>
+            <mat-radio-group [(ngModel)]="operator.iOperatorType" name="iOperatorType">
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="5">פרטי
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="6">חברה
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="7">שכיר
+                </mat-radio-button>
 
-                </mat-radio-group> <br>
-                <mat-hint style="font-size: 13px;color: red;"  align="end">{{operator.iOperatorType|required }}</mat-hint>
+            </mat-radio-group> <br>
+            <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{operator.iOperatorType|required }}</mat-hint>
 
         </section>
 
@@ -43,87 +44,9 @@
         <mat-form-field class="example-form-field">
             <mat-label>ת.ז</mat-label>
             <input matInput type="text" [(ngModel)]="operator.nvIdentity" name="nvIdentity">
-            <mat-hint align="end">{{ operator.nvIdentity| idNumber }}</mat-hint>
+            <mat-hint class="mat-hint" align="end">{{ operator.nvIdentity| idNumber }}</mat-hint>
 
         </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>שם איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="nvContactPerson">
-            <mat-hint align="end">{{operator.nvContactPerson|string }}</mat-hint>
-        </mat-form-field><br>
-
-
-        <mat-form-field class="example-form-field">
-            <mat-label>טלפון איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
-            <mat-hint align="end">{{ operator.nvContactPersonPhone| phone }}</mat-hint>
-
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label> מייל איש קשר</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="nvContactPersonMail">
-            <mat-hint align="end">{{ operator.nvContactPersonMail| email }}</mat-hint>
-
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>מספר מדריכים</mat-label>
-            <input matInput type="text" required [(ngModel)]="operator.iNumLeaders" name="iNumLeaders">
-
-        </mat-form-field>
-        <br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>הגבלת מספר חוגים ביום</mat-label>
-            <input matInput type="number" required [(ngModel)]="operator.iNumOperationsDay" name="iNumOperationsDay">
-
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>הגבלת מספר חוגים בשבוע</mat-label>
-            <input matInput type="number" required [(ngModel)]="operator.iNumOperationsWeek" name="NumActivityWeek">
-
-        </mat-form-field><br>
-
-        <section class="example-section">
-            <label class="example-margin">תנאי תשלום: </label>
-            <mat-radio-group [(ngModel)]="operator.iOperatorPaymentType" name="iOperatorPaymentType">
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="8">30 + שוטף
-                </mat-radio-button>
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="9">שוטף + 60
-                </mat-radio-button>
-                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="10">מזומן
-                </mat-radio-button>
-            </mat-radio-group>
-        </section>
-        <mat-hint style="font-size: 13px;color: red;"  align="end">{{operator.iOperatorPaymentType|required }}</mat-hint>
-
-        <br>
-
-
-        <mat-form-field class="example-form-field">
-            <mat-label>מספר ספק</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.nvOperatorNumber" name="nvOperatorNumber">
-
-        </mat-form-field><br>
-
-        <mat-form-field class="example-form-field">
-            <mat-label>מספר הנהלת חשבונות</mat-label>
-            <input matInput type="text" [(ngModel)]="operator.iNumBookkeeping" name="iNumBookkeeping">
-
-        </mat-form-field><br>
-
-        <section class="example-section s">
-            <mat-checkbox [(ngModel)]="operator.bActivityPriority" [checked]="operator.bActivityPriority"
-                name="ActivityPriority" class="example-margin">עדיפות בשיבוץ</mat-checkbox>
-        </section>
-
-        <section class="example-section s">
-            <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
-        </section>
-
         <div id="TalanSchool">
 
             <section style="direction: rtl;" class="example-section">
@@ -206,6 +129,86 @@
             </section>
             <a data-toggle="modal" data-target="#modalCart">עריכת לו"ז קייטנת קיץ</a>
         </div>
+        <h4>פרטי איש קשר </h4>
+        <mat-form-field class="example-form-field">
+            <mat-label>שם איש קשר</mat-label>
+            <input matInput type="text" [(ngModel)]="operator.nvContactPerson" name="nvContactPerson">
+            <mat-hint class="mat-hint" align="end">{{operator.nvContactPerson|string }}</mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>טלפון איש קשר</mat-label>
+            <input matInput type="text" [(ngModel)]="operator.nvContactPersonPhone" name="nvContactPersonPhone">
+            <mat-hint class="mat-hint" align="end">{{ operator.nvContactPersonPhone| phone }}</mat-hint>
+
+        </mat-form-field><br>
+
+        <mat-form-field class="example-form-field">
+            <mat-label> מייל איש קשר</mat-label>
+            <input matInput type="text" [(ngModel)]="operator.nvContactPersonMail" name="nvContactPersonMail">
+            <mat-hint class="mat-hint" align="end">{{ operator.nvContactPersonMail| email }}</mat-hint>
+        </mat-form-field><br>
+        <h4>פרטי פעילות</h4>
+
+        <mat-form-field >
+            <mat-label>בחר קטגורית פעילות</mat-label> 
+              <mat-hint  align="end" style="color: darkslateblue;" *ngIf="operator.iOperatorId!=-1">שינוי הקטגוריה יחול על כל הפעילויות</mat-hint >
+
+            <mat-select data-toggle="modal" data-target="#categoryModal" name="nvActivityies" [(ngModel)]="iCategory">
+                <mat-option *ngFor="let a of activityCategories" [value]="a.Key">
+                    {{a.Value}}
+                </mat-option>
+            </mat-select>
+            <mat-hint class="mat-hint" align="end">{{ iCategory| required }}</mat-hint >
+
+        </mat-form-field><br> 
+     
+
+
+        <mat-form-field class="example-form-field">
+            <mat-label>מספר מדריכים</mat-label>
+            <input matInput type="text" required [(ngModel)]="operator.iNumLeaders" name="iNumLeaders">
+
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>הגבלת מספר חוגים ביום</mat-label>
+            <input matInput type="number" min="0" required [(ngModel)]="operator.iNumOperationsDay" name="iNumOperationsDay">
+
+        </mat-form-field><br>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>הגבלת מספר חוגים בשבוע</mat-label>
+            <input matInput type="number" min="0" required [(ngModel)]="operator.iNumOperationsWeek" name="NumActivityWeek">
+
+        </mat-form-field><br>
+
+        <!-- <section class="example-section">
+            <label class="example-margin">תנאי תשלום: </label>
+            <mat-radio-group [(ngModel)]="operator.iOperatorPaymentType" name="iOperatorPaymentType">
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="8">30 + שוטף
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="9">שוטף + 60
+                </mat-radio-button>
+                <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="10">מזומן
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <mat-hint class="mat-hint" style="font-size: 13px;color: red;"  align="end">{{operator.iOperatorPaymentType|required }}</mat-hint> -->
+
+        <br>
+
+        <section class="example-section s">
+            <mat-checkbox [(ngModel)]="operator.bActivityPriority" [checked]="operator.bActivityPriority"
+                name="ActivityPriority" class="example-margin">עדיפות בשיבוץ</mat-checkbox>
+        </section>
+
+        <section class="example-section s">
+            <mat-checkbox [checked]="operator.bInProgramPool" class="example-margin">קיים במאגר התוכניות</mat-checkbox>
+        </section>
+
+
     </form>
 </div>
 
@@ -216,8 +219,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <!--Header-->
-            <div class="modal-header">
-                <h4 style="text-align: center;" class="modal-title" id="myModalLabel">לו"ז צהרונים</h4>
+            <div class="modal-header" style="text-align:center;">
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">לו"ז צהרונים</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
