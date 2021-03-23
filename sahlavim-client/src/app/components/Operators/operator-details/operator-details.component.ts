@@ -2,12 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
-import { MatCheckboxModule } from '@angular/material'
+import { MatCheckboxModule, MatDialog } from '@angular/material'
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Setting } from 'src/app/Classes/setting';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { operatorsAvailability } from 'src/app/Classes/operatorsAvailability';
 import { Activity } from 'src/app/classes/activity';
+import { MessageDialogComponent } from '../../message-dialog/message-dialog.component';
+import { de } from 'date-fns/locale';
 
 @Component({
   selector: 'app-operator-details',
@@ -19,7 +21,7 @@ export class OperatorDetailsComponent implements OnInit {
   dropdownNeighborhoods: IDropdownSettings;
   operatorsAvailability: operatorsAvailability[] = [];
 
-
+  modelContent:number=0;
   //רשימת שכונות
   NeighborhoodsList: forSelect[] = [];
   operatorNeighborhoods: forSelect[] = [];
@@ -35,11 +37,15 @@ export class OperatorDetailsComponent implements OnInit {
   schoolsExcludeList: Setting[] = [];//רשימת המיסגרות בהן המפעיל לא פעיל
   settingsList: Setting[] = [];//רשימת המיסגרות
   newOp: boolean = true;
-  iCategory: number=0;
+  iCategory: number = 0;
   mat: ElementRef;
   isValid: boolean = false;
-  Activities: Activity[]=[];
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService,private elementRef: ElementRef) {
+  Activities: Activity[] = [];
+  constructor(private route: ActivatedRoute, private mainService: MainServiceService, private elementRef: ElementRef,public dialog: MatDialog) {
+  }
+
+  openDialog() {
+    this.dialog.open(MessageDialogComponent);
   }
 
   ngOnInit() {
@@ -48,18 +54,28 @@ export class OperatorDetailsComponent implements OnInit {
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס עריכה
     this.settingsList = this.mainService.settingsList;
     this.activityCategories = this.mainService.gItems[7].dParams;
-
+debugger
     //find id category of operator activities
-    this.activityCategories.forEach(element => {
+    if(this.operator.lActivity.length>0)
+    {
+      this.iCategory=this.operator.lActivity[0].iCategoryType;
+      this.operator.nvActivityies=this.activityCategories.find(x=>x.Key==this.iCategory).Value;
+    }
+    else
+    {
+       this.activityCategories.forEach(element => {
       this.iCategory = this.operator.nvActivityies.includes(element.Value) ? element.Key : this.iCategory;
-      
     });
-    
+    }
+   
+debugger
+
     //אתחול רשימת איזורים
     this.NeighborhoodsList = this.mainService.gItems[4].dParams;
 
     //שליפת רשימת מיסגרות מסוג ביה"ס- לחוגי תל"ן
     this.schoolListforTalan = this.settingsList.filter(x => x.iSettingType === 18);
+    debugger
     //Check if is not new operator
     if (this.operator.iOperatorId != -1) {
       this.newOp = false;
@@ -67,6 +83,7 @@ export class OperatorDetailsComponent implements OnInit {
       this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
         res => {
           this.operatorsAvailability = res;
+          
         },
         err => {
           alert(err);
@@ -76,12 +93,12 @@ export class OperatorDetailsComponent implements OnInit {
       this.blNeighborhoods = this.operator.lNeighborhoods.length > 0 ? true : false;//ממלא את הרשימה אם פעיל באיזורים מסויימים
       this.bSettingslsExclude = this.operator.lSchoolsExcude.length > 0 ? true : false;//מלוי רשימה אם לא פועל במיסגרות מסויימות
 
-      if (this.operator.lSchools.length > 0)//talan schools where operates, for the form input
+      if (this.operator.lSchools.length > 0)//talan schools where actives, for ngModel      
       {
         for (let schoolId of this.operator.lSchools)
           this.lschool.push(this.settingsList.find(x => x.iSettingId == schoolId));
       }
-
+debugger
       // איתחול רשימת schoolsExcludeList של מפעיל 
       if (this.operator.lSchoolsExcude.length > 0) {
         for (let schoolId of this.operator.lSchoolsExcude) {
@@ -97,7 +114,6 @@ export class OperatorDetailsComponent implements OnInit {
         }
       }
     }
-
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -122,13 +138,24 @@ export class OperatorDetailsComponent implements OnInit {
     };
 
   }
+  daysNames = [
+    'ראשון',
+     'שני',
+     'שלישי',
+     'רביעי',
+      'חמישי'
+  ];
+  availability: operatorsAvailability[] = [];
+  createNoonsArray(type:number) {
+    this.availability = this.operatorsAvailability.filter(x => x.iOperatorId == this.operator.iOperatorId && x.iOperatorAvailabilityType == type);
+    
+  }
 
-modal:boolean=true;
-  showCategoryModal(event:any){
-if(this.operator.iOperatorId!=-1)
-{
-  this.modal=true;
-}
+  modal: boolean = true;
+  showCategoryModal(event: any) {
+    if (this.operator.iOperatorId != -1) {
+      this.modal = true;
+    }
   }
   h: boolean = false;
 
@@ -136,7 +163,7 @@ if(this.operator.iOperatorId!=-1)
     //check if no mat-hint with context 
     const dom: HTMLElement = this.elementRef.nativeElement;
     const list = document.querySelectorAll('.mat-hint');
-debugger
+    debugger
     list.forEach(function (Item) {
       if (Item.innerHTML != '') {
         alert('נא שים לב לתוכן תקין');
@@ -152,24 +179,36 @@ debugger
     }
   }
 
-  save() {
-
-    this.Activities = this.mainService.operatorForDetails.lActivity;
-    this.Activities.forEach(element => {
-      element.iCategoryType=this.iCategory;
-    });
-
-    this.operator.lNeighborhoods = this.operator.lSchools = this.operator.lSchoolsExcude = [];
-    this.operator.bTalan == false ? this.operator.lSchools = [] : this.lschool.map((item) => item.iSettingId);
-    this.bSettingslsExclude == false ? this.operator.lSchoolsExcude = [] : this.schoolsExcludeList.map((item) => item.iSettingId);
-    this.blNeighborhoods == false ? this.operator.lNeighborhoods = [] : this.operatorNeighborhoods.map((item) => item.Key);
+  abilitySave(){
     debugger
-    let func=this.newOp==true?'AddOperator':'UpdateOperator';
+    this.mainService.post("OperatorsAvailabilityUpdt", { iOperatorId: this.operator.iOperatorId,lOperatorsAvailability:this.availability, iUserId:this.mainService.currentUser.iUserId})
+    .then(
+      res => {
+        let o = res;
+      }
+      , err => {
+        alert("err");
+      }
+    );
+  }
+  save() {
+debugger
+    //update active category at all activities
+    this.operator.nvActivityies=this.activityCategories.find(x=>x.Key==this.iCategory).Value;
+ 
+  if(this.operator.lActivity.length>0)
+  {
+    this.operator.lActivity.forEach(element => {
+      element.iCategoryType = this.iCategory;
+    });
+  }  
+       debugger
+//save operator details changes
+    let func = this.newOp == true ? 'AddOperator' : 'UpdateOperator';
     this.mainService.post(func, { oOperator: this.operator })
       .then(
         res => {
           let o = res;
-          debugger
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
 
@@ -183,7 +222,7 @@ debugger
 
   //add school/setting to the list
   onItemSelect(item: Setting, type: string) {
-
+debugger
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools.push(item.iSettingId);
@@ -202,7 +241,7 @@ debugger
 
   //Delete school/setting from the list
   OnItemDeSelect(item: Setting, type: string) {
-
+debugger
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools.splice(this.operator.lSchools.findIndex(x => x == item.iSettingId), 1);
@@ -219,6 +258,7 @@ debugger
         break;
     }
   }
+
 
   onSelectAll(type: string) {
 
@@ -240,7 +280,7 @@ debugger
   }
 
   onDeSelectAll(type: string) {
-
+debugger
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools = [];

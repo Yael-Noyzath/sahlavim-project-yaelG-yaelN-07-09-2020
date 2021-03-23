@@ -218,8 +218,9 @@ export class CalendarComponent implements OnInit {
   }
   flag: number = 0;
   ps: Setting;
+
   fillLists(str: string) {
-    debugger
+    
     //מופעל רק בתוכניות וצהרונים
     //מילוי רשימת מפעילים שעובדים במיסגרת מסוימת שנבחרה לתוכנית
     if (this.eventToEdit.iSettingId != 0 && this.types["iOperatorId"] == -1) {

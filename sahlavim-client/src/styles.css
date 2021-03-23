@@ -74,7 +74,7 @@ a, button{
       position: sticky;
       position: -webkit-sticky;
       height: 100px;
-      top: 20px;
+      top: 0px;
       float: left;
       margin-left: 30px;
       

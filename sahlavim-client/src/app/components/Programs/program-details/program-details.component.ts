@@ -90,7 +90,7 @@ export class ProgramDetailsComponent implements OnInit {
     }
     var lSettingMorning: number[];
     var lSettingNoon: number[];
-debugger;
+    
     this.mainService.post("ProgramSettingsInsertUpdate", {
       iProgramId: this.currentProgram.iProgramId,
       lProgramSettings: this.currentProgram.lProgramSettings,

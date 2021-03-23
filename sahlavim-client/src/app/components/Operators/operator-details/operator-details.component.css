@@ -3,13 +3,32 @@ h4{
   margin: auto;
   padding-bottom: 2%;
 }
+.mat-hint{
+  color: red;
+  font-size: 15px;
+
+}
 .example-additional-selection {
     opacity: 0.75;
     font-size: 0.75em;
   }
-
+  .form {
+    width: 60%;
+    height: 630px;
+    margin: auto;
+    text-align: center;
+    direction: rtl; 
+   background-color: #ffffffcf;
+   overflow-y: scroll;
+}
   ng-multiselect-dropdown /deep/ .multiselect-dropdown > .dropdown-btn{
     font-size:12px !important;
+ }
+ .disabled{
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
  }
 
 #work section,a{
@@ -27,7 +46,9 @@ h4{
 
  }
 
-
+#day .example-section, .example-full-width{
+  display: inline-block;
+}
 #work{
   margin-top: 20px;
   width: 60%;
@@ -36,10 +57,22 @@ h4{
   padding-bottom: 30px;
 }
 
+.saveIconBtn{
+  color: var(--operatorClr);
+    position: sticky;
+    position: -webkit-sticky;
+    height: 100px;
+    top: 20px;
+
+    float: left;
+    margin-left: 30px;
+}
+
 mat-icon{
   
   font-size: 40px;
   text-shadow: 10px 10px 20px #ffffff;
+
 }
 
 
@@ -65,11 +98,12 @@ mat-label{
 }
 mat-form-field{
   padding-bottom: 20px;
+  width: 30%;
 }
 .form-group{
-  width: 100%;
-
-}
+  width: 100%;  
+  }
+  
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #c01f1f;
