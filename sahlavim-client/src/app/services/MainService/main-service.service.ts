@@ -114,7 +114,6 @@ export class MainServiceService {
 };
 
  async post(url: string, data: any): Promise<any> {
-     
     return this.http.post(`${this.sahlavimUrl}${url}`, data).toPromise();
   }
 
@@ -201,7 +200,7 @@ export class MainServiceService {
     this.post("SettingsGet", {}).then(
       res => {
         this.settingsList = res;
-         debugger
+           
       },
       err => {
         alert("SettingsGet err")
@@ -265,7 +264,7 @@ export class MainServiceService {
   }
 
   updateCurrentOp(id:number){
-    debugger
+      
     this.post('GetOperator',{ iOperatorId: id }).then(
       res => {
         this.operatorForDetails = res;
@@ -275,7 +274,7 @@ export class MainServiceService {
         alert(err);
       }
     );
-    debugger
+      
   }
 
 }

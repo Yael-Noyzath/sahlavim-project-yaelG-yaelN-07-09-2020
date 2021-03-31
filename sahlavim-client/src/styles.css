@@ -43,7 +43,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --managerClr: rgb(91, 185, 170)
 
   }
-
+.opColor{
+  color: var(--operatorClr);
+}
 mat-sort-header-button{
 display: none;
 }

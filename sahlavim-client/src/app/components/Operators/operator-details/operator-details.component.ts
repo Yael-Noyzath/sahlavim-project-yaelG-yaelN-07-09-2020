@@ -54,7 +54,7 @@ export class OperatorDetailsComponent implements OnInit {
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס עריכה
     this.settingsList = this.mainService.settingsList;
     this.activityCategories = this.mainService.gItems[7].dParams;
-debugger
+ 
     //find id category of operator activities
     if(this.operator.lActivity.length>0)
     {
@@ -68,14 +68,14 @@ debugger
     });
     }
    
-debugger
+ 
 
     //אתחול רשימת איזורים
     this.NeighborhoodsList = this.mainService.gItems[4].dParams;
 
     //שליפת רשימת מיסגרות מסוג ביה"ס- לחוגי תל"ן
     this.schoolListforTalan = this.settingsList.filter(x => x.iSettingType === 18);
-    debugger
+     
     //Check if is not new operator
     if (this.operator.iOperatorId != -1) {
       this.newOp = false;
@@ -98,7 +98,7 @@ debugger
         for (let schoolId of this.operator.lSchools)
           this.lschool.push(this.settingsList.find(x => x.iSettingId == schoolId));
       }
-debugger
+ 
       // איתחול רשימת schoolsExcludeList של מפעיל 
       if (this.operator.lSchoolsExcude.length > 0) {
         for (let schoolId of this.operator.lSchoolsExcude) {
@@ -163,7 +163,7 @@ debugger
     //check if no mat-hint with context 
     const dom: HTMLElement = this.elementRef.nativeElement;
     const list = document.querySelectorAll('.mat-hint');
-    debugger
+     
     list.forEach(function (Item) {
       if (Item.innerHTML != '') {
         alert('נא שים לב לתוכן תקין');
@@ -172,7 +172,7 @@ debugger
       }
     });
 
-    debugger
+     
 
     if (this.h == false) {
       this.save()
@@ -180,7 +180,7 @@ debugger
   }
 
   abilitySave(){
-    debugger
+     
     this.mainService.post("OperatorsAvailabilityUpdt", { iOperatorId: this.operator.iOperatorId,lOperatorsAvailability:this.availability, iUserId:this.mainService.currentUser.iUserId})
     .then(
       res => {
@@ -192,7 +192,7 @@ debugger
     );
   }
   save() {
-debugger
+ 
     //update active category at all activities
     this.operator.nvActivityies=this.activityCategories.find(x=>x.Key==this.iCategory).Value;
  
@@ -202,7 +202,7 @@ debugger
       element.iCategoryType = this.iCategory;
     });
   }  
-       debugger
+        
 //save operator details changes
     let func = this.newOp == true ? 'AddOperator' : 'UpdateOperator';
     this.mainService.post(func, { oOperator: this.operator })
@@ -222,7 +222,7 @@ debugger
 
   //add school/setting to the list
   onItemSelect(item: Setting, type: string) {
-debugger
+ 
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools.push(item.iSettingId);
@@ -241,7 +241,7 @@ debugger
 
   //Delete school/setting from the list
   OnItemDeSelect(item: Setting, type: string) {
-debugger
+ 
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools.splice(this.operator.lSchools.findIndex(x => x == item.iSettingId), 1);
@@ -280,7 +280,7 @@ debugger
   }
 
   onDeSelectAll(type: string) {
-debugger
+ 
     switch (type) {
       case 'talanSchool':
         this.operator.lSchools = [];
@@ -301,7 +301,7 @@ debugger
 
   //When deselect neighborhood
   onDeSelectNeighborhood(item: forSelect) {
-    debugger
+     
     this.operator.lNeighborhoods.splice(this.NeighborhoodsList.findIndex(x => x.Key == item.Key), 1);
     if (this.operator.lNeighborhoods.length == 0) {
       this.blNeighborhoods = false;
