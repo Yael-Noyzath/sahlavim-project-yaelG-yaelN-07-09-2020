@@ -133,7 +133,7 @@
             <!--Body-->
             <div class="modal-body col-sm-12">
                 <mat-card-content style="direction: rtl; text-align: center;margin-top: 3%;" class="Details">
-                    <form (ngSubmit)="saveUser()">
+                    <form (ngSubmit)="checkFormValid()">
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>שם פרטי</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvFirstName" name="nvFirstName" />
