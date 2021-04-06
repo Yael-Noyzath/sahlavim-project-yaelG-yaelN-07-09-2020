@@ -113,25 +113,7 @@ export class ProgramDetailsComponent implements OnInit {
 
 
   }
-  h = false;
-  checkValid() {
-    const dom: HTMLElement = this.elementRef.nativeElement;
-    const list = document.querySelectorAll('.mat-hint');
 
-    list.forEach(function (Item) {
-      if (Item.innerHTML != '') {
-        debugger
-        alert('נא שים לב לתוכן תקין');
-        this.h = true;
-        return false
-      }
-    });
-
-    if (this.h == false) {
-      this.testDate();
-
-    }
-  }
 
   saveProgram() {
     debugger
