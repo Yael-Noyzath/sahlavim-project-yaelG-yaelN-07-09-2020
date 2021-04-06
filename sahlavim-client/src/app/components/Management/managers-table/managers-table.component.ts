@@ -174,4 +174,25 @@ this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody
   }
 );
 }
+  h:boolean=false;
+
+  checkFormValid() {
+    //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
+
+list.forEach(function(Item) {
+  if(Item.innerHTML != '')
+  {
+    alert('נא שים לב לתוכן תקין');
+    this.h = true;
+    return false
+  }
+});
+     
+    debugger
+
+    if (this.h == false) {
+      this.saveUser()
+    }
+  }
 }

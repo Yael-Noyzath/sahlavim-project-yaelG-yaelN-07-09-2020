@@ -113,25 +113,7 @@ export class ProgramDetailsComponent implements OnInit {
 
 
   }
-  h = false;
-  checkValid() {
-    const dom: HTMLElement = this.elementRef.nativeElement;
-    const list = document.querySelectorAll('.mat-hint');
-
-    list.forEach(function (Item) {
-      if (Item.innerHTML != '') {
-        debugger
-        alert('נא שים לב לתוכן תקין');
-        this.h = true;
-        return false
-      }
-    });
-
-    if (this.h == false) {
-      this.testDate();
-
-    }
-  }
+  
 
   saveProgram() {
     debugger
@@ -256,5 +238,26 @@ export class ProgramDetailsComponent implements OnInit {
     if (this.currentProgram.lProgramSettings.findIndex(x => x == id) == -1)
       return false;
     return true;
+  }
+  h:boolean=false;
+
+  checkFormValid() {
+    //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
+
+list.forEach(function(Item) {
+  if(Item.innerHTML != '')
+  {
+    alert('נא שים לב לתוכן תקין');
+    this.h = true;
+    return false
+  }
+});
+     
+    debugger
+
+    if (this.h == false) {
+      this.testDate()
+    }
   }
 }
