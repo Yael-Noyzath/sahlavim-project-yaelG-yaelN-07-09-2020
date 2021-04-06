@@ -243,7 +243,7 @@ export class ProgramDetailsComponent implements OnInit {
       return false;
     return true;
   }
-  h: boolean = false;
+  h:boolean=false;
 
   checkFormValid() {
     //check if no mat-hint with context 
