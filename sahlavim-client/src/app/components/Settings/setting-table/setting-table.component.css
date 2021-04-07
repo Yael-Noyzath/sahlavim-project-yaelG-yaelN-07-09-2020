@@ -1,0 +1,42 @@
+
+.settingBtn{
+    background-color:var(--settingClr);
+    color:white;
+    /* margin-left: 80px; */
+}
+.settingColor{
+    color: var(--settingClr);
+}
+.header {
+    padding: 5px;
+    font-size: 14px;
+  
+}
+
+mat-form-field {
+    font-size: 14px;
+    width: 80px;
+  } 
+
+/* .container{
+  background-image:url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg) ;
+} */
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 80%;
+}
+table {
+
+  width: 100%;
+}
+element.style {
+  text-align: center;
+  margin-top: 0%;
+  direction: rtl;
+}

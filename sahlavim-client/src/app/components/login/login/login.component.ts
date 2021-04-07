@@ -12,86 +12,107 @@ export class LoginComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) { }
 
+  hide = true;
   enterByUserName: boolean = true;
   user: User = new User();
   currentUser: User = new User();
-  usersList: Array<User>;
+  usersList: Array<User> = new Array<User>();
   formLogin: FormGroup;
-  userExist:boolean=false;
+  userExist: boolean = false;
+  spinnerWork: boolean = false;
+
   ngOnInit() {
-    this.UserLoginControls();
-    debugger
-  }
-  //כניסה
-  enterToTheMenu() {
-    //קבלה של הנתונים שהכניס בכניסה
-    this.user = this.formLogin.value;
-    //בדיקה אם הוא רשאי להכנס
-    this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);
-    //users קבלת רשימה של כל ה
-    this.GetUsers();
+
+    this.formLogin = new FormGroup({
+      nvUserName: new FormControl(this.user.nvUserName),
+      nvPassword: new FormControl(this.user.nvPassword),
+      nvMail: new FormControl(this.user.nvMail)
+    });  
+      this.GetUsers();
+
   }
 
+  // Login to site
+  Login() {
+    debugger
+    this.user = this.formLogin.value;
+    //חיפוש המשתמש בתוך הרשימה
+    if (this.user) {
+      this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName && u.nvPassword == this.user.nvPassword);
+      if (this.currentUser)//אם שם והסיסמה נכונים
+      {
+        //שנכנס לשמירה בסרויס user שליחה של ה
+        this.mainService.currentUser = this.currentUser
+        this.UserLogin(this.user.nvUserName, this.user.nvPassword, this.user.nvMail);//  עידכון המשתמש הנוכחי בשרת 
+        this.mainService.serviceNavigate("header-menu");
+      }
+      else {
+
+        alert("שם וסיסמה אינם תקינים");
+      }
+    }
+
+  }
+ 
   GetUsers() {
     this.mainService.post("GetUsers", {})
       .then(
         res => {
-          if (res) {
-            this.usersList = res;
-            //חיפוש המשתמש הזה בתוך הרשימה
-            this.currentUser = this.usersList.find(u => u.nvUserName == this.user.nvUserName
-              && u.nvPassword == this.user.nvPassword);
-            //שנכנס למערכת לשמירה בסרויס user שליחה של ה
-            this.mainService.saveUser(this.currentUser);
-            if(this.userExist==true)
-            {
-              this.mainService.serviceNavigate("header-menu");
-            }
-          }
-          else
-            alert("GetUsers login error");
+          this.usersList = res;
         },
         err => {
-          alert("error");
+          alert(err + "get users err");
         }
       );
   }
+
 
   UserLogin(UnvUserName: string, UnvPassword: string, UnvMail: string) {
     this.mainService.post("UserLogin", { nvUserName: UnvUserName, nvPassword: UnvPassword, nvMail: UnvMail })
       .then(
         res => {
           if (res.iUserId)
-            this.userExist= true;
+            this.userExist = true;
+
           else {
             alert("userLogin error");
-            this.userExist= false;
+            this.userExist = false;
           }
         },
         err => {
           alert("err")
-          this.userExist= false;
+          this.userExist = false;
         }
       );
   }
-  //אתחול סיסמא
-  resetUser() {
-    if (this.enterByUserName)
-      this.enterByUserName = false;
-    else
-      this.enterByUserName = true;
-  }
+  
+  forgot: boolean = false;
+
+
   //שליחת מייל לאיפוס הסיסמא
-  sentMailToResetPassword() {
-    alert(this.user.nvMail + " we are sorry but our mail dose not work!")
+  sentMailToResetPassword(mail: string) {
+    debugger
+    this.user.nvPassword = null;
+    this.mainService.post("UserReset", { nvMail: mail }).then
+      (
+        res => {
+          if (!res.iUserId) {
+            alert("לא קים מייל זה")
+          }
+          else {
+            this.forgot = false;
+            alert("סיסמתך נשלחה בהצלחה!")
+          }
+        },
+        err => {
+          alert("err UserReset")
+        }
+      )
+
   }
-  UserLoginControls() {
-    this.formLogin = new FormGroup({
-      nvUserName: new FormControl(this.user.nvUserName),
-      nvPassword: new FormControl(this.user.nvPassword),
-      nvMail: new FormControl(this.user.nvMail)
-    });
-  }
+
+  
+
   get nvUserName() {
     return this.formLogin.get("nvUserName");
   }

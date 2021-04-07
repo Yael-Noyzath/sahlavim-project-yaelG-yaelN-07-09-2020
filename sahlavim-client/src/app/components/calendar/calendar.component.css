@@ -1,0 +1,35 @@
+.row{
+    background-color: white;
+    width: 85%;
+    margin: auto;
+}
+#calendar{
+    width: 85%;height: 50%; background: transparent;margin: auto;
+}
+mat-form-field {
+    margin-right: 12px;
+  }
+  
+  .btnOp{
+    background-color: white;
+    color:rgb(192, 31, 31) ;
+    font-family: inherit;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+    .cal-week-view .cal-day-headers {
+        
+        padding-left: 0 !important;
+        padding-right: 68px !important;
+
+    }
+
+    p{
+        margin-bottom: 0px;
+        font-size: 18px;
+    }
+    .btn-group .btn{
+        color: white;
+    }
+    

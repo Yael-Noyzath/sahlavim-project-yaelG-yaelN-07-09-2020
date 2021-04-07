@@ -1,0 +1,28 @@
+.managementColor {
+    color:var(--managerClr);
+}
+.managementBtn {
+    background-color:var(--managerClr);
+    color: white;
+}
+
+.header {
+    padding: 5px;
+   
+}
+mat-form-field {
+    width: 180px;
+  } 
+
+
+/* .container{
+  background-image:url(src\Images\CBGOrchidsMarch2018-4323-Edit-550x367.jpg) ;
+} */
+.addMsg{
+  text-align: center;
+  margin-bottom: 10px;
+}
+table {
+
+  width: 100%;
+}

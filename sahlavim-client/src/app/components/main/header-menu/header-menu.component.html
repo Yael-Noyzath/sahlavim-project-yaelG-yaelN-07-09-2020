@@ -1,26 +1,54 @@
-<div class="container" dir="rtl">
-    <div class="col-lg-12">
-        <a href="/" class="col-lg-offset-2">
-            <img style="text-align:center" height="90px" width="150px" src="assets/Images/logo-JPG.jpg">
-        </a>
-        
-        <a routerLink="/header-menu/operators/operator-table" routerLinkActive="activeLink" class="button operatorBtn" mat-button value="operator" >מפעילים</a>
+<div class="body" data-mdb-perfect-scrollbar='true' dir="rtl">
 
-        <a routerLink="/header-menu/settings" routerLinkActive="activeLink" class="button settingBtn" mat-button value="setting" >מסגרות</a>
-        
-        <a routerLink="/header-menu/programs" routerLinkActive="activeLink" class="button programBtn" mat-button value="program" >תוכניות</a>
-      
-        <a routerLink="/header-menu/managers-table" routerLinkActive="activeLink" class="button managementBtn" mat-button value="management" >ניהול</a>
-        
-        <a href="/">התנתק</a>
+
+    <div class="container-fluid col-lg-12">
+        <div class="row">
+            <div class="img col-sm-3">
+                <a href="/">
+                    <img class="img-responsive" src="assets/Images/logo-JPG.jpg">
+                </a>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;" class="middle col-lg-6 col-sm-8">
+
+                <a style="border-bottom: 3px solid var(--operatorClr);" [ngStyle]="{'font-size':activeLink==1? '25px': '20px'}" (click)="wel=false;activeLink=1" routerLink="operators/operator-table" 
+                    value="operator">מפעילים</a>
+
+                <a style="border-bottom:3px solid var(--settingClr);" [ngStyle]="{'font-size':activeLink==2? '25px': '20px'}" (click)="wel=false;activeLink=2" routerLink="settings/setting-table" 
+                    value="setting">מסגרות</a>
+
+                <a style="border-bottom:3px solid var(--programClr);" [ngStyle]="{'font-size':activeLink==3? '25px': '20px'}" (click)="wel=false;activeLink=3" routerLink="programs/programs-table" 
+                    value="program">תוכניות</a>
+
+                <a style="border-bottom:3px solid var(--afternoonClr);" [ngStyle]="{'font-size':activeLink==4? '25px': '20px'}" (click)="wel=false;activeLink=4" routerLink="afternoon/afternoon-table" 
+                    value="afternoon">צהרונים</a>
+
+                <a style="border-bottom:3px solid var(--managerClr);" [ngStyle]="{'font-size':activeLink==5? '25px': '20px'}" (click)="wel=false;activeLink=5" routerLink="management-menu/managers-table" 
+                    value="management">ניהול</a>
+            </div>
+
+            <div style="text-align: center;" class="col-sm-1 col-lg-3">
+                <p>שלום {{currentUser.nvUserName}}</p>
+                <a style="text-align: center;color:black;text-decoration: underline;" href="/">התנתק</a>
+            </div>
+        </div>
     </div>
-    <p>שלום {{currentUser.nvUserName}}</p>
+
+
+    <div *ngIf="wel" class="welcome">
+        <h1 style="font-size: 90px;">ברוכים הבאים <br>
+            למנהלי העמותה</h1>
+        <div style="width: 80%;">
+            <p class="p">
+                אתר זה נועד בכדי להקל על ניהול תחומי פעילות העמותה, כמו
+                חוגים, קייטנות, גני ילדים, צהרונים, קונסרבטוריון, פעילויות ספורט עממיות ותחרותיות, פרויקטים קהילתיים,
+                פעילויות לבעלי צרכים מיוחדים, שהם רק חלק מהשירותים שמעניקה עמותת סחלבים לתושבי מודיעין מכבים רעות.
+                באפשרותך לצפות ולערוך את הפעילויות בצורה יעילה ופשוטה.
+                לכל שאלה בנוגע לאתר ניתן ליפנות אל: yaeli10@gmail.com
+            </p>
+        </div>
+
+    </div>
+    <router-outlet></router-outlet>
+
 </div>
-
-<hr>
-
-<!-- <div *ngIf="showWelcome" style=" text-align:center;padding-top: 100px;">
-    <h1>ברוכה הבאה <br>
-        למנהלי עמותת סחלבים</h1>
-</div> -->
-<router-outlet></router-outlet>

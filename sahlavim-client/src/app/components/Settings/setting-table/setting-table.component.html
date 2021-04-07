@@ -1,0 +1,250 @@
+<div class="container-" style="text-align:right;margin: auto; " dir="rtl">
+   
+    <div class="addMsg row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+            <button mat-stroked-button class="settingColor" data-toggle="modal" data-target="#modalCart"
+                (click)="emailList()">שליחת הודעה</button>
+            <button mat-stroked-button class="settingColor" (click)="addSetting()"> הוספת מסגרת</button>
+        </div>
+        <div class="col-lg-3">
+            <button mat-button class="settingBtn" (click)="exporter.exportTable('xls',{fileName:'settingsTable'})">ייצא ל Excel</button>
+        </div>
+
+
+    </div>
+
+    <div *ngIf="openDetails==false" style="width: 90%;margin: auto;" class="overflow-auto">
+        <table [hiddenColumns]=[0,1,11] mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200"
+            #exporter="matTableExporter" mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="select">
+                <th>בחירה</th>
+                <th class="header" style="width:2%;" mat-header-cell *matHeaderCellDef>
+                    <!--Select All-->
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        <!-- [aria-label]="checkboxLabel()" -->
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                        <!-- [aria-label]="checkboxLabel(row)" -->
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+            <!-- SettingId Column -->
+            <ng-container matColumnDef="iSettingId">
+                <th class="header" style="width: 5%;" mat-header-cell *matHeaderCellDef> מזהה מסגרת
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="SettingIdFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.iSettingId}} </td>
+            </ng-container>
+
+            <!-- SettingName Column -->
+            <ng-container matColumnDef="nvSettingName">
+                <th class="header" style="width: 5%;" mat-header-cell *matHeaderCellDef> שם מסגרת
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="SettingNameFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvSettingName}} </td>
+            </ng-container>
+
+            <!-- SettingType Column -->
+            <ng-container matColumnDef="iSettingType">
+                <th class="header" style="width: 4%;" mat-header-cell *matHeaderCellDef>סוג
+                    <!-- <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                        
+                        <input matInput value="חפש" [formControl]="SettingTypeFilter">
+                    </mat-form-field> -->
+                </th>
+                <td mat-cell *matCellDef="let row">{{this.lSettingTypeValue.get(row.iSettingType)}}</td>
+            </ng-container>
+            <!-- this.lSettingType[row.nvSettingType-17].Value -->
+
+            <!-- Address Column -->
+            <ng-container matColumnDef="nvAddress">
+                <th class="header" style="width:10%;" mat-header-cell *matHeaderCellDef>כתובת
+                    <br>
+                    <mat-form-field style="width: 170px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="AddressFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvAddress}} </td>
+            </ng-container>
+
+
+            <!-- Phone  Column -->
+            <ng-container matColumnDef="nvPhone">
+                <th class="header" style="width: 4%;" mat-header-cell *matHeaderCellDef> טלפון
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="PhoneFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvPhone}} </td>
+            </ng-container>
+
+            <!-- ContactPerson  Column -->
+            <ng-container matColumnDef="nvContactPerson">
+                <th class="header" style="width:3%;" mat-header-cell *matHeaderCellDef> שם איש קשר
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="ContactPersonFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvContactPerson}} </td>
+            </ng-container>
+
+            <!-- ContactPersonMail  Column -->
+            <ng-container matColumnDef="nvContactPersonMail">
+                <th class="header" style="width: 8%;" mat-header-cell *matHeaderCellDef> מייל איש קשר
+                    <br>
+                    <mat-form-field style="width: 90px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="ContactPersonMailFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvContactPersonMail}} </td>
+            </ng-container>
+
+            <!-- ContactPersonPhone  Column -->
+            <ng-container matColumnDef="nvContactPersonPhone">
+                <th class="header" class="header" style="width: 1%;" mat-header-cell *matHeaderCellDef>טלפון איש קשר
+                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+
+                        <input matInput value="חפש" [formControl]="ContactPersonPhoneFilter">
+                    </mat-form-field>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.nvContactPersonPhone}} </td>
+            </ng-container>
+
+            <!-- SettingAgegroupsValue  Column -->
+            <ng-container matColumnDef="lSettingAgegroups">
+                <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>
+                    קטגוריות גילאים
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <div *ngFor="let r of row.lSettingAgegroups" style="display: inline;">
+                        {{this.lSettingAgegroupsValue.get(r)}},
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- FullName  Column -->
+            <!-- <ng-container matColumnDef="nvFullName">
+            <th class="header" class="header" style="width: 5%;" mat-header-cell *matHeaderCellDef  >רכזת </th>
+            <td mat-cell *matCellDef="let row"> {{row.nvFullName}} </td>
+        </ng-container> -->
+
+            <!-- Mail  Column -->
+            <!-- <ng-container matColumnDef="nvMail">
+            <th class="header" class="header" style="width: 5%;" mat-header-cell *matHeaderCellDef  > מייל רכזת </th>
+            <td mat-cell *matCellDef="let row"> {{row.nvMail}} </td>
+        </ng-container> -->
+
+            <!-- PhoneCoordinator  Column -->
+            <!-- <ng-container matColumnDef="nvPhoneCoordinator">
+            <th class="header" class="header" style="width: 8%;" mat-header-cell *matHeaderCellDef  >טלפון רכזת </th>
+            <td mat-cell *matCellDef="let row"> {{row.nvPhoneCoordinator}} </td>
+        </ng-container> -->
+
+            <!-- Coordinator Column -->
+            <ng-container matColumnDef="CoordinatorDetails">
+                <th class="header" style="width:2%;" mat-header-cell *matHeaderCellDef> פרטי רכזת </th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- (click)="redirectToDelete(element.id)" -->
+                    <button mat-icon-button class="settingColor"
+                        (click)="CoordinatorDetails(element,element.iCoordinatorId)">
+                        <mat-icon class="mat-18">list</mat-icon>
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="edit">
+                <th class="header" style="width:2%;" mat-header-cell *matHeaderCellDef>עריכה </th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- (click)="redirectToDelete(element.id)" -->
+                    <button mat-icon-button class="settingColor" (click)="EditSetting(element)">
+                        <mat-icon class="mat-18">edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[7]"></mat-paginator>
+    </div>
+    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header" style="text-align:center;">
+                    <h4 style="width: 100%; " class="modal-title" id="myModalLabel">שליחת הודעה</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+
+                <div class="modal-body" style="text-align:right;" dir="rtl">
+                    <label style="display:inline-block;font-weight:500;">שולח ל: </label>
+                    <div *ngIf="selection.selected.length==0" class="alert alert-danger">
+                        בחר מסגרות בטבלה אליהם הנך רוצה לשלוח
+                    </div>
+                    <h5 style="font-size:18px;font-weight:400;display:inline-block;margin-right: 5px;"
+                        *ngFor="let element of selection.selected"> {{element.nvSettingName}}, </h5>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>נושא</mat-label>
+                        <input matInput placeholder="נושא" [(ngModel)]="emailSubject">
+                    </mat-form-field><br>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>הודעה </mat-label>
+                        <textarea [(ngModel)]="emailContent" cols="30" rows="5" matInput></textarea>
+                    </mat-form-field>
+
+                </div>
+
+                <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
+                    <button mat-raised-button class="settingBtn" (click)="sendEmail()"
+                        [disabled]="selection.selected.length==0">שלח</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-accordion *ngIf="openDetails==true">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false; openDetails=false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <!-- <p *ngIf="panelOpenState">לחץ לסגירה</p>
+                    <p *ngIf="!panelOpenState">לחץ לפרטי רכזת</p> -->
+                </mat-panel-title>
+
+                <mat-panel-description>
+                    {{currentSetting.iSettingId}} | {{currentSetting.nvSettingName}} | {{currentSetting.nvAddress}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <p>שם: {{coordinator.nvFirstName}} {{coordinator.nvLastName}} </p>
+            <p>טלפון: {{coordinator.nvPhone}}</p>
+            <p>{{coordinator.nvMail}} :מייל </p>
+        </mat-expansion-panel>
+    </mat-accordion>

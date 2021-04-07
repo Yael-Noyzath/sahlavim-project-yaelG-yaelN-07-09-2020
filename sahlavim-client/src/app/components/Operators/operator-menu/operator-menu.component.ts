@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Operator } from 'src/app/classes/operator';
 import { MainServiceService } from 'src/app/services/MainService/main-service.service';
 
@@ -11,24 +11,16 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 export class OperatorMenuComponent implements OnInit {
   id: string;
   operator: Operator;
-  constructor(private route: ActivatedRoute, private mainService: MainServiceService) { }
+  idOperator:number;
+  
+  constructor(private router: Router, private route: ActivatedRoute, private mainService: MainServiceService) {
+    this.operator = this.mainService.operatorForDetails;
+    this.router.navigate(['./operator-details'], { relativeTo: this.route });
+    this.idOperator = parseInt(this.route.snapshot.paramMap.get('id'));
+
+  }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id')
-
-    this.mainService.post("GetOperator", { iOperatorId: Number(this.id)  })
-      .then(
-        res => {
-          if (res) {
-            this.operator = res;
-            // }
-            // else
-            //   alert("There is an Error")
-          }
-        }
-        , err => {
-          alert("There is an Error")
-        }
-      );
+let t=100;
   }
 }

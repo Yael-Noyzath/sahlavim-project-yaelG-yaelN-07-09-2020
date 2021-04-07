@@ -9,36 +9,18 @@ import { MainServiceService } from 'src/app/services/MainService/main-service.se
 })
 export class HeaderMenuComponent implements OnInit {
 
-  showWelcome: boolean = true;
+  wel: boolean = true;
   currentUser: User = new User();
-
+  activeLink:number;
   ngOnInit() {
+    this.currentUser = this.mainService.currentUser;
+
   }
 
   constructor(private mainService: MainServiceService) {
-    this.currentUser = this.mainService.getUser();
+    
   }
 
-  
-  // setting() {
-  //   this.showWelcome = false;
-  //   this.mainService.serviceNavigate("/header-menu/settings");
 
-  // }
-  // management() {
-  //   this.mainService.serviceNavigate("/header-menu/managers-table");
-  //   this.showWelcome = false;
-
-  // }
-  // operator() {
-  //   this.mainService.serviceNavigate("/header-menu/operators");
-  //   this.showWelcome = false;
-
-  // }
-  // program() {
-  //   this.mainService.serviceNavigate("/header-menu/programs");
-  //   this.showWelcome = false;
-
-  // }
 
 }
