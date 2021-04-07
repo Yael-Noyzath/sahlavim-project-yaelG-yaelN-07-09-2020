@@ -11,17 +11,27 @@ import { Activity } from 'src/app/classes/activity';
 import { MessageDialogComponent } from '../../message-dialog/message-dialog.component';
 import { de } from 'date-fns/locale';
 
+export class ItimesArray {
+  fromTimeMorning:Date;
+  toTimeMorning:Date;
+}
 @Component({
   selector: 'app-operator-details',
   templateUrl: './operator-details.component.html',
   styleUrls: ['./operator-details.component.css']
 })
+
 export class OperatorDetailsComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
   dropdownNeighborhoods: IDropdownSettings;
   operatorsAvailability: operatorsAvailability[] = [];
 
   modelContent:number=0;
+  modelTitle=[
+'לו"ז צהרונים','לו"ז קייטנת קיץ','לו"ז קייטנת חנוכה', 'לו"ז קייטנת פסח'
+  ]
+
+  timesArray:ItimesArray[]=[];
   //רשימת שכונות
   NeighborhoodsList: forSelect[] = [];
   operatorNeighborhoods: forSelect[] = [];
@@ -83,6 +93,7 @@ export class OperatorDetailsComponent implements OnInit {
       this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
         res => {
           this.operatorsAvailability = res;
+          debugger
           
         },
         err => {
@@ -146,9 +157,22 @@ export class OperatorDetailsComponent implements OnInit {
       'חמישי'
   ];
   availability: operatorsAvailability[] = [];
-  createNoonsArray(type:number) {
+  createNoonsArray(type:number,model) {
+    this.modelContent=model;
     this.availability = this.operatorsAvailability.filter(x => x.iOperatorId == this.operator.iOperatorId && x.iOperatorAvailabilityType == type);
-    
+    //create times array for Chanuka active
+    if(this.modelContent==2)
+    {
+this.availability.forEach((element,index )=> {
+  var d:ItimesArray=new ItimesArray();
+  d.toTimeMorning.setHours(+element.tMorningToTime,0);
+  debugger
+  d.fromTimeMorning.setHours(+element.tMorningFromTime,0);
+  this.timesArray.push(d);
+   
+
+});debugger
+    }
   }
 
   modal: boolean = true;

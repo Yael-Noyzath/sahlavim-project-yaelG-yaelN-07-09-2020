@@ -30,6 +30,7 @@ export class MainServiceService {
 
     this.globalObj();
     this.getSettings();
+    
     this.getAllOperators();
     this.getPrograms();
     this.getAfternoon();
@@ -170,6 +171,7 @@ export class MainServiceService {
       .then(
         res => {
           this.operatorsList = res;
+          debugger
           //Delete duplicates valus from schollexcude list in each operator
           this.operatorsList.forEach(element => {
             element.lSchoolsExcude = element.lSchoolsExcude.filter(

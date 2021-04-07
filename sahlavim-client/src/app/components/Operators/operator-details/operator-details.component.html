@@ -136,7 +136,7 @@
                     <mat-checkbox [(ngModel)]="operator.bActiveAfternoon" [checked]="operator.bActiveAfternoon"
                         name="ActiveAfternoon" class="example-margin">עובד בצהרונים</mat-checkbox>
                 </section>
-                <a [ngClass]="!operator.bActiveAfternoon?'disabled':'a'" (click)="createNoonsArray(28); modelContent=1"
+                <a [ngClass]="!operator.bActiveAfternoon?'disabled':'a'" (click)="createNoonsArray(28,0)"
                     data-toggle="modal" data-target="#Modal"> עריכת
                     לו"ז צהרונים</a><br>
 
@@ -146,7 +146,7 @@
                         name="ActiveChanukahCamp" class="example-margin">עובד בקייטנת חנוכה</mat-checkbox>
                 </section>
                 <a [ngClass]="!operator.bActiveChanukahCamp?'disabled':'a'" data-toggle="modal"
-                    data-target="#Modal" (click)="createNoonsArray(30); modelContent=2">
+                    data-target="#Modal" (click)="createNoonsArray(30,2) ">
                     עריכת לו"ז קייטנת חנוכה</a><br>
 
                 <section style="direction: rtl;" class="example-section">
@@ -222,7 +222,7 @@
         <div class="modal-content" style="width: 70%;margin: auto;">
             <!--Header-->
             <div class="modal-header" style="text-align:center;">
-                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">לו"ז צהרונים</h4>
+                <h4 style="width: 100%;" class="modal-title" id="myModalLabel">{{modelTitle[modelContent]}}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -231,7 +231,7 @@
             <!--Body-->
 
             <div class="modal-body" style="text-align:center;" dir="rtl">
-                <div *ngIf="modelContent==1">
+                <div *ngIf="modelContent==0">
                          <div  id="day" *ngFor="let a of availability;index as i">
                     <section style="direction: rtl;padding-left: 30px;" class="example-section">
                         <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">{{daysNames[i]}}
@@ -252,24 +252,18 @@
                 <div *ngIf="modelContent==2">
     <div   *ngFor="let a of availability;index as i">
         <section style="direction: rtl;padding-left: 30px;" class="example-section">
-            <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">{{daysNames[i]}}
+            <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">בוקר {{daysNames[i]}}
             </mat-checkbox>
         </section>
         <mat-form-field class="example-full-width">
             <mat-label>שעת התחלה</mat-label>
-            <input type="number" [(ngModel)]="availability[i].iNumLeaders" min="8" matInput
-                placeholder="הכנס מיספר">
-            <!-- <p>{{availability[i].iNumLeaders}}</p> -->
-            <!-- <mat-hint class="mat-hint" align="end">{{ availability[i].iNumLeaders| required }}</mat-hint> -->
+            <input type="time" [(ngModel)]="timesArray[i].fromTimeMorning" matInput>
 
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>שעת סיום</mat-label>
-            <input type="number" [(ngModel)]="availability[i].iNumLeaders" min="14" matInput
-                placeholder="הכנס מיספר">
-            <!-- <p>{{availability[i].iNumLeaders}}</p> -->
-            <!-- <mat-hint class="mat-hint" align="end">{{ availability[i].iNumLeaders| required }}</mat-hint> -->
-
+            <input type="time" [(ngModel)]="timesArray[i].toTimeMorning" min="14" matInput>
+         
         </mat-form-field>
 
     </div>

@@ -13,8 +13,8 @@
                 <mat-form-field class="example-form-field">
                     <mat-select [(ngModel)]="currentProgram.iProgramType" required placeholder="סוג תוכנית"
                         name="iProgramType">
-                        <mat-option *ngFor="let s of lProgramTypeValue.keys()" [value]="s">
-                            {{this.lProgramTypeValue.get(s)}}
+                        <mat-option *ngFor="let s of lProgramTypeValue" [value]="s.Key">
+                            {{this.s.Value}}
                         </mat-option>
                     </mat-select>
                     <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -24,7 +24,7 @@
                 <mat-form-field class="example-form-field">
                     <mat-label>שם תוכנית</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvProgramName" name="nvProgramName"
-                        required />
+                         />
                     <mat-hint align="end">{{ currentProgram.nvProgramName| required }}</mat-hint>
 
                 </mat-form-field><br>
@@ -33,7 +33,7 @@
                     <input matInput type="text" [(ngModel)]="currentProgram.nvBudgetItem" name="nvBudgetItem" />
                 </mat-form-field><br>
 
-                
+
                 <div class="col-sm-12" style="margin: auto;">
                     <p style="font-size: smaller;">קטגורית גילאים</p>
                     <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
@@ -56,13 +56,13 @@
                 <div>
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות מועדפות</mat-label>
-                        <input matInput type="number" required [(ngModel)]="currentProgram.iActivityPreferenceCount"
+                        <input matInput type="number" min="0" min="0" required [(ngModel)]="currentProgram.iActivityPreferenceCount"
                             name="iActivityPreferenceCount" />
 
                     </mat-form-field><br>
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות מועדפות לשבוע</mat-label>
-                        <input matInput type="number" required
+                        <input matInput type="number" min="0" required
                             [(ngModel)]="currentProgram.iActivityPreferenceInWeekCount"
                             name="iActivityPreferenceInWeekCount" />
 
@@ -74,7 +74,7 @@
 
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות בוקר</mat-label>
-                        <input matInput type="number" required [(ngModel)]="currentProgram.iNumActivityMorning"
+                        <input matInput type="number" min="0" required [(ngModel)]="currentProgram.iNumActivityMorning"
                             name="iNumActivityMorning" />
 
                     </mat-form-field><br>
@@ -96,7 +96,7 @@
 
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות צהריים</mat-label>
-                        <input matInput type="number" required [(ngModel)]="currentProgram.iNumActivityAfternoon"
+                        <input matInput type="number" min="0" required [(ngModel)]="currentProgram.iNumActivityAfternoon"
                             name="iNumActivityAfternoon" />
 
                     </mat-form-field><br>
