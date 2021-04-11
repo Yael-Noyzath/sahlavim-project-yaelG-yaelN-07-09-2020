@@ -117,23 +117,29 @@ export class OperatorActivitiesComponent implements OnInit {
   }
 
   saveActiveChanges() {
+    this.mainService.post("ActivityInsertUpdate", { oActivity: this.CurrentActivity, iUserId: this.mainService.currentUser.iUserId }).then(
+      res => {
+        let result = res;
+        debugger
+      },
+      error => {
+        alert(error);
+      }
+);
 
-    console.log(this.CurrentActivity);
-    debugger
+}
 
-  }
+onItemSelect(a: forSelect) {
+  this.CurrentActivity.lActivityAgegroups.push(a.Key)
+}
+onSelectAll(a: forSelect[]) {
+  this.CurrentActivity.lActivityAgegroups = Array.from(this.mainService.SysTableList[6].keys());
+}
 
-  onItemSelect(a: forSelect) {
-    this.CurrentActivity.lActivityAgegroups.push(a.Key)
-  }
-  onSelectAll(a: forSelect[]) {
-    this.CurrentActivity.lActivityAgegroups = Array.from(this.mainService.SysTableList[6].keys());
-  }
-
-  OnItemDeSelect(a: forSelect) {
-    this.CurrentActivity.lActivityAgegroups.splice(this.CurrentActivity.lActivityAgegroups.findIndex(x => x == a.Key), 1);
-  }
-  onDeSelectAll() {
-    this.CurrentActivity.lActivityAgegroups = [];
-  }
+OnItemDeSelect(a: forSelect) {
+  this.CurrentActivity.lActivityAgegroups.splice(this.CurrentActivity.lActivityAgegroups.findIndex(x => x == a.Key), 1);
+}
+onDeSelectAll() {
+  this.CurrentActivity.lActivityAgegroups = [];
+}
 }

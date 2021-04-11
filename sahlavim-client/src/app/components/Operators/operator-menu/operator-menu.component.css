@@ -23,5 +23,5 @@ li a {
  } 
  
  li a:hover {
-   background-color: #111;
+   background-color: rgba(148, 141, 141, 0.637);
  }
