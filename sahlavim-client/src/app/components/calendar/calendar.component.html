@@ -140,7 +140,7 @@
                     <label class="example-margin">למסגרת:</label><br>
                     <mat-form-field>
                         <mat-label>בחר מיסגרת</mat-label>
-                        <mat-select name="settingId" [(ngModel)]="eventToEdit.iSettingId"
+                        <mat-select [(ngModel)]="eventToEdit.iSettingId" name="settingId"
                             (ngModelChange)="fillLists('setting')">
                             <mat-option *ngFor="let s of settingsList" [value]="s.iSettingId">
                                 {{s.nvSettingName}}

@@ -169,11 +169,14 @@ export class CalendarComponent implements OnInit {
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
+      this.eventToEdit.iOperatorId=this.operator.iOperatorId;
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
       this.types['iSettingId'] = this.mainService.settingForDetails.iSettingId;
       this.objName = 'מסגרת ' + this.currentSetting.nvSettingName;
+      this.eventToEdit.iSettingId=this.currentSetting.iSettingId;
+
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
@@ -181,6 +184,8 @@ export class CalendarComponent implements OnInit {
 
       this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
+      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+
 
     }
     
