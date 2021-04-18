@@ -36,9 +36,9 @@ h4{
    padding: 10px;
 
  }
- #work section{
+ /* #work section{
    margin-right: 110px;
- }
+ } */
  a{
   font-size: 14px;
   cursor: pointer;
@@ -49,10 +49,15 @@ h4{
 #day .example-section, .example-full-width{
   display: inline-block;
 }
+
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+      background-color:  rgb(219 162 162) !important; 
+  }
+
 #work{
   margin-top: 20px;
   width: 60%;
-  margin: auto;
+margin-right: 30%;
   text-align: right;  
   padding-bottom: 30px;
 }
@@ -68,9 +73,9 @@ h4{
     margin-left: 30px;
 }
 
-mat-icon{
+.saveIcon{
   
-  font-size: 40px;
+  font-size: 48px;
   text-shadow: 10px 10px 20px #ffffff;
 
 }
@@ -80,7 +85,6 @@ mat-icon{
   width: 30%;
   text-align: justify;
   margin: auto;
-  margin-right: 42%;
 }
 
 form {
@@ -115,4 +119,14 @@ mat-form-field{
 {
   width: 50%; margin: auto;  padding-top: 35px;
 
+}
+.example-full-width{
+  width: 110px;
+  margin-left: 18px;
+
+}
+ .saveDialog{
+  background-color: var(--operatorClr);
+    border-color: var(--operatorClr);
+    color: white;
 }

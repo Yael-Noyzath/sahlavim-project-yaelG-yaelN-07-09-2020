@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatSelect, MatSort, MatTableDataSource } from '@angular/material';
 import { Activity } from 'src/app/classes/activity';
 import { MatTableModule } from '@angular/material/table';
@@ -8,6 +8,8 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { AfterViewInit, OnDestroy } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-operator-activities',
@@ -47,8 +49,9 @@ export class OperatorActivitiesComponent implements OnInit {
   AgesSelected: forSelect[] = [];
   ActivitiesType: forSelect[] = [];
   activeType: forSelect;
+  @ViewChild("content",{static:true}) private contentRef: TemplateRef<Object>;
 
-  constructor(private mainService: MainServiceService) { }
+  constructor(private modalService: NgbModal,private mainService: MainServiceService) { }
 
 
   ngOnInit() {
@@ -62,7 +65,7 @@ export class OperatorActivitiesComponent implements OnInit {
     this.agesCategories = this.mainService.gItems[6].dParams;
     this.activityCategories = this.mainService.SysTableList[7];
 
-
+   // this.AgesSelected.push(this.agesCategories.find(x => x.Key == 21));
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -71,11 +74,10 @@ export class OperatorActivitiesComponent implements OnInit {
       textField: 'Value',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 2,
       allowSearchFilter: true
     };
   }
-
   ngAfterViewInit() {
     this.setInitialValue();
     this.dataSource.paginator = this.paginator;
@@ -106,34 +108,56 @@ export class OperatorActivitiesComponent implements OnInit {
   }
 
 
-
-  EditActivity(Activity: Activity) {
+show:boolean=false;
+  EditActivity(Activity: Activity){ 
+    debugger
     this.CurrentActivity = Activity;
     this.activControl = this.ActivitiesType.find(x => x.Key == this.CurrentActivity.iCategoryType);
     if (this.CurrentActivity.lActivityAgegroups != null) {
       for (let a of this.CurrentActivity.lActivityAgegroups)
-        this.AgesSelected.push(this.agesCategories.find(x => x.Key == a));
+       if(this.AgesSelected.find(x=>x.Key==a)==null)
+       {
+         this.AgesSelected.push(this.agesCategories.find(x => x.Key == a));
+       } 
     }
-  }
-
-  saveActiveChanges() {
-
-    console.log(this.CurrentActivity);
     debugger
+    //this.modalService.open(this.contentRef, {ariaLabelledBy: 'modal-basic-title'})
+this.show=true;
+  }
+close(){
+  this.AgesSelected=[];
+  debugger
+}
+  saveActiveChanges() {
+    debugger
+    this.CurrentActivity.lActivityAgegroups=[];
+    this.AgesSelected.forEach(element=>{
+this.CurrentActivity.lActivityAgegroups.push(element.Key);
+    });
 
-  }
+    this.mainService.post("ActivityInsertUpdate", { oActivity: this.CurrentActivity, iUserId: this.mainService.currentUser.iUserId }).then(
+      res => {
+        this.CurrentActivity=res;
+        
+      },
+      error => {
+        alert(error);
+      }
+);
 
-  onItemSelect(a: forSelect) {
-    this.CurrentActivity.lActivityAgegroups.push(a.Key)
-  }
-  onSelectAll(a: forSelect[]) {
-    this.CurrentActivity.lActivityAgegroups = Array.from(this.mainService.SysTableList[6].keys());
-  }
+}
 
-  OnItemDeSelect(a: forSelect) {
-    this.CurrentActivity.lActivityAgegroups.splice(this.CurrentActivity.lActivityAgegroups.findIndex(x => x == a.Key), 1);
-  }
-  onDeSelectAll() {
-    this.CurrentActivity.lActivityAgegroups = [];
-  }
+onItemSelect(a: forSelect) {
+  this.CurrentActivity.lActivityAgegroups.push(a.Key)
+}
+onSelectAll(a: forSelect[]) {
+  this.CurrentActivity.lActivityAgegroups = Array.from(this.mainService.SysTableList[6].keys());
+}
+
+OnItemDeSelect(a: forSelect) {
+  this.CurrentActivity.lActivityAgegroups.splice(this.CurrentActivity.lActivityAgegroups.findIndex(x => x == a.Key), 1);
+}
+onDeSelectAll() {
+  this.CurrentActivity.lActivityAgegroups = [];
+}
 }

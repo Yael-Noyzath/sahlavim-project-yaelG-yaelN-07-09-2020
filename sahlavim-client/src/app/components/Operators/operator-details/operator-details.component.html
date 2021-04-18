@@ -1,10 +1,13 @@
 <div class="form-group col-sm-12" style=" text-align: center;direction: rtl;" class="Details">
     <div class="form-group row">
         <form class="form" (ngSubmit)="checkFormValid()">
-            <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
-                <mat-icon>save</mat-icon>
-
+            <button matTooltip="שמור" class="saveIconBtn" mat-icon-button
+                aria-label="Example icon button with a home icon" title="שמור"> <br>
+                
+                <mat-icon class="saveIcon">save</mat-icon>
             </button>
+
+
             <h3 class="newObj" *ngIf="newOp"> מפעיל חדש חדשה</h3>
 
             <div style="height: 170px;margin: auto;width: 50%;padding-top: 25px;">
@@ -35,7 +38,8 @@
                     </mat-radio-button>
 
                 </mat-radio-group> <br>
-                <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{operator.iOperatorType|required}}</mat-hint>
+                <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">
+                    {{operator.iOperatorType|required}}</mat-hint>
 
             </section>
 
@@ -87,7 +91,8 @@
                         (onDeSelectAll)="onDeSelectAll('talanSchool')"
                         (onDeSelect)="OnItemDeSelect($event,'talanSchool')" [disabled]="!operator.bTalan">
                     </ng-multiselect-dropdown>
-                    <mat-hint class="mat-hint" *ngIf="operator.bTalan" align="end">{{ lschool.length| required }}</mat-hint>
+                    <mat-hint class="mat-hint" *ngIf="operator.bTalan" align="end">{{ lschool.length| required }}
+                    </mat-hint>
 
                 </div>
             </div>
@@ -136,7 +141,7 @@
                     <mat-checkbox [(ngModel)]="operator.bActiveAfternoon" [checked]="operator.bActiveAfternoon"
                         name="ActiveAfternoon" class="example-margin">עובד בצהרונים</mat-checkbox>
                 </section>
-                <a [ngClass]="!operator.bActiveAfternoon?'disabled':'a'" (click)="createNoonsArray(28,0)"
+                <a [ngClass]="!operator.bActiveAfternoon?'disabled':'a'" (click)="createNoonsArray(28);modelContent=0"
                     data-toggle="modal" data-target="#Modal"> עריכת
                     לו"ז צהרונים</a><br>
 
@@ -145,16 +150,17 @@
                     <mat-checkbox [(ngModel)]="operator.bActiveChanukahCamp" [checked]="operator.bActiveChanukahCamp"
                         name="ActiveChanukahCamp" class="example-margin">עובד בקייטנת חנוכה</mat-checkbox>
                 </section>
-                <a [ngClass]="!operator.bActiveChanukahCamp?'disabled':'a'" data-toggle="modal"
-                    data-target="#Modal" (click)="createNoonsArray(30,2) ">
+                <a [ngClass]="!operator.bActiveChanukahCamp?'disabled':'a'" data-toggle="modal" data-target="#Modal"
+                    (click)="createNoonsArray(30);modelContent=2 ">
                     עריכת לו"ז קייטנת חנוכה</a><br>
 
                 <section style="direction: rtl;" class="example-section">
                     <mat-checkbox [(ngModel)]="operator.bActivePassoverCamp" [checked]="operator.bActivePassoverCamp"
                         name="ActivePassoverCamp" class="example-margin">עובד בקייטנת פסח</mat-checkbox>
                 </section>
-                <a [ngClass]="!operator.bActivePassoverCamp?'disabled':'a'" data-toggle="modal"
-                    data-target="#modalCart">
+
+                <a [ngClass]="!operator.bActivePassoverCamp?'disabled':'a'" data-toggle="modal" data-target="#Modal"
+                    (click)="createNoonsArray(31);modelContent=3 ">
                     עריכת לו"ז קייטנת פסח</a><br>
 
 
@@ -162,8 +168,8 @@
                     <mat-checkbox [(ngModel)]="operator.bActiveSummerCamp" [checked]="operator.bActiveSummerCamp"
                         name="ActiveSummerCamp" class="example-margin">עובד בקייטנת קיץ</mat-checkbox>
                 </section>
-                <a [ngClass]="!operator.bActiveSummerCamp?'disabled':'a'" data-toggle="modal"
-                    data-target="#Modal">עריכת
+                <a (click)="createNoonsArray(32);modelContent=1 " [ngClass]="!operator.bActiveSummerCamp?'disabled':'a'"
+                    data-toggle="modal" data-target="#Modal">עריכת
                     לו"ז קייטנת קיץ</a>
             </div>
             <h4>פרטי איש קשר </h4>
@@ -196,6 +202,7 @@
                     </mat-option>
                 </mat-select>
                 <mat-hint class="mat-hint" align="end">{{ iCategory| required }}</mat-hint>
+                <mat-hint  align="end">hhh</mat-hint>
 
             </mat-form-field><br>
 
@@ -216,8 +223,7 @@
 </div>
 
 
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="width: 70%;margin: auto;">
             <!--Header-->
@@ -231,51 +237,112 @@
             <!--Body-->
 
             <div class="modal-body" style="text-align:center;" dir="rtl">
-                <div *ngIf="modelContent==0">
-                         <div  id="day" *ngFor="let a of availability;index as i">
-                    <section style="direction: rtl;padding-left: 30px;" class="example-section">
-                        <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">{{daysNames[i]}}
-                        </mat-checkbox>
-                    </section>
-                    <mat-form-field class="example-full-width">
-                        <mat-label>מספר מדריכים</mat-label>
-                        <input type="number" [(ngModel)]="availability[i].iNumLeaders" min="0" matInput
-                            placeholder="הכנס מיספר">
-                        <!-- <p>{{availability[i].iNumLeaders}}</p> -->
-                        <!-- <mat-hint class="mat-hint" align="end">{{ availability[i].iNumLeaders| required }}</mat-hint> -->
 
-                    </mat-form-field>
 
-                </div>
-                </div>
-           
-                <div *ngIf="modelContent==2">
-    <div   *ngFor="let a of availability;index as i">
-        <section style="direction: rtl;padding-left: 30px;" class="example-section">
-            <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">בוקר {{daysNames[i]}}
-            </mat-checkbox>
-        </section>
-        <mat-form-field class="example-full-width">
-            <mat-label>שעת התחלה</mat-label>
-            <input type="time" [(ngModel)]="timesArray[i].fromTimeMorning" matInput>
+                <ng-container [ngSwitch]="modelContent">
+                    <div *ngSwitchCase="0">
+                        <div id="day" *ngFor="let a of availability;index as i">
 
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>שעת סיום</mat-label>
-            <input type="time" [(ngModel)]="timesArray[i].toTimeMorning" min="14" matInput>
-         
-        </mat-form-field>
+                            <section style="direction: rtl;padding-left: 30px;" class="example-section">
+                                <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">
+                                    {{daysNames[i]}}
+                                </mat-checkbox>
+                            </section>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>מספר מדריכים</mat-label>
+                                <input type="number" [(ngModel)]="availability[i].iNumLeaders" min="0" matInput
+                                    placeholder="הכנס מיספר">
+                                <!-- <p>{{availability[i].iNumLeaders}}</p> -->
+                                <!-- <mat-hint class="mat-hint" align="end">{{ availability[i].iNumLeaders| required }}</mat-hint> -->
 
-    </div>
-                </div>
+                            </mat-form-field>
+                        </div>
 
-                <div style="margin: auto;" class="modal-footer">
-                    <button type="button" aria-label="Close" class="btn btn-primary" data-dismiss="modal"
-                        (click)="abilitySave()">שמור</button>
-                </div>
+                    </div>
+
+                    <div *ngSwitchCase="2">
+                        <div *ngFor="let a of availability;index as i">
+                            <section style="direction: rtl;padding-left: 30px;" class="example-section">
+                                <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">
+                                    {{daysNames[i]}} בוקר
+                                </mat-checkbox>
+                            </section>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת התחלה</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningFromTime" matInput>
+
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת סיום</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningToTime" matInput>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="1">
+                        <div *ngFor="let a of availability;index as i">
+                            <section style="direction: rtl;padding-left: 30px;" class="example-section">
+                                <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">
+                                    {{daysNames[i]}}
+                                </mat-checkbox>
+                            </section>בוקר
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת התחלה</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningFromTime" matInput>
+
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת סיום</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningToTime" matInput>
+                            </mat-form-field>
+                            <br>
+                            צהריים
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת התחלה</mat-label>
+                                <input type="time" [(ngModel)]="a.tAfternoonFromTime" matInput>
+
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת סיום</mat-label>
+                                <input type="time" [(ngModel)]="a.tAfternoonToTime" matInput>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="3">
+                        <div *ngFor="let a of availability;index as i">
+                            <section style="direction: rtl;padding-left: 30px;" class="example-section">
+                                <mat-checkbox [(ngModel)]="a.bActive" name="{{daysNames[i]}}" class="example-margin">
+                                    {{daysNames[i]}} בוקר
+                                </mat-checkbox>
+                            </section>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת התחלה</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningFromTime" matInput>
+
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>שעת סיום</mat-label>
+                                <input type="time" [(ngModel)]="a.tMorningToTime" matInput>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+
 
             </div>
-
+            <div style="margin: auto;" class="modal-footer">
+                <button type="button" aria-label="Close" class="btn saveDialog" data-dismiss="modal"
+                    (click)="abilitySave()">שמור</button>
+            </div>
         </div>
     </div>
 </div>
