@@ -161,11 +161,15 @@ export class ProgramDetailsComponent implements OnInit {
         alert("err ProgramSettingsInsertUpdate")
       }
     )
-    debugger
-    this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
-    this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
-    this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();
-    this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
+
+    if (this.currentProgram.tFromTimeMorning != null)
+      this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
+    if (this.currentProgram.tToTimeMorning != null)
+      this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
+    if (this.currentProgram.tFromTimeAfternoon != null)
+      this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();
+    if (this.currentProgram.tToTimeAfternoon != null)
+      this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
 
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
@@ -257,21 +261,20 @@ export class ProgramDetailsComponent implements OnInit {
       return false;
     return true;
   }
-  h:boolean=false;
+  h: boolean = false;
 
   checkFormValid() {
     //check if no mat-hint with context 
     const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
 
-list.forEach(function(Item) {
-  if(Item.innerHTML != '')
-  {
-    alert('נא שים לב לתוכן תקין');
-    this.h = true;
-    return false
-  }
-});
-     
+    list.forEach(function (Item) {
+      if (Item.innerHTML != '') {
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+        return false
+      }
+    });
+
     debugger
 
     if (this.h == false) {
