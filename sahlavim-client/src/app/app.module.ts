@@ -212,5 +212,6 @@ import { MessageDialogComponent } from './components/message-dialog/message-dial
   
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

@@ -224,6 +224,7 @@ export class OperatorDetailsComponent implements OnInit {
 
   abilitySave() {
     debugger
+    console.log(this.operator.iOperatorId,  this.availability,  this.mainService.currentUser.iUserId);
     this.mainService.post("OperatorsAvailabilityUpdt", { iOperatorId: this.operator.iOperatorId, lOperatorsAvailability: this.availability, iUserId: this.mainService.currentUser.iUserId })
       .then(
         res => {
