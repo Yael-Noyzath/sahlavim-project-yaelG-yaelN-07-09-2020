@@ -9,15 +9,16 @@ export class HebrewDatePipe implements PipeTransform {
   Hebcal = require('hebcal');
 
   transform(date: Date): any {
+
     debugger
     if((typeof date)=="string"){
     date=new Date(date);
     var day = new this.Hebcal.HDate(date);
-    console.log("day: "+day );
+    // console.log("day: "+day );
 
-    console.log("day.getDay(): "+day.getDay() );
-    console.log( "day.getMonth(): "+day.getMonth());
-    return this.Hebcal.gematriya(day.getDate()+" "+day.getMonth());
+    // console.log("day.getDay(): "+day.getDay() );
+    // console.log( "day.getMonth(): "+day.getMonth());
+    return (this.Hebcal.gematriya(day.getDate())+" "+this.Hebcal.Month(day.getMonth(),5774) );
 
     }
 //get the hebrew date

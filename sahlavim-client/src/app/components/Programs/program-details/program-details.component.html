@@ -55,7 +55,8 @@
 
                 <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
-                    <input matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
+                    <input (change)="checkValidDate(2,currentProgram.dToDate)" matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
+                    <mat-hint  align="end">{{rightToDate}}</mat-hint>
                 </mat-form-field><br>
 
                 <div>

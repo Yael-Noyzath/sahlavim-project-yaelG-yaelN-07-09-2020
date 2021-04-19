@@ -81,26 +81,30 @@ export class ProgramDetailsComponent implements OnInit {
   Hebcal = require('hebcal');
   rightFromDate: string = null;
 
-
+  rightToDate: string = null;
   checkValidDate(fromTo: number, date: Date) {//30  קייטנת חנוכה 
     //31 פסח
     //32 קיץ
     //  date= new Date(5780, 5, 7, new HebrewCalendar())
     let newDate = new Date(date);
- 
+
     //בדיקת תאריך קייטנת חנוכה, 23/3
     if (this.currentProgram.iProgramType == 30) {
-      if (fromTo == 1)// אם תאריך התחלתי
       {
         //get the hebrew date
         let day = new this.Hebcal.HDate(newDate);
         //if not Kislev month
         if (day.getMonth() != 3) {
-       // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
+          // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
+          if (fromTo == 1)// אם תאריך התחלתי
+          {
+            this.rightFromDate = "נא הזן תאריך בחודש כסליו"
 
-        
-          this.rightFromDate = "נא הזן תאריך בחודש כסליו"
+          }
+          else {
+            this.rightToDate = "נא הזן תאריך בחודש כסליו"
 
+          }
         }
 
         debugger
