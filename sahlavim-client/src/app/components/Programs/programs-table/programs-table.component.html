@@ -32,9 +32,9 @@
             <ng-container matColumnDef="nvProgramName">
                 <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>שם תוכנית
                     <br>
-                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <!-- <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         <input value="חפש" matInput value="חפש" [formControl]="ProgramNameFilter">
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.nvProgramName}} </td>
             </ng-container>
@@ -44,10 +44,10 @@
             <ng-container matColumnDef="dFromDateFormat">
                 <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>מתאריך
                     <br>
-                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <!-- <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         
                         <input matInput value="חפש" [formControl]="FromDateFormatFilter">
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </th>
 
                 <td mat-cell *matCellDef="let row">{{row.dFromDate | date:'dd/MM/yyyy'}} </td>
@@ -57,10 +57,10 @@
             <ng-container matColumnDef="dToDateFormat">
                 <th class="header" style="width: 10%;" mat-header-cell *matHeaderCellDef>עד תאריך
                     <br>
-                    <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
+                    <!-- <mat-form-field style="width: 80px;" class="filter" floatLabel="never">
                         
                         <input matInput value="חפש" [formControl]="ToDateFormatFilter">
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.dToDate| date:'dd/MM/yyyy'}} </td>
             </ng-container>

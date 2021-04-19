@@ -169,11 +169,15 @@ export class CalendarComponent implements OnInit {
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
+      debugger
+      this.eventToEdit.iOperatorId=this.types['iOperatorId'];
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
       this.types['iSettingId'] = this.mainService.settingForDetails.iSettingId;
       this.objName = 'מסגרת ' + this.currentSetting.nvSettingName;
+      this.eventToEdit.iSettingId=this.currentSetting.iSettingId;
+
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
@@ -181,6 +185,8 @@ export class CalendarComponent implements OnInit {
 
       this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
+      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+
 
     }
     
@@ -315,6 +321,7 @@ export class CalendarComponent implements OnInit {
   //new Date(2015, 10, 10, 14, 57, 0)
 
   async addEditEvent(t: NgModel) {
+    //לבדוק שלא נופל
     debugger
     this.eventToEdit.dtStartTime.setHours(+t.viewModel.substr(0, 2));
     this.eventToEdit.dtStartTime.setMinutes(+t.viewModel.substr(3, 2));
@@ -332,16 +339,30 @@ export class CalendarComponent implements OnInit {
       iActivityId: this.eventToEdit.iActivityId,
       iSettingId: this.eventToEdit.iSettingId,
       iProgramId: this.eventToEdit.iProgramId,
-      dtStartTime: "/Date(" + this.eventToEdit.dtStartTime + ")/",
+     // dtStartTime: this.eventToEdit.dtStartTime,
+      dtStartTime: "/Date("+new Date(this.eventToEdit.dtStartTime).getTime()+")/",
       bCopyAllWeeks: false,
       iUserId: this.mainService.currentUser.iUserId
     });
     debugger
+
+
+    this.updateEventsL();
     //  this.router.navigate(['./calendar'], { relativeTo: this.route });
 
 
   }
   resetEventToEdit() {
     this.eventToEdit = new schedule();
+    if (this.type == 'iOperatorId') {
+      this.eventToEdit.iOperatorId=this.types['iOperatorId'];
+    }
+    if (this.type == "iSettingId") {
+      this.eventToEdit.iSettingId=this.currentSetting.iSettingId;
+    }
+    if (this.type == "iProgramId") {
+      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+    }
+
   }
 }

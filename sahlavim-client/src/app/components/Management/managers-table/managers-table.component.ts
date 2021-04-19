@@ -39,7 +39,7 @@ export class ManagersTableComponent implements OnInit {
   editUser: User = new User();
   lUserTypeValue: Map<number, string> = new Map<number, string>();
   constructor(private mainService: MainServiceService) {
-    this.usersList=mainService.usersList;
+    this.usersList = mainService.usersList;
     this.dataSource = new MatTableDataSource(this.usersList);
     //מילוי הרשימה בצורה של MAP
     this.lUserTypeValue = mainService.SysTableList[0];
@@ -120,7 +120,7 @@ export class ManagersTableComponent implements OnInit {
       res => {
         if (res) {
           this.mainService.getUsers();
-          alert("update " + this.editUser.nvUserName + " done!");
+          alert("הנתונים של  " + this.editUser.nvUserName + " נשמרו בהצלחה!");
 
         }
         else {
@@ -133,45 +133,64 @@ export class ManagersTableComponent implements OnInit {
     )
   }
 
-emailAddress:Array<string>=new Array<string>();
-emailContent:string;
-emailSubject:string;
+  emailAddress: Array<string> = new Array<string>();
+  emailContent: string;
+  emailSubject: string;
 
-//for multi select
-selection = new SelectionModel<User>(true, []);
+  //for multi select
+  selection = new SelectionModel<User>(true, []);
 
-isAllSelected() {
-  
-  this.selection.selected
-  const numSelected = this.selection.selected.length;
-  const numRows = this.dataSource.data.length;
-  return numSelected === numRows;
-}
+  isAllSelected() {
 
-/** Selects all rows if they are not all selected; otherwise clear selection. */
-masterToggle() {
-  
-  this.isAllSelected() ?
+    this.selection.selected
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+
+    this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-}
-emailList()
-{
-
-this.emailAddress=this.selection.selected.map(obj=>obj.nvMail);
-}
-
-sendEmail()
-{
-this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody:this.emailContent,emailAddressesList:this.emailAddress ,filePath:""}).then(
-  res => {
-    
-    let r = res;
-    alert(res);
-  },
-  err => {
-    alert(err);
   }
-);
-}
+  // emailList() {
+
+  //   this.emailAddress = this.selection.selected.map(obj => obj.nvMail);
+  // }
+
+  sendEmail() {
+    this.mainService.post("SendMailsMessage", { nvSubject: this.emailSubject, nvBody: this.emailContent, emailAddressesList: this.emailAddress, filePath: "" }).then(
+      res => {
+
+        let r = res;
+        alert("נשלח בהצלחה!");
+      },
+      err => {
+        alert(err);
+      }
+    );
+  }
+  h: boolean = false;
+
+  checkFormValid() {
+    alert("dsbv");
+    //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
+
+    list.forEach(function (Item) {
+      if (Item.innerHTML != '') {
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+        return false
+      }
+    });
+
+    debugger
+
+    if (this.h == false) {
+      this.saveUser()
+    }
+  }
 }

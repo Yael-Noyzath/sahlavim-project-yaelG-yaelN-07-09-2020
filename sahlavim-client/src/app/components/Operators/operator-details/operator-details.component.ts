@@ -262,6 +262,9 @@ export class OperatorDetailsComponent implements OnInit {
           //קבלה מהשרת את רשימת מפעילים המעודכנת
           this.mainService.getAllOperators();
 
+          alert("הנתונים של  " + this.operator.nvOperatorName + " נשמרו בהצלחה!");
+          this.mainService.serviceNavigate("./header-menu/operators/operator-table");
+
         }
         , err => {
           alert("err");

@@ -17,8 +17,12 @@
     </div>
 
     <div *ngIf="openDetails==false" style="width: 90%;margin: auto;" class="overflow-auto">
-        <table #table [hiddenColumns]=[0,1,11] multiTemplateDataRows mdbTable matTableExporter mdbTableScroll scrollY="true"
-            maxHeight="200" #exporter="matTableExporter" mat-table [dataSource]="dataSource" matSort>
+        <div class="col-lg-3">
+            <button mat-button class="settingBtn" (click)="exporter.exportTable('xls',{fileName:'settingsTable'})">ייצא
+                ל Excel</button>
+        </div>
+        <table [hiddenColumns]=[0,1,11] mdbTable matTableExporter mdbTableScroll scrollY="true" maxHeight="200"
+            #exporter="matTableExporter" mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="select">
                 <th>בחירה</th>
                 <th class="header"  mat-header-cell *matHeaderCellDef>

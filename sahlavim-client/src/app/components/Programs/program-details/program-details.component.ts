@@ -113,29 +113,9 @@ export class ProgramDetailsComponent implements OnInit {
 
 
   }
-  h = false;
-  checkValid() {
-    const dom: HTMLElement = this.elementRef.nativeElement;
-    const list = document.querySelectorAll('.mat-hint');
-
-    list.forEach(function (Item) {
-      if (Item.innerHTML != '') {
-        debugger
-        alert('נא שים לב לתוכן תקין');
-        this.h = true;
-        return false
-      }
-    });
-
-    if (this.h == false) {
-      this.testDate();
-
-    }
-  }
+  
 
   saveProgram() {
-    debugger
-    alert(this.currentProgram.lProgramSettings.length)
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -155,25 +135,40 @@ export class ProgramDetailsComponent implements OnInit {
       iUserId: this.mainService.currentUser.iUserId
     }).then(
       res => {
-        alert(res)
+        // alert(res)
       },
       err => {
         alert("err ProgramSettingsInsertUpdate")
       }
     )
-    debugger
-    this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
-    this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
-    this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();
-    this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
+
+    if (this.currentProgram.tFromTimeMorning != null)
+      this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
+    if (this.currentProgram.tToTimeMorning != null)
+      this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
+    if (this.currentProgram.tFromTimeAfternoon != null)
+      this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();
+    if (this.currentProgram.tToTimeAfternoon != null)
+      this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
+
+     this.currentProgram.dFromDate="/Date("+new Date(this.currentProgram.dFromDate).getTime()+")/";
+     this.currentProgram.dToDate="/Date("+new Date(this.currentProgram.dToDate).getTime()+")/";
+    //   this.currentProgram.dToDate="/Date(1530910800000+0300)/";
+
+    //   let da=this.currentProgram.dToDate+"T00:00:00";
+    //   let g:string;
+    //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
+      console.log(this.currentProgram);
 
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
+        alert("הנתונים של  " + this.currentProgram.nvProgramName + " נשמרו בהצלחה!");
+        this.mainService.serviceNavigate("./header-menu/programs/programs-table");
 
       },
       err => {
-        alert("saveProgram err+\n+צריך לסדר את השעה והתאריך");
+        alert("saveProgram err");
       }
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
@@ -256,5 +251,25 @@ export class ProgramDetailsComponent implements OnInit {
     if (this.currentProgram.lProgramSettings.findIndex(x => x == id) == -1)
       return false;
     return true;
+  }
+  h:boolean=false;
+
+  checkFormValid() {
+    //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
+
+    list.forEach(function (Item) {
+      if (Item.innerHTML != '') {
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+        return false
+      }
+    });
+
+    debugger
+
+    if (this.h == false) {
+      this.testDate()
+    }
   }
 }

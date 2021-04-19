@@ -76,7 +76,6 @@ export class AfternoonDetailsComponent implements OnInit {
   }
 
   saveAfternoon() {
-    alert(this.currentAfternoon.iProgramId)
     this.currentAfternoon.lProgramAgegroups.splice(0, this.currentAfternoon.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -85,41 +84,50 @@ export class AfternoonDetailsComponent implements OnInit {
         this.currentAfternoon.lProgramAgegroups.push(age.Key);
       }
     }
-    // var lSettingMorning: number[];
-    // var lSettingNoon: number[];
+     var lSettingMorning: number[];
+     var lSettingNoon: number[];
 
-    // this.mainService.post("ProgramSettingsInsertUpdate", { 
-    //   iProgramId: this.currentAfternoon.iProgramId, 
-    //   lProgramSettings: this.currentAfternoon.lProgramSettings,
-    //   lSettingMorning: lSettingMorning,
-    //   lSettingNoon: lSettingNoon,
-    //   iUserId: this.mainService.currentUser.iUserId}).then(
-    //   res => {
-    //     alert("suc")
-    //   },
-    //   err => {
-    //     alert("err ProgramSettingsInsertUpdate")
-    //   }
-    // )
+     this.mainService.post("ProgramSettingsInsertUpdate", { 
+       iProgramId: this.currentAfternoon.iProgramId, 
+       lProgramSettings: this.currentAfternoon.lProgramSettings,
+       lSettingMorning: lSettingMorning,
+       lSettingNoon: lSettingNoon,
+      iUserId: this.mainService.currentUser.iUserId}).then(
+       res => {
+         alert("suc")
+       },
+       err => {
+         alert("err ProgramSettingsInsertUpdate")
+      }
+     )
      
     this.currentAfternoon.tFirstActivity=this.currentAfternoon.tFirstActivity.toString();
     this.currentAfternoon.tSecondActivity=this.currentAfternoon.tSecondActivity.toString();
 
-    debugger;
+    this.currentAfternoon.dFromDate="/Date("+new Date(this.currentAfternoon.dFromDate).getTime()+")/";
+     this.currentAfternoon.dToDate="/Date("+new Date(this.currentAfternoon.dToDate).getTime()+")/";
+    //   this.currentProgram.dToDate="/Date(1530910800000+0300)/";
+
+    //   let da=this.currentProgram.dToDate+"T00:00:00";
+    //   let g:string;
+    //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
+      console.log(this.currentAfternoon);
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentAfternoon, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getAfternoon();
-        alert("update " + this.currentAfternoon.nvProgramName + " done!");
-        this.mainService.serviceNavigate("/header-menu/afternoon/afternoon-table");
+
+          alert("הנתונים של  " + this.currentAfternoon.nvProgramName + " נשמרו בהצלחה!");
+          this.mainService.serviceNavigate("./header-menu/afternoon/afternoon-table");
+
       },
       err => {
-        alert("saveAfternoon err\nצריך לסדר את השעה והתאריך");
+        alert("saveaAfternoon err");
       }
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
-    this.mainService.getAfternoon();
+    //this.mainService.getAfternoon();
   }
-
+  
   testDate() {
     // if (this.currentAfternoon.iProgramId > -1 && (this.currentAfternoon.dFromDate > $scope.dFromDate || this.currentAfternoon.dToDate < $scope.dToDate))
     //   alert("שים לב  <br />בשמירה ימחקו הפעילויות שהוגדרו מחוץ לטווח התאריכים שצומצם <br /> האם בכל אופן הינך מעונין לשמור ?" + "אזהרה")

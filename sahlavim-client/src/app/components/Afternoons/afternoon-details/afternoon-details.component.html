@@ -63,7 +63,7 @@
 
                 <mat-form-field class="example-form-field">
                     <mat-label>מספר הפעלות שבועיות</mat-label>
-                    <input matInput type="number" required [(ngModel)]="currentAfternoon.iNumActivityInWeek"
+                    <input matInput type="number" min="0" required [(ngModel)]="currentAfternoon.iNumActivityInWeek"
                         name="iNumActivityInWeek" />
                    
                 </mat-form-field><br>

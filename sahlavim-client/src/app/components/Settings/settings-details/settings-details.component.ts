@@ -112,6 +112,8 @@ export class SettingsDetailsComponent implements OnInit {
       res => {
         //קבלה מהשרת את רשימת מפעילים המעודכנת
         this.mainService.getSettings();
+        alert("הנתונים של  " + this.currentSetting.nvSettingName + " נשמרו בהצלחה!");
+        this.mainService.serviceNavigate("./header-menu/settings/setting-table");
 
       },
       err => {
@@ -137,6 +139,8 @@ export class SettingsDetailsComponent implements OnInit {
         this.currentCoordinator = res;
         this.currentSetting.iCoordinatorId = this.currentCoordinator.iCoordinatorId;
         this.CoordinatorsGet();
+        alert("הנתונים של  " + this.currentCoordinator.nvFirstName+" "+this.currentCoordinator.nvLastName  + " נשמרו בהצלחה!");
+
       }
       ,
       err => {
@@ -154,6 +158,25 @@ export class SettingsDetailsComponent implements OnInit {
   validation(){
     
   }
+  h:boolean=false;
 
+  checkFormValid() {
+    //check if no mat-hint with context 
+    const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
 
+list.forEach(function(Item) {
+  if(Item.innerHTML != '')
+  {
+    alert('נא שים לב לתוכן תקין');
+    this.h = true;
+    return false
+  }
+});
+     
+    debugger
+
+    if (this.h == false) {
+      this.saveSetting()
+    }
+  }
 }
