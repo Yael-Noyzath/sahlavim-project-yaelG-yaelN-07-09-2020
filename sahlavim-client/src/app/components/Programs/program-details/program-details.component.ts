@@ -245,6 +245,8 @@ export class ProgramDetailsComponent implements OnInit {
   }
   h: boolean = false;
 
+
+  
   checkFormValid() {
     //check if no mat-hint with context 
     const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
