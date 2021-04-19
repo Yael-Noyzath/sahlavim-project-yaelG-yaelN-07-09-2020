@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { da } from 'date-fns/locale';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
@@ -21,7 +22,7 @@ export class ProgramDetailsComponent implements OnInit {
 
   currentProgram: Program = new Program();
   formProgram: FormGroup;
-  lProgramTypeValue: forSelect[]=[];
+  lProgramTypeValue: forSelect[] = [];
 
   //מקור הנתונים לטבלה של המסגרות
   dataSource: MatTableDataSource<Setting>;
@@ -32,6 +33,7 @@ export class ProgramDetailsComponent implements OnInit {
 
   constructor(private mainService: MainServiceService) {
     this.currentProgram = this.mainService.programForDetails;
+    debugger
     this.lProgramTypeValue = mainService.gItems[9].dParams;
     this.lProgramAgegroupsValueForTable = mainService.SysTableList[6];
     this.settingList = mainService.settingsList;
@@ -76,9 +78,43 @@ export class ProgramDetailsComponent implements OnInit {
     this.ngAfterViewInit();
 
   }
-h=false;
-  checkValid()
-  {
+  Hebcal = require('hebcal');
+  rightFromDate: string = null;
+
+
+  checkValidDate(fromTo: number, date: Date) {//30  קייטנת חנוכה 
+    //31 פסח
+    //32 קיץ
+    //  date= new Date(5780, 5, 7, new HebrewCalendar())
+    let newDate = new Date(date);
+ 
+    //בדיקת תאריך קייטנת חנוכה, 23/3
+    if (this.currentProgram.iProgramType == 30) {
+      if (fromTo == 1)// אם תאריך התחלתי
+      {
+        //get the hebrew date
+        let day = new this.Hebcal.HDate(newDate);
+        //if not Kislev month
+        if (day.getMonth() != 3) {
+       // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
+
+        
+          this.rightFromDate = "נא הזן תאריך בחודש כסליו"
+
+        }
+
+        debugger
+
+        //convert the number date to letters 
+        // return this.Hebcal.gematriya(day.getDate());et rightFromDate;
+      }
+    }
+
+
+
+  }
+  h = false;
+  checkValid() {
     const dom: HTMLElement = this.elementRef.nativeElement;
     const list = document.querySelectorAll('.mat-hint');
 
@@ -92,7 +128,7 @@ h=false;
     });
 
     if (this.h == false) {
-          this.testDate();
+      this.testDate();
 
     }
   }
@@ -110,7 +146,7 @@ h=false;
     }
     var lSettingMorning: number[];
     var lSettingNoon: number[];
-    
+
     this.mainService.post("ProgramSettingsInsertUpdate", {
       iProgramId: this.currentProgram.iProgramId,
       lProgramSettings: this.currentProgram.lProgramSettings,
@@ -125,7 +161,7 @@ h=false;
         alert("err ProgramSettingsInsertUpdate")
       }
     )
-debugger
+    debugger
     this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
     this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
     this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();

@@ -147,7 +147,7 @@ export class CalendarComponent implements OnInit {
   // constructor(private mainService: MainServiceService, private calendar: NgbCalendar, public i18n: NgbDatepickerI18n) {
   //   this.dayTemplateData = this.dayTemplateData.bind(this);
   // }
-  constructor(private router: Router, private route: ActivatedRoute,private mainService: MainServiceService) {
+  constructor(private router: Router, private route: ActivatedRoute, private mainService: MainServiceService) {
   }
 
   // dayTemplateData(date: NgbDate) {
@@ -164,7 +164,7 @@ export class CalendarComponent implements OnInit {
     this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
     this.settingsList = this.mainService.settingsList;
-debugger
+    debugger
     if (this.type == 'iOperatorId') {//import the operator by the id
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
@@ -177,20 +177,21 @@ debugger
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
-      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+      this.eventToEdit.iProgramId = this.currentProgram.iProgramId;
 
       this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
 
     }
+    
     //אם לא מפעיל/מסגרת/תוכנית חדשה
     //אז לקבל את האירועים ליומן 
     if (!(this.types['iSettingId'] == -1 && this.types['iProgramId'] == -1 && this.types['iOperatorId'] == -1)) {
 
       this.eventsFromSer = <schedule[]>await this.mainService.post("SchedulesGet", this.types);
-debugger
+      debugger
 
-    this.updateEventsL();
+      this.updateEventsL();
       console.log(this.events);
 
     }
@@ -203,19 +204,16 @@ debugger
 
   }
 
-  updateEventsL(){
+  updateEventsL() {
     this.eventsFromSer.forEach(element => {
-if(element.dtStartTime!=null)
-{
+      if (element.dtStartTime != null) {
         element.dtStartTime = new Date(parseInt((element.dtStartTime).toString().substr(6)));
-
-}
-else
-{
-  element.dtStartTime=new Date();
-}
+      }
+      else {
+        element.dtStartTime = new Date();
+      }
       this.events.push({
-        id:element.iScheduleId,
+        id: element.iScheduleId,
         title: element.nvProgramValue,
         start: element.dtStartTime,
       });
@@ -310,30 +308,36 @@ else
   dTime: string;
   editEvent(e: schedule) {
     // this.dTime = e.dtStartTime.substr(16, 5);
-    this.eventToEdit = this.eventsFromSer.find(x=>x.iScheduleId==e.iScheduleId);
-debugger
+    this.eventToEdit = this.eventsFromSer.find(x => x.iScheduleId == e.iScheduleId);
+    debugger
 
   }
   //new Date(2015, 10, 10, 14, 57, 0)
 
   async addEditEvent(t: NgModel) {
-
+    debugger
     this.eventToEdit.dtStartTime.setHours(+t.viewModel.substr(0, 2));
     this.eventToEdit.dtStartTime.setMinutes(+t.viewModel.substr(3, 2));
+    console.log(this.eventToEdit.iOperatorId,
+      this.eventToEdit.iActivityId,
+      this.eventToEdit.iSettingId,
+      this.eventToEdit.iProgramId,
+      //this.eventToEdit.dtStartTime
+    );
     debugger
+    let res = <boolean>await this.mainService.post("ScheduleUpdate", {
+      iScheduleId: this.eventToEdit.iScheduleId,
 
-let res=<boolean> await this.mainService.post("ScheduleUpdate",{ iScheduleId: this.eventToEdit.iScheduleId,
-
-  iOperatorId: this.eventToEdit.iOperatorId,
- iActivityId: this.eventToEdit.iActivityId,
- iSettingId: this.eventToEdit.iSettingId,
-iProgramId: this.eventToEdit.iProgramId,
- dtStartTime: this.eventToEdit.dtStartTime
-// bCopyAllWeeks: false,
-// iUserId: this.mainService.currentUser.iUserId
-});
-  debugger
-//  this.router.navigate(['./calendar'], { relativeTo: this.route });
+      iOperatorId: this.eventToEdit.iOperatorId,
+      iActivityId: this.eventToEdit.iActivityId,
+      iSettingId: this.eventToEdit.iSettingId,
+      iProgramId: this.eventToEdit.iProgramId,
+      dtStartTime: "/Date(" + this.eventToEdit.dtStartTime + ")/",
+      bCopyAllWeeks: false,
+      iUserId: this.mainService.currentUser.iUserId
+    });
+    debugger
+    //  this.router.navigate(['./calendar'], { relativeTo: this.route });
 
 
   }

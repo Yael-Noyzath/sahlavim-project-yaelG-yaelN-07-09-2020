@@ -28,10 +28,10 @@
                     <mat-hint align="end">{{ currentProgram.nvProgramName| required }}</mat-hint>
 
                 </mat-form-field><br>
-                <mat-form-field class="example-form-field">
+                <!-- <mat-form-field class="example-form-field">
                     <mat-label>סעיף תקציבי</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvBudgetItem" name="nvBudgetItem" />
-                </mat-form-field><br>
+                </mat-form-field><br> -->
 
 
                 <div class="col-sm-12" style="margin: auto;">
@@ -45,8 +45,13 @@
 
                 <mat-form-field class="example-form-field">
                     <mat-label>מתאריך</mat-label>
-                    <input matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
-                </mat-form-field><br>
+                    <input (change)="checkValidDate(1,currentProgram.dFromDate)" matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
+                    <!-- <mat-hint  align="end">{{ currentProgram.dFromDate| required }}</mat-hint> -->
+                    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
+                </mat-form-field> 
+                 <p *ngIf=" currentProgram.dFromDate">{{ currentProgram.dFromDate | hebrewDate}}</p> 
+
+                <br>
 
                 <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
