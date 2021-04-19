@@ -7,6 +7,7 @@ import { User } from 'src/app/classes/user';
 import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 import { promise } from 'protractor';
+import * as moment from 'moment';
 
 
 export class forSelect {
@@ -32,6 +33,7 @@ export class MainServiceService {
     this.getSettings();
     
     this.getAllOperators();
+    
     this.getPrograms();
     this.getAfternoon();
     this.getUsers();
@@ -129,6 +131,9 @@ export class MainServiceService {
         if (res) {
           this.programsList = res;
           for (let p of this.programsList) {
+            // p.dFromDate=moment(p.dFromDate).format('DD/MM/YYYY');
+            // p.dToDate=moment(p.dToDate).format('DD/MM/YYYY');
+
             p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
@@ -148,6 +153,8 @@ export class MainServiceService {
         if (res) {
           this.afternoonsList = res;
           for (let p of this.afternoonsList) {
+            // p.dFromDate=moment(p.dFromDate).format('DD/MM/YYYY');
+            // p.dToDate=moment(p.dToDate).format('DD/MM/YYYY');
             p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             //  alert(p.dToDate[1])

@@ -116,8 +116,6 @@ export class ProgramDetailsComponent implements OnInit {
   
 
   saveProgram() {
-    debugger
-    alert(this.currentProgram.lProgramSettings.length)
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -137,7 +135,7 @@ export class ProgramDetailsComponent implements OnInit {
       iUserId: this.mainService.currentUser.iUserId
     }).then(
       res => {
-        alert(res)
+        // alert(res)
       },
       err => {
         alert("err ProgramSettingsInsertUpdate")
@@ -153,13 +151,24 @@ export class ProgramDetailsComponent implements OnInit {
     if (this.currentProgram.tToTimeAfternoon != null)
       this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
 
+     this.currentProgram.dFromDate="/Date("+new Date(this.currentProgram.dFromDate).getTime()+")/";
+     this.currentProgram.dToDate="/Date("+new Date(this.currentProgram.dToDate).getTime()+")/";
+    //   this.currentProgram.dToDate="/Date(1530910800000+0300)/";
+
+    //   let da=this.currentProgram.dToDate+"T00:00:00";
+    //   let g:string;
+    //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
+      console.log(this.currentProgram);
+
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
+        alert("הנתונים של  " + this.currentProgram.nvProgramName + " נשמרו בהצלחה!");
+        this.mainService.serviceNavigate("./header-menu/programs/programs-table");
 
       },
       err => {
-        alert("saveProgram err+\n+צריך לסדר את השעה והתאריך");
+        alert("saveProgram err");
       }
     )
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.

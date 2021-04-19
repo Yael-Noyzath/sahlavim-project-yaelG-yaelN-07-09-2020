@@ -216,7 +216,7 @@ export class SettingTableComponent implements OnInit {
       res => {
 
         let r = res;
-        alert(res);
+        alert("נשלח בהצלחה!");
       },
       err => {
         alert(err);
