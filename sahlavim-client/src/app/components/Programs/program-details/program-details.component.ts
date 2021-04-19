@@ -28,6 +28,7 @@ export class ProgramDetailsComponent implements OnInit {
   displayedColumns: string[] = ['check', 'nvSettingName', 'nvAddress', 'lSettingAgegroups'];
   settingList: Array<Setting>;
   lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
+  elementRef: any;
 
   constructor(private mainService: MainServiceService) {
     this.currentProgram = this.mainService.programForDetails;
@@ -75,10 +76,29 @@ export class ProgramDetailsComponent implements OnInit {
     this.ngAfterViewInit();
 
   }
+h=false;
+  checkValid()
+  {
+    const dom: HTMLElement = this.elementRef.nativeElement;
+    const list = document.querySelectorAll('.mat-hint');
 
+    list.forEach(function (Item) {
+      if (Item.innerHTML != '') {
+        debugger
+        alert('נא שים לב לתוכן תקין');
+        this.h = true;
+        return false
+      }
+    });
 
+    if (this.h == false) {
+          this.testDate();
+
+    }
+  }
 
   saveProgram() {
+    debugger
     alert(this.currentProgram.lProgramSettings.length)
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
@@ -105,7 +125,7 @@ export class ProgramDetailsComponent implements OnInit {
         alert("err ProgramSettingsInsertUpdate")
       }
     )
-
+debugger
     this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
     this.currentProgram.tToTimeMorning = this.currentProgram.tToTimeMorning.toString();
     this.currentProgram.tFromTimeAfternoon = this.currentProgram.tFromTimeAfternoon.toString();

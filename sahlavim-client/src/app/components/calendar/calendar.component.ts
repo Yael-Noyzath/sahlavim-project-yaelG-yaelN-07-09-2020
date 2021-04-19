@@ -164,7 +164,7 @@ export class CalendarComponent implements OnInit {
     this.operatorList = this.mainService.operatorsList;
     this.programsList = this.mainService.programsList;
     this.settingsList = this.mainService.settingsList;
-
+debugger
     if (this.type == 'iOperatorId') {//import the operator by the id
       this.operator = this.mainService.operatorForDetails;
       this.objName = this.operator.nvOperatorName;
@@ -177,6 +177,8 @@ export class CalendarComponent implements OnInit {
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
+      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+
       this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
 
@@ -321,7 +323,8 @@ debugger
     debugger
 
 let res=<boolean> await this.mainService.post("ScheduleUpdate",{ iScheduleId: this.eventToEdit.iScheduleId,
- iOperatorId: this.eventToEdit.iOperatorId,
+
+  iOperatorId: this.eventToEdit.iOperatorId,
  iActivityId: this.eventToEdit.iActivityId,
  iSettingId: this.eventToEdit.iSettingId,
 iProgramId: this.eventToEdit.iProgramId,
