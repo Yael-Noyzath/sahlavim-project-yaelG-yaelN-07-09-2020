@@ -175,6 +175,7 @@ export class OperatorTableComponent implements OnInit {
   //עריכת מפעיל
   async EditOperator(op: Operator) {
 
+    //update the service the current operator
     this.mainService.operatorForDetails= <Operator> await this.mainService.post("GetOperator",{iOperatorId: op.iOperatorId });
 
 debugger

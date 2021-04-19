@@ -99,6 +99,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { ParashaPipe } from './Pipes/parasha.pipe';
 import { HolidaysPipe } from './Pipes/holidays.pipe';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
 
 @NgModule({
   declarations: [
@@ -146,6 +147,7 @@ import { MessageDialogComponent } from './components/message-dialog/message-dial
     ParashaPipe,
     HolidaysPipe,
     MessageDialogComponent,
+    CheckValidDatePipe,
   ],
   imports: [
 

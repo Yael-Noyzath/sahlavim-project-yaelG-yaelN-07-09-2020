@@ -188,10 +188,14 @@
 
                 </div>
 
-                <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
-                    <button mat-raised-button color="accent" (click)="sendEmail()"
-                        [disabled]="selection.selected.length==0">שלח</button>
+                <div style="margin: auto;" class="modal-footer">
+                    <button type="button" aria-label="Close" class="btn saveDialog" data-dismiss="modal"
+                        (click)="sendEmail()" [disabled]="selection.selected.length==0">שלח</button>
                 </div>
+                <!-- <div mat-dialog-actions style="margin: auto;margin-bottom: 10px;">
+                    <button mat-raised-button color="accent" (click)="sendEmail()"
+                        >שלח</button>
+                </div> -->
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="form-group col-sm-12" style=" text-align: center;direction: rtl;" class="Details">
 
     <div class="form-group row">
-        <form (ngSubmit)="testDate()">
+        <form (ngSubmit)="checkValid()">
             <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
                 <mat-icon class="saveIcon">save</mat-icon>
             </button>
@@ -28,10 +28,10 @@
                     <mat-hint align="end">{{ currentProgram.nvProgramName| required }}</mat-hint>
 
                 </mat-form-field><br>
-                <mat-form-field class="example-form-field">
+                <!-- <mat-form-field class="example-form-field">
                     <mat-label>סעיף תקציבי</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvBudgetItem" name="nvBudgetItem" />
-                </mat-form-field><br>
+                </mat-form-field><br> -->
 
 
                 <div class="col-sm-12" style="margin: auto;">
@@ -45,8 +45,13 @@
 
                 <mat-form-field class="example-form-field">
                     <mat-label>מתאריך</mat-label>
-                    <input matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
-                </mat-form-field><br>
+                    <input (change)="checkValidDate(1,currentProgram.dFromDate)" matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
+                    <!-- <mat-hint  align="end">{{ currentProgram.dFromDate| required }}</mat-hint> -->
+                    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
+                </mat-form-field> 
+                 <p *ngIf=" currentProgram.dFromDate">{{ currentProgram.dFromDate | hebrewDate}}</p> 
+
+                <br>
 
                 <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
@@ -82,12 +87,14 @@
                         <mat-label>בוקר - משעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tFromTimeMorning"
                             name="tFromTimeMorning" />
+                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeMorning| required }}</mat-hint>
 
                     </mat-form-field><br>
 
                     <mat-form-field class="example-form-field">
                         <mat-label>בוקר - עד שעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tToTimeMorning" name="tToTimeMorning" />
+                        <mat-hint class="mat-hint" align="end">{{ currentProgram.tToTimeMorning| required }}</mat-hint>
 
                     </mat-form-field><br>
                 </div>
@@ -104,6 +111,7 @@
                         <mat-label>צהריים - משעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tFromTimeAfternoon"
                             name="tFromTimeAfternoon" />
+                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeAfternoon| required }}</mat-hint>
 
                     </mat-form-field><br>
 
@@ -111,6 +119,7 @@
                         <mat-label>צהריים - עד שעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tToTimeAfternoon"
                             name="tToTimeAfternoon" />
+                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tToTimeAfternoon| required }}</mat-hint>
 
                     </mat-form-field><br>
                 </div>
@@ -139,9 +148,9 @@
 <div class="modal fade" style="width:100%;" id="modalCart" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 70%;margin: auto;">
             <!--Header-->
-            <div class="modal-header">
+            <div class="modal-header" style="text-align:center;">
                 <h4 class="programColor modal-title" id="myModalLabel">שיוך מסגרות</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>

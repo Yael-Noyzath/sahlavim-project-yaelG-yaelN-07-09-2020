@@ -93,3 +93,9 @@ element.style {
 .example-element-description-attribution {
   opacity: 0.5;
 }
+
+.saveDialog{
+  background-color: var(--settingClr);
+    border-color: var(--settingClr);
+    color: white;
+}

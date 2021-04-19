@@ -38,8 +38,7 @@
                     </mat-radio-button>
 
                 </mat-radio-group> <br>
-                <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">
-                    {{operator.iOperatorType|required}}</mat-hint>
+                <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{operator.iOperatorType|required}}</mat-hint>
 
             </section>
 
@@ -91,8 +90,7 @@
                         (onDeSelectAll)="onDeSelectAll('talanSchool')"
                         (onDeSelect)="OnItemDeSelect($event,'talanSchool')" [disabled]="!operator.bTalan">
                     </ng-multiselect-dropdown>
-                    <mat-hint class="mat-hint" *ngIf="operator.bTalan" align="end">{{ lschool.length| required }}
-                    </mat-hint>
+                    <mat-hint class="mat-hint" *ngIf="operator.bTalan" align="end">{{ lschool.length| required }}</mat-hint>
 
                 </div>
             </div>
@@ -202,7 +200,6 @@
                     </mat-option>
                 </mat-select>
                 <mat-hint class="mat-hint" align="end">{{ iCategory| required }}</mat-hint>
-                <mat-hint  align="end">hhh</mat-hint>
 
             </mat-form-field><br>
 
