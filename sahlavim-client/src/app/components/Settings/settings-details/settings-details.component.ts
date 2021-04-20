@@ -119,7 +119,7 @@ export class SettingsDetailsComponent implements OnInit {
           timeOut: 3000,
         });
         // alert("הנתונים של  " + this.currentSetting.nvSettingName + " נשמרו בהצלחה!");
-        // this.mainService.serviceNavigate("./header-menu/settings/setting-table");
+        this.mainService.serviceNavigate("./header-menu/settings/setting-table");
 
       },
       err => {

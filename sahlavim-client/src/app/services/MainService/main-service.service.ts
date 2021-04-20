@@ -125,14 +125,14 @@ export class MainServiceService {
     return await this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
 
-  private extractData(res: Response) {
-    return res.json();
-    //let body = res.json();
-    //return body.data || { };
-  }
-  getGeorgianDate(url:string) {
-    return this.http.get(url).map(this.extractData);
-  }
+  // private extractData(res: Response) {
+  //   return res.json();
+  //   //let body = res.json();
+  //   //return body.data || { };
+  // }
+  // getGeorgianDate(url:string) {
+  //   return this.http.get(url).map(this.extractData);
+  // }
 
   getPrograms() {
     //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable

@@ -11,20 +11,18 @@
                       padding-top: 25px;">
                 <h3 style="z-index: 20;" class="programColor">פרטי תוכנית</h3>
                 <mat-form-field class="example-form-field">
-                    <mat-select [(ngModel)]="currentProgram.iProgramType" required placeholder="סוג תוכנית"
-                        name="iProgramType">
+                    <mat-select (selectionChange)="typeChanged()" [(ngModel)]="currentProgram.iProgramType" required
+                        placeholder="סוג תוכנית" name="iProgramType">
                         <mat-option *ngFor="let s of lProgramTypeValue" [value]="s.Key">
                             {{this.s.Value}}
                         </mat-option>
                     </mat-select>
-                    <!-- <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-            <mat-icon>close</mat-icon>
-        </button> -->
+                    <mat-hint align="end">{{currentProgram.iProgramType| required }}</mat-hint>
+
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-label>שם תוכנית</mat-label>
-                    <input matInput type="text" [(ngModel)]="currentProgram.nvProgramName" name="nvProgramName"
-                         />
+                    <input matInput type="text" [(ngModel)]="currentProgram.nvProgramName" name="nvProgramName" />
                     <mat-hint align="end">{{ currentProgram.nvProgramName| required }}</mat-hint>
 
                 </mat-form-field><br>
@@ -41,20 +39,22 @@
                         [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
                         (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)">
                     </ng-multiselect-dropdown>
+                    <mat-hint align="end">{{ currentProgram.iProgramType| required }}</mat-hint>
                 </div><br>
 
-                
-<p>בחר תאריך בין:</p>
 
-  <mat-form-field>
-    <mat-label>מתאריך</mat-label>
-    <input (change)="checkValidDate(1,currentProgram.dFromDate)" [(ngModel)]="currentProgram.dFromDate" matInput name="dFromDate" [matDatepicker]="picker2" placeholder="בחר תאריך">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
-  </mat-form-field>
+                <mat-form-field>
+                    <mat-label>מתאריך</mat-label>
+                    <input matInput #input="ngModel"
+                        [(ngModel)]="currentProgram.dFromDate" [min]="minFromDate" [max]="maxFromDate"
+                        [matDatepicker]="picker2" (change)="checkValidDate(1,currentProgram.dFromDate)" name="dFromDate"
+                        placeholder="בחר תאריך">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-hint align="end">{{currentProgram.dFromDate | required}}</mat-hint>
 
-            
+                </mat-form-field>
+
                 <br>
 
                 <!-- <mat-form-field>
@@ -64,14 +64,15 @@
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-hint  align="end">{{rightFromDate}}</mat-hint>
                   </mat-form-field> -->
-
+                <!-- (change)="checkValidDate(2,currentProgram.dToDate)"  -->
                 <mat-form-field>
                     <mat-label>עד תאריך</mat-label>
-                    <input (change)="checkValidDate(2,currentProgram.dToDate)" [(ngModel)]="currentProgram.dToDate" matInput name="dToDate" [matDatepicker]="picker" placeholder="בחר תאריך" >
+                    <input [min]="minToDate" [max]="maxToDate" [(ngModel)]="currentProgram.dToDate" matInput
+                        name="dToDate" [matDatepicker]="picker" placeholder="בחר תאריך">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-hint  align="end">{{rightToDate}}</mat-hint>
-                  </mat-form-field>
+                    <mat-hint align="end">{{currentProgram.dFromDate | required}}</mat-hint>
+                </mat-form-field>
 
                 <!-- <mat-form-field class="example-form-field">
                     <mat-label>עד תאריך</mat-label>
@@ -84,8 +85,8 @@
                 <div>
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות מועדפות</mat-label>
-                        <input matInput type="number" min="0" required [(ngModel)]="currentProgram.iActivityPreferenceCount"
-                            name="iActivityPreferenceCount" />
+                        <input matInput type="number" min="0" required
+                            [(ngModel)]="currentProgram.iActivityPreferenceCount" name="iActivityPreferenceCount" />
 
                     </mat-form-field><br>
                     <mat-form-field class="example-form-field">
@@ -106,11 +107,11 @@
                             name="iNumActivityMorning" />
 
                     </mat-form-field><br>
-                    <mat-form-field class="example-form-field">
+                    <!-- <mat-form-field class="example-form-field">
                         <mat-label>בוקר - משעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tFromTimeMorning"
                             name="tFromTimeMorning" />
-                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeMorning| required }}</mat-hint>
+                        <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeMorning| required }}</mat-hint>
 
                     </mat-form-field><br>
 
@@ -119,22 +120,22 @@
                         <input matInput type="time" [(ngModel)]="currentProgram.tToTimeMorning" name="tToTimeMorning" />
                         <mat-hint class="mat-hint" align="end">{{ currentProgram.tToTimeMorning| required }}</mat-hint>
 
-                    </mat-form-field><br>
+                    </mat-form-field><br> -->
                 </div>
                 <div>
                     <h6 class="programColor">צהריים</h6>
 
                     <mat-form-field class="example-form-field">
                         <mat-label>מספר הפעלות צהריים</mat-label>
-                        <input matInput type="number" min="0" required [(ngModel)]="currentProgram.iNumActivityAfternoon"
-                            name="iNumActivityAfternoon" />
+                        <input matInput type="number" min="0" required
+                            [(ngModel)]="currentProgram.iNumActivityAfternoon" name="iNumActivityAfternoon" />
 
                     </mat-form-field><br>
-                    <mat-form-field class="example-form-field">
+                    <!-- <mat-form-field class="example-form-field">
                         <mat-label>צהריים - משעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tFromTimeAfternoon"
                             name="tFromTimeAfternoon" />
-                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeAfternoon| required }}</mat-hint>
+                        <mat-hint class="mat-hint" align="end">{{ currentProgram.tFromTimeAfternoon| required }}</mat-hint>
 
                     </mat-form-field><br>
 
@@ -142,9 +143,9 @@
                         <mat-label>צהריים - עד שעה</mat-label>
                         <input matInput type="time" [(ngModel)]="currentProgram.tToTimeAfternoon"
                             name="tToTimeAfternoon" />
-                            <mat-hint class="mat-hint" align="end">{{ currentProgram.tToTimeAfternoon| required }}</mat-hint>
+                        <mat-hint class="mat-hint" align="end">{{ currentProgram.tToTimeAfternoon| required }}</mat-hint>
 
-                    </mat-form-field><br>
+                    </mat-form-field><br> -->
                 </div>
 
                 <div class="col-sm-12">

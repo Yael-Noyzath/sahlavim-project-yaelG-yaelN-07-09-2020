@@ -100,6 +100,7 @@ import { ParashaPipe } from './Pipes/parasha.pipe';
 import { HolidaysPipe } from './Pipes/holidays.pipe';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
+import { DatePipe } from '@angular/common'
 
 
 import { ToastrModule } from 'ngx-toastr';
@@ -209,7 +210,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   providers: [
 
-
+DatePipe,
       {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
   
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },DayService,WeekService,WorkWeekService,MonthService,MonthAgendaService],

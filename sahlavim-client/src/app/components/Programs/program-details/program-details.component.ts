@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-program-details',
@@ -32,8 +34,9 @@ export class ProgramDetailsComponent implements OnInit {
   lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
   elementRef: any;
   datePickerCtrl = new FormControl();
+  toDayHebrewDay: any;
+  constructor(public datepipe: DatePipe,private dateAdapter: DateAdapter<any>, public toastr: ToastrService, private mainService: MainServiceService) {
 
-  constructor(private dateAdapter: DateAdapter<any>, public toastr: ToastrService, private mainService: MainServiceService) {
     this.dateAdapter.setLocale('he');
     this.currentProgram = this.mainService.programForDetails;
     debugger
@@ -41,31 +44,8 @@ export class ProgramDetailsComponent implements OnInit {
     this.lProgramAgegroupsValueForTable = mainService.SysTableList[6];
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
-    this.mainService.getGeorgianDate("https://www.hebcal.com/zmanim?cfg=json&geonameid=3448439&date=2021-03-23").subscribe(
-      x => {
-          console.log("VALUE RECEIVED: ",x);
-          let d = x;
-debugger
-      },
-      x => {
-          console.log("ERROR: ",x);
-      },
-      () => {
-          console.log("Completed");
-      }
-    );
-    debugger
-//https://www.hebcal.com/converter?hd=1&hm=Kislev&hy=5781&h2g=1
-    this.mainService.getGeorgianDate(" https://www.hebcal.com/zmanim?cfg=json&geonameid=3448439&date=2021-03-23").then(
-      res => {
-        let d = res;
-        debugger
-      },
-      error => {
-        let e = error;
-      }
-    );
-    debugger
+    this.typeChanged();
+
   }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -110,36 +90,91 @@ debugger
   rightFromDate: string = null;
   rightToDate: string = null;
 
+  maxFromDate: Date = new Date();
+  minFromDate: Date;
+  maxToDate: Date;
+  minToDate: Date;
 
-  checkValidDate(fromTo: number, date: Date) {//30  קייטנת חנוכה 
+  typeChanged() {
+    debugger
+    //30  קייטנת חנוכה 
     //31 פסח
     //32 קיץ
-    //  date= new Date(5780, 5, 7, new HebrewCalendar())
-    let newDate = new Date(date);
-
-    //בדיקת תאריך קייטנת חנוכה, 23/3
     if (this.currentProgram.iProgramType == 30) {
+ 
+      this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
+      this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
 
-      //get the hebrew date
-      let day = new this.Hebcal.HDate(newDate);
-      //if not Kislev month
-      if (day.getMonth() != 3) {
-        if (fromTo == 1)// אם תאריך התחלתי
-        {
-          // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
-          this.rightFromDate = "נא הזן תאריך בחודש כסליו"
-        }
-        else {
-          this.rightToDate = "נא הזן תאריך בחודש כסליו"
-        }
 
-      }
-
-      debugger
-
-      //convert the number date to letters 
-      // return this.Hebcal.gematriya(day.getDate());et rightFromDate;
+      this.minFromDate = new Date(2021, 11, 5);
+      this.maxFromDate = new Date(2020, 12, 4);
+      this.minToDate = new Date(2021, 11, 5);
+      this.maxToDate = new Date(2020, 12, 4);
     }
+    else {
+      if (this.currentProgram.iProgramType == 31) {
+        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
+        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 14), 'yyyy-MM-dd');
+
+        // this.currentProgram.dFromDate = new Date(2022, 3, 2).toString();
+        // this.currentProgram.dToDate = new Date(2022, 3, 14).toString();
+
+        this.minFromDate = new Date(2022, 3, 2);
+        this.maxFromDate = new Date(2022, 3, 14);
+        this.minToDate = new Date(2022, 3, 2);
+        this.maxToDate = new Date(2022, 3, 14);
+      }
+      else {
+        if (this.currentProgram.iProgramType == 32) {
+          this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
+          this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
+
+          // this.currentProgram.dFromDate = new Date(2021, 6, 1).toString();
+          // this.currentProgram.dToDate = new Date(2021, 7, 31).toString();
+
+          this.minFromDate = new Date(2021, 6, 1);
+          this.maxFromDate = new Date(2021, 7, 31);
+          this.minToDate = new Date(2021, 6, 1);
+          this.maxToDate = new Date(2021, 7, 31);
+        }
+      }
+    }
+
+    debugger
+  }
+
+  checkValidDate(fromTo: number, date: Date) {
+
+    this.minToDate = new Date(this.currentProgram.dFromDate);
+    this.currentProgram.dToDate = date.toString();
+
+    debugger
+
+    // //  date= new Date(5780, 5, 7, new HebrewCalendar())
+    // let newDate = new Date(date);
+
+    // //בדיקת תאריך קייטנת חנוכה, 23/3
+    // if (this.currentProgram.iProgramType == 30) {
+
+    //   //get the hebrew date
+    //   let day = new this.Hebcal.HDate(newDate);
+    //   //if not Kislev month
+    //   if (day.getMonth() != 3) {
+    //     if (fromTo == 1)// אם תאריך התחלתי
+    //     {
+    //       // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
+    //       this.rightFromDate = "נא הזן תאריך בחודש כסליו"
+    //     }
+    //     else {
+    //       this.rightToDate = "נא הזן תאריך בחודש כסליו"
+    //     }
+
+    //   }
+
+    debugger
+
+    //convert the number date to letters 
+    // return this.Hebcal.gematriya(day.getDate());et rightFromDate;
   }
 
 
@@ -202,6 +237,8 @@ debugger
           timeOut: 3000,
         });
 
+        this.mainService.serviceNavigate("./header-menu/programs/programs-table");
+
       },
       err => {
         alert("saveProgram err");
@@ -211,40 +248,13 @@ debugger
     this.mainService.getPrograms();
   }
 
-
-  testDate() {
-    // if (this.currentProgram.iProgramId > -1 && (this.currentProgram.dFromDate > $scope.dFromDate || this.currentProgram.dToDate < $scope.dToDate))
-    //   alert("שים לב  <br />בשמירה ימחקו הפעילויות שהוגדרו מחוץ לטווח התאריכים שצומצם <br /> האם בכל אופן הינך מעונין לשמור ?" + "אזהרה")
-    // function () { $scope.saveProgram(); }, function () { return; });
-    // else
-    this.saveProgram();
-  }
   selected: boolean = false;
   isSelected(s: any) {
-    // alert(this.currentSetting.lSettingAgegroups.includes(s))
-    // if (this.selectAllProgramAgegroups)
-    //   return true;
-    // else
-    //   if (this.cancelAllProgramAgegroups)
-    //     return false;
-    //   else
-    //    {
+ 
     this.selected = this.selected = this.currentProgram.lProgramAgegroups.includes(s)
     return true;
-    // } 
   }
-  // selectAll() {
-  //   //alert(this.selectAllProgramAgegroups)
-  //   this.selectAllProgramAgegroups = true;
-  //   this.cancelAllProgramAgegroups = false;
 
-  // }
-  // cancelAll() {
-  //   //alert(this.selectAllProgramAgegroups)
-  //   this.cancelAllProgramAgegroups = true;
-  //   this.selectAllProgramAgegroups = false;
-
-  // }
   //בינתיים
   onItemSelect(item: Program) {
     //this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
@@ -296,16 +306,25 @@ debugger
 
     list.forEach(function (Item) {
       if (Item.innerHTML != '') {
+        debugger
+
         alert('נא שים לב לתוכן תקין');
         this.h = true;
         return false
       }
     });
-
+    debugger
+    if (new Date(this.currentProgram.dFromDate) >= new Date(this.currentProgram.dToDate)) {
+      debugger
+      alert('הזן תאריך התחלה לפני תאריך סיום');
+      this.h = true;
+      return false;
+    }
     debugger
 
     if (this.h == false) {
-      this.testDate()
+      this.saveProgram();
     }
+    this.h=false;
   }
 }
