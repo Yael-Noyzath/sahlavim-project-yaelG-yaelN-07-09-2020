@@ -283,7 +283,7 @@ debugger
         });
         debugger
           // alert("הנתונים של  " + this.operator.nvOperatorName + " נשמרו בהצלחה!");
-          // this.mainService.serviceNavigate("./header-menu/operators/operator-table");
+          this.mainService.serviceNavigate("./header-menu/operators/operator-table");
 
         }
         , err => {

@@ -57,7 +57,7 @@ export class MainServiceService {
   settingForDetails: Setting = new Setting();
 
   //לעריכת תוכנית
-  programForDetails: Program;
+  programForDetails: Program=new Program();
 
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();

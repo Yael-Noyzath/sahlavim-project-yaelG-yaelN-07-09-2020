@@ -9,6 +9,7 @@ export class EmailPipe implements PipeTransform {
 
     debugger
     var mail = /[A-Za-z0-9-]+@+[A-Za-z]+\.+[A-Za-z]/;
+    debugger
     if (mail.test(value) == false) {
       return ('כתובת מייל לא תקינה')
     }

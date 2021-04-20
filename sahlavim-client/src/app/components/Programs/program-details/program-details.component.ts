@@ -245,6 +245,7 @@ debugger
         this.toastr.success('השינויים נשמרו בהצלחה', '', {
           timeOut: 3000,
         });
+        this.mainService.serviceNavigate("./header-menu/programs/programs-table");
 
         this.mainService.serviceNavigate("./header-menu/programs/programs-table");
 
