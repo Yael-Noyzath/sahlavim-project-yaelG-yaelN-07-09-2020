@@ -35,7 +35,7 @@ export class ProgramDetailsComponent implements OnInit {
   elementRef: any;
   datePickerCtrl = new FormControl();
   toDayHebrewDay: any;
-  constructor(public datepipe: DatePipe,private dateAdapter: DateAdapter<any>, public toastr: ToastrService, private mainService: MainServiceService) {
+  constructor(public datepipe: DatePipe, private dateAdapter: DateAdapter<any>, public toastr: ToastrService, private mainService: MainServiceService) {
 
     this.dateAdapter.setLocale('he');
     this.currentProgram = this.mainService.programForDetails;
@@ -101,16 +101,14 @@ export class ProgramDetailsComponent implements OnInit {
     //31 פסח
     //32 קיץ
     if (this.currentProgram.iProgramType == 30) {
- 
-    if(!(new Date(this.currentProgram.dFromDate)>=new Date(2021, 11, 5)&&new Date(this.currentProgram.dFromDate)<=new Date(2020, 12, 4)))
-    {
-     this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
-} 
-if(!(new Date(this.currentProgram.dToDate)>=new Date(2020, 12, 4))&&new Date(this.currentProgram.dToDate)<=new Date(2020, 12, 4)))
-{
-  this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
-} 
 
+      if (!(new Date(this.currentProgram.dFromDate) >= new Date(2021, 11, 5) && new Date(this.currentProgram.dFromDate) <= new Date(2020, 12, 4))) {
+        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
+      }
+      if (!(new Date(this.currentProgram.dToDate) >= new Date(2020, 12, 4) && new Date(this.currentProgram.dToDate) <= new Date(2020, 12, 4)))
+      {
+        this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
+      }
 
       this.minFromDate = new Date(2021, 11, 5);
       this.maxFromDate = new Date(2020, 12, 4);
@@ -252,7 +250,7 @@ if(!(new Date(this.currentProgram.dToDate)>=new Date(2020, 12, 4))&&new Date(thi
 
   selected: boolean = false;
   isSelected(s: any) {
- 
+
     this.selected = this.selected = this.currentProgram.lProgramAgegroups.includes(s)
     return true;
   }
@@ -327,6 +325,6 @@ if(!(new Date(this.currentProgram.dToDate)>=new Date(2020, 12, 4))&&new Date(thi
     if (this.h == false) {
       this.saveProgram();
     }
-    this.h=false;
+    this.h = false;
   }
 }

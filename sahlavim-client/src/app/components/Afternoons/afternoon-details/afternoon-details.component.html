@@ -9,10 +9,10 @@
    margin: auto;
    width: 50%;
    padding-top: 25px;">
-                <h3 class="afternonColor">פרטי תוכנית</h3>
+                <h3 style="color: rgb(196, 196, 21);" class="afternonColor">פרטי סמסטר</h3>
 
                 <mat-form-field class="example-form-field">
-                    <mat-select [(ngModel)]="currentAfternoon.iYearType" placeholder="שנה" name="iYearType">
+                    <mat-select  [(ngModel)]="currentAfternoon.iYearType" placeholder="שנה" name="iYearType">
                         <mat-option *ngFor="let s of YearTypeValue.keys()" [value]="s">{{this.YearTypeValue.get(s)}}
                         </mat-option>
                     </mat-select>
@@ -20,14 +20,27 @@
                   
                 </mat-form-field><br>
 
-                <mat-form-field class="example-form-field">
-                    <mat-select [(ngModel)]="currentAfternoon.iSemesterType" placeholder="סמסטר" name="iSemesterType">
+                <section class="example-section" style="padding-top: 3%;padding-bottom: 3%;">
+                    <label class="example-margin">סמסטר: </label>
+    
+                    <mat-radio-group (change)="typeChanged()" [(ngModel)]="currentAfternoon.iSemesterType" name="iSemesterType">
+                        <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="94">סמסטר א
+                        </mat-radio-button>
+                        <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="95">סמסטר ב
+                        </mat-radio-button>    
+                    </mat-radio-group> <br>
+                    <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{currentAfternoon.iSemesterType|required}}</mat-hint>
+
+                </section>
+
+                <!-- <mat-form-field class="example-form-field">
+                    <mat-select (mouseleave)="typeChanged()" [(ngModel)]="currentAfternoon.iSemesterType" placeholder="סמסטר" name="iSemesterType">
                         <mat-option *ngFor="let s of SemesterTypeValue.keys()" [value]="s">
                             {{this.SemesterTypeValue.get(s)}}
                         </mat-option>
                     </mat-select>
 
-                </mat-form-field><br>
+                </mat-form-field><br> -->
 
                 <!-- <mat-form-field class="example-form-field">
                     <mat-label>סעיף תקציבי</mat-label>
@@ -37,7 +50,7 @@
                 </mat-form-field><br> -->
 
                 <div class="example-form-field col-sm-12" style="margin: auto;">
-                    <p style="font-size: smaller;" class="afternonColor">קטגורית גילאים</p>
+                    <p style="font-size: smaller;" style="color: rgb(196, 196, 21);" class="afternonColor">קטגורית גילאים</p>
                     <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
                         [data]="lProgramAgegroupsValue" [(ngModel)]="ProgramAgegroupsListNg"
                         [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
@@ -45,16 +58,11 @@
                     </ng-multiselect-dropdown>
                 </div><br>
 
-                
-
-
-
-
                 <mat-form-field>
                     <mat-label>מתאריך</mat-label>
                     <input matInput #input="ngModel"
                         [(ngModel)]="currentAfternoon.dFromDate" [min]="minFromDate" [max]="maxFromDate"
-                        [matDatepicker]="picker2" (change)="checkValidDate(1,currentAfternoon.dFromDate)" name="dFromDate"
+                        [matDatepicker]="picker2" (change)="checkValidDate(currentAfternoon.dFromDate)" name="dFromDate"
                         placeholder="בחר תאריך">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
@@ -82,7 +90,7 @@
                    
                 </mat-form-field><br>
 
-                <mat-form-field class="example-form-field">
+                <!-- <mat-form-field class="example-form-field">
                     <mat-label>שעת פעילות ראשונה</mat-label>
                     <input matInput type="time" [(ngModel)]="currentAfternoon.tFirstActivity" name="tFirstActivity" />
                    
@@ -92,8 +100,8 @@
                     <mat-label>שעת פעילות שניה</mat-label>
                     <input matInput type="time" [(ngModel)]="currentAfternoon.tSecondActivity" name="tSecondActivity" />
                    
-                </mat-form-field><br>
-
+                </mat-form-field> -->
+<br>
                 <!-- Button trigger modal-->
                 <button type="button" style="background-color:rgb(240, 236, 20, 0.904); color: black;"
                     class="btn col-sm-4" data-toggle="modal" data-target="#modalCart">שיוך מסגרות</button>

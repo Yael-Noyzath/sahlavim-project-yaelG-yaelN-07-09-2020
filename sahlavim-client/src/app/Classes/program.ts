@@ -22,10 +22,10 @@ export class Program {
         public LastModifyUserId: number = 0,//קוד מישתמש שינוי אחרון
         public iSysRowStatus: number = 0,//לבדוק מה זה
         public bProgramAfternoon: boolean = false,//האם תוכנית צהרים
-        public iSemesterType: number = 0,
+        public iSemesterType: number =94,
         public tFirstActivity: string= new Date("00:00").toTimeString(),
         public tSecondActivity: string= new Date("00:00").toTimeString(),
-        public iYearType: number = 0,//לבדוק
+        public iYearType: number = 64,//לבדוק
         public iNumActivityInWeek: number = 0,
         public lProgramAgegroups: Array<number> = new Array<number>(),
         public lProgramSettings: Array<number> = new Array<number>(),

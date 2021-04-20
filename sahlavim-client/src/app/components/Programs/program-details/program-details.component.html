@@ -11,7 +11,7 @@
                       padding-top: 25px;">
                 <h3 style="z-index: 20;" class="programColor">פרטי תוכנית</h3>
                 <mat-form-field class="example-form-field">
-                    <mat-select (selectionChange)="typeChanged()" [(ngModel)]="currentProgram.iProgramType" required
+                    <mat-select (mouseleave)="typeChanged()" [(ngModel)]="currentProgram.iProgramType" required
                         placeholder="סוג תוכנית" name="iProgramType">
                         <mat-option *ngFor="let s of lProgramTypeValue" [value]="s.Key">
                             {{this.s.Value}}
