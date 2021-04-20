@@ -164,15 +164,18 @@ export class SettingsDetailsComponent implements OnInit {
   validation(){
     
   }
+  //להציג את הוספת רכזת, גורם לטעויות ב mat-hint
+  c:boolean=false;
   h:boolean=false;
 
   checkFormValid() {
     //check if no mat-hint with context 
     const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
-
+debugger
 list.forEach(function(Item) {
   if(Item.innerHTML != '')
   {
+    debugger
     alert('נא שים לב לתוכן תקין');
     this.h = true;
     return false

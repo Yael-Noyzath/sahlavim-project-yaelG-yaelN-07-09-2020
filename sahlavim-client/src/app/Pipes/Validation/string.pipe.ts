@@ -9,6 +9,7 @@ export class StringPipe implements PipeTransform {
 
     var hasNumber = /\d/;
     if (value.length <2) {
+      debugger
       return ('ערך לא תקין')
     }
 

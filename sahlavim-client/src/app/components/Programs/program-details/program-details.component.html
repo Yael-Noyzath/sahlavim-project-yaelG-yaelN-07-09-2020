@@ -48,18 +48,26 @@
 
   <mat-form-field>
     <mat-label>מתאריך</mat-label>
-    <input (change)="checkValidDate(1,currentProgram.dFromDate)" [(ngModel)]="currentProgram.dFromDate" matInput name="dFromDate" [matDatepicker]="picker" placeholder="בחר תאריך" [formControl]="datePickerCtrl">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <input (change)="checkValidDate(1,currentProgram.dFromDate)" [(ngModel)]="currentProgram.dFromDate" matInput name="dFromDate" [matDatepicker]="picker2" placeholder="בחר תאריך">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
     <mat-hint  align="end">{{rightFromDate}}</mat-hint>
   </mat-form-field>
 
             
                 <br>
 
+                <!-- <mat-form-field>
+                    <mat-label>מתאריך</mat-label>
+                    <input (change)="checkValidDate(1,currentProgram.dFromDate)" [(ngModel)]="currentProgram.dFromDate" matInput name="dFromDate" [matDatepicker]="picker" placeholder="בחר תאריך" [formControl]="datePickerCtrl2">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
+                  </mat-form-field> -->
+
                 <mat-form-field>
                     <mat-label>עד תאריך</mat-label>
-                    <input (change)="checkValidDate(2,currentProgram.dToDate)" [(ngModel)]="currentProgram.dToDate" matInput name="dFromDate" [matDatepicker]="picker" placeholder="בחר תאריך" [formControl]="datePickerCtrl">
+                    <input (change)="checkValidDate(2,currentProgram.dToDate)" [(ngModel)]="currentProgram.dToDate" matInput name="dToDate" [matDatepicker]="picker" placeholder="בחר תאריך" >
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-hint  align="end">{{rightToDate}}</mat-hint>

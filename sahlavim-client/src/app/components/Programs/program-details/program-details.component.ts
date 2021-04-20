@@ -33,7 +33,7 @@ export class ProgramDetailsComponent implements OnInit {
   elementRef: any;
   datePickerCtrl = new FormControl();
 
-  constructor(private dateAdapter: DateAdapter<any>,public toastr: ToastrService, private mainService: MainServiceService) {
+  constructor(private dateAdapter: DateAdapter<any>, public toastr: ToastrService, private mainService: MainServiceService) {
     this.dateAdapter.setLocale('he');
     this.currentProgram = this.mainService.programForDetails;
     debugger
@@ -41,6 +41,31 @@ export class ProgramDetailsComponent implements OnInit {
     this.lProgramAgegroupsValueForTable = mainService.SysTableList[6];
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
+    this.mainService.getGeorgianDate("https://www.hebcal.com/zmanim?cfg=json&geonameid=3448439&date=2021-03-23").subscribe(
+      x => {
+          console.log("VALUE RECEIVED: ",x);
+          let d = x;
+debugger
+      },
+      x => {
+          console.log("ERROR: ",x);
+      },
+      () => {
+          console.log("Completed");
+      }
+    );
+    debugger
+//https://www.hebcal.com/converter?hd=1&hm=Kislev&hy=5781&h2g=1
+    this.mainService.getGeorgianDate(" https://www.hebcal.com/zmanim?cfg=json&geonameid=3448439&date=2021-03-23").then(
+      res => {
+        let d = res;
+        debugger
+      },
+      error => {
+        let e = error;
+      }
+    );
+    debugger
   }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

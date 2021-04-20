@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, observable } from 'rxjs';
+import {  observable } from 'rxjs';
 import { Operator } from 'src/app/classes/operator';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/classes/user';
@@ -8,6 +8,7 @@ import { Setting } from 'src/app/Classes/setting';
 import { Program } from 'src/app/Classes/program';
 import { promise } from 'protractor';
 import * as moment from 'moment';
+import {Observable} from 'rxjs/Observable';
 
 
 export class forSelect {
@@ -122,6 +123,15 @@ export class MainServiceService {
 
   async get(url: string): Promise<any> {
     return await this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
+  }
+
+  private extractData(res: Response) {
+    return res.json();
+    //let body = res.json();
+    //return body.data || { };
+  }
+  getGeorgianDate(url:string) {
+    return this.http.get(url).map(this.extractData);
   }
 
   getPrograms() {
