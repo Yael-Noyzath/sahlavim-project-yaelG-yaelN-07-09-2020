@@ -101,6 +101,8 @@ import { HolidaysPipe } from './Pipes/holidays.pipe';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
 
+
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -150,8 +152,9 @@ import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
     CheckValidDatePipe,
   ],
   imports: [
-
-    NgbModalModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
+             NgbModalModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -160,9 +163,7 @@ import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
 
     CommonModule,
     ScheduleModule,
-    BrowserModule, 
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
@@ -172,7 +173,6 @@ import { CheckValidDatePipe } from './Pipes/Validation/check-valid-date.pipe';
     NgMultiSelectDropDownModule.forRoot(),
     AngularMultiSelectModule,
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,

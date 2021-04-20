@@ -69,7 +69,7 @@
                     <!-- <p *ngIf="row.iUserType==1" >מנהלת</p>
                 <p *ngIf="row.iUserType==2" >מזכירה</p> -->
                     <!-- {{row.iUserType}} -->
-                    {{this.lUserTypeValue.get(row.iUserType)}}
+                    {{iUserType(row.iUserType)}}
                 </td>
             </ng-container>
 
@@ -147,6 +147,19 @@
                             <mat-hint align="end">{{ editUser.nvLastName| string }}</mat-hint>
 
                         </mat-form-field><br>
+
+                        <mat-form-field>
+                            <mat-label>סוג הרשאה</mat-label>
+                            <mat-select style="padding-top: 20px;"  data-target="#categoryModal"
+                                name="iUserType" [(ngModel)]="editUser.iUserType">
+                                <mat-option *ngFor="let a of lUserTypeValue" [value]="a.Key">
+                                    {{a.Value}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint class="mat-hint" align="end">{{ editUser.iUserType| required }}</mat-hint>
+            
+                        </mat-form-field><br>
+<!-- 
                         <mat-form-field>
                             <mat-select [(ngModel)]="editUser.iUserType" required placeholder="הרשאה" name="iUserType">
                                 <mat-option *ngFor="let s of lUserTypeValue.keys()" [value]="s">
@@ -154,7 +167,8 @@
                                 </mat-option>
                             </mat-select>
 
-                        </mat-form-field><br>
+                        </mat-form-field><br> -->
+
                         <mat-form-field class="example-form-field col-sm-12">
                             <mat-label>פלאפון</mat-label>
                             <input matInput type="text" [(ngModel)]="editUser.nvMobile" name="nvMobile" />
@@ -180,13 +194,18 @@
 
 
                         </mat-form-field><br>
-                        <button mat-icon-button data-dismiss="modal" aria-label="Close" class="close managementColor"
+                        <!-- <button mat-icon-button data-dismiss="modal" aria-label="Close" class="close managementColor"
                             aria-label="Example icon button with a home icon">
                             <mat-icon aria-hidden="true">save</mat-icon>
-                        </button>
+                        </button> -->
                     </form>
                 </mat-card-content>
             </div>
+            <div style="margin: auto;" class="modal-footer">
+                <button type="button" aria-label="Close" class="btn saveDialog" data-dismiss="modal"
+                    (click)="checkFormValid()">שמור</button>
+            </div>
         </div>
+        
     </div>
 </div>

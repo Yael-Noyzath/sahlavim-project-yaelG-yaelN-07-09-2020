@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 import { coordinator } from 'src/app/Classes/coordinator';
 import { Setting } from 'src/app/Classes/setting';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
@@ -35,7 +36,7 @@ export class SettingsDetailsComponent implements OnInit {
 
   newSe:boolean=true;
 
-  constructor(private mainService: MainServiceService) {
+  constructor(public toastr: ToastrService,private mainService: MainServiceService) {
     this.lNeighborhoodTypeValue = mainService.SysTableList[4];
     this.lSettingTypeValue = mainService.SysTableList[5];
   }
@@ -112,8 +113,13 @@ export class SettingsDetailsComponent implements OnInit {
       res => {
         //קבלה מהשרת את רשימת מפעילים המעודכנת
         this.mainService.getSettings();
-        alert("הנתונים של  " + this.currentSetting.nvSettingName + " נשמרו בהצלחה!");
-        this.mainService.serviceNavigate("./header-menu/settings/setting-table");
+
+        
+        this.toastr.success('השינויים נשמרו בהצלחה', '', {
+          timeOut: 3000,
+        });
+        // alert("הנתונים של  " + this.currentSetting.nvSettingName + " נשמרו בהצלחה!");
+        // this.mainService.serviceNavigate("./header-menu/settings/setting-table");
 
       },
       err => {

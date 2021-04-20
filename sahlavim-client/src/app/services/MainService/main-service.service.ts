@@ -173,7 +173,7 @@ export class MainServiceService {
 
   }
   //get operator list from server
-  getAllOperators() {
+async  getAllOperators() {
 
     this.post("GetOperators", {})
       .then(

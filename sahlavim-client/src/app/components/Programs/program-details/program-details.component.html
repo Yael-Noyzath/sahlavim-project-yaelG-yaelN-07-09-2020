@@ -43,20 +43,35 @@
                     </ng-multiselect-dropdown>
                 </div><br>
 
-                <mat-form-field class="example-form-field">
-                    <mat-label>מתאריך</mat-label>
-                    <input (change)="checkValidDate(1,currentProgram.dFromDate)" matInput type="date" [(ngModel)]="currentProgram.dFromDate" name="dFromDate" />
-                    <!-- <mat-hint  align="end">{{ currentProgram.dFromDate| required }}</mat-hint> -->
-                    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
-                </mat-form-field> 
-                 <p *ngIf=" currentProgram.dFromDate">{{ currentProgram.dFromDate | hebrewDate}}</p> 
+                
+<p>בחר תאריך בין:</p>
 
+  <mat-form-field>
+    <mat-label>מתאריך</mat-label>
+    <input (change)="checkValidDate(1,currentProgram.dFromDate)" [(ngModel)]="currentProgram.dFromDate" matInput name="dFromDate" [matDatepicker]="picker" placeholder="בחר תאריך" [formControl]="datePickerCtrl">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-hint  align="end">{{rightFromDate}}</mat-hint>
+  </mat-form-field>
+
+            
                 <br>
 
-                <mat-form-field class="example-form-field">
+                <mat-form-field>
                     <mat-label>עד תאריך</mat-label>
-                    <input matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
-                </mat-form-field><br>
+                    <input (change)="checkValidDate(2,currentProgram.dToDate)" [(ngModel)]="currentProgram.dToDate" matInput name="dFromDate" [matDatepicker]="picker" placeholder="בחר תאריך" [formControl]="datePickerCtrl">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint  align="end">{{rightToDate}}</mat-hint>
+                  </mat-form-field>
+
+                <!-- <mat-form-field class="example-form-field">
+                    <mat-label>עד תאריך</mat-label>
+                    <input (change)="checkValidDate(2,currentProgram.dToDate)" matInput type="date" [(ngModel)]="currentProgram.dToDate" name="dToDate" />
+                    <mat-hint  align="end">{{rightToDate}}</mat-hint>
+
+                </mat-form-field> -->
+                <br>
 
                 <div>
                     <mat-form-field class="example-form-field">

@@ -17,6 +17,7 @@
                     <mat-hint align="end">{{ currentSetting.nvSettingName| string }}</mat-hint>
 
                 </mat-form-field><br>
+
                 <mat-form-field class="example-form-field">
                     <mat-select [(ngModel)]="currentSetting.iSettingType" required placeholder="סוג מסגרת"
                         name="iSettingType">
@@ -24,6 +25,7 @@
                             {{this.lSettingTypeValue.get(s)}}
                         </mat-option>
                     </mat-select>
+                <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{currentSetting.iSettingType|required}}</mat-hint>
 
                 </mat-form-field><br>
 
@@ -40,9 +42,11 @@
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">
                     <mat-label>כתובת</mat-label>
-                    <input matInput type="text" [(ngModel)]="currentSetting.nvAddress" name="nvAddress" required />
+                    <input matInput type="text" [(ngModel)]="currentSetting.nvAddress" name="nvAddress"  />
+                    <mat-hint align="end">{{ currentSetting.nvAddress| required }}</mat-hint>
 
                 </mat-form-field><br>
+
                 <mat-form-field class="example-form-field">
                     <mat-label>שכונה</mat-label>
                     <mat-select [(ngModel)]="currentSetting.iNeighborhoodType" required placeholder="שכונה"
@@ -50,6 +54,7 @@
                         <mat-option *ngFor="let s of lNeighborhoodTypeValue.keys()" [value]="s">
                             {{this.lNeighborhoodTypeValue.get(s)}}</mat-option>
                     </mat-select>
+                    <mat-hint align="end">{{ currentSetting.iNeighborhoodType| required }}</mat-hint>
 
                 </mat-form-field><br>
 
@@ -98,6 +103,7 @@
                 <mat-form-field class="example-form-field">
                     <mat-label>שם איש קשר</mat-label>
                     <input matInput type="text" [(ngModel)]="currentSetting.nvContactPerson" name="nvContactPerson" />
+                    <mat-hint align="end">{{ currentSetting.nvContactPerson| required }}</mat-hint>
 
                 </mat-form-field><br>
                 <mat-form-field class="example-form-field">

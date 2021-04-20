@@ -159,6 +159,12 @@ export class CalendarComponent implements OnInit {
   // selectToday() {
   //   this.model = this.calendar.getToday();
   // }
+  color:string="";
+  // --operatorClr:rgb(192, 31, 31);;
+  // --settingClr: rgb(47, 50, 150);
+  // --programClr:  rgb(98, 169, 29);
+  // --afternoonClr: rgb(219 182 0 / 90%);
+  // --managerClr: rgb(91, 185, 170)
 
   async ngOnInit() {
     this.operatorList = this.mainService.operatorsList;
@@ -170,14 +176,15 @@ export class CalendarComponent implements OnInit {
       this.objName = this.operator.nvOperatorName;
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
       debugger
-      this.eventToEdit.iOperatorId=this.types['iOperatorId'];
+      this.eventToEdit.iOperatorId = this.types['iOperatorId'];
+      this.color='rgb(219 162 162)';
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
       this.types['iSettingId'] = this.mainService.settingForDetails.iSettingId;
       this.objName = 'מסגרת ' + this.currentSetting.nvSettingName;
-      this.eventToEdit.iSettingId=this.currentSetting.iSettingId;
-
+      this.eventToEdit.iSettingId = this.currentSetting.iSettingId;
+this.color='rgb(150 170 241)';
     }
     if (this.type == "iProgramId") {//import the program by the id
       this.currentProgram = this.mainService.programForDetails;
@@ -185,11 +192,11 @@ export class CalendarComponent implements OnInit {
 
       this.types['iProgramId'] = this.mainService.programForDetails.iProgramId;
       this.objName = 'תוכנית ' + this.currentProgram.nvProgramName;
-      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+      this.eventToEdit.iProgramId = this.currentProgram.iProgramId;
 
-
+this.color='rgb(177 218 175)';
     }
-    
+
     //אם לא מפעיל/מסגרת/תוכנית חדשה
     //אז לקבל את האירועים ליומן 
     if (!(this.types['iSettingId'] == -1 && this.types['iProgramId'] == -1 && this.types['iOperatorId'] == -1)) {
@@ -226,8 +233,7 @@ export class CalendarComponent implements OnInit {
     });
 
   }
-  watch(date: any) {
-  }
+
   flag: number = 0;
   ps: Setting;
 
@@ -286,6 +292,7 @@ export class CalendarComponent implements OnInit {
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
   }
+
   createArrayForDetails(date: Date)//יצירת מערך להצגת פרטי אירועים ליום מסויים שנבחר
   {
     this.dayDetails = this.getShortDate(date);
@@ -339,8 +346,8 @@ export class CalendarComponent implements OnInit {
       iActivityId: this.eventToEdit.iActivityId,
       iSettingId: this.eventToEdit.iSettingId,
       iProgramId: this.eventToEdit.iProgramId,
-     // dtStartTime: this.eventToEdit.dtStartTime,
-      dtStartTime: "/Date("+new Date(this.eventToEdit.dtStartTime).getTime()+")/",
+      // dtStartTime: this.eventToEdit.dtStartTime,
+      dtStartTime: "/Date(" + new Date(this.eventToEdit.dtStartTime).getTime() + ")/",
       bCopyAllWeeks: false,
       iUserId: this.mainService.currentUser.iUserId
     });
@@ -355,13 +362,13 @@ export class CalendarComponent implements OnInit {
   resetEventToEdit() {
     this.eventToEdit = new schedule();
     if (this.type == 'iOperatorId') {
-      this.eventToEdit.iOperatorId=this.types['iOperatorId'];
+      this.eventToEdit.iOperatorId = this.types['iOperatorId'];
     }
     if (this.type == "iSettingId") {
-      this.eventToEdit.iSettingId=this.currentSetting.iSettingId;
+      this.eventToEdit.iSettingId = this.currentSetting.iSettingId;
     }
     if (this.type == "iProgramId") {
-      this.eventToEdit.iProgramId=this.currentProgram.iProgramId;
+      this.eventToEdit.iProgramId = this.currentProgram.iProgramId;
     }
 
   }

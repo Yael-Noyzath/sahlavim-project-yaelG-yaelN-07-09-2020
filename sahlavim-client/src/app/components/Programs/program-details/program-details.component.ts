@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { DateAdapter, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { da } from 'date-fns/locale';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
 import { MainServiceService, forSelect } from 'src/app/services/MainService/main-service.service';
@@ -30,8 +31,10 @@ export class ProgramDetailsComponent implements OnInit {
   settingList: Array<Setting>;
   lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
   elementRef: any;
+  datePickerCtrl = new FormControl();
 
-  constructor(private mainService: MainServiceService) {
+  constructor(private dateAdapter: DateAdapter<any>,public toastr: ToastrService, private mainService: MainServiceService) {
+    this.dateAdapter.setLocale('he');
     this.currentProgram = this.mainService.programForDetails;
     debugger
     this.lProgramTypeValue = mainService.gItems[9].dParams;
@@ -80,6 +83,7 @@ export class ProgramDetailsComponent implements OnInit {
   }
   Hebcal = require('hebcal');
   rightFromDate: string = null;
+  rightToDate: string = null;
 
 
   checkValidDate(fromTo: number, date: Date) {//30  קייטנת חנוכה 
@@ -87,33 +91,35 @@ export class ProgramDetailsComponent implements OnInit {
     //32 קיץ
     //  date= new Date(5780, 5, 7, new HebrewCalendar())
     let newDate = new Date(date);
- 
+
     //בדיקת תאריך קייטנת חנוכה, 23/3
     if (this.currentProgram.iProgramType == 30) {
-      if (fromTo == 1)// אם תאריך התחלתי
-      {
-        //get the hebrew date
-        let day = new this.Hebcal.HDate(newDate);
-        //if not Kislev month
-        if (day.getMonth() != 3) {
-       // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
 
-        
+      //get the hebrew date
+      let day = new this.Hebcal.HDate(newDate);
+      //if not Kislev month
+      if (day.getMonth() != 3) {
+        if (fromTo == 1)// אם תאריך התחלתי
+        {
+          // date =  this.Hebcal.HDate.hebrew2abs('1 Kislev');
           this.rightFromDate = "נא הזן תאריך בחודש כסליו"
-
+        }
+        else {
+          this.rightToDate = "נא הזן תאריך בחודש כסליו"
         }
 
-        debugger
-
-        //convert the number date to letters 
-        // return this.Hebcal.gematriya(day.getDate());et rightFromDate;
       }
+
+      debugger
+
+      //convert the number date to letters 
+      // return this.Hebcal.gematriya(day.getDate());et rightFromDate;
     }
-
-
-
   }
-  
+
+
+
+
 
   saveProgram() {
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
@@ -135,6 +141,8 @@ export class ProgramDetailsComponent implements OnInit {
       iUserId: this.mainService.currentUser.iUserId
     }).then(
       res => {
+
+
         // alert(res)
       },
       err => {
@@ -151,20 +159,23 @@ export class ProgramDetailsComponent implements OnInit {
     if (this.currentProgram.tToTimeAfternoon != null)
       this.currentProgram.tToTimeAfternoon = this.currentProgram.tToTimeAfternoon.toString();
 
-     this.currentProgram.dFromDate="/Date("+new Date(this.currentProgram.dFromDate).getTime()+")/";
-     this.currentProgram.dToDate="/Date("+new Date(this.currentProgram.dToDate).getTime()+")/";
+    this.currentProgram.dFromDate = "/Date(" + new Date(this.currentProgram.dFromDate).getTime() + ")/";
+    this.currentProgram.dToDate = "/Date(" + new Date(this.currentProgram.dToDate).getTime() + ")/";
     //   this.currentProgram.dToDate="/Date(1530910800000+0300)/";
 
     //   let da=this.currentProgram.dToDate+"T00:00:00";
     //   let g:string;
     //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
-      console.log(this.currentProgram);
+    console.log(this.currentProgram);
 
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();
-        alert("הנתונים של  " + this.currentProgram.nvProgramName + " נשמרו בהצלחה!");
-        this.mainService.serviceNavigate("./header-menu/programs/programs-table");
+
+
+        this.toastr.success('השינויים נשמרו בהצלחה', '', {
+          timeOut: 3000,
+        });
 
       },
       err => {
@@ -252,7 +263,7 @@ export class ProgramDetailsComponent implements OnInit {
       return false;
     return true;
   }
-  h:boolean=false;
+  h: boolean = false;
 
   checkFormValid() {
     //check if no mat-hint with context 

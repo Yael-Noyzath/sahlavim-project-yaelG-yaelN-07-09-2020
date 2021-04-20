@@ -37,12 +37,14 @@ export class ManagersTableComponent implements OnInit {
   //מערך מפעילים לטבלה
   usersList: Array<User>;
   editUser: User = new User();
-  lUserTypeValue: Map<number, string> = new Map<number, string>();
+  lUserTypeValue: forSelect[];
   constructor(private mainService: MainServiceService) {
     this.usersList = mainService.usersList;
     this.dataSource = new MatTableDataSource(this.usersList);
     //מילוי הרשימה בצורה של MAP
-    this.lUserTypeValue = mainService.SysTableList[0];
+  //  this.lUserTypeValue = mainService.SysTableList[0];
+    this.lUserTypeValue = this.mainService.gItems[0].dParams;
+
     this.dataSource.filterPredicate = this.createFilter();
   }
   LastNameFilter = new FormControl('');
@@ -91,7 +93,10 @@ export class ManagersTableComponent implements OnInit {
       }
     )
   }
-
+  iUserType(type:number)
+  {
+return this.lUserTypeValue.find(x=>x.Key==type).Value;
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter); debugger
@@ -116,16 +121,16 @@ export class ManagersTableComponent implements OnInit {
   }
 
   saveUser() {
+    debugger
     this.mainService.post("AddUpdateUser", { oUser: this.editUser }).then(
       res => {
+        alert(res);
         if (res) {
           this.mainService.getUsers();
           alert("הנתונים של  " + this.editUser.nvUserName + " נשמרו בהצלחה!");
 
         }
-        else {
-          alert("err AddUpdateUser")
-        }
+    
       },
       err => {
         alert("err AddUpdateUser")
@@ -175,7 +180,6 @@ export class ManagersTableComponent implements OnInit {
   h: boolean = false;
 
   checkFormValid() {
-    alert("dsbv");
     //check if no mat-hint with context 
     const list = document.querySelectorAll<HTMLInputElement>("mat-hint");
 
