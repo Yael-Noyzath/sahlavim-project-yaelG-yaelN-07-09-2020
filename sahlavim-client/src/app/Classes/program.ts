@@ -5,8 +5,8 @@ export class Program {
         public iProgramType: number = 0,
         public nvProgramName: string = "",
         public nvBudgetItem: string = "",//סעיף תקציב
-        public dFromDate: string ="",
-        public dToDate: string="",
+        public dFromDate: string ="1/1/2020",
+        public dToDate: string="1/1/20",
         public iNumActivityMorning: number = 0,//מיספר הפעלות בוקר
         public iNumActivityAfternoon: number = 0,//מיספר הפעלות צהרים
         public iActivityPreferenceCount: number = 0,//מספר הפעלות מועדפות

@@ -102,8 +102,14 @@ export class ProgramDetailsComponent implements OnInit {
     //32 קיץ
     if (this.currentProgram.iProgramType == 30) {
  
-      this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
-      this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
+    if(!(new Date(this.currentProgram.dFromDate)>=new Date(2021, 11, 5)&&new Date(this.currentProgram.dFromDate)<=new Date(2020, 12, 4)))
+    {
+     this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
+} 
+if(!(new Date(this.currentProgram.dToDate)>=new Date(2020, 12, 4))&&new Date(this.currentProgram.dToDate)<=new Date(2020, 12, 4)))
+{
+  this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
+} 
 
 
       this.minFromDate = new Date(2021, 11, 5);
@@ -116,9 +122,6 @@ export class ProgramDetailsComponent implements OnInit {
         this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
         this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 14), 'yyyy-MM-dd');
 
-        // this.currentProgram.dFromDate = new Date(2022, 3, 2).toString();
-        // this.currentProgram.dToDate = new Date(2022, 3, 14).toString();
-
         this.minFromDate = new Date(2022, 3, 2);
         this.maxFromDate = new Date(2022, 3, 14);
         this.minToDate = new Date(2022, 3, 2);
@@ -129,8 +132,7 @@ export class ProgramDetailsComponent implements OnInit {
           this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
           this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
 
-          // this.currentProgram.dFromDate = new Date(2021, 6, 1).toString();
-          // this.currentProgram.dToDate = new Date(2021, 7, 31).toString();
+
 
           this.minFromDate = new Date(2021, 6, 1);
           this.maxFromDate = new Date(2021, 7, 31);

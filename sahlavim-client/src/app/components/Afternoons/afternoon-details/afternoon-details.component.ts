@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { DateAdapter, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
@@ -28,15 +28,36 @@ export class AfternoonDetailsComponent implements OnInit {
   settingList: Array<Setting>;
   lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
 
-  constructor(private mainService: MainServiceService) {
+  constructor(private mainService: MainServiceService,private dateAdapter: DateAdapter<any>) {
+    this.dateAdapter.setLocale('he');
+
     this.currentAfternoon = this.mainService.programForDetails;
     this.lProgramAgegroupsValueForTable = mainService.SysTableList[6];
     this.settingList = mainService.settingsList;
     this.dataSource = new MatTableDataSource(this.settingList);
     this.YearTypeValue = mainService.SysTableList[14];
     this.SemesterTypeValue = mainService.SysTableList[16];
+    this.typeChanged();
+
   }
 
+  maxFromDate: Date;
+  minFromDate: Date;
+  maxToDate: Date;
+  minToDate: Date;
+
+  typeChanged() {
+    //סמסטר א
+
+    if(this.currentAfternoon.iProgramId==-1)
+    {
+      
+    }
+if(this.currentAfternoon.iSemesterType==94)
+{
+  this.minFromDate
+}
+           }
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
