@@ -65,7 +65,8 @@
             <!--Body-->
             <div class="modal-body" style="text-align:right;" dir="rtl">
                 <dl *ngFor="let event of eventsArrayByDate">
-                    <dt> {{event.dtStartTime| date:'hh:mm'}} | מסגרת: {{event.nvSettingName}} </dt>
+                    <!-- <dt> {{event.dtStartTime| date:'hh:mm'}} | מסגרת: {{event.nvSettingName}} </dt> -->
+                    <dt> מסגרת: {{event.nvSettingName}} </dt>
                     <p>כתובת: {{event.nvAddress}}</p>
                     <p>טלפון איש קשר: {{event.nvPhone}}</p>
                     <p>פעילות: {{event.nvActivityName}}</p>

@@ -1,7 +1,7 @@
 import { time } from 'console';
 
 export class Program {
-    constructor(public iProgramId: number = 0,
+    constructor(public iProgramId: number = -1,
         public iProgramType: number = 0,
         public nvProgramName: string = "",
         public nvBudgetItem: string = "",//סעיף תקציב
@@ -17,9 +17,9 @@ export class Program {
         public tToTimeAfternoon: string = new Date("00:00").toTimeString(),
         public bTwoActivitiesThatDay: boolean = false,
         public iStatusType: number = 0,
-        public CreateByUserId: number = 0,
-        public CreateDate: string ="",
-        public LastModifyUserId: number = 0,//קוד מישתמש שינוי אחרון
+        // public CreateByUserId: number = 0,
+        // public CreateDate: string ="",
+        // public LastModifyUserId: number = 0,//קוד מישתמש שינוי אחרון
         public iSysRowStatus: number = 0,//לבדוק מה זה
         public bProgramAfternoon: boolean = false,//האם תוכנית צהרים
         public iSemesterType: number =94,
@@ -30,5 +30,4 @@ export class Program {
         public lProgramAgegroups: Array<number> = new Array<number>(),
         public lProgramSettings: Array<number> = new Array<number>(),
     ) { }
-
 }
