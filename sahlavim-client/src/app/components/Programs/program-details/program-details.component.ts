@@ -236,7 +236,7 @@ debugger
     //   let g:string;
     //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
     console.log(this.currentProgram);
-
+debugger
     this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
       res => {
         this.mainService.getPrograms();

@@ -33,21 +33,6 @@
 
                 </section>
 
-                <!-- <mat-form-field class="example-form-field">
-                    <mat-select (mouseleave)="typeChanged()" [(ngModel)]="currentAfternoon.iSemesterType" placeholder="סמסטר" name="iSemesterType">
-                        <mat-option *ngFor="let s of SemesterTypeValue.keys()" [value]="s">
-                            {{this.SemesterTypeValue.get(s)}}
-                        </mat-option>
-                    </mat-select>
-
-                </mat-form-field><br> -->
-
-                <!-- <mat-form-field class="example-form-field">
-                    <mat-label>סעיף תקציבי</mat-label>
-                    <input matInput type="text" [(ngModel)]="currentAfternoon.nvBudgetItem" required
-                        name="nvBudgetItem" />
-
-                </mat-form-field><br> -->
 
                 <div class="example-form-field col-sm-12" style="margin: auto;">
                     <p style="font-size: smaller;" style="color: rgb(196, 196, 21);" class="afternonColor">קטגורית גילאים</p>
@@ -62,7 +47,7 @@
                     <mat-label>מתאריך</mat-label>
                     <input matInput #input="ngModel"
                         [(ngModel)]="currentAfternoon.dFromDate" [min]="minFromDate" [max]="maxFromDate"
-                        [matDatepicker]="picker2" (change)="checkValidDate(currentAfternoon.dFromDate)" name="dFromDate"
+                        [matDatepicker]="picker2"  name="dFromDate"
                         placeholder="בחר תאריך">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>

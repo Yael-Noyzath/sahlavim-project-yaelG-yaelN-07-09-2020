@@ -217,6 +217,13 @@ this.color='rgb(177 218 175)';
 
   }
 
+
+
+
+  checkValidDate()
+  {
+
+  }
   updateEventsL() {
     this.eventsFromSer.forEach(element => {
       if (element.dtStartTime != null) {
@@ -237,8 +244,17 @@ this.color='rgb(177 218 175)';
   flag: number = 0;
   ps: Setting;
 
-  fillLists(str: string) {
+ maxDate: Date;
+  minDate: Date;
 
+  fillLists(str: string) {
+    debugger
+if(str=='program')
+{
+  let p:Program=this.programsList.find(x=>x.iProgramId==this.eventToEdit.iProgramId);
+this.minDate=new Date(p.dFromDate);
+this.maxDate=new Date(p.dToDate);
+}
     //מופעל רק בתוכניות וצהרונים
     //מילוי רשימת מפעילים שעובדים במיסגרת מסוימת שנבחרה לתוכנית
     if (this.eventToEdit.iSettingId != 0 && this.types["iOperatorId"] == -1) {

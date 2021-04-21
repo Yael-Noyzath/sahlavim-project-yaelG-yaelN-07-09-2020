@@ -87,6 +87,7 @@ ngAfterViewInit() {
 }
 
 ngOnInit() {
+
   this.lProgramAgegroupsValue = this.mainService.gItems[6].dParams;
   // איתחול רשימת הגילאים של התוכנית 
   if (this.currentAfternoon.lProgramAgegroups.length > 0) {
@@ -95,9 +96,6 @@ ngOnInit() {
     }
   }
 
-  //  this.currentAfternoon.dFromDate;
-  //  this.currentAfternoon.dToDate= new Date(this.currentAfternoon.dToDate).toLocaleDateString() ;
-  //  alert(  this.currentAfternoon.dToDate)
   this.currentAfternoon.tFirstActivity = new Date(parseInt(this.currentAfternoon.tFirstActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
   this.currentAfternoon.tSecondActivity = new Date(parseInt(this.currentAfternoon.tSecondActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
 
@@ -112,8 +110,8 @@ ngOnInit() {
     allowSearchFilter: true
   };
   this.ngAfterViewInit();
-
 }
+
 
 saveAfternoon() {
   this.currentAfternoon.lProgramAgegroups.splice(0, this.currentAfternoon.lProgramAgegroups.length)
