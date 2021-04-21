@@ -55,7 +55,7 @@
                     <mat-label>מתאריך</mat-label>
                     <input matInput #input="ngModel"
                         [(ngModel)]="currentAfternoon.dFromDate" [min]="minFromDate" [max]="maxFromDate"
-                        [matDatepicker]="picker2"  name="dFromDate"
+                        [matDatepicker]="picker2" name="dFromDate"
                         placeholder="בחר תאריך">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
