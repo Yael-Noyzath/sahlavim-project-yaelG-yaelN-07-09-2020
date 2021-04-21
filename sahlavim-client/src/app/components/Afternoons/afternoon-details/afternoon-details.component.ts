@@ -98,8 +98,8 @@ export class AfternoonDetailsComponent implements OnInit {
     //  this.currentAfternoon.dFromDate;
     //  this.currentAfternoon.dToDate= new Date(this.currentAfternoon.dToDate).toLocaleDateString() ;
     //  alert(  this.currentAfternoon.dToDate)
-    this.currentAfternoon.tFirstActivity = new Date(parseInt(this.currentAfternoon.tFirstActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
-    this.currentAfternoon.tSecondActivity = new Date(parseInt(this.currentAfternoon.tSecondActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    // this.currentAfternoon.tFirstActivity = new Date(parseInt(this.currentAfternoon.tFirstActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
+    // this.currentAfternoon.tSecondActivity = new Date(parseInt(this.currentAfternoon.tSecondActivity.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toLocaleTimeString();
 
     //הגדרות ה multi select
     this.dropdownProgramAgegroups = {
@@ -124,9 +124,11 @@ export class AfternoonDetailsComponent implements OnInit {
         this.currentAfternoon.lProgramAgegroups.push(age.Key);
       }
     }
-    this.currentAfternoon.nvProgramName = this.currentAfternoon.iYearType + " " + this.currentAfternoon.iSemesterType;
+    this.currentAfternoon.nvProgramName = this.YearTypeValue.get(this.currentAfternoon.iYearType)  + " " +this.SemesterTypeValue.get(this.currentAfternoon.iSemesterType) ;
     this.currentAfternoon.bProgramAfternoon = true;
     this.currentAfternoon.iProgramType = -1;
+    if(this.currentAfternoon.iProgramId==0)
+    this.currentAfternoon.iProgramId=-1;
     this.currentAfternoon.dFromDate = "/Date(" + new Date(this.currentAfternoon.dFromDate).getTime() + ")/";
     this.currentAfternoon.dToDate = "/Date(" + new Date(this.currentAfternoon.dToDate).getTime() + ")/";
 
@@ -230,11 +232,11 @@ export class AfternoonDetailsComponent implements OnInit {
 
     if (index != -1) {//אם קיים סימן שרוצה להסיר ולכן מוציא מהמערך
       this.currentAfternoon.lProgramSettings.splice(index, 1);
-      alert(this.currentAfternoon.lProgramSettings.length + " remove")
+      // alert(this.currentAfternoon.lProgramSettings.length + " remove")
     }
     else {  //אם לא קיים סימן שרוצה להוסיף ולכן מכניס למערך
       this.currentAfternoon.lProgramSettings.push(settingId);
-      alert(this.currentAfternoon.lProgramSettings.length + " add")
+      // alert(this.currentAfternoon.lProgramSettings.length + " add")
     }
   }
 

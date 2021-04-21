@@ -1,12 +1,8 @@
 
 <ul>
     <li> <a routerLink="afternoon-details" class="navbar-brand">
-            <div *ngIf="idProgram!=-1">
-                <mat-icon class="mat-18">create</mat-icon> עריכת צהרון
-            </div>
-            <div *ngIf="idProgram==-1">
-                <mat-icon class="mat-18">create</mat-icon> צהרון חדש
-            </div>
+                          <mat-icon class="mat-18">create</mat-icon>{{ idProgram==-1?'צהרון חדש': afternoon.nvProgramName }}
+           
         </a></li>
 
     <li class="nav-item">
