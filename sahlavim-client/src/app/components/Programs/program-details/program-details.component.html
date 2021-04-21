@@ -10,16 +10,24 @@
                       width: 50%;
                       padding-top: 25px;">
                 <h3 style="z-index: 20;" class="programColor">פרטי תוכנית</h3>
-                <mat-form-field class="example-form-field">
-                    <mat-select (mouseleave)="typeChanged()" [(ngModel)]="currentProgram.iProgramType" required
-                        placeholder="סוג תוכנית" name="iProgramType">
-                        <mat-option *ngFor="let s of lProgramTypeValue" [value]="s.Key">
-                            {{this.s.Value}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-hint align="end">{{currentProgram.iProgramType| required }}</mat-hint>
+             
+             
+                <section class="example-section" style="padding-top: 3%;padding-bottom: 3%;">
+                    <label class="example-margin">סמסטר: </label>
+    
+                    <mat-radio-group (change)="typeChanged()" [(ngModel)]="currentProgram.iProgramType" name="iProgramType">
+                        <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="30">קייטנת חנוכה
+                        </mat-radio-button>
+                        <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="31">קייטנת פסח
+                        </mat-radio-button>
+                        <mat-radio-button style="margin-right: 17px;" class="example-margin" [value]="32">קייטנת קיץ
+                        </mat-radio-button>   
+                    </mat-radio-group> <br>
+                    <mat-hint class="mat-hint" style="font-size: 13px;color: red;" align="end">{{currentProgram.iProgramType|required}}</mat-hint>
 
-                </mat-form-field><br>
+                </section>
+             
+               
                 <mat-form-field class="example-form-field">
                     <mat-label>שם תוכנית</mat-label>
                     <input matInput type="text" [(ngModel)]="currentProgram.nvProgramName" name="nvProgramName" />

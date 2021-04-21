@@ -101,37 +101,46 @@ export class ProgramDetailsComponent implements OnInit {
     //31 פסח
     //32 קיץ
     if (this.currentProgram.iProgramType == 30) {
-
-      if (!(new Date(this.currentProgram.dFromDate) >= new Date(2021, 11, 5) && new Date(this.currentProgram.dFromDate) <= new Date(2020, 12, 4))) {
-        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 11, 5), 'yyyy-MM-dd');
+      if (!(new Date(this.currentProgram.dFromDate) >= new Date(2021, 10, 5) && new Date(this.currentProgram.dFromDate) <= new Date(2021, 11, 6))) {
+        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 10, 5), 'yyyy-MM-dd');
       }
-      if (!(new Date(this.currentProgram.dToDate) >= new Date(2020, 12, 4) && new Date(this.currentProgram.dToDate) <= new Date(2020, 12, 4)))
-      {
-        this.currentProgram.dToDate = this.datepipe.transform(new Date(2020, 12, 4), 'yyyy-MM-dd');
+      if (!(new Date(this.currentProgram.dToDate) >= new Date(2020, 10, 5) && new Date(this.currentProgram.dToDate) <= new Date(2021, 11, 6))) {
+        this.currentProgram.dToDate = this.datepipe.transform(new Date(2021, 11, 6), 'yyyy-MM-dd');
       }
 
-      this.minFromDate = new Date(2021, 11, 5);
-      this.maxFromDate = new Date(2020, 12, 4);
-      this.minToDate = new Date(2021, 11, 5);
-      this.maxToDate = new Date(2020, 12, 4);
+      this.minFromDate = new Date(2021, 10, 5);
+      this.maxFromDate = new Date(2021, 11, 6);
+      this.minToDate = new Date(2021, 10, 5);
+      this.maxToDate = new Date(2021, 11, 6);
     }
     else {
       if (this.currentProgram.iProgramType == 31) {
-        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
-        this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 14), 'yyyy-MM-dd');
+        if (!(new Date(this.currentProgram.dFromDate) >= new Date(2022, 3, 2) && new Date(this.currentProgram.dFromDate) <= new Date(2022, 4, 1))) {
+          this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
+        }
+        if (!(new Date(this.currentProgram.dToDate) >= new Date(2022, 3, 2) && new Date(this.currentProgram.dToDate) <= new Date(2022, 4, 1))) {
+          this.currentProgram.dToDate = this.datepipe.transform(new Date(2022, 4, 1), 'yyyy-MM-dd');
+        }
+
+        // this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
+        // this.currentProgram.dToDate = this.datepipe.transform(new Date(2022, 4, 1), 'yyyy-MM-dd');
 
         this.minFromDate = new Date(2022, 3, 2);
-        this.maxFromDate = new Date(2022, 3, 14);
+        this.maxFromDate = new Date(2022, 4, 1);
         this.minToDate = new Date(2022, 3, 2);
-        this.maxToDate = new Date(2022, 3, 14);
+        this.maxToDate = new Date(2022, 4, 1);
       }
       else {
         if (this.currentProgram.iProgramType == 32) {
-          this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
-          this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
+          if (!(new Date(this.currentProgram.dFromDate) >= new Date(2021, 6, 1) && new Date(this.currentProgram.dFromDate) <= new Date(2021, 7, 31))) {
+            this.currentProgram.dFromDate = this.datepipe.transform(new Date(2021, 6, 1), 'yyyy-MM-dd');
+          }
+          if (!(new Date(this.currentProgram.dToDate) >= new Date(2021, 6, 1) && new Date(this.currentProgram.dToDate) <= new Date(2021, 7, 31))) {
+            this.currentProgram.dToDate = this.datepipe.transform(new Date(2021, 7, 31), 'yyyy-MM-dd');
+          }
 
-
-
+          // this.currentProgram.dFromDate = this.datepipe.transform(new Date(2022, 3, 2), 'yyyy-MM-dd');
+          // this.currentProgram.dToDate = this.datepipe.transform(new Date(2022, 4, 1), 'yyyy-MM-dd');
           this.minFromDate = new Date(2021, 6, 1);
           this.maxFromDate = new Date(2021, 7, 31);
           this.minToDate = new Date(2021, 6, 1);
@@ -144,7 +153,7 @@ export class ProgramDetailsComponent implements OnInit {
   }
 
   checkValidDate(fromTo: number, date: Date) {
-
+debugger
     this.minToDate = new Date(this.currentProgram.dFromDate);
     this.currentProgram.dToDate = date.toString();
 
