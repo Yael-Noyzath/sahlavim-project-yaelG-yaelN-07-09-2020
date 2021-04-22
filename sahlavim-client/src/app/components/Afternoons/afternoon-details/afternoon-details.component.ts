@@ -6,6 +6,7 @@ import { Program } from 'src/app/Classes/program';
 import { Setting } from 'src/app/Classes/setting';
 import { forSelect, MainServiceService } from 'src/app/services/MainService/main-service.service';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class AfternoonDetailsComponent implements OnInit {
   settingList: Array<Setting>;
   lProgramAgegroupsValueForTable: Map<number, string> = new Map<number, string>();
 
-  constructor(public datepipe: DatePipe, private mainService: MainServiceService, private dateAdapter: DateAdapter<any>) {
+  constructor(public toastr: ToastrService,public datepipe: DatePipe, private mainService: MainServiceService, private dateAdapter: DateAdapter<any>) {
     this.dateAdapter.setLocale('he');
 
     this.currentAfternoon = this.mainService.programForDetails;
@@ -155,7 +156,11 @@ saveAfternoon() {
     res => {
       this.mainService.getAfternoon();
 
-      alert("הנתונים של  " + this.currentAfternoon.nvProgramName + " נשמרו בהצלחה!");
+      
+      this.toastr.success('השינויים נשמרו בהצלחה', '', {
+        timeOut: 3000,
+      });
+      // alert("הנתונים של  " + this.currentAfternoon.nvProgramName + " נשמרו בהצלחה!");
       this.mainService.serviceNavigate("./header-menu/afternoon/afternoon-table");
 
     },
