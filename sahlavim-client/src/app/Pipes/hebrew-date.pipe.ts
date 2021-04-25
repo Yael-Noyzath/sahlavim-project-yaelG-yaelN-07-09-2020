@@ -22,7 +22,7 @@ export class HebrewDatePipe implements PipeTransform {
     }
 //get the hebrew date
     var day = new this.Hebcal.HDate(date);
-    debugger
+    
         //convert the number date to letters 
     return this.Hebcal.gematriya(day.getDate());
     }

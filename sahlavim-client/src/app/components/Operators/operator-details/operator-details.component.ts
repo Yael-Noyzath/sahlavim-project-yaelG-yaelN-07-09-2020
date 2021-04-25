@@ -125,7 +125,7 @@ debugger
         }
       }
     }
-
+debugger
 
     //הגדרות ה multi select
     this.dropdownSettings = {

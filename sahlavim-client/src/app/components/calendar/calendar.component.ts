@@ -177,7 +177,7 @@ export class CalendarComponent implements OnInit {
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
       debugger
       this.eventToEdit.iOperatorId = this.types['iOperatorId'];
-      this.color='rgb(219 162 162)';
+      this.color='rgb(197 94 94)';
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
@@ -355,7 +355,7 @@ this.maxDate=new Date(p.dToDate);
     //   //this.eventToEdit.dtStartTime
     // );
     debugger
-    alert("/Date(" + new Date(this.eventToEdit.dtStartTime).getTime() + ")/");
+    // alert("/Date(" + new Date(this.eventToEdit.dtStartTime).getTime() + ")/");
     let res = <boolean>await this.mainService.post("ScheduleUpdate", {
       iScheduleId: this.eventToEdit.iScheduleId,
 
