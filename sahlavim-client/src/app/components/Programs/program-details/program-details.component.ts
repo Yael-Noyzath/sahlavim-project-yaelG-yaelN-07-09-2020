@@ -190,7 +190,7 @@ debugger
 
 
 
-  saveProgram() {
+  async saveProgram() {
     this.currentProgram.lProgramAgegroups.splice(0, this.currentProgram.lProgramAgegroups.length)
     //  עידכון רשימת הבתי ספר שלא פעיל לפי הרשימה שנבחרה 
     if (this.ProgramAgegroupsListNg.length > 0) {
@@ -199,26 +199,6 @@ debugger
         this.currentProgram.lProgramAgegroups.push(age.Key);
       }
     }
-    var lSettingMorning: number[];
-    var lSettingNoon: number[];
-
-    this.mainService.post("ProgramSettingsInsertUpdate", {
-      iProgramId: this.currentProgram.iProgramId,
-      lProgramSettings: this.currentProgram.lProgramSettings,
-      lSettingMorning: lSettingMorning,
-      lSettingNoon: lSettingNoon,
-      iUserId: this.mainService.currentUser.iUserId
-    }).then(
-      res => {
-
-
-        // alert(res)
-      },
-      err => {
-        alert("err ProgramSettingsInsertUpdate")
-      }
-    )
-
     if (this.currentProgram.tFromTimeMorning != null)
       this.currentProgram.tFromTimeMorning = this.currentProgram.tFromTimeMorning.toString();
     if (this.currentProgram.tToTimeMorning != null)
@@ -236,23 +216,60 @@ debugger
     //   let g:string;
     //   g=new Date(this.currentProgram.dFromDate).getTime()+"";
     console.log(this.currentProgram);
-debugger
-    this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
-      res => {
-        this.mainService.getPrograms();
 
+    // this.mainService.post("ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }).then(
+    //   res => {
+
+    //     this.toastr.success('השינויים נשמרו בהצלחה', '', {
+    //       timeOut: 3000,
+    //     });
+    //     this.mainService.serviceNavigate("./header-menu/programs/programs-table");
+
+    //   },
+    //   err => {
+    //     alert("saveProgram err");
+    //   }
+    // )
+    debugger
+    this.currentProgram.tFirstActivity = null;
+    this.currentProgram.tSecondActivity = null;
+    this.currentProgram.tFromTimeMorning = null;
+    this.currentProgram.tToTimeMorning = null;
+    this.currentProgram.tFromTimeAfternoon = null;
+    this.currentProgram.tToTimeAfternoon = null;
+
+
+    let res = <number>await this.mainService.post(
+      "ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }
+    );
+    this.currentProgram.iProgramId = res;
+    var lSettingMorning: number[];
+    var lSettingNoon: number[];
+
+    this.mainService.post("ProgramSettingsInsertUpdate", {
+      iProgramId: this.currentProgram.iProgramId,
+      lProgramSettings: this.currentProgram.lProgramSettings,
+      lSettingMorning: lSettingMorning,
+      lSettingNoon: lSettingNoon,
+      iUserId: this.mainService.currentUser.iUserId
+    }).then(
+      res => {
 
         this.toastr.success('השינויים נשמרו בהצלחה', '', {
           timeOut: 3000,
         });
-
         this.mainService.serviceNavigate("./header-menu/programs/programs-table");
 
+        // alert(res)
       },
       err => {
-        alert("saveProgram err");
+        alert("err ProgramSettingsInsertUpdate")
       }
     )
+    res = <number>await this.mainService.post(
+      "ProgramInsertUpdate", { oProgram: this.currentProgram, iUserId: this.mainService.currentUser.iUserId }
+    );
+
     //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
     this.mainService.getPrograms();
   }
@@ -289,11 +306,11 @@ debugger
 
     if (index != -1) {//אם קיים סימן שרוצה להסיר ולכן מוציא מהמערך
       this.currentProgram.lProgramSettings.splice(index, 1);
-      alert(this.currentProgram.lProgramSettings.length + " remove")
+      // alert(this.currentProgram.lProgramSettings.length + " remove")
     }
     else {  //אם לא קיים סימן שרוצה להוסיף ולכן מכניס למערך
       this.currentProgram.lProgramSettings.push(settingId);
-      alert(this.currentProgram.lProgramSettings.length + " add")
+      // alert(this.currentProgram.lProgramSettings.length + " add")
     }
     debugger
   }

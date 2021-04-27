@@ -57,7 +57,7 @@ export class MainServiceService {
   settingForDetails: Setting = new Setting();
 
   //לעריכת תוכנית
-  programForDetails: Program;
+  programForDetails: Program=new Program();
 
   //מערך של כל הטבלאות
   SysTableList: Array<Map<number, string>> = new Array<Map<number, string>>();
@@ -134,12 +134,15 @@ export class MainServiceService {
         if (res) {
           this.programsList = res;
           for (let p of this.programsList) {
-
-
+            // p.dFromDate=moment(p.dFromDate).format('DD/MM/YYYY');
+            // p.dToDate=moment(p.dToDate).format('DD/MM/YYYY');
+  
             p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
+
+            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
           }
-          debugger
+            
         }
       },
       err => {
@@ -175,7 +178,7 @@ async  getAllOperators() {
       .then(
         res => {
           this.operatorsList = res;
-          debugger
+            
           //Delete duplicates valus from schollexcude list in each operator
           this.operatorsList.forEach(element => {
             element.lSchoolsExcude = element.lSchoolsExcude.filter(

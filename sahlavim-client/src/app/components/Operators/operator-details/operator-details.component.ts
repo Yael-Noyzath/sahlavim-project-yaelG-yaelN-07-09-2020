@@ -68,7 +68,7 @@ export class OperatorDetailsComponent implements OnInit {
     this.operator = this.mainService.operatorForDetails;//פרטי המפעיל לטופס עריכה
     this.settingsList = this.mainService.settingsList;
     this.activityCategories = this.mainService.gItems[7].dParams;
-debugger
+ 
     //find id category of operator activities
     if (this.operator.lActivity.length > 0) {
       this.iCategory = this.operator.lActivity[0].iCategoryType;
@@ -93,7 +93,6 @@ debugger
       this.mainService.post("OperatorsAvailabilityGet", { iOperatorId: this.operator.iOperatorId }).then(
         res => {
           this.operatorsAvailability = res;
-          debugger
 
         },
         err => {
@@ -125,7 +124,7 @@ debugger
         }
       }
     }
-
+ 
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -165,12 +164,12 @@ debugger
       for (let i = 0; i < 5; i++) {
         this.availability[i] = new operatorsAvailability();
       }
-      debugger
+       
     }
 
     else {
       this.availability = this.operatorsAvailability.filter(x => x.iOperatorId == this.operator.iOperatorId && x.iOperatorAvailabilityType == type);
-      debugger
+       
       this.availability.forEach((element) => {
         element.tMorningToTime = element.tMorningToTime.replace('.', ':');
         element.tMorningFromTime = element.tMorningFromTime.replace('.', ':');
@@ -205,7 +204,7 @@ debugger
       });
     }
 
-    debugger
+     
   }
 
   modal: boolean = true;
@@ -223,7 +222,7 @@ debugger
 
     list.forEach(function (Item) {
       if (Item.innerHTML != '') {
-        debugger
+         
         alert('נא שים לב לתוכן תקין');
         this.h = true;
         return false
@@ -233,16 +232,15 @@ debugger
       this.save()
     }
   }
-
+  
 
   abilitySave() {
-    debugger
+     
     console.log(this.operator.iOperatorId, this.availability, this.mainService.currentUser.iUserId);
     this.mainService.post("OperatorsAvailabilityUpdt", { iOperatorId: this.operator.iOperatorId, lOperatorsAvailability: this.availability, iUserId: this.mainService.currentUser.iUserId })
       .then(
         res => {
           let o = res;
-          alert(o);
         }
         , err => {
           alert("err");
@@ -259,7 +257,7 @@ debugger
         element.iCategoryType = this.iCategory;
       });
     }
-debugger
+ 
     //save operator details changes
     let func = this.newOp == true ? 'AddOperator' : 'UpdateOperator';
     this.mainService.post(func, { oOperator: this.operator })
@@ -267,7 +265,7 @@ debugger
         async res => {
           let o = res;
 
-          debugger      
+                 
           if(this.Saveability)
           {
             this.operator.iOperatorId=o;
@@ -281,8 +279,10 @@ debugger
          this.toastr.success('השינויים נשמרו בהצלחה', '', {
           timeOut: 3000,
         });
-        debugger
-        
+         
+          // alert("הנתונים של  " + this.operator.nvOperatorName + " נשמרו בהצלחה!");
+           this.mainService.serviceNavigate("./header-menu/operators/operator-table");
+
         }
         , err => {
           alert("err");

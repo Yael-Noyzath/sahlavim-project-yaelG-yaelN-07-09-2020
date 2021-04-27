@@ -177,7 +177,7 @@ export class CalendarComponent implements OnInit {
       this.types['iOperatorId'] = this.mainService.operatorForDetails.iOperatorId;
       debugger
       this.eventToEdit.iOperatorId = this.types['iOperatorId'];
-      this.color='rgb(219 162 162)';
+      this.color='rgb(197 94 94)';
     }
     if (this.type == "iSettingId") {//import the setting by the id
       this.currentSetting = this.mainService.settingForDetails;
@@ -341,15 +341,16 @@ this.maxDate=new Date(p.dToDate);
 
   async addEditEvent(t: NgModel) {
     debugger
-    this.eventToEdit.dtStartTime.setHours(+t.viewModel.substr(0, 2));
-    this.eventToEdit.dtStartTime.setMinutes(+t.viewModel.substr(3, 2));
-    console.log(this.eventToEdit.iOperatorId,
-      this.eventToEdit.iActivityId,
-      this.eventToEdit.iSettingId,
-      this.eventToEdit.iProgramId,
-      //this.eventToEdit.dtStartTime
-    );
+    // this.eventToEdit.dtStartTime.setHours(+t.viewModel.substr(0, 2));
+    // this.eventToEdit.dtStartTime.setMinutes(+t.viewModel.substr(3, 2));
+    // console.log(this.eventToEdit.iOperatorId,
+    //   this.eventToEdit.iActivityId,
+    //   this.eventToEdit.iSettingId,
+    //   this.eventToEdit.iProgramId,
+    //   //this.eventToEdit.dtStartTime
+    // );
     debugger
+    // alert("/Date(" + new Date(this.eventToEdit.dtStartTime).getTime() + ")/");
     let res = <boolean>await this.mainService.post("ScheduleUpdate", {
       iScheduleId: this.eventToEdit.iScheduleId,
 
