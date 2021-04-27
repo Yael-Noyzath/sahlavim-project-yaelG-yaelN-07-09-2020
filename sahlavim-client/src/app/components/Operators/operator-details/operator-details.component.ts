@@ -282,9 +282,7 @@ debugger
           timeOut: 3000,
         });
         debugger
-          // alert("הנתונים של  " + this.operator.nvOperatorName + " נשמרו בהצלחה!");
-          // this.mainService.serviceNavigate("./header-menu/operators/operator-table");
-
+        
         }
         , err => {
           alert("err");

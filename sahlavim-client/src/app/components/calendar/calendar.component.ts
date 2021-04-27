@@ -294,9 +294,6 @@ this.maxDate=new Date(p.dToDate);
     }
   }
 
-  // resetArray() {
-  //   this.eventsArrayByDate = new Array<schedule>();
-  // }
 
   eventsArrayByDate: schedule[] = [];
   eventToEdit: schedule = new schedule();
@@ -341,10 +338,8 @@ this.maxDate=new Date(p.dToDate);
     debugger
 
   }
-  //new Date(2015, 10, 10, 14, 57, 0)
 
   async addEditEvent(t: NgModel) {
-    //לבדוק שלא נופל
     debugger
     this.eventToEdit.dtStartTime.setHours(+t.viewModel.substr(0, 2));
     this.eventToEdit.dtStartTime.setMinutes(+t.viewModel.substr(3, 2));
@@ -371,7 +366,6 @@ this.maxDate=new Date(p.dToDate);
 
 
     this.updateEventsL();
-    //  this.router.navigate(['./calendar'], { relativeTo: this.route });
 
 
   }

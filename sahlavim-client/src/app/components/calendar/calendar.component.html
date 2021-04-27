@@ -73,34 +73,6 @@
                     <button (click)="editEvent(event)" data-toggle="modal" data-target="#addEditEvent"
                         style="cursor: pointer; text-align: center;  text-decoration: underline;">עריכה</button>
 
-
-
-                    <!-- <dd>תוכנית: {{event.nvProgramValue}}</dd> -->
-
-                    <!-- public iOperatorId: number = -1,
-                    public iActivityId: number = -1,
-                    public iScheduleId: number = -1,
-                    public iSettingId: number = -1,
-                    public iProgramId: number = -1,
-                    public dtStartTime: string='',
-                    public nvProgramValue: string = '',
-                    public bClosedDay: boolean = false,
-                    public bLongDay: boolean = false,
-                    public dtDoneDate: Date = new Date(),
-                    public iActivityDetailsId: number = -1,
-                    public iCategoryType: number = -1,
-                    public iClusterId: number = -1,
-                    public iDayInWeek: number = -1,
-                    public iLeaderNumber: number = -1,
-                    public nvActivityName: string = '',
-                    public nvAddress: string = '',
-                    public nvCategoryValue: string = '',
-                    public nvComment: string='',
-                    public nvCompanyName: string='',
-                    public nvOperatingLocation: string='',
-                    public nvOperatorName: string='',
-                    public nvPhone: string='',
-                    public nvSettingName: string='' -->
                 </dl>
             </div>
         </div>
@@ -174,17 +146,7 @@
                     </mat-form-field>
                 </section>
 
-                <!-- <mat-form-field>
-                    <mat-label>שעה:</mat-label>
-                    <input matInput #time="ngModel" [ngModel]="eventToEdit.dtStartTime |date:'hh:mm'"  matInput type="time">
-                </mat-form-field><br> -->
 
-                <!-- <mat-form-field class="example-form-field col-sm-12">
-                    <mat-label>שעה:</mat-label>
-                    <input [(ngModel)]="dTime" matInput type="time" placeholder="00:00">
-                </mat-form-field> -->
-
-                <!-- [min]="minFromDate" [max]="maxFromDate" -->
                 <mat-form-field>
                     <mat-label>תאריך:</mat-label>
                     <input matInput #input="ngModel"

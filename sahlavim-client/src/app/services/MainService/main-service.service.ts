@@ -125,14 +125,7 @@ export class MainServiceService {
     return await this.http.get(`${this.sahlavimUrl}${url}`).toPromise();
   }
 
-  // private extractData(res: Response) {
-  //   return res.json();
-  //   //let body = res.json();
-  //   //return body.data || { };
-  // }
-  // getGeorgianDate(url:string) {
-  //   return this.http.get(url).map(this.extractData);
-  // }
+
 
   getPrograms() {
     //פונקציה המחזירה לתוך אובייקט את נתוני טבלת SysTable
@@ -141,12 +134,10 @@ export class MainServiceService {
         if (res) {
           this.programsList = res;
           for (let p of this.programsList) {
-            // p.dFromDate=moment(p.dFromDate).format('DD/MM/YYYY');
-            // p.dToDate=moment(p.dToDate).format('DD/MM/YYYY');
+
 
             p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
-            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
           }
           debugger
         }
@@ -167,12 +158,7 @@ export class MainServiceService {
             // p.dToDate=moment(p.dToDate).format('DD/MM/YYYY');
             p.dFromDate = new Date(parseInt(p.dFromDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
             p.dToDate = new Date(parseInt(p.dToDate.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toJSON().slice(0, 10);
-            //  alert(p.dToDate[1])
-            //   if (this.YearTypeValue.get(p.iYearType) != p.dToDate[3]) {
-
-            //   }
-            // p.tFromTimeAfternoon=new Date(parseInt(p.tFromTimeAfternoon.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1'))).toDateString();
-          }
+         }
 
         }
       },
@@ -234,16 +220,7 @@ async  getAllOperators() {
         res => {
           //if (res) {
             this.usersList = res;
-             
-            // this.usersList.forEach(element => {
-            //   switch(element.iUserType)
-            //   {
-            //     case 1:
-            //   }
-            // });
-          //}
-          // else
-          //   alert("GetUsers management error");
+       
         },
         err => {
           alert("error");

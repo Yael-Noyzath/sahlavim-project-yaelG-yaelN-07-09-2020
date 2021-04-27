@@ -91,18 +91,12 @@ export class OperatorActivitiesComponent implements OnInit {
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
+
   protected setInitialValue() {
     this.filteredActivities
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        // setting the compare With property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
+      
         this.singleSelect.compareWith = (a: forSelect, b: forSelect) => a && b && a.Key === b.Key;
       });
   }

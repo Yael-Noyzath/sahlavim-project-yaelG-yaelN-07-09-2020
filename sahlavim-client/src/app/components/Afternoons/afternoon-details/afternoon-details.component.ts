@@ -160,7 +160,6 @@ saveAfternoon() {
       this.toastr.success('השינויים נשמרו בהצלחה', '', {
         timeOut: 3000,
       });
-      // alert("הנתונים של  " + this.currentAfternoon.nvProgramName + " נשמרו בהצלחה!");
       this.mainService.serviceNavigate("./header-menu/afternoon/afternoon-table");
 
     },
@@ -168,37 +167,13 @@ saveAfternoon() {
       alert("saveaAfternoon err");
     }
   )
-  //לאחר שעידכנו מיסגרת צריך לישלוף מחדש מהסרויס את המיסגרת המעודכנת.
-  //this.mainService.getAfternoon();
+
 }
 
 testDate() {
-  // if (this.currentAfternoon.iProgramId > -1 && (this.currentAfternoon.dFromDate > $scope.dFromDate || this.currentAfternoon.dToDate < $scope.dToDate))
-  //   alert("שים לב  <br />בשמירה ימחקו הפעילויות שהוגדרו מחוץ לטווח התאריכים שצומצם <br /> האם בכל אופן הינך מעונין לשמור ?" + "אזהרה")
-  // function () { $scope.saveProgram(); }, function () { return; });
-  // else
   this.saveAfternoon();
 }
 
-//בינתיים
-onItemSelect(item: Program) {
-  //this.operator.lSchoolsExcude.push(item.iSettingId);//הוספה לרשימה של האופרטור
-  console.log(item);
-  //console.log(this.ProgramAgegroupsListNg);
-}
-OnItemDeSelect(item: Program) {
-  //this.operator.lSchoolsExcude.splice(item.iSettingId, 1);//מחיקה מהרשימה של האופרטור
-
-  console.log(item);
-  //console.log(this.ProgramAgegroupsListNg);
-}
-onSelectAll(items: any) {
-
-  console.log(items);
-}
-onDeSelectAll(items: any) {
-  console.log(items);
-}
 
 checkedSettings(settingId: number) {
   //בודק אם כבר קיים
@@ -214,11 +189,10 @@ checkedSettings(settingId: number) {
   }
 }
 
-removeAlSetting() {
-  //צריך לטפל במקרה הזה
-  if (confirm("שים לב" + "\n" + "באם תשמור שינוי זה ימחקו כל הפעילויות המשובצות למסגרת זו לצהריים בתוכנית זו ובשאר תוכניות" + "\n האם אתה בטוח?"))
-    alert("נמחק")
-}
+// removeAlSetting() {
+//   if (confirm("שים לב" + "\n" + "באם תשמור שינוי זה ימחקו כל הפעילויות המשובצות למסגרת זו לצהריים בתוכנית זו ובשאר תוכניות" + "\n האם אתה בטוח?"))
+//     alert("נמחק")
+// }
 
 ifChecked(id: number) {
   if (this.currentAfternoon.lProgramSettings.findIndex(x => x == id) == -1)

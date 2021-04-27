@@ -38,8 +38,8 @@
                     <p style="font-size: smaller;" style="color: rgb(196, 196, 21);" class="afternonColor">קטגורית גילאים</p>
                     <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
                         [data]="lProgramAgegroupsValue" [(ngModel)]="ProgramAgegroupsListNg"
-                        [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
-                        (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)">
+                        [placeholder]="'קטגורית גילאים'" 
+                     >
                     </ng-multiselect-dropdown>
                 </div><br>
 
@@ -75,17 +75,7 @@
                    
                 </mat-form-field><br>
 
-                <!-- <mat-form-field class="example-form-field">
-                    <mat-label>שעת פעילות ראשונה</mat-label>
-                    <input matInput type="time" [(ngModel)]="currentAfternoon.tFirstActivity" name="tFirstActivity" />
-                   
-                </mat-form-field><br>
-
-                <mat-form-field class="example-form-field">
-                    <mat-label>שעת פעילות שניה</mat-label>
-                    <input matInput type="time" [(ngModel)]="currentAfternoon.tSecondActivity" name="tSecondActivity" />
-                   
-                </mat-form-field> -->
+      
 <br>
                 <!-- Button trigger modal-->
                 <button type="button" style="background-color:rgb(240, 236, 20, 0.904); color: black;"
