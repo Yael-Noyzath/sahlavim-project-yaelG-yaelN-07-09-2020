@@ -125,7 +125,7 @@ debugger
         }
       }
     }
-
+debugger
 
     //הגדרות ה multi select
     this.dropdownSettings = {
@@ -233,7 +233,7 @@ debugger
       this.save()
     }
   }
-
+  
 
   abilitySave() {
     debugger
@@ -242,7 +242,6 @@ debugger
       .then(
         res => {
           let o = res;
-          alert(o);
         }
         , err => {
           alert("err");
@@ -283,7 +282,7 @@ debugger
         });
         debugger
           // alert("הנתונים של  " + this.operator.nvOperatorName + " נשמרו בהצלחה!");
-          // this.mainService.serviceNavigate("./header-menu/operators/operator-table");
+           this.mainService.serviceNavigate("./header-menu/operators/operator-table");
 
         }
         , err => {

@@ -1,7 +1,7 @@
 <div class="form-group col-sm-12" style=" text-align: center;direction: rtl;" class="Details">
 
     <div class="form-group row">
-        <form (ngSubmit)="testDate()">
+        <form style="height: 580px" (ngSubmit)="testDate()">
             <button class="saveIconBtn" mat-icon-button aria-label="Example icon button with a home icon" title="שמור">
                 <mat-icon>save</mat-icon>
             </button>
@@ -17,7 +17,7 @@
                         </mat-option>
                     </mat-select>
 
-                  
+
                 </mat-form-field><br>
 
                 <section class="example-section" style="padding-top: 3%;padding-bottom: 3%;">
@@ -34,20 +34,28 @@
                 </section>
 
 
-                <div class="example-form-field col-sm-12" style="margin: auto;">
+                <!-- <div class="example-form-field col-sm-12" style="margin: auto;">
+                    <p style="font-size: smaller;" class="afternonColor">קטגורית גילאים</p>
+                    <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
+                        [data]="lProgramAgegroupsValue" [(ngModel)]="ProgramAgegroupsListNg"
+                        [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div><br> -->
+                <!-- <div class="example-form-field col-sm-12" style="margin: auto;">
                     <p style="font-size: smaller;" style="color: rgb(196, 196, 21);" class="afternonColor">קטגורית גילאים</p>
                     <ng-multiselect-dropdown name="ProgramAgegroups" [settings]="dropdownProgramAgegroups"
                         [data]="lProgramAgegroupsValue" [(ngModel)]="ProgramAgegroupsListNg"
                         [placeholder]="'קטגורית גילאים'" (onSelect)="onItemSelect($event)"
                         (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)">
                     </ng-multiselect-dropdown>
-                </div><br>
+                </div><br> -->
 
                 <mat-form-field>
                     <mat-label>מתאריך</mat-label>
                     <input matInput #input="ngModel"
                         [(ngModel)]="currentAfternoon.dFromDate" [min]="minFromDate" [max]="maxFromDate"
-                        [matDatepicker]="picker2"  name="dFromDate"
+                        [matDatepicker]="picker2" name="dFromDate"
                         placeholder="בחר תאריך">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
@@ -72,13 +80,13 @@
                     <mat-label>מספר הפעלות שבועיות</mat-label>
                     <input matInput type="number" min="0" required [(ngModel)]="currentAfternoon.iNumActivityInWeek"
                         name="iNumActivityInWeek" />
-                   
+
                 </mat-form-field><br>
 
                 <!-- <mat-form-field class="example-form-field">
                     <mat-label>שעת פעילות ראשונה</mat-label>
                     <input matInput type="time" [(ngModel)]="currentAfternoon.tFirstActivity" name="tFirstActivity" />
-                   
+
                 </mat-form-field><br>
 
                 <mat-form-field class="example-form-field">
@@ -136,7 +144,7 @@
                         <td mat-cell *matCellDef="let row"> {{row.nvAddress}} </td>
                     </ng-container>
                     <!-- Setting Noon Column -->
-                    <ng-container matColumnDef="bActiveAfternoon">
+                    <!-- <ng-container matColumnDef="bActiveAfternoon">
                         <th style="width: 5%;" mat-header-cell *matHeaderCellDef mat-sort-header>מסגרת צהריים</th>
                         <td mat-cell *matCellDef="let row">
                             <div *ngIf="row.bActiveAfternoon==true">
@@ -146,12 +154,20 @@
                                 <input type="checkbox">
                             </div>
                         </td>
+                    </ng-container> -->
+                    <!-- Setting Age groups Column -->
+                    <ng-container matColumnDef="lSettingAgegroups">
+                        <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header> קטגוריות גילאים
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <div *ngFor="let r of row.lSettingAgegroups" style="display: inline;">
+                                {{this.lProgramAgegroupsValueForTable.get(r)}},
+                            </div>
                     </ng-container>
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                
+
                 </table>
                 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 

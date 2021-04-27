@@ -15,6 +15,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as XLSX from 'XLSX';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Item } from 'angular2-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-managers-table',
@@ -38,7 +39,7 @@ export class ManagersTableComponent implements OnInit {
   usersList: Array<User>;
   editUser: User = new User();
   lUserTypeValue: forSelect[];
-  constructor(private mainService: MainServiceService) {
+  constructor(private mainService: MainServiceService,public toastr: ToastrService) {
     this.usersList = mainService.usersList;
     this.dataSource = new MatTableDataSource(this.usersList);
     //מילוי הרשימה בצורה של MAP
@@ -124,11 +125,11 @@ return this.lUserTypeValue.find(x=>x.Key==type).Value;
     debugger
     this.mainService.post("AddUpdateUser", { oUser: this.editUser }).then(
       res => {
-        alert(res);
         if (res) {
           this.mainService.getUsers();
-          alert("הנתונים של  " + this.editUser.nvUserName + " נשמרו בהצלחה!");
-
+          this.toastr.success('השינויים נשמרו בהצלחה', '', {
+            timeOut: 3000,
+          });
         }
     
       },

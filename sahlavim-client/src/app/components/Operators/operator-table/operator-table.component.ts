@@ -155,12 +155,17 @@ export class OperatorTableComponent implements OnInit {
 
     if (confirm("האם אתה בטוח שברצונך למחוק את  " + oper.nvOperatorName + "?")) {
       this.mainService.post("DeleteOperator", { iOperatorId: oper.iOperatorId, iUserId: this.mainService.currentUser.iUserId }).then(
-        res => {
+     async   res => {
           this.mainService.operatorsList = res;
+          await  this.mainService.getAllOperators(); 
+          await location.reload();
+          this.mainService.serviceNavigate('./header-menu/operators/operator-table');
+          alert("המחיקה הושלמה")
+
           debugger
         },
         err => {
-          alert(err);
+          alert(err +'DeleteOperator');
         }
       );
     }

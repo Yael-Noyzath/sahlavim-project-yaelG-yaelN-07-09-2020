@@ -43,7 +43,7 @@ export class Operator {
 
         public lSchoolsExcude:number[]=[],
  
-        public lActivity:Activity[]=[],
+        public lActivity:Activity[]=[new Activity()],
 
         public iNumBookkeeping: number=0,
 
